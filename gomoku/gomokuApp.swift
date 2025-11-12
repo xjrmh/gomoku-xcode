@@ -8,10 +8,14 @@
 import SwiftUI
 
 @main
-struct gomokuApp: App {
+struct GomokuApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
+}
+
+#Preview {
+    ContentView()
 }

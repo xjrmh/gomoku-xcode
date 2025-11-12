@@ -1,0 +1,29 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gomoku app icon - dark">
+  <title>Gomoku Icon (Dark)</title>
+  <rect x="0" y="0" width="1024" height="1024" rx="220" fill="#121212"></rect>
+  <g stroke="#FFFFFF" stroke-opacity="0.20" stroke-width="10" stroke-linecap="round">
+    <line x1="140" y1="140" x2="140" y2="884"></line>
+    <line x1="326" y1="140" x2="326" y2="884"></line>
+    <line x1="512" y1="140" x2="512" y2="884"></line>
+    <line x1="698" y1="140" x2="698" y2="884"></line>
+    <line x1="884" y1="140" x2="884" y2="884"></line>
+    <line x1="140" y1="140" x2="884" y2="140"></line>
+    <line x1="140" y1="326" x2="884" y2="326"></line>
+    <line x1="140" y1="512" x2="884" y2="512"></line>
+    <line x1="140" y1="698" x2="884" y2="698"></line>
+    <line x1="140" y1="884" x2="884" y2="884"></line>
+  </g>
+  <g>
+    <g fill="#EDEDED">
+      <circle cx="140" cy="140" r="58"></circle>
+      <circle cx="326" cy="326" r="58"></circle>
+      <circle cx="512" cy="512" r="58"></circle>
+      <circle cx="698" cy="698" r="58"></circle>
+      <circle cx="884" cy="884" r="58"></circle>
+    </g>
+    <g fill="#FFFFFF" fill-opacity="0.22">
+      <circle cx="512" cy="512" r="40"></circle>
+    </g>
+  </g>
+  <rect x="12" y="12" width="1000" height="1000" rx="208" fill="none" stroke="#FFF" stroke-opacity="0.05" stroke-width="24"></rect>
+</svg>
