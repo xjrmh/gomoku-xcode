@@ -239,12 +239,6 @@ struct ContentView: View {
 
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        game.reset(size: game.boardSize)
-                    } label: {
-                        Label("Restart", systemImage: "arrow.counterclockwise")
-                    }
-
-                    Button {
                         game.undo()
                     } label: {
                         Label("Undo", systemImage: "arrow.uturn.backward")
@@ -254,6 +248,12 @@ struct ContentView: View {
                         game.askForHint()
                     } label: {
                         Label("Help", systemImage: "questionmark.circle")
+                    }
+
+                    Button {
+                        game.reset(size: game.boardSize)
+                    } label: {
+                        Label("Restart", systemImage: "arrow.counterclockwise")
                     }
                 }
             }
