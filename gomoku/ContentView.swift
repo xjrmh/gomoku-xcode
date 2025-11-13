@@ -358,7 +358,7 @@ struct ContentView: View {
             return nil
         }
         let format = UIGraphicsImageRendererFormat()
-        format.scale = UIScreen.main.scale
+        format.scale = window.traitCollection.displayScale
         let renderer = UIGraphicsImageRenderer(bounds: window.bounds, format: format)
         return renderer.image { ctx in
             window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
