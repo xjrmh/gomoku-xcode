@@ -7,6 +7,10 @@
 
 import SwiftUI
 import Combine
+#if os(iOS)
+import UIKit
+import Photos
+#endif
 
 private struct BoardFramePreferenceKey: PreferenceKey {
     static var defaultValue: CGRect = .zero
@@ -19,6 +23,10 @@ struct ContentView: View {
     @State private var boardFrame: CGRect = .zero
     @State private var showRestartConfirm1: Bool = false
     @Environment(\.colorScheme) private var colorScheme
+    #if os(iOS)
+    @State private var showSaveResult: Bool = false
+    @State private var saveResultMessage: String = ""
+    #endif
 
     var body: some View {
         NavigationStack {
@@ -51,9 +59,6 @@ struct ContentView: View {
                         if let win = game.winner, game.gameOver {
                             VStack(spacing: 12) {
                                 VictoryMessage(text: "\(win.name) Wins!", player: win)
-                                TapToPlayAgainHint()
-                                    .transition(.opacity)
-                                    .animation(.easeInOut(duration: 0.3), value: game.gameOver)
                             }
                             .allowsHitTesting(false)
                         }
@@ -66,76 +71,6 @@ struct ContentView: View {
                                                       y: boardFrame.minY + boardFrame.height * fy)
                             EmojiFireworksOverlay(isActive: $game.showFireworks, startPointGlobal: startGlobal)
                                 .ignoresSafeArea()
-                        }
-                    }
-                    .overlay {
-                        if showRestartConfirm1 {
-                            Color.clear
-                                .contentShape(Rectangle())
-                                .ignoresSafeArea()
-                                .onTapGesture {
-                                    showRestartConfirm1 = false
-                                }
-                        }
-                    }
-                    #if os(macOS)
-                    .overlay(alignment: .topTrailing) {
-                        if showRestartConfirm1 {
-                            VStack(spacing: 8) {
-                                HStack(spacing: 12) {
-                                    Button("Restart", role: .destructive) {
-                                        game.reset(size: game.boardSize)
-                                        showRestartConfirm1 = false
-                                    }
-                                    .buttonStyle(.borderedProminent)
-                                }
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .background(.thinMaterial, in: Capsule())
-                            .overlay(
-                                Capsule().stroke(Color.white.opacity(0.25), lineWidth: 0.5)
-                            )
-                            .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 6)
-                            .padding(.top, -43)
-                            .padding(.trailing, 50)
-                            .transition(.move(edge: .top).combined(with: .opacity))
-                            .animation(.spring(response: 0.35, dampingFraction: 0.85), value: showRestartConfirm1)
-                        }
-                    }
-                    #else
-                    .overlay(alignment: .bottomLeading) {
-                        if showRestartConfirm1 {
-                            VStack(spacing: 8) {
-                                HStack(spacing: 12) {
-                                    Button("Restart", role: .destructive) {
-                                        game.reset(size: game.boardSize)
-                                        showRestartConfirm1 = false
-                                    }
-                                    .buttonStyle(.borderedProminent)
-                                }
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .background(.thinMaterial, in: Capsule())
-                            .overlay(
-                                Capsule().stroke(Color.white.opacity(0.25), lineWidth: 0.5)
-                            )
-                            .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 6)
-                            .padding(.bottom, 4)
-                            .padding(.leading, 80)
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
-                            .animation(.spring(response: 0.35, dampingFraction: 0.85), value: showRestartConfirm1)
-                        }
-                    }
-                    #endif
-                    .overlay(alignment: .bottom) {
-                        if game.gameOver, game.winner == nil {
-                            TapToPlayAgainHint()
-                                .padding(.bottom, 24)
-                                .allowsHitTesting(false)
-                                .transition(.opacity)
-                                .animation(.easeInOut(duration: 0.3), value: game.gameOver)
                         }
                     }
                     .overlay {
@@ -223,7 +158,7 @@ struct ContentView: View {
 
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button {
-                        showRestartConfirm1 = true
+                        game.reset(size: game.boardSize)
                     } label: {
                         Label("Restart", systemImage: "arrow.counterclockwise")
                     }
@@ -304,7 +239,7 @@ struct ContentView: View {
 
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        showRestartConfirm1 = true
+                        game.reset(size: game.boardSize)
                     } label: {
                         Label("Restart", systemImage: "arrow.counterclockwise")
                     }
@@ -341,8 +276,95 @@ struct ContentView: View {
                 let desired: GomokuTheme = (colorScheme == .dark) ? .night : .classic
                 if game.theme != desired { game.theme = desired }
             }
+            #if os(iOS)
+            .overlay(alignment: .center) {
+                if game.gameOver, game.winner != nil {
+                    Button {
+                        saveWinScreenshot()
+                    } label: {
+                        Label {
+                            Text("Save Screenshot")
+                                .font(.footnote.weight(.semibold))
+                        } icon: {
+                            Image(systemName: "camera")
+                                .font(.footnote)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .foregroundStyle(.white)
+                    .background(.thinMaterial, in: Capsule())
+                    .overlay(
+                        Capsule().stroke(Color.white.opacity(0.35), lineWidth: 0.5)
+                    )
+                    .shadow(color: .black.opacity(0.25), radius: 8, x: 0, y: 3)
+                    .opacity(0.92)
+                    .offset(y: 66)
+                    .transition(.opacity)
+                    .animation(.easeInOut(duration: 0.3), value: game.gameOver)
+                }
+            }
+            .alert("Screenshot", isPresented: $showSaveResult) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(saveResultMessage)
+            }
+            #endif
         }
     }
+
+    #if os(iOS)
+    private func saveWinScreenshot() {
+        // Ensure the required Info.plist key exists to avoid a crash when requesting Photos access.
+        let hasUsageDescription = Bundle.main.object(forInfoDictionaryKey: "NSPhotoLibraryAddUsageDescription") != nil
+        guard hasUsageDescription else {
+            saveResultMessage = "Missing Info.plist key: NSPhotoLibraryAddUsageDescription. Add a description string in your target's Info to allow saving to Photos."
+            showSaveResult = true
+            return
+        }
+
+        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+            DispatchQueue.main.async {
+                guard status == .authorized || status == .limited else {
+                    saveResultMessage = "Photo access not granted. Enable Photos access in Settings to save screenshots."
+                    showSaveResult = true
+                    return
+                }
+                guard let image = captureWindowImage() else {
+                    saveResultMessage = "Failed to capture screenshot."
+                    showSaveResult = true
+                    return
+                }
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: image)
+                }) { success, error in
+                    DispatchQueue.main.async {
+                        if success {
+                            saveResultMessage = "Saved to Photos."
+                        } else {
+                            saveResultMessage = error?.localizedDescription ?? "Failed to save screenshot."
+                        }
+                        showSaveResult = true
+                    }
+                }
+            }
+        }
+    }
+
+    private func captureWindowImage() -> UIImage? {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = scene.windows.first(where: { $0.isKeyWindow }) else {
+            return nil
+        }
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = UIScreen.main.scale
+        let renderer = UIGraphicsImageRenderer(bounds: window.bounds, format: format)
+        return renderer.image { ctx in
+            window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
+        }
+    }
+    #endif
 }
 
 struct BoardView: View {
@@ -412,27 +434,6 @@ struct VictoryMessage: View {
             .foregroundStyle(player == .black ? Color.black : Color.white)
             .shadow(color: .black.opacity(0.85), radius: 8, x: 0, y: 4)
             .padding(.horizontal, 12)
-    }
-}
-
-struct TapToPlayAgainHint: View {
-    var body: some View {
-        Label {
-            Text("Tap to play again")
-                .font(.footnote.weight(.semibold))
-        } icon: {
-            Image(systemName: "hand.tap")
-                .font(.footnote)
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .foregroundStyle(.white)
-        .background(.thinMaterial, in: Capsule())
-        .overlay(
-            Capsule().stroke(Color.white.opacity(0.35), lineWidth: 0.5)
-        )
-        .shadow(color: .black.opacity(0.25), radius: 8, x: 0, y: 3)
-        .opacity(0.92)
     }
 }
 

@@ -1,0 +1,45 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gomoku app icon - light">
+  <title>Gomoku Icon (Light)</title>
+  <!-- Background (rounded so it previews nicely; platforms will still mask as needed) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="220" fill="#F2E7D5"></rect>
+  <!-- Grid -->
+  <g stroke="#3B2F2A" stroke-opacity="0.28" stroke-width="10" stroke-linecap="round">
+    <!-- 5×5 intersections ⇒ 5 lines each way -->
+    <!-- margins -->
+    <g>
+      <!-- verticals -->
+      <line x1="140" y1="140" x2="140" y2="884"></line>
+      <line x1="326" y1="140" x2="326" y2="884"></line>
+      <line x1="512" y1="140" x2="512" y2="884"></line>
+      <line x1="698" y1="140" x2="698" y2="884"></line>
+      <line x1="884" y1="140" x2="884" y2="884"></line>
+      <!-- horizontals -->
+      <line x1="140" y1="140" x2="884" y2="140"></line>
+      <line x1="140" y1="326" x2="884" y2="326"></line>
+      <line x1="140" y1="512" x2="884" y2="512"></line>
+      <line x1="140" y1="698" x2="884" y2="698"></line>
+      <line x1="140" y1="884" x2="884" y2="884"></line>
+    </g>
+  </g>
+
+  <!-- Stones (five-in-a-row diagonal to read instantly at small sizes) -->
+  <g>
+    <!-- helper: grid coordinates to pixels -->
+    <!-- col/row 0..4 map to 140 + 186*index -->
+    <!-- Diagonal: (0,0),(1,1),(2,2),(3,3),(4,4) -->
+    <g fill="#111111">
+      <circle cx="140" cy="140" r="58"></circle>
+      <circle cx="326" cy="326" r="58"></circle>
+      <circle cx="512" cy="512" r="58"></circle>
+      <circle cx="698" cy="698" r="58"></circle>
+      <circle cx="884" cy="884" r="58"></circle>
+    </g>
+    <!-- subtle highlight to give a touch of depth while staying minimal -->
+    <g fill="#FFFFFF" fill-opacity="0.18">
+      <circle cx="512" cy="512" r="40"></circle>
+    </g>
+  </g>
+
+  <!-- Safe-area polish: faint inner vignette to reduce edge contrast on masks -->
+  <rect x="12" y="12" width="1000" height="1000" rx="208" fill="none" stroke="#000" stroke-opacity="0.04" stroke-width="24"></rect>
+</svg>
