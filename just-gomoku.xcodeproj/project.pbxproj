@@ -269,7 +269,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = gomoku/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Gomoku 五子棋";
+				INFOPLIST_KEY_CFBundleDisplayName = "Just Gomoku";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save game screenshots";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -320,7 +320,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = gomoku/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Gomoku 五子棋";
+				INFOPLIST_KEY_CFBundleDisplayName = "Just Gomoku";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save game screenshots";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
