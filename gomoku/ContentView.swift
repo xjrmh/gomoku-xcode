@@ -26,6 +26,7 @@ struct ContentView: View {
     #if os(iOS)
     @State private var showSaveResult: Bool = false
     @State private var saveResultMessage: String = ""
+    @State private var isCapturingScreenshot: Bool = false
     #endif
 
     var body: some View {
@@ -158,6 +159,7 @@ struct ContentView: View {
 
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button {
+                        GameHaptics.reset()
                         game.reset(size: game.boardSize)
                     } label: {
                         Label("Restart", systemImage: "arrow.counterclockwise")
@@ -166,12 +168,14 @@ struct ContentView: View {
                     .tint(.blue)
 
                     Button {
+                        GameHaptics.undo()
                         game.undo()
                     } label: {
                         Label("Undo", systemImage: "arrow.uturn.backward")
                     }
 
                     Button {
+                        GameHaptics.hint()
                         game.askForHint()
                     } label: {
                         Label("Help", systemImage: "questionmark.circle")
@@ -239,18 +243,21 @@ struct ContentView: View {
 
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
+                        GameHaptics.undo()
                         game.undo()
                     } label: {
                         Label("Undo", systemImage: "arrow.uturn.backward")
                     }
 
                     Button {
+                        GameHaptics.hint()
                         game.askForHint()
                     } label: {
                         Label("Help", systemImage: "questionmark.circle")
                     }
 
                     Button {
+                        GameHaptics.reset()
                         game.reset(size: game.boardSize)
                     } label: {
                         Label("Restart", systemImage: "arrow.counterclockwise")
@@ -276,6 +283,9 @@ struct ContentView: View {
                 let desired: GomokuTheme = (colorScheme == .dark) ? .night : .classic
                 if game.theme != desired { game.theme = desired }
             }
+            .onChange(of: game.mode) { _, _ in
+                GameHaptics.modeSwitch()
+            }
             #if os(iOS)
             .overlay(alignment: .center) {
                 if game.gameOver, game.winner != nil {
@@ -299,7 +309,7 @@ struct ContentView: View {
                         Capsule().stroke(Color.white.opacity(0.35), lineWidth: 0.5)
                     )
                     .shadow(color: .black.opacity(0.25), radius: 8, x: 0, y: 3)
-                    .opacity(0.92)
+                    .opacity(isCapturingScreenshot ? 0.0 : 0.92)
                     .offset(y: 66)
                     .transition(.opacity)
                     .animation(.easeInOut(duration: 0.3), value: game.gameOver)
@@ -331,21 +341,26 @@ struct ContentView: View {
                     showSaveResult = true
                     return
                 }
-                guard let image = captureWindowImage() else {
-                    saveResultMessage = "Failed to capture screenshot."
-                    showSaveResult = true
-                    return
-                }
-                PHPhotoLibrary.shared().performChanges({
-                    PHAssetChangeRequest.creationRequestForAsset(from: image)
-                }) { success, error in
-                    DispatchQueue.main.async {
-                        if success {
-                            saveResultMessage = "Saved to Photos."
-                        } else {
-                            saveResultMessage = error?.localizedDescription ?? "Failed to save screenshot."
-                        }
+                isCapturingScreenshot = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    let image = captureWindowImage()
+                    isCapturingScreenshot = false
+                    guard let image else {
+                        saveResultMessage = "Failed to capture screenshot."
                         showSaveResult = true
+                        return
+                    }
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAsset(from: image)
+                    }) { success, error in
+                        DispatchQueue.main.async {
+                            if success {
+                                saveResultMessage = "Saved to Photos."
+                            } else {
+                                saveResultMessage = error?.localizedDescription ?? "Failed to save screenshot."
+                            }
+                            showSaveResult = true
+                        }
                     }
                 }
             }
@@ -415,7 +430,6 @@ struct CellView: View {
 
             if let hint = game.hint, hint.r == r, hint.c == c, game.state(r, c) == .empty {
                 HintIndicator(color: .red)
-                    .padding(10)
                     .allowsHitTesting(false)
             }
         }
@@ -434,6 +448,7 @@ struct VictoryMessage: View {
             .foregroundStyle(player == .black ? Color.black : Color.white)
             .shadow(color: .black.opacity(0.85), radius: 8, x: 0, y: 4)
             .padding(.horizontal, 12)
+            .opacity(0.85)
     }
 }
 
@@ -534,46 +549,61 @@ struct HintIndicator: View {
     @State private var pulse = false
     @State private var rotate = false
     let color: Color
+    var insetFactor: CGFloat = 0.18
 
     var body: some View {
-        ZStack {
-            // Outer halo
-            Circle()
-                .stroke(color.opacity(0.25), lineWidth: 10)
-                .scaleEffect(pulse ? 1.8 : 1.2)
-                .opacity(pulse ? 0.0 : 0.35)
-                .blur(radius: 1.5)
-                .animation(.easeOut(duration: 1.2).repeatForever(autoreverses: false), value: pulse)
+        GeometryReader { geo in
+            let d = min(geo.size.width, geo.size.height)
+            let inset = d * insetFactor
+            let lwOuter = max(1, d * 0.12)
+            let lwRipple = max(0.5, d * 0.09)
+            let lwDashed = max(0.5, d * 0.035)
+            let lwCore = max(0.5, d * 0.035)
+            let dashLen = max(2, d * 0.22)
+            let dashGap = max(1, d * 0.14)
+            let blurSoft: CGFloat = max(0.5, d * 0.09)
+            let shadowR: CGFloat = max(1, d * 0.18)
 
-            // Expanding ripple
-            Circle()
-                .stroke(color.opacity(0.6), lineWidth: 8)
-                .scaleEffect(pulse ? 1.6 : 0.7)
-                .opacity(pulse ? 0.0 : 0.8)
-                .animation(.easeOut(duration: 1.2).repeatForever(autoreverses: false), value: pulse)
+            ZStack {
+                // Outer halo
+                Circle()
+                    .stroke(color.opacity(0.25), lineWidth: lwOuter)
+                    .scaleEffect(pulse ? 1.8 : 1.2)
+                    .opacity(pulse ? 0.0 : 0.35)
+                    .blur(radius: blurSoft)
+                    .animation(.easeOut(duration: 1.2).repeatForever(autoreverses: false), value: pulse)
 
-            // Soft glow fill
-            Circle()
-                .fill(color.opacity(0.22))
-                .blur(radius: 2)
+                // Expanding ripple
+                Circle()
+                    .stroke(color.opacity(0.6), lineWidth: lwRipple)
+                    .scaleEffect(pulse ? 1.6 : 0.7)
+                    .opacity(pulse ? 0.0 : 0.8)
+                    .animation(.easeOut(duration: 1.2).repeatForever(autoreverses: false), value: pulse)
 
-            // Rotating dashed ring
-            Circle()
-                .stroke(style: StrokeStyle(lineWidth: 3, dash: [5, 3]))
-                .foregroundStyle(color.opacity(0.6))
-                .rotationEffect(.degrees(rotate ? 360 : 0))
-                .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: rotate)
+                // Soft glow fill
+                Circle()
+                    .fill(color.opacity(0.22))
+                    .blur(radius: blurSoft)
 
-            // Core ring
-            Circle()
-                .stroke(color.opacity(1.0), lineWidth: 3)
-                .scaleEffect(pulse ? 1.12 : 0.9)
-                .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: pulse)
-        }
-        .shadow(color: color.opacity(0.4), radius: 4, x: 0, y: 1)
-        .onAppear {
-            pulse = true
-            rotate = true
+                // Rotating dashed ring
+                Circle()
+                    .stroke(style: StrokeStyle(lineWidth: lwDashed, dash: [dashLen, dashGap]))
+                    .foregroundStyle(color.opacity(0.6))
+                    .rotationEffect(.degrees(rotate ? 360 : 0))
+                    .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: rotate)
+
+                // Core ring
+                Circle()
+                    .stroke(color.opacity(1.0), lineWidth: lwCore)
+                    .scaleEffect(pulse ? 1.12 : 0.9)
+                    .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: pulse)
+            }
+            .padding(inset)
+            .shadow(color: color.opacity(0.4), radius: shadowR, x: 0, y: 1)
+            .onAppear {
+                pulse = true
+                rotate = true
+            }
         }
     }
 }

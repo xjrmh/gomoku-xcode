@@ -138,6 +138,8 @@ final class GameState: ObservableObject {
     private func place(at pos: Position, by player: Player) {
         board[idx(pos.r, pos.c)] = (player == .black ? .black : .white)
         moves.append(Move(pos: pos, player: player))
+        // Haptic feedback to simulate stone placement
+        GameHaptics.stonePlacement()
     }
 
     private func afterMove() {
