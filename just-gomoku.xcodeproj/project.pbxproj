@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		36AD573B2EC39A2600A41776 /* gomoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gomoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		36AD573B2EC39A2600A41776 /* just-gomoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "just-gomoku.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		36524F102EC57F4100D60367 /* Exceptions for "gomoku" folder in "gomoku" target */ = {
+		3625B5732EC78F56004452DD /* Exceptions for "gomoku" folder in "just-gomoku" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 36AD573A2EC39A2600A41776 /* gomoku */;
+			target = 36AD573A2EC39A2600A41776 /* just-gomoku */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -24,7 +24,7 @@
 		36AD573D2EC39A2600A41776 /* gomoku */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				36524F102EC57F4100D60367 /* Exceptions for "gomoku" folder in "gomoku" target */,
+				3625B5732EC78F56004452DD /* Exceptions for "gomoku" folder in "just-gomoku" target */,
 			);
 			path = gomoku;
 			sourceTree = "<group>";
@@ -53,7 +53,7 @@
 		36AD573C2EC39A2600A41776 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				36AD573B2EC39A2600A41776 /* gomoku.app */,
+				36AD573B2EC39A2600A41776 /* just-gomoku.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		36AD573A2EC39A2600A41776 /* gomoku */ = {
+		36AD573A2EC39A2600A41776 /* just-gomoku */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 36AD57462EC39A2700A41776 /* Build configuration list for PBXNativeTarget "gomoku" */;
+			buildConfigurationList = 36AD57462EC39A2700A41776 /* Build configuration list for PBXNativeTarget "just-gomoku" */;
 			buildPhases = (
 				36AD57372EC39A2600A41776 /* Sources */,
 				36AD57382EC39A2600A41776 /* Frameworks */,
@@ -76,11 +76,11 @@
 			fileSystemSynchronizedGroups = (
 				36AD573D2EC39A2600A41776 /* gomoku */,
 			);
-			name = gomoku;
+			name = "just-gomoku";
 			packageProductDependencies = (
 			);
 			productName = gomoku;
-			productReference = 36AD573B2EC39A2600A41776 /* gomoku.app */;
+			productReference = 36AD573B2EC39A2600A41776 /* just-gomoku.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 36AD57362EC39A2600A41776 /* Build configuration list for PBXProject "gomoku" */;
+			buildConfigurationList = 36AD57362EC39A2600A41776 /* Build configuration list for PBXProject "just-gomoku" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -112,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				36AD573A2EC39A2600A41776 /* gomoku */,
+				36AD573A2EC39A2600A41776 /* just-gomoku */,
 			);
 		};
 /* End PBXProject section */
@@ -357,7 +357,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		36AD57362EC39A2600A41776 /* Build configuration list for PBXProject "gomoku" */ = {
+		36AD57362EC39A2600A41776 /* Build configuration list for PBXProject "just-gomoku" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				36AD57442EC39A2700A41776 /* Debug */,
@@ -366,7 +366,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		36AD57462EC39A2700A41776 /* Build configuration list for PBXNativeTarget "gomoku" */ = {
+		36AD57462EC39A2700A41776 /* Build configuration list for PBXNativeTarget "just-gomoku" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				36AD57472EC39A2700A41776 /* Debug */,
