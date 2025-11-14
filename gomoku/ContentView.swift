@@ -87,6 +87,22 @@ struct ContentView: View {
                     }
                 }
             }
+            .gesture(
+                DragGesture(minimumDistance: 20, coordinateSpace: .global)
+                    .onEnded { value in
+                        let start = value.startLocation
+                        // Only respond if the swipe starts outside the game board
+                        if boardFrame.contains(start) { return }
+                        let dx = value.translation.width
+                        let dy = value.translation.height
+                        guard abs(dx) > 60, abs(dx) > abs(dy) else { return }
+                        if dx < 0 {
+                            if game.mode != .ai { game.mode = .ai }
+                        } else {
+                            if game.mode != .pvp { game.mode = .pvp }
+                        }
+                    }
+            )
             .navigationTitle("Gomoku")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
