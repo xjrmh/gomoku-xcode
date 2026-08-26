@@ -1,0 +1,18 @@
+<svg width="1536" height="1536" viewBox="0 0 1536 1536" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Flatre logo mark</title>
+  <desc id="desc">A modern geometric FT-style logo mark in navy and blue on a transparent background.</desc>
+  <defs>
+    <linearGradient id="navyGradient" x1="362" y1="252" x2="1216" y2="1160" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#071A3B"/>
+      <stop offset="0.48" stop-color="#06152F"/>
+      <stop offset="1" stop-color="#0A2A5F"/>
+    </linearGradient>
+    <linearGradient id="blueGradient" x1="657" y1="616" x2="1216" y2="1160" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0A8CFF"/>
+      <stop offset="0.52" stop-color="#006EFF"/>
+      <stop offset="1" stop-color="#0057E6"/>
+    </linearGradient>
+  </defs>
+  <path d="M513 252H1216V405C1216 427.1 1198.1 445 1176 445H623C578.8 445 543 480.8 543 525V1116C543 1140.3 523.3 1160 499 1160H362V404C362 320.1 429.1 252 513 252Z" fill="url(#navyGradient)"/>
+  <path d="M691 616H1216V707C1216 758.4 1174.4 800 1123 800H877V1116C877 1140.3 857.3 1160 833 1160H714V800H657V650C657 631.2 672.2 616 691 616Z" fill="url(#blueGradient)"/>
+</svg>

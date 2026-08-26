@@ -1,0 +1,5 @@
+.artifacts/
+.derived/
+*.profraw
+*.xcresult
+xcuserdata/

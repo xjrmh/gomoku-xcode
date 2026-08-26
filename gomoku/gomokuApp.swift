@@ -5,32 +5,73 @@
 //  Created by Li Zheng on 11/11/25.
 //
 
+import SwiftData
 import SwiftUI
-#if os(iOS)
-import UIKit
-#endif
 
 @main
 struct GomokuApp: App {
-    #if os(iOS)
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    #endif
+    @StateObject private var game: GameState
+    @StateObject private var preferences: PreferencesStore
+    private let archiveContainer: ModelContainer
+
+    init() {
+        _game = StateObject(wrappedValue: GameState())
+        _preferences = StateObject(wrappedValue: PreferencesStore())
+        archiveContainer = ArchiveContainer.make()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(game)
+                .environmentObject(preferences)
+        }
+        .modelContainer(archiveContainer)
+        .commands { GameCommands() }
+    }
+}
+
+struct GameActions {
+    let newRound: () -> Void
+    let undo: () -> Void
+    let hint: () -> Void
+    let canUndo: Bool
+    let canHint: Bool
+}
+
+private struct GameActionsKey: FocusedValueKey {
+    typealias Value = GameActions
+}
+
+extension FocusedValues {
+    var gameActions: GameActions? {
+        get { self[GameActionsKey.self] }
+        set { self[GameActionsKey.self] = newValue }
+    }
+}
+
+private struct GameCommands: Commands {
+    @FocusedValue(\.gameActions) private var actions
+
+    var body: some Commands {
+        CommandMenu("Game") {
+            Button("New Round", systemImage: "arrow.clockwise") { actions?.newRound() }
+                .keyboardShortcut("n", modifiers: .command)
+                .disabled(actions == nil)
+            Button("Undo", systemImage: "arrow.uturn.backward") { actions?.undo() }
+                .keyboardShortcut("z", modifiers: .command)
+                .disabled(actions?.canUndo != true)
+            Divider()
+            Button("Hint", systemImage: "lightbulb") { actions?.hint() }
+                .keyboardShortcut("h", modifiers: .command)
+                .disabled(actions?.canHint != true)
         }
     }
 }
 
-#if os(iOS)
-final class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        // Allow only portrait; include `.portraitUpsideDown` as needed.
-        return .portrait
-    }
-}
-#endif
-
 #Preview {
     ContentView()
+        .environmentObject(GameState())
+        .environmentObject(PreferencesStore())
+        .modelContainer(ArchiveContainer.make())
 }

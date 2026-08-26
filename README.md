@@ -1,7 +1,11 @@
-Privacy Policy version 1.0 for the Just Gomoku
+# Just Gomoku Privacy Policy
 
-The Just Gomoku iOS/MacOS app does not collect any user data of any kind. The app does not access the Internet at all.
+Version 2.0 — August 26, 2026
 
-It is just a simple game.
+Just Gomoku does not collect analytics, advertising identifiers, contacts, photos, location, or other personal information. The current match is stored only on the device.
 
-If you wish to verify this for yourself, see the source code at https://github.com/xjrmh/gomoku-xcode.
+When iCloud is available, Apple CloudKit synchronizes completed-game history and game preferences between the user's Apple devices. This data remains in the user's private iCloud account and can be deleted from the app. The active match is not synchronized.
+
+Sharing a result uses Apple's system share sheet and occurs only after the user chooses a destination. Just Gomoku does not operate its own server or send data to third parties.
+
+Source code: https://github.com/xjrmh/gomoku-xcode

@@ -1,646 +1,587 @@
-//
-//  ContentView.swift
-//  gomoku
-//
-//  Created by Li Zheng on 11/11/25.
-//
-
+import SwiftData
 import SwiftUI
-import Combine
+
 #if os(iOS)
 import UIKit
-import Photos
+#elseif os(macOS)
+import AppKit
 #endif
 
-private struct BoardFramePreferenceKey: PreferenceKey {
-    static var defaultValue: CGRect = .zero
-    static func reduce(value: inout CGRect, nextValue: () -> CGRect) { value = nextValue() }
-}
-
 struct ContentView: View {
-    @StateObject private var game = GameState()
-    @State private var showAbout: Bool = false
-    @State private var boardFrame: CGRect = .zero
-    @State private var showRestartConfirm1: Bool = false
+    @EnvironmentObject private var game: GameState
+    @EnvironmentObject private var preferences: PreferencesStore
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var colorScheme
-    #if os(iOS)
-    @State private var showSaveResult: Bool = false
-    @State private var saveResultMessage: String = ""
-    @State private var isCapturingScreenshot: Bool = false
-    #endif
+    @SceneStorage("matchInspectorExpanded") private var inspectorExpanded = true
+    @State private var showSettings = false
+    @State private var showAbout = false
+    @State private var sharePayload: SharePayload?
+    @State private var didBootstrap = false
+
+    private var palette: GomokuPalette { .resolve(colorScheme) }
 
     var body: some View {
         NavigationStack {
-            GeometryReader { geo in
+            GeometryReader { proxy in
                 ZStack {
-                    game.theme.chrome.ignoresSafeArea()
-
-                    VStack(spacing: 10) {
-                        BoardView()
-                            .environmentObject(game)
-                            .background(
-                                GeometryReader { g in
-                                    Color.clear
-                                        .preference(key: BoardFramePreferenceKey.self, value: g.frame(in: .global))
-                                }
-                            )
-                            .padding(.horizontal, 2)
-                            .padding(.bottom, 12)
-
-                        StatsBar()
-                            .environmentObject(game)
-                            .padding(.horizontal, 12)
-                            .padding(.bottom, 6)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .onPreferenceChange(BoardFramePreferenceKey.self) { frame in
-                        self.boardFrame = frame
-                    }
-                    .overlay(alignment: .center) {
-                        if let win = game.winner, game.gameOver {
-                            VStack(spacing: 12) {
-                                VictoryMessage(text: "\(win.name) Wins!", player: win)
-                            }
-                            .allowsHitTesting(false)
-                        }
-                    }
-                    .overlay {
-                        if game.showFireworks, let last = game.moves.last, boardFrame != .zero {
-                            let fx = (CGFloat(last.pos.c) + 0.5) / CGFloat(game.boardSize)
-                            let fy = (CGFloat(last.pos.r) + 0.5) / CGFloat(game.boardSize)
-                            let startGlobal = CGPoint(x: boardFrame.minX + boardFrame.width * fx,
-                                                      y: boardFrame.minY + boardFrame.height * fy)
-                            EmojiFireworksOverlay(isActive: $game.showFireworks, startPointGlobal: startGlobal)
-                                .ignoresSafeArea()
-                        }
-                    }
-                    .overlay {
-                        if game.gameOver {
-                            Color.clear
-                                .contentShape(Rectangle())
-                                .ignoresSafeArea()
-                                .onTapGesture {
-                                    game.showFireworks = false
-                                    game.reset(size: game.boardSize)
-                                }
-                        }
+                    palette.background.ignoresSafeArea()
+                    if proxy.size.width >= 800 {
+                        wideLayout
+                    } else {
+                        compactLayout
                     }
                 }
             }
-            .gesture(
-                DragGesture(minimumDistance: 20, coordinateSpace: .global)
-                    .onEnded { value in
-                        let start = value.startLocation
-                        // Only respond if the swipe starts outside the game board
-                        if boardFrame.contains(start) { return }
-                        let dx = value.translation.width
-                        let dy = value.translation.height
-                        guard abs(dx) > 60, abs(dx) > abs(dy) else { return }
-                        if dx < 0 {
-                            if game.mode != .ai { game.mode = .ai }
-                        } else {
-                            if game.mode != .pvp { game.mode = .pvp }
-                        }
-                    }
-            )
             .navigationTitle("Gomoku")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
-            .safeAreaInset(edge: .top, spacing: 0) {
-                ZStack(alignment: .top) {
-                    if !game.gameOver {
-                        StatusChip(text: game.statusText, player: game.current, theme: game.theme)
-                            .padding(.top, 4)
-                    }
-                }
-                .frame(height: 44, alignment: .top)
-            }
-            #if os(iOS)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Picker("Mode", selection: $game.mode) {
-                        Text("PvP Mode").tag(GameMode.pvp)
-                        Text("AI Mode").tag(GameMode.ai)
-                    }
-                    .pickerStyle(.segmented)
-                    .frame(maxWidth: 240)
-                }
-
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Menu {
-                        Button {
-                            game.toggleTheme()
-                        } label: {
-                            Label("Dark Mode", systemImage: "paintbrush")
-                        }
-                        Divider()
-                        Button {
-                            game.reset(size: 15)
-                        } label: {
-                            Label("15×15 Board", systemImage: "checkerboard.rectangle")
-                        }
-                        .disabled(game.boardSize == 15)
-                        Button {
-                            game.reset(size: 19)
-                        } label: {
-                            Label("19×19 Board", systemImage: "checkerboard.rectangle")
-                        }
-                        .disabled(game.boardSize == 19)
-                        Button {
-                            game.sizePlus()
-                        } label: {
-                            Label("Larger Board", systemImage: "plus.circle")
-                        }
-                        Button {
-                            game.sizeMinus()
-                        } label: {
-                            Label("Smaller Board", systemImage: "minus.circle")
-                        }
-                        Divider()
-                        Button {
-                            game.reset(size: 15)
-                        } label: {
-                            Label("Reset to Default", systemImage: "arrow.clockwise")
-                        }
-                        Button {
-                            showAbout = true
-                        } label: {
-                            Label("About", systemImage: "info.circle")
-                        }
-                    } label: {
-                        Label("Options", systemImage: "gearshape")
-                    }
-                }
-
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button {
-                        GameHaptics.reset()
-                        game.reset(size: game.boardSize)
-                    } label: {
-                        Label("Restart", systemImage: "arrow.counterclockwise")
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.blue)
-
-                    Button {
-                        GameHaptics.undo()
-                        game.undo()
-                    } label: {
-                        Label("Undo", systemImage: "arrow.uturn.backward")
-                    }
-
-                    Button {
-                        GameHaptics.hint()
-                        game.askForHint()
-                    } label: {
-                        Label("Help", systemImage: "questionmark.circle")
-                    }
+            .toolbar { toolbarContent }
+            .sheet(isPresented: $showSettings) {
+                NavigationStack {
+                    SettingsView(game: game)
+                        .environmentObject(preferences)
                 }
             }
-            #else
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    Picker("Mode", selection: $game.mode) {
-                        Text("PvP Mode").tag(GameMode.pvp)
-                        Text("AI Mode").tag(GameMode.ai)
+            .sheet(isPresented: $showAbout) { AboutView() }
+            .preferredColorScheme(preferences.appearance.preferredColorScheme)
+            .modifier(HapticFeedbackModifier(pulse: game.feedbackPulse, enabled: preferences.hapticsEnabled))
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active { game.sceneBecameActive() } else { game.sceneBecameInactive() }
+            }
+            .onChange(of: game.feedbackPulse) { _, pulse in announce(pulse.event) }
+            .onChange(of: game.session.configuration) { _, configuration in
+                preferences.apply(configuration: configuration)
+            }
+            .task(id: game.session.archived) {
+                sharePayload = game.gameOver
+                    ? ShareCardRenderer.render(session: game.session, palette: palette, colorScheme: colorScheme)
+                    : nil
+            }
+            .onAppear { bootstrap() }
+        }
+        .focusedSceneValue(\.gameActions, GameActions(
+            newRound: { game.newRound() },
+            undo: { game.undo() },
+            hint: { game.askForHint() },
+            canUndo: game.canUndo,
+            canHint: game.canHint
+        ))
+    }
+
+    private var compactLayout: some View {
+        VStack(spacing: 12) {
+            GameHeader(game: game)
+            StatusChip(game: game)
+            ZStack(alignment: .top) {
+                BoardCanvasView(game: game, palette: palette)
+                precisionCoachMark
+            }
+            .padding(.horizontal, 8)
+            .layoutPriority(1)
+            MatchDock(game: game, sharePayload: sharePayload)
+                .padding(.horizontal, 14)
+                .padding(.bottom, 8)
+        }
+        .padding(.top, 8)
+    }
+
+    private var wideLayout: some View {
+        GeometryReader { proxy in
+            let inspectorWidth: CGFloat = inspectorExpanded ? 290 : 44
+            let availableWidth = proxy.size.width - inspectorWidth - 64
+            let availableHeight = proxy.size.height - 70
+            let boardSide = max(320, min(availableWidth, availableHeight))
+
+            VStack(spacing: 16) {
+                GameHeader(game: game)
+                    .frame(maxWidth: 720)
+                HStack(alignment: .top, spacing: 20) {
+                    ZStack(alignment: .top) {
+                        BoardCanvasView(game: game, palette: palette)
+                        precisionCoachMark
                     }
-                    .pickerStyle(.segmented)
-                    .frame(maxWidth: 240)
-                }
+                    .frame(width: boardSide, height: boardSide)
 
-                ToolbarItemGroup(placement: .automatic) {
-                    Menu {
-                        Button {
-                            game.toggleTheme()
-                        } label: {
-                            Label("Dark Mode", systemImage: "paintbrush")
+                    if inspectorExpanded {
+                        MatchInspector(game: game, sharePayload: sharePayload) {
+                            withAnimation(.snappy) { inspectorExpanded = false }
                         }
-                        
-                        Divider()
-                        Button {
-                            game.reset(size: 15)
-                        } label: {
-                            Label("15×15 Board", systemImage: "checkerboard.rectangle")
+                        .frame(width: 290, height: boardSide)
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
+                    } else {
+                        Button("Show match inspector", systemImage: "sidebar.right") {
+                            withAnimation(.snappy) { inspectorExpanded = true }
                         }
-                        .disabled(game.boardSize == 15)
-                        Button {
-                            game.reset(size: 19)
-                        } label: {
-                            Label("19×19 Board", systemImage: "checkerboard.rectangle")
-                        }
-                        .disabled(game.boardSize == 19)
-                        Button {
-                            game.sizePlus()
-                        } label: {
-                            Label("Increase", systemImage: "plus.circle")
-                        }
-                        Button {
-                            game.sizeMinus()
-                        } label: {
-                            Label("Decrease", systemImage: "minus.circle")
-                        }
-
-                        Divider()
-                        Button {
-                            game.reset(size: 15)
-                        } label: {
-                            Label("Reset to Default", systemImage: "arrow.clockwise")
-                        }
-                        Button {
-                            showAbout = true
-                        } label: {
-                            Label("About", systemImage: "info.circle")
-                        }
-                    } label: {
-                        Label("Options", systemImage: "gearshape")
-                    }
-                }
-
-                ToolbarItemGroup(placement: .automatic) {
-                    Button {
-                        GameHaptics.undo()
-                        game.undo()
-                    } label: {
-                        Label("Undo", systemImage: "arrow.uturn.backward")
-                    }
-
-                    Button {
-                        GameHaptics.hint()
-                        game.askForHint()
-                    } label: {
-                        Label("Help", systemImage: "questionmark.circle")
-                    }
-
-                    Button {
-                        GameHaptics.reset()
-                        game.reset(size: game.boardSize)
-                    } label: {
-                        Label("Restart", systemImage: "arrow.counterclockwise")
+                        .labelStyle(.iconOnly)
+                        .buttonStyle(.bordered)
+                        .accessibilityHint("Shows clocks and game actions")
                     }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .padding(.horizontal, 22)
+                .padding(.bottom, 18)
             }
-            #endif
-            .coordinateSpace(name: "root")
-            #if os(macOS)
-            .popover(isPresented: $showAbout) {
-                AboutView(theme: game.theme)
-            }
-            #else
-            .sheet(isPresented: $showAbout) {
-                AboutView(theme: game.theme)
-            }
-            #endif
-            .onAppear {
-                let desired: GomokuTheme = (colorScheme == .dark) ? .night : .classic
-                if game.theme != desired { game.theme = desired }
-            }
-            .onChange(of: colorScheme) { _, _ in
-                let desired: GomokuTheme = (colorScheme == .dark) ? .night : .classic
-                if game.theme != desired { game.theme = desired }
-            }
-            .onChange(of: game.mode) { _, _ in
-                GameHaptics.modeSwitch()
-            }
-            #if os(iOS)
-            .overlay(alignment: .center) {
-                if game.gameOver, game.winner != nil {
-                    Button {
-                        saveWinScreenshot()
-                    } label: {
-                        Label {
-                            Text("Save Screenshot")
-                                .font(.footnote.weight(.semibold))
-                        } icon: {
-                            Image(systemName: "camera")
-                                .font(.footnote)
-                        }
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
-                    .foregroundStyle(.white)
-                    .background(.thinMaterial, in: Capsule())
-                    .overlay(
-                        Capsule().stroke(Color.white.opacity(0.35), lineWidth: 0.5)
-                    )
-                    .shadow(color: .black.opacity(0.25), radius: 8, x: 0, y: 3)
-                    .opacity(isCapturingScreenshot ? 0.0 : 0.92)
-                    .offset(y: 66)
-                    .transition(.opacity)
-                    .animation(.easeInOut(duration: 0.3), value: game.gameOver)
-                }
-            }
-            .alert("Screenshot", isPresented: $showSaveResult) {
-                Button("OK", role: .cancel) { }
-            } message: {
-                Text(saveResultMessage)
-            }
-            #endif
+            .padding(.top, 10)
         }
     }
 
-    #if os(iOS)
-    private func saveWinScreenshot() {
-        // Ensure the required Info.plist key exists to avoid a crash when requesting Photos access.
-        let hasUsageDescription = Bundle.main.object(forInfoDictionaryKey: "NSPhotoLibraryAddUsageDescription") != nil
-        guard hasUsageDescription else {
-            saveResultMessage = "Missing Info.plist key: NSPhotoLibraryAddUsageDescription. Add a description string in your target's Info to allow saving to Photos."
-            showSaveResult = true
-            return
+    @ViewBuilder
+    private var precisionCoachMark: some View {
+        if game.boardSize >= 19, !preferences.didShowPrecisionCoachMark {
+            HStack(spacing: 10) {
+                Image(systemName: "hand.draw")
+                Text("Hold, drag, and release for precise placement.")
+                    .font(.callout)
+                Button("Got it") { preferences.didShowPrecisionCoachMark = true }
+                    .font(.callout.bold())
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .adaptiveGlass(cornerRadius: 18, interactive: true)
+            .padding(12)
+            .transition(.move(edge: .top).combined(with: .opacity))
         }
+    }
 
-        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
-            DispatchQueue.main.async {
-                guard status == .authorized || status == .limited else {
-                    saveResultMessage = "Photo access not granted. Enable Photos access in Settings to save screenshots."
-                    showSaveResult = true
-                    return
-                }
-                isCapturingScreenshot = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    let image = captureWindowImage()
-                    isCapturingScreenshot = false
-                    guard let image else {
-                        saveResultMessage = "Failed to capture screenshot."
-                        showSaveResult = true
-                        return
-                    }
-                    PHPhotoLibrary.shared().performChanges({
-                        PHAssetChangeRequest.creationRequestForAsset(from: image)
-                    }) { success, error in
-                        DispatchQueue.main.async {
-                            if success {
-                                saveResultMessage = "Saved to Photos."
-                            } else {
-                                saveResultMessage = error?.localizedDescription ?? "Failed to save screenshot."
-                            }
-                            showSaveResult = true
-                        }
-                    }
-                }
+    @ToolbarContentBuilder
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItemGroup(placement: .automatic) {
+            NavigationLink {
+                HistoryView()
+            } label: {
+                Label("History", systemImage: "clock.arrow.circlepath")
+            }
+            Button("Settings", systemImage: "gearshape") { showSettings = true }
+            Menu("More", systemImage: "ellipsis.circle") {
+                Button("About Just Gomoku", systemImage: "info.circle") { showAbout = true }
             }
         }
     }
 
-    private func captureWindowImage() -> UIImage? {
-        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = scene.windows.first(where: { $0.isKeyWindow }) else {
-            return nil
+    private func bootstrap() {
+        guard !didBootstrap else { return }
+        didBootstrap = true
+        game.configureArchive(
+            completion: { ArchiveRepository.archive($0, in: modelContext) },
+            reopen: { ArchiveRepository.reopen($0, in: modelContext) }
+        )
+        if game.moves.isEmpty, !game.gameOver {
+            let saved = preferences.payload
+            let configuration = GameConfiguration(
+                mode: saved.defaultMode,
+                boardSize: saved.boardSize,
+                difficulty: saved.difficulty,
+                humanSide: saved.humanSide
+            )
+            if game.session.configuration != configuration { game.newRound(configuration: configuration) }
         }
-        let format = UIGraphicsImageRendererFormat()
-        format.scale = window.traitCollection.displayScale
-        let renderer = UIGraphicsImageRenderer(bounds: window.bounds, format: format)
-        return renderer.image { ctx in
-            window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
-        }
+        if scenePhase == .active { game.sceneBecameActive() }
     }
-    #endif
-}
 
-struct BoardView: View {
-    @EnvironmentObject var game: GameState
-
-    var body: some View {
-        GeometryReader { geo in
-            let side = min(geo.size.width, geo.size.height) * 0.97
-            ZStack {
-                RoundedRectangle(cornerRadius: 6)
-                    .fill(game.theme.boardWood)
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 1), count: game.boardSize), spacing: 1) {
-                    ForEach(0..<(game.boardSize * game.boardSize), id: \.self) { idx in
-                        let r = idx / game.boardSize
-                        let c = idx % game.boardSize
-                        CellView(r: r, c: c)
-                            .aspectRatio(1, contentMode: .fit)
-                    }
-                }
-                .padding(2)
-            }
-            .frame(width: side, height: side)
-            .aspectRatio(1, contentMode: .fit)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    private func announce(_ event: HapticEvent) {
+        let message: String?
+        switch event {
+        case .placement: message = game.statusText
+        case .invalidPlacement: message = "That position is unavailable"
+        case .undo: message = "Move undone. \(game.statusText)"
+        case .hint: message = game.hint.map { "Hint: \($0.coordinate)" }
+        case .newRound: message = "New round. Black's turn"
+        case .win: message = game.winner.map { "\($0.name) wins" }
+        case .draw: message = "Draw"
+        case .none, .targetChanged: message = nil
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        guard let message else { return }
+        #if os(iOS)
+        UIAccessibility.post(notification: .announcement, argument: message)
+        #elseif os(macOS)
+        guard let application = NSApp else { return }
+        NSAccessibility.post(element: application, notification: .announcementRequested, userInfo: [
+            .announcement: message,
+            .priority: NSAccessibilityPriorityLevel.medium.rawValue
+        ])
+        #endif
     }
 }
 
-struct CellView: View {
-    @EnvironmentObject var game: GameState
-    let r: Int
-    let c: Int
-
-    var body: some View {
-        let cell = game.state(r, c)
-        ZStack {
-            Rectangle()
-                .fill(((r + c) % 2 == 0) ? game.theme.cellLight : game.theme.cellDark)
-
-            if cell != .empty {
-                Circle()
-                    .fill(cell == .black ? Color.black : Color.white)
-                    .overlay(Circle().stroke(game.theme.stoneBorder, lineWidth: cell == .white ? 1 : 0))
-                    .padding(4)
-                    .shadow(color: .black.opacity(0.3), radius: 4, x: 2, y: 2)
-            }
-
-            if let hint = game.hint, hint.r == r, hint.c == c, game.state(r, c) == .empty {
-                HintIndicator(color: .red)
-                    .allowsHitTesting(false)
-            }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture { game.playHuman(at: Position(r: r, c: c)) }
-    }
-}
-
-struct VictoryMessage: View {
-    let text: String
-    let player: Player
-
-    var body: some View {
-        Text(text)
-            .font(.system(size: 44, weight: .bold, design: .rounded))
-            .foregroundStyle(player == .black ? Color.black : Color.white)
-            .shadow(color: .black.opacity(0.85), radius: 8, x: 0, y: 4)
-            .padding(.horizontal, 12)
-            .opacity(0.85)
-    }
-}
-
-struct StatusChip: View {
-    let text: String
-    let player: Player
-    let theme: GomokuTheme
-
-    var body: some View {
-        Label {
-            Text(text)
-                .font(.callout.weight(.semibold))
-                .foregroundStyle(theme.text)
-        } icon: {
-            Circle()
-                .fill(player == .black ? Color.black : Color.white)
-                .overlay(Circle().stroke(theme.stoneBorder, lineWidth: player == .white ? 1 : 0))
-                .frame(width: 12, height: 12)
-                .shadow(color: .black.opacity(0.25), radius: 1, x: 0, y: 1)
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .background(.thinMaterial)
-        .clipShape(Capsule())
-        .shadow(color: Color.black.opacity(0.08), radius: 6, x: 0, y: 3)
-        .padding(.horizontal, 12)
-        .transition(.move(edge: .top).combined(with: .opacity))
-        .animation(.spring(response: 0.4, dampingFraction: 0.85), value: text)
-    }
-}
-
-struct StatsBar: View {
-    @EnvironmentObject var game: GameState
-    @State private var now: Date = Date()
-
-    private let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+private struct GameHeader: View {
+    @ObservedObject var game: GameState
 
     var body: some View {
         HStack(spacing: 12) {
-            // Black timer
-            Label {
-                Text(timeString(game.elapsed(for: .black, now: now)))
-                    .font(.caption.monospacedDigit().weight(.semibold))
-            } icon: {
-                Circle().fill(Color.black)
-                    .frame(width: 10, height: 10)
-                    .overlay(Circle().stroke(game.theme.stoneBorder, lineWidth: 0))
+            Picker("Mode", selection: Binding(
+                get: { game.session.configuration.mode },
+                set: { game.setMode($0) }
+            )) {
+                ForEach(GameMode.allCases) { Text($0.title).tag($0) }
             }
+            .pickerStyle(.segmented)
+            .frame(maxWidth: 260)
 
-            Divider()
-                .frame(height: 14)
-                .overlay(Color.primary.opacity(0.15))
-
-            // Move count
-            Label {
-                Text("Moves: \(game.moves.count)")
-                    .font(.caption.weight(.semibold))
-            } icon: {
-                Image(systemName: "number")
-                    .font(.caption)
-            }
-
-            Divider()
-                .frame(height: 14)
-                .overlay(Color.primary.opacity(0.15))
-
-            // White timer
-            Label {
-                Text(timeString(game.elapsed(for: .white, now: now)))
-                    .font(.caption.monospacedDigit().weight(.semibold))
-            } icon: {
-                Circle().fill(Color.white)
-                    .frame(width: 10, height: 10)
-                    .overlay(Circle().stroke(game.theme.stoneBorder, lineWidth: 1))
+            if game.session.configuration.mode == .ai {
+                Picker("Difficulty", selection: Binding(
+                    get: { game.session.configuration.difficulty },
+                    set: { game.setDifficulty($0) }
+                )) {
+                    ForEach(AIDifficulty.allCases) { Text($0.title).tag($0) }
+                }
+                .pickerStyle(.menu)
+                .fixedSize()
             }
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal)
+    }
+}
+
+private struct StatusChip: View {
+    @ObservedObject var game: GameState
+
+    var body: some View {
+        Label {
+            Text(game.statusText).font(.callout.weight(.semibold))
+        } icon: {
+            StoneDot(player: game.outcome == .draw ? nil : (game.winner ?? game.current))
+        }
+        .padding(.horizontal, 13)
         .padding(.vertical, 8)
-        .background(.thinMaterial, in: Capsule())
-        .overlay(
-            Capsule().stroke(Color.white.opacity(0.25), lineWidth: 0.5)
-        )
-        .shadow(color: .black.opacity(0.12), radius: 6, x: 0, y: 3)
-        .onReceive(timer) { date in
-            now = date
-        }
-    }
-
-    private func timeString(_ t: TimeInterval) -> String {
-        let s = Int(t.rounded())
-        let m = s / 60
-        let r = s % 60
-        return String(format: "%02d:%02d", m, r)
+        .adaptiveGlass(cornerRadius: 18)
+        .animation(.snappy, value: game.statusText)
+        .accessibilityElement(children: .combine)
     }
 }
 
-struct HintIndicator: View {
-    @State private var pulse = false
-    @State private var rotate = false
-    let color: Color
-    var insetFactor: CGFloat = 0.18
+private struct MatchDock: View {
+    @ObservedObject var game: GameState
+    let sharePayload: SharePayload?
 
     var body: some View {
-        GeometryReader { geo in
-            let d = min(geo.size.width, geo.size.height)
-            let inset = d * insetFactor
-            let lwOuter = max(1, d * 0.12)
-            let lwRipple = max(0.5, d * 0.09)
-            let lwDashed = max(0.5, d * 0.035)
-            let lwCore = max(0.5, d * 0.035)
-            let dashLen = max(2, d * 0.22)
-            let dashGap = max(1, d * 0.14)
-            let blurSoft: CGFloat = max(0.5, d * 0.09)
-            let shadowR: CGFloat = max(1, d * 0.18)
-
-            ZStack {
-                // Outer halo
-                Circle()
-                    .stroke(color.opacity(0.25), lineWidth: lwOuter)
-                    .scaleEffect(pulse ? 1.8 : 1.2)
-                    .opacity(pulse ? 0.0 : 0.35)
-                    .blur(radius: blurSoft)
-                    .animation(.easeOut(duration: 1.2).repeatForever(autoreverses: false), value: pulse)
-
-                // Expanding ripple
-                Circle()
-                    .stroke(color.opacity(0.6), lineWidth: lwRipple)
-                    .scaleEffect(pulse ? 1.6 : 0.7)
-                    .opacity(pulse ? 0.0 : 0.8)
-                    .animation(.easeOut(duration: 1.2).repeatForever(autoreverses: false), value: pulse)
-
-                // Soft glow fill
-                Circle()
-                    .fill(color.opacity(0.22))
-                    .blur(radius: blurSoft)
-
-                // Rotating dashed ring
-                Circle()
-                    .stroke(style: StrokeStyle(lineWidth: lwDashed, dash: [dashLen, dashGap]))
-                    .foregroundStyle(color.opacity(0.6))
-                    .rotationEffect(.degrees(rotate ? 360 : 0))
-                    .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: rotate)
-
-                // Core ring
-                Circle()
-                    .stroke(color.opacity(1.0), lineWidth: lwCore)
-                    .scaleEffect(pulse ? 1.12 : 0.9)
-                    .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: pulse)
+        VStack(spacing: 12) {
+            if game.gameOver {
+                HStack(spacing: 10) {
+                    StoneDot(player: game.winner)
+                    Text(game.statusText)
+                        .font(.title2.bold())
+                    Spacer()
+                }
             }
-            .padding(inset)
-            .shadow(color: color.opacity(0.4), radius: shadowR, x: 0, y: 1)
-            .onAppear {
-                pulse = true
-                rotate = true
+            ClockSummary(game: game)
+            actions
+        }
+        .padding(14)
+        .adaptiveGlass(cornerRadius: 26)
+        .animation(.snappy, value: game.gameOver)
+    }
+
+    private var actions: some View {
+        HStack(spacing: 12) {
+            if game.gameOver {
+                AdaptiveGlassButton(prominent: true) { game.newRound() } label: {
+                    Label("New Round", systemImage: "arrow.clockwise")
+                        .frame(maxWidth: .infinity, minHeight: 30)
+                }
+            }
+            AdaptiveGlassButton { game.undo() } label: {
+                if game.gameOver {
+                    Label("Undo", systemImage: "arrow.uturn.backward")
+                        .labelStyle(.iconOnly)
+                        .frame(minWidth: 44, minHeight: 30)
+                } else {
+                    Label("Undo", systemImage: "arrow.uturn.backward")
+                        .frame(minWidth: 44, minHeight: 30)
+                }
+            }
+            .disabled(!game.canUndo)
+
+            if game.gameOver {
+                AdaptiveShareButton(payload: sharePayload)
+            } else {
+                AdaptiveGlassButton { game.askForHint() } label: {
+                    Label("Hint", systemImage: "lightbulb")
+                        .frame(minWidth: 44, minHeight: 30)
+                }
+                .disabled(!game.canHint)
             }
         }
     }
 }
 
-struct AboutView: View {
-    let theme: GomokuTheme
-    var body: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "info.circle.fill")
-                .font(.system(size: 44))
-                .foregroundStyle(.blue)
-                .padding(.top, 8)
+private struct MatchInspector: View {
+    @ObservedObject var game: GameState
+    let sharePayload: SharePayload?
+    let collapse: () -> Void
 
-            Text("Created by Li Zheng (li_zheng@outlook.com). Of course it's AI assisted.")
-                .font(.body)
+    var body: some View {
+        VStack(spacing: 22) {
+            HStack {
+                Text(game.gameOver ? game.statusText : "Match")
+                    .font(.title2.bold())
+                Spacer()
+                Button("Collapse inspector", systemImage: "chevron.right", action: collapse)
+                    .labelStyle(.iconOnly)
+                    .buttonStyle(.plain)
+            }
+            StatusChip(game: game)
+            ClockSummary(game: game)
+            Spacer()
+            VStack(spacing: 12) {
+                if game.gameOver {
+                    AdaptiveGlassButton(prominent: true) { game.newRound() } label: {
+                        Label("New Round", systemImage: "arrow.clockwise")
+                            .frame(maxWidth: .infinity, minHeight: 36)
+                    }
+                }
+                AdaptiveGlassButton { game.undo() } label: {
+                    Label("Undo", systemImage: "arrow.uturn.backward").frame(maxWidth: .infinity, minHeight: 34)
+                }
+                .disabled(!game.canUndo)
+                if game.gameOver {
+                    AdaptiveShareButton(payload: sharePayload, expand: true)
+                } else {
+                    AdaptiveGlassButton { game.askForHint() } label: {
+                        Label("Hint", systemImage: "lightbulb").frame(maxWidth: .infinity, minHeight: 34)
+                    }
+                    .disabled(!game.canHint)
+                }
+            }
+        }
+        .padding(20)
+        .adaptiveGlass(cornerRadius: 28)
+    }
+}
+
+private struct ClockSummary: View {
+    @ObservedObject var game: GameState
+
+    var body: some View {
+        TimelineView(.periodic(from: .now, by: 1)) { timeline in
+            HStack(spacing: 10) {
+                Label("Moves \(game.moves.count)", systemImage: "number")
+                Divider().frame(height: 18)
+                Label(time(game.elapsed(for: .black, now: timeline.date)), systemImage: "circle.fill")
+                    .symbolRenderingMode(.monochrome)
+                Divider().frame(height: 18)
+                Label(time(game.elapsed(for: .white, now: timeline.date)), systemImage: "circle")
+            }
+            .font(.caption.monospacedDigit().weight(.semibold))
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.72)
+            .accessibilityElement(children: .combine)
+        }
+    }
+
+    private func time(_ value: TimeInterval) -> String {
+        let seconds = Int(value.rounded())
+        return String(format: "%02d:%02d", seconds / 60, seconds % 60)
+    }
+}
+
+private struct AdaptiveShareButton: View {
+    let payload: SharePayload?
+    var expand = false
+
+    var body: some View {
+        if let payload {
+            if #available(iOS 26.0, macOS 26.0, *) {
+                ShareLink(item: payload, preview: SharePreview("Just Gomoku result")) {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                        .frame(maxWidth: expand ? .infinity : nil, minHeight: 34)
+                }
+                .buttonStyle(.glass)
+            } else {
+                ShareLink(item: payload, preview: SharePreview("Just Gomoku result")) {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                        .frame(maxWidth: expand ? .infinity : nil, minHeight: 34)
+                }
+                .buttonStyle(.bordered)
+            }
+        } else {
+            ProgressView().frame(minWidth: 44, minHeight: 44)
+        }
+    }
+}
+
+private struct SettingsView: View {
+    @ObservedObject var game: GameState
+    @EnvironmentObject private var preferences: PreferencesStore
+    @Environment(\.dismiss) private var dismiss
+    @State private var pendingSize: Int?
+    @State private var pendingSide: Player?
+    @State private var customSize = 15
+    @State private var showResetConfirmation = false
+
+    var body: some View {
+        Form {
+            Section("Board") {
+                Picker("Board Size", selection: Binding(
+                    get: { game.boardSize },
+                    set: { requestBoardSize($0) }
+                )) {
+                    Text("9×9").tag(9)
+                    Text("15×15").tag(15)
+                    Text("19×19").tag(19)
+                    Text("Custom (\(customSize)×\(customSize))").tag(customSize)
+                }
+                Stepper("Custom: \(customSize)×\(customSize)", value: $customSize, in: 5...25, step: 2)
+                Button("Use Custom Size") { requestBoardSize(customSize) }
+            }
+
+            Section("Opponent") {
+                Picker("Difficulty", selection: Binding(
+                    get: { game.session.configuration.difficulty },
+                    set: { game.setDifficulty($0) }
+                )) {
+                    ForEach(AIDifficulty.allCases) { Text($0.title).tag($0) }
+                }
+                .disabled(game.session.configuration.mode != .ai)
+
+                Picker("Your Stones", selection: Binding(
+                    get: { game.session.configuration.humanSide },
+                    set: { requestSide($0) }
+                )) {
+                    Text("Black").tag(Player.black)
+                    Text("White").tag(Player.white)
+                }
+                .disabled(game.session.configuration.mode != .ai)
+            }
+
+            Section("Appearance & Feel") {
+                Picker("Appearance", selection: Binding(
+                    get: { preferences.appearance },
+                    set: { preferences.appearance = $0 }
+                )) {
+                    ForEach(AppAppearance.allCases) { Text($0.title).tag($0) }
+                }
+                Toggle("Haptics", isOn: Binding(
+                    get: { preferences.hapticsEnabled },
+                    set: { preferences.hapticsEnabled = $0 }
+                ))
+            }
+
+            Section {
+                Button("Restart Current Game", systemImage: "arrow.counterclockwise") {
+                    if game.moves.isEmpty {
+                        game.newRound()
+                    } else {
+                        showResetConfirmation = true
+                    }
+                }
+            }
+        }
+        .navigationTitle("Settings")
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
+        }
+        .onAppear { customSize = game.boardSize }
+        .confirmationDialog("Start a new game?", isPresented: Binding(
+            get: { pendingSize != nil || pendingSide != nil || showResetConfirmation },
+            set: { if !$0 { pendingSize = nil; pendingSide = nil; showResetConfirmation = false } }
+        ), titleVisibility: .visible) {
+            Button("Start New Game", role: .destructive) { applyPendingReset() }
+            Button("Cancel", role: .cancel) { clearPending() }
+        } message: {
+            Text("The current board will be cleared.")
+        }
+    }
+
+    private func requestBoardSize(_ size: Int) {
+        guard size != game.boardSize else { return }
+        if game.moves.isEmpty { game.setBoardSizeAndStartNewRound(size) } else { pendingSize = size }
+    }
+
+    private func requestSide(_ side: Player) {
+        guard side != game.session.configuration.humanSide else { return }
+        if game.moves.isEmpty { game.setHumanSideAndStartNewRound(side) } else { pendingSide = side }
+    }
+
+    private func applyPendingReset() {
+        if let pendingSize { game.setBoardSizeAndStartNewRound(pendingSize) }
+        else if let pendingSide { game.setHumanSideAndStartNewRound(pendingSide) }
+        else { game.newRound() }
+        clearPending()
+    }
+
+    private func clearPending() {
+        pendingSize = nil
+        pendingSide = nil
+        showResetConfirmation = false
+    }
+}
+
+private struct AboutView: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "circle.grid.3x3.fill")
+                .font(.system(size: 52))
+                .foregroundStyle(.tint)
+            Text("Just Gomoku").font(.title.bold())
+            Text("A private, focused Gomoku game for your Apple devices.")
                 .multilineTextAlignment(.center)
-                .foregroundStyle(theme.text)
-                .padding(.horizontal, 16)
+                .foregroundStyle(.secondary)
+
+            VStack(spacing: 10) {
+                Text("Created by")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+
+                Link(destination: URL(string: "https://flatre.ai")!) {
+                    HStack(spacing: 8) {
+                        Image("FlatreLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30, height: 30)
+                            .accessibilityHidden(true)
+                        Text("Flatre.ai")
+                            .font(.headline)
+                    }
+                }
+
+                Link(destination: URL(string: "mailto:li@flatre.ai")!) {
+                    Label("li@flatre.ai", systemImage: "envelope")
+                }
+                .font(.footnote)
+            }
+
+            Button("Done") { dismiss() }.buttonStyle(.borderedProminent)
         }
-        .padding(.vertical, 12)
-        .presentationDetents([.height(160)])
+        .padding(32)
+        .presentationDetents([.medium])
     }
 }
 
+private struct HapticFeedbackModifier: ViewModifier {
+    let pulse: HapticPulse
+    let enabled: Bool
+
+    func body(content: Content) -> some View {
+        content.sensoryFeedback(trigger: pulse) { _, new in
+            guard enabled else { return nil }
+            switch new.event {
+            case .placement:
+                return .impact(flexibility: .rigid, intensity: 0.72)
+            case .targetChanged, .hint:
+                return .selection
+            case .invalidPlacement:
+                return .warning
+            case .undo:
+                return .impact(flexibility: .soft, intensity: 0.45)
+            case .newRound, .draw:
+                return .impact(weight: .medium, intensity: 0.55)
+            case .win:
+                return .success
+            case .none:
+                return nil
+            }
+        }
+    }
+}
+
+#Preview {
+    ContentView()
+        .environmentObject(GameState())
+        .environmentObject(PreferencesStore())
+        .modelContainer(ArchiveContainer.make())
+}
