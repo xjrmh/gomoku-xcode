@@ -33,7 +33,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("Gomoku")
+            .navigationTitle("")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
@@ -73,18 +73,22 @@ struct ContentView: View {
     private var compactLayout: some View {
         VStack(spacing: 12) {
             GameHeader(game: game)
-            StatusChip(game: game)
+                .padding(.bottom, 8)
             ZStack(alignment: .top) {
                 BoardCanvasView(game: game, palette: palette)
                 precisionCoachMark
             }
             .padding(.horizontal, 8)
+            .padding(.vertical, 8)
             .layoutPriority(1)
+            Spacer(minLength: 0)
             MatchDock(game: game, sharePayload: sharePayload)
-                .padding(.horizontal, 14)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 8)
                 .padding(.bottom, 8)
         }
         .padding(.top, 8)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
 
     private var wideLayout: some View {
@@ -147,6 +151,16 @@ struct ContentView: View {
 
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
+        #if os(iOS)
+        ToolbarItem(placement: .topBarLeading) {
+            StatusChip(game: game)
+        }
+        #elseif os(macOS)
+        ToolbarItem(placement: .navigation) {
+            StatusChip(game: game)
+        }
+        #endif
+
         ToolbarItemGroup(placement: .automatic) {
             NavigationLink {
                 HistoryView()
@@ -209,28 +223,96 @@ private struct GameHeader: View {
     @ObservedObject var game: GameState
 
     var body: some View {
-        HStack(spacing: 12) {
-            Picker("Mode", selection: Binding(
-                get: { game.session.configuration.mode },
-                set: { game.setMode($0) }
-            )) {
-                ForEach(GameMode.allCases) { Text($0.title).tag($0) }
-            }
-            .pickerStyle(.segmented)
-            .frame(maxWidth: 260)
+        ModeDifficultyControl(game: game)
+            .frame(maxWidth: 300)
+            .padding(.horizontal)
+    }
+}
 
-            if game.session.configuration.mode == .ai {
-                Picker("Difficulty", selection: Binding(
-                    get: { game.session.configuration.difficulty },
-                    set: { game.setDifficulty($0) }
-                )) {
-                    ForEach(AIDifficulty.allCases) { Text($0.title).tag($0) }
-                }
-                .pickerStyle(.menu)
-                .fixedSize()
+private struct ModeDifficultyControl: View {
+    @ObservedObject var game: GameState
+
+    private var configuration: GameConfiguration { game.session.configuration }
+
+    var body: some View {
+        HStack(spacing: 2) {
+            Button {
+                game.setMode(.pvp)
+            } label: {
+                Text("PvP")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .contentShape(Rectangle())
             }
+            .buttonStyle(.plain)
+            .background { selectionBackground(for: .pvp) }
+            .accessibilityValue(configuration.mode == .pvp ? "Selected" : "")
+
+            HStack(spacing: 0) {
+                Button {
+                    game.setMode(.ai)
+                } label: {
+                    Text(aiTitle)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("AI")
+                .accessibilityValue(aiAccessibilityValue)
+
+                Menu {
+                    ForEach(AIDifficulty.allCases) { difficulty in
+                        Button {
+                            game.setDifficulty(difficulty)
+                            game.setMode(.ai)
+                        } label: {
+                            if configuration.difficulty == difficulty {
+                                Label(difficulty.title, systemImage: "checkmark")
+                            } else {
+                                Text(difficulty.title)
+                            }
+                        }
+                    }
+                } label: {
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.caption2.weight(.semibold))
+                        .frame(width: 32)
+                        .frame(maxHeight: .infinity)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("AI Difficulty")
+                .accessibilityValue(configuration.difficulty.title)
+            }
+            .background { selectionBackground(for: .ai) }
         }
-        .padding(.horizontal)
+        .font(.body.weight(.medium))
+        .frame(height: 36)
+        .padding(3)
+        .background(.secondary.opacity(0.12), in: Capsule())
+        .animation(.snappy, value: configuration.mode)
+        .animation(.snappy, value: configuration.difficulty)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Game Mode")
+    }
+
+    @ViewBuilder
+    private func selectionBackground(for mode: GameMode) -> some View {
+        if configuration.mode == mode {
+            Capsule()
+                .fill(.background)
+                .overlay(Capsule().stroke(.primary.opacity(0.06), lineWidth: 1))
+                .shadow(color: .black.opacity(0.06), radius: 1, y: 1)
+        }
+    }
+
+    private var aiAccessibilityValue: String {
+        let difficulty = configuration.difficulty.title
+        return configuration.mode == .ai ? "\(difficulty), selected" : difficulty
+    }
+
+    private var aiTitle: String {
+        configuration.mode == .ai ? "AI · \(configuration.difficulty.title)" : "AI"
     }
 }
 
@@ -238,14 +320,14 @@ private struct StatusChip: View {
     @ObservedObject var game: GameState
 
     var body: some View {
-        Label {
-            Text(game.statusText).font(.callout.weight(.semibold))
-        } icon: {
+        HStack(spacing: 8) {
             StoneDot(player: game.outcome == .draw ? nil : (game.winner ?? game.current))
+            Text(game.statusText)
+                .font(.callout.weight(.semibold))
         }
         .padding(.horizontal, 13)
         .padding(.vertical, 8)
-        .adaptiveGlass(cornerRadius: 18)
+        .fixedSize()
         .animation(.snappy, value: game.statusText)
         .accessibilityElement(children: .combine)
     }
@@ -256,7 +338,7 @@ private struct MatchDock: View {
     let sharePayload: SharePayload?
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 6) {
             if game.gameOver {
                 HStack(spacing: 10) {
                     StoneDot(player: game.winner)
@@ -268,41 +350,83 @@ private struct MatchDock: View {
             ClockSummary(game: game)
             actions
         }
-        .padding(14)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .frame(maxWidth: .infinity)
         .adaptiveGlass(cornerRadius: 26)
         .animation(.snappy, value: game.gameOver)
     }
 
+    @ViewBuilder
     private var actions: some View {
-        HStack(spacing: 12) {
-            if game.gameOver {
+        if game.gameOver {
+            HStack(spacing: 12) {
                 AdaptiveGlassButton(prominent: true) { game.newRound() } label: {
                     Label("New Round", systemImage: "arrow.clockwise")
                         .frame(maxWidth: .infinity, minHeight: 30)
                 }
-            }
-            AdaptiveGlassButton { game.undo() } label: {
-                if game.gameOver {
+                AdaptiveGlassButton { game.undo() } label: {
                     Label("Undo", systemImage: "arrow.uturn.backward")
                         .labelStyle(.iconOnly)
                         .frame(minWidth: 44, minHeight: 30)
-                } else {
-                    Label("Undo", systemImage: "arrow.uturn.backward")
-                        .frame(minWidth: 44, minHeight: 30)
                 }
-            }
-            .disabled(!game.canUndo)
+                .disabled(!game.canUndo)
 
-            if game.gameOver {
                 AdaptiveShareButton(payload: sharePayload)
-            } else {
-                AdaptiveGlassButton { game.askForHint() } label: {
-                    Label("Hint", systemImage: "lightbulb")
-                        .frame(minWidth: 44, minHeight: 30)
+            }
+        } else {
+            HStack(spacing: 0) {
+                MinimalDockAction("Undo", systemImage: "arrow.uturn.backward") {
+                    game.undo()
+                }
+                .disabled(!game.canUndo)
+
+                Divider()
+                    .frame(height: 20)
+                    .padding(.horizontal, 4)
+
+                MinimalDockAction("Hint", systemImage: "lightbulb") {
+                    game.askForHint()
                 }
                 .disabled(!game.canHint)
             }
+            .frame(maxWidth: .infinity, minHeight: 44)
         }
+    }
+}
+
+private struct MinimalDockAction: View {
+    let title: LocalizedStringKey
+    let systemImage: String
+    let action: () -> Void
+
+    init(_ title: LocalizedStringKey, systemImage: String, action: @escaping () -> Void) {
+        self.title = title
+        self.systemImage = systemImage
+        self.action = action
+    }
+
+    var body: some View {
+        Button(action: action) {
+            Label(title, systemImage: systemImage)
+                .font(.subheadline)
+                .fontWeight(.regular)
+                .frame(maxWidth: .infinity, minHeight: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(MinimalDockActionStyle())
+        .foregroundStyle(.primary)
+    }
+}
+
+private struct MinimalDockActionStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(isEnabled ? (configuration.isPressed ? 0.5 : 1) : 0.32)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
     }
 }
 
@@ -513,41 +637,92 @@ private struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "circle.grid.3x3.fill")
-                .font(.system(size: 52))
-                .foregroundStyle(.tint)
-            Text("Just Gomoku").font(.title.bold())
-            Text("A private, focused Gomoku game for your Apple devices.")
-                .multilineTextAlignment(.center)
-                .foregroundStyle(.secondary)
-
+        VStack(spacing: 22) {
             VStack(spacing: 10) {
-                Text("Created by")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+                Image(systemName: "circle.grid.3x3.fill")
+                    .font(.system(size: 34, weight: .semibold))
+                    .foregroundStyle(.tint)
+                    .frame(width: 68, height: 68)
+                    .adaptiveGlass(cornerRadius: 20)
 
+                VStack(spacing: 4) {
+                    Text("Just Gomoku")
+                        .font(.title2.bold())
+                    Text("Private, focused Gomoku for your Apple devices.")
+                        .font(.subheadline)
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            VStack(spacing: 0) {
                 Link(destination: URL(string: "https://flatre.ai")!) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: 12) {
                         Image("FlatreLogo")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30, height: 30)
+                            .frame(width: 36, height: 36)
                             .accessibilityHidden(true)
-                        Text("Flatre.ai")
-                            .font(.headline)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Flatre.ai")
+                                .font(.headline)
+                            Text("Creator")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.secondary)
                     }
+                    .foregroundStyle(.primary)
+                    .padding(.horizontal, 16)
+                    .frame(height: 64)
+                    .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Visit Flatre.ai website")
+
+                Divider()
+                    .padding(.leading, 64)
 
                 Link(destination: URL(string: "mailto:li@flatre.ai")!) {
-                    Label("li@flatre.ai", systemImage: "envelope")
+                    HStack(spacing: 12) {
+                        Image(systemName: "envelope")
+                            .foregroundStyle(.tint)
+                            .frame(width: 36)
+                        Text("li@flatre.ai")
+                            .font(.subheadline)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.tertiary)
+                    }
+                    .foregroundStyle(.primary)
+                    .padding(.horizontal, 16)
+                    .frame(height: 50)
+                    .contentShape(Rectangle())
                 }
-                .font(.footnote)
+                .buttonStyle(.plain)
             }
+            .frame(maxWidth: 340)
+            .adaptiveGlass(cornerRadius: 22)
 
-            Button("Done") { dismiss() }.buttonStyle(.borderedProminent)
+            AdaptiveGlassButton(prominent: true) {
+                dismiss()
+            } label: {
+                Text("Done")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 3)
+            }
+            .frame(maxWidth: 320)
+            .controlSize(.large)
         }
-        .padding(32)
+        .padding(.horizontal, 24)
+        .padding(.vertical, 28)
         .presentationDetents([.medium])
     }
 }

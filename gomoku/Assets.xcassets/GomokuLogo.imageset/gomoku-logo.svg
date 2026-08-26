@@ -1,0 +1,32 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gomoku logo">
+  <defs>
+    <linearGradient id="board" x1="36" y1="24" x2="220" y2="232" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7ECDD"/>
+      <stop offset="1" stop-color="#E7C89E"/>
+    </linearGradient>
+    <radialGradient id="stone" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(76 68) rotate(48) scale(142)">
+      <stop stop-color="#34302D"/>
+      <stop offset="1" stop-color="#090909"/>
+    </radialGradient>
+  </defs>
+  <rect x="6" y="6" width="244" height="244" rx="60" fill="url(#board)"/>
+  <rect x="9" y="9" width="238" height="238" rx="57" stroke="#5D3A24" stroke-opacity="0.14" stroke-width="6"/>
+  <g stroke="#6C432B" stroke-opacity="0.38" stroke-width="5" stroke-linecap="round">
+    <path d="M42 42V214M85 42V214M128 42V214M171 42V214M214 42V214"/>
+    <path d="M42 42H214M42 85H214M42 128H214M42 171H214M42 214H214"/>
+  </g>
+  <g fill="url(#stone)" stroke="#000" stroke-opacity="0.3" stroke-width="2">
+    <circle cx="42" cy="42" r="15"/>
+    <circle cx="85" cy="85" r="15"/>
+    <circle cx="128" cy="128" r="15"/>
+    <circle cx="171" cy="171" r="15"/>
+    <circle cx="214" cy="214" r="15"/>
+  </g>
+  <g fill="#FFF" fill-opacity="0.24">
+    <circle cx="37" cy="37" r="4"/>
+    <circle cx="80" cy="80" r="4"/>
+    <circle cx="123" cy="123" r="4"/>
+    <circle cx="166" cy="166" r="4"/>
+    <circle cx="209" cy="209" r="4"/>
+  </g>
+</svg>

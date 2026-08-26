@@ -1,0 +1,78 @@
+{
+  "app": "Just Gomoku",
+  "platform": "iPhone 6.9-inch portrait",
+  "device_capture": "iPhone 17 Pro Max simulator, iOS 26.5",
+  "export_dimensions": [
+    1320,
+    2868
+  ],
+  "alpha_channel": false,
+  "items": [
+    {
+      "order": 1,
+      "file": "01-five-in-a-row.png",
+      "source": "01-focused-play.png",
+      "headline": "Five in a row. Zero distractions.",
+      "subheadline": "Pure strategy in a calm, focused space.",
+      "width": 1320,
+      "height": 2868,
+      "color_mode": "RGB",
+      "sha256": "8c51a842c5dce6c461059242d684238894b030d7f49559888bc670bf4bc6fe47"
+    },
+    {
+      "order": 2,
+      "file": "02-ai-opponent.png",
+      "source": "02-ai-opponent.png",
+      "headline": "Meet your next opponent.",
+      "subheadline": "Choose Easy, Medium, or Hard.",
+      "width": 1320,
+      "height": 2868,
+      "color_mode": "RGB",
+      "sha256": "3ad6c57bc3008b60b4354acfc077d08ac60c5d7add3174c5d1c29886266ad604"
+    },
+    {
+      "order": 3,
+      "file": "03-smart-hints.png",
+      "source": "03-smart-hints.png",
+      "headline": "A hint, when you want it.",
+      "subheadline": "Get a nudge only when you ask.",
+      "width": 1320,
+      "height": 2868,
+      "color_mode": "RGB",
+      "sha256": "472274fa4ae131c7df5ec56ebd42aa0734e988d297df991d60f29c7ce303b5fb"
+    },
+    {
+      "order": 4,
+      "file": "04-customize.png",
+      "source": "04-customize.png",
+      "headline": "Play it your way.",
+      "subheadline": "Choose board size, stones, appearance, and haptics.",
+      "width": 1320,
+      "height": 2868,
+      "color_mode": "RGB",
+      "sha256": "c97b18b2805aadd9cadaa70a40c0c8867e0c4d86a52134665b0444c25ae2780b"
+    },
+    {
+      "order": 5,
+      "file": "05-dark-mode.png",
+      "source": "05-dark-mode.png",
+      "headline": "Made for light and dark.",
+      "subheadline": "A focused board in either appearance.",
+      "width": 1320,
+      "height": 2868,
+      "color_mode": "RGB",
+      "sha256": "b84e5b596d1c865f43fdf0123dfe039900dc68af570f0d1ddffd98db5e947902"
+    },
+    {
+      "order": 6,
+      "file": "06-private-by-design.png",
+      "source": "06-private-by-design.png",
+      "headline": "Private by design.",
+      "subheadline": "No analytics or advertising identifiers.",
+      "width": 1320,
+      "height": 2868,
+      "color_mode": "RGB",
+      "sha256": "39897ebb5505e0ff19b920ed538175c875b4f1b741bc6e83b8874121e7c7b74a"
+    }
+  ]
+}
