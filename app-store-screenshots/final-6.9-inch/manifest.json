@@ -7,6 +7,10 @@
     2868
   ],
   "alpha_channel": false,
+  "contact_sheet": {
+    "file": "../final-contact-sheet.jpg",
+    "sha256": "2c085a43e3697833ad145bc00c74e5446b10ee4ff769e9320c3120422907b6c0"
+  },
   "items": [
     {
       "order": 1,
@@ -17,7 +21,7 @@
       "width": 1320,
       "height": 2868,
       "color_mode": "RGB",
-      "sha256": "8c51a842c5dce6c461059242d684238894b030d7f49559888bc670bf4bc6fe47"
+      "sha256": "43993f13071deb343e531e0e17ba9bffc9faa907114dfe2154f4090b6af9ad31"
     },
     {
       "order": 2,
@@ -28,7 +32,7 @@
       "width": 1320,
       "height": 2868,
       "color_mode": "RGB",
-      "sha256": "3ad6c57bc3008b60b4354acfc077d08ac60c5d7add3174c5d1c29886266ad604"
+      "sha256": "e8e2041ae37c691cfc3f9c6bc487ae89c661365a8304d4357535afaee71850cf"
     },
     {
       "order": 3,
@@ -39,7 +43,7 @@
       "width": 1320,
       "height": 2868,
       "color_mode": "RGB",
-      "sha256": "472274fa4ae131c7df5ec56ebd42aa0734e988d297df991d60f29c7ce303b5fb"
+      "sha256": "b22253f268a5d13a42d7eebce366bb26458c66070d0521484da36313ef03a6b6"
     },
     {
       "order": 4,
@@ -50,7 +54,7 @@
       "width": 1320,
       "height": 2868,
       "color_mode": "RGB",
-      "sha256": "c97b18b2805aadd9cadaa70a40c0c8867e0c4d86a52134665b0444c25ae2780b"
+      "sha256": "fcc7c8d524e4092c8b9ef7bc2e809449b222e98de6a40aa6c18427320086043c"
     },
     {
       "order": 5,
@@ -61,7 +65,7 @@
       "width": 1320,
       "height": 2868,
       "color_mode": "RGB",
-      "sha256": "b84e5b596d1c865f43fdf0123dfe039900dc68af570f0d1ddffd98db5e947902"
+      "sha256": "b8fa9ef8facf0bb4be98b00fc3566c7dcabab8b4dddcb4b7f5778a41e57e0295"
     },
     {
       "order": 6,
@@ -72,7 +76,7 @@
       "width": 1320,
       "height": 2868,
       "color_mode": "RGB",
-      "sha256": "39897ebb5505e0ff19b920ed538175c875b4f1b741bc6e83b8874121e7c7b74a"
+      "sha256": "c9d01ec7a07c9870f3cd252b280171dba913fe54d2e9e1fc573d05846d078cb7"
     }
   ]
 }

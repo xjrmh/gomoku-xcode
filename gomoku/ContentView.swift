@@ -71,35 +71,49 @@ struct ContentView: View {
     }
 
     private var compactLayout: some View {
-        VStack(spacing: 12) {
-            GameHeader(game: game)
-                .padding(.bottom, 8)
-            ZStack(alignment: .top) {
-                BoardCanvasView(game: game, palette: palette)
-                precisionCoachMark
+        GeometryReader { proxy in
+            let boardSide = max(240, min(proxy.size.width - 28, proxy.size.height - 220))
+
+            ZStack {
+                VStack(spacing: 0) {
+                    MatchHUD(game: game)
+                        .padding(.horizontal, 8)
+                        .padding(.top, 8)
+
+                    Spacer(minLength: 0)
+
+                    MatchDock(game: game, sharePayload: sharePayload)
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 4)
+                }
+
+                ZStack(alignment: .top) {
+                    BoardCanvasView(game: game, palette: palette)
+                    precisionCoachMark
+                }
+                .frame(width: boardSide, height: boardSide)
+
+                Text("Move \(game.moves.count)")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.secondary)
+                    .frame(width: boardSide, alignment: .trailing)
+                    .padding(.trailing, 3)
+                    .offset(y: boardSide / 2 + 14)
+                    .accessibilityLabel("Move count, \(game.moves.count)")
             }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 8)
-            .layoutPriority(1)
-            Spacer(minLength: 0)
-            MatchDock(game: game, sharePayload: sharePayload)
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 8)
-                .padding(.bottom, 8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(.top, 8)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
 
     private var wideLayout: some View {
         GeometryReader { proxy in
             let inspectorWidth: CGFloat = inspectorExpanded ? 290 : 44
             let availableWidth = proxy.size.width - inspectorWidth - 64
-            let availableHeight = proxy.size.height - 70
+            let availableHeight = proxy.size.height - 96
             let boardSide = max(320, min(availableWidth, availableHeight))
 
             VStack(spacing: 16) {
-                GameHeader(game: game)
+                MatchHUD(game: game)
                     .frame(maxWidth: 720)
                 HStack(alignment: .top, spacing: 20) {
                     ZStack(alignment: .top) {
@@ -151,16 +165,6 @@ struct ContentView: View {
 
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
-        #if os(iOS)
-        ToolbarItem(placement: .topBarLeading) {
-            StatusChip(game: game)
-        }
-        #elseif os(macOS)
-        ToolbarItem(placement: .navigation) {
-            StatusChip(game: game)
-        }
-        #endif
-
         ToolbarItemGroup(placement: .automatic) {
             NavigationLink {
                 HistoryView()
@@ -168,9 +172,11 @@ struct ContentView: View {
                 Label("History", systemImage: "clock.arrow.circlepath")
             }
             Button("Settings", systemImage: "gearshape") { showSettings = true }
+            #if os(macOS)
             Menu("More", systemImage: "ellipsis.circle") {
                 Button("About Just Gomoku", systemImage: "info.circle") { showAbout = true }
             }
+            #endif
         }
     }
 
@@ -219,100 +225,146 @@ struct ContentView: View {
     }
 }
 
-private struct GameHeader: View {
+private struct MatchHUD: View {
     @ObservedObject var game: GameState
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
-        ModeDifficultyControl(game: game)
-            .frame(maxWidth: 300)
-            .padding(.horizontal)
+        TimelineView(.periodic(from: .now, by: 1)) { timeline in
+            Group {
+                if dynamicTypeSize.isAccessibilitySize {
+                    expandedLayout(now: timeline.date)
+                } else {
+                    ViewThatFits(in: .horizontal) {
+                        compactLayout(now: timeline.date)
+                        expandedLayout(now: timeline.date)
+                    }
+                }
+            }
+            .padding(.horizontal, 11)
+            .padding(.vertical, 4)
+            .frame(maxWidth: .infinity)
+            .adaptiveGlass(cornerRadius: 26, interactive: true)
+            .animation(.snappy, value: game.statusText)
+        }
+    }
+
+    private func compactLayout(now: Date) -> some View {
+        HStack(spacing: 0) {
+            turnSummary
+                .frame(maxWidth: .infinity, alignment: .leading)
+            compactDivider
+            clock(for: .black, now: now)
+                .frame(minWidth: 70)
+            compactDivider
+            clock(for: .white, now: now)
+                .frame(minWidth: 70)
+            compactDivider
+            MatchModeMenu(game: game)
+                .frame(minWidth: 84)
+        }
+    }
+
+    private func expandedLayout(now: Date) -> some View {
+        VStack(spacing: 8) {
+            HStack(spacing: 10) {
+                turnSummary
+                Spacer(minLength: 8)
+                MatchModeMenu(game: game)
+            }
+            HStack(spacing: 18) {
+                clock(for: .black, now: now)
+                clock(for: .white, now: now)
+            }
+            .frame(maxWidth: .infinity)
+        }
+    }
+
+    private var turnSummary: some View {
+        HStack(spacing: 8) {
+            StoneDot(player: game.outcome == .draw ? nil : (game.winner ?? game.current), size: 16)
+            Text("\(game.statusText)")
+                .font(.subheadline.weight(.semibold))
+        }
+        .frame(minHeight: 44)
+        .layoutPriority(2)
+    }
+
+    private var compactDivider: some View {
+        Divider()
+            .frame(height: 22)
+    }
+
+    private func clock(for player: Player, now: Date) -> some View {
+        HStack(spacing: 6) {
+            StoneDot(player: player, size: 13)
+            Text("\(time(game.elapsed(for: player, now: now)))")
+                .font(.subheadline)
+        }
+        .frame(minHeight: 44)
+        .layoutPriority(1)
+    }
+
+    private func time(_ value: TimeInterval) -> String {
+        let seconds = Int(value.rounded())
+        return String(format: "%02d:%02d", seconds / 60, seconds % 60)
     }
 }
 
-private struct ModeDifficultyControl: View {
+private struct MatchModeMenu: View {
     @ObservedObject var game: GameState
 
     private var configuration: GameConfiguration { game.session.configuration }
 
     var body: some View {
-        HStack(spacing: 2) {
+        Menu {
             Button {
-                game.setMode(.pvp)
+                startNewMatch(mode: .pvp)
             } label: {
-                Text("PvP")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .background { selectionBackground(for: .pvp) }
-            .accessibilityValue(configuration.mode == .pvp ? "Selected" : "")
-
-            HStack(spacing: 0) {
-                Button {
-                    game.setMode(.ai)
-                } label: {
-                    Text(aiTitle)
-                        .lineLimit(1)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .contentShape(Rectangle())
+                if configuration.mode == .pvp {
+                    Label("Player vs Player", systemImage: "checkmark")
+                } else {
+                    Text("Player vs Player")
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel("AI")
-                .accessibilityValue(aiAccessibilityValue)
+            }
 
-                Menu {
-                    ForEach(AIDifficulty.allCases) { difficulty in
-                        Button {
-                            game.setDifficulty(difficulty)
-                            game.setMode(.ai)
-                        } label: {
-                            if configuration.difficulty == difficulty {
-                                Label(difficulty.title, systemImage: "checkmark")
-                            } else {
-                                Text(difficulty.title)
-                            }
+            Section("Play against AI") {
+                ForEach(AIDifficulty.allCases) { difficulty in
+                    Button {
+                        startNewMatch(mode: .ai, difficulty: difficulty)
+                    } label: {
+                        if configuration.mode == .ai, configuration.difficulty == difficulty {
+                            Label(difficulty.title, systemImage: "checkmark")
+                        } else {
+                            Text(difficulty.title)
                         }
                     }
-                } label: {
-                    Image(systemName: "chevron.up.chevron.down")
-                        .font(.caption2.weight(.semibold))
-                        .frame(width: 32)
-                        .frame(maxHeight: .infinity)
-                        .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel("AI Difficulty")
-                .accessibilityValue(configuration.difficulty.title)
             }
-            .background { selectionBackground(for: .ai) }
+        } label: {
+            HStack(spacing: 5) {
+                Text("\(title)")
+                    .font(.caption)
+                Image(systemName: "chevron.down")
+                    .font(.caption2.weight(.semibold))
+            }
+            .foregroundStyle(.secondary)
+            .frame(minHeight: 44)
+            .contentShape(Rectangle())
         }
-        .font(.body.weight(.medium))
-        .frame(height: 36)
-        .padding(3)
-        .background(.secondary.opacity(0.12), in: Capsule())
-        .animation(.snappy, value: configuration.mode)
-        .animation(.snappy, value: configuration.difficulty)
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Game Mode")
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("game-mode-menu")
     }
 
-    @ViewBuilder
-    private func selectionBackground(for mode: GameMode) -> some View {
-        if configuration.mode == mode {
-            Capsule()
-                .fill(.background)
-                .overlay(Capsule().stroke(.primary.opacity(0.06), lineWidth: 1))
-                .shadow(color: .black.opacity(0.06), radius: 1, y: 1)
-        }
+    private var title: String {
+        configuration.mode == .ai ? "AI · \(configuration.difficulty.title)" : "PvP"
     }
 
-    private var aiAccessibilityValue: String {
-        let difficulty = configuration.difficulty.title
-        return configuration.mode == .ai ? "\(difficulty), selected" : difficulty
-    }
-
-    private var aiTitle: String {
-        configuration.mode == .ai ? "AI · \(configuration.difficulty.title)" : "AI"
+    private func startNewMatch(mode: GameMode, difficulty: AIDifficulty? = nil) {
+        var next = configuration
+        next.mode = mode
+        if let difficulty { next.difficulty = difficulty }
+        game.newRound(configuration: next)
     }
 }
 
@@ -338,59 +390,48 @@ private struct MatchDock: View {
     let sharePayload: SharePayload?
 
     var body: some View {
-        VStack(spacing: 6) {
-            if game.gameOver {
-                HStack(spacing: 10) {
-                    StoneDot(player: game.winner)
-                    Text(game.statusText)
-                        .font(.title2.bold())
-                    Spacer()
-                }
-            }
-            ClockSummary(game: game)
-            actions
-        }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 10)
+        actions
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
         .frame(maxWidth: .infinity)
-        .adaptiveGlass(cornerRadius: 26)
+        .adaptiveGlass(cornerRadius: 30)
         .animation(.snappy, value: game.gameOver)
     }
 
     @ViewBuilder
     private var actions: some View {
         if game.gameOver {
-            HStack(spacing: 12) {
-                AdaptiveGlassButton(prominent: true) { game.newRound() } label: {
-                    Label("New Round", systemImage: "arrow.clockwise")
-                        .frame(maxWidth: .infinity, minHeight: 30)
-                }
-                AdaptiveGlassButton { game.undo() } label: {
-                    Label("Undo", systemImage: "arrow.uturn.backward")
-                        .labelStyle(.iconOnly)
-                        .frame(minWidth: 44, minHeight: 30)
-                }
+            HStack(spacing: 4) {
+                MinimalDockAction("Undo", systemImage: "arrow.uturn.backward") { game.undo() }
                 .disabled(!game.canUndo)
 
-                AdaptiveShareButton(payload: sharePayload)
+                NewGameMenu(game: game)
+
+                if let sharePayload {
+                    ShareLink(item: sharePayload, preview: SharePreview("Just Gomoku result")) {
+                        MinimalDockLabel("Share", systemImage: "square.and.arrow.up")
+                    }
+                    .buttonStyle(MinimalDockActionStyle())
+                    .foregroundStyle(.primary)
+                } else {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, minHeight: 58)
+                }
             }
         } else {
-            HStack(spacing: 0) {
+            HStack(spacing: 4) {
                 MinimalDockAction("Undo", systemImage: "arrow.uturn.backward") {
                     game.undo()
                 }
                 .disabled(!game.canUndo)
 
-                Divider()
-                    .frame(height: 20)
-                    .padding(.horizontal, 4)
-
                 MinimalDockAction("Hint", systemImage: "lightbulb") {
                     game.askForHint()
                 }
                 .disabled(!game.canHint)
+
+                NewGameMenu(game: game)
             }
-            .frame(maxWidth: .infinity, minHeight: 44)
         }
     }
 }
@@ -408,14 +449,82 @@ private struct MinimalDockAction: View {
 
     var body: some View {
         Button(action: action) {
-            Label(title, systemImage: systemImage)
-                .font(.subheadline)
-                .fontWeight(.regular)
-                .frame(maxWidth: .infinity, minHeight: 44)
-                .contentShape(Rectangle())
+            MinimalDockLabel(title, systemImage: systemImage)
         }
         .buttonStyle(MinimalDockActionStyle())
         .foregroundStyle(.primary)
+    }
+}
+
+private struct MinimalDockLabel: View {
+    let title: LocalizedStringKey
+    let systemImage: String
+
+    init(_ title: LocalizedStringKey, systemImage: String) {
+        self.title = title
+        self.systemImage = systemImage
+    }
+
+    var body: some View {
+        VStack(spacing: 5) {
+            Image(systemName: systemImage)
+                .font(.system(size: 19, weight: .regular))
+                .frame(width: 28, height: 24, alignment: .center)
+            Text(title)
+                .font(.caption)
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
+                .multilineTextAlignment(.center)
+                .frame(height: 16, alignment: .center)
+        }
+        .frame(maxWidth: .infinity, minHeight: 58)
+        .contentShape(Rectangle())
+    }
+}
+
+private struct NewGameMenu: View {
+    @ObservedObject var game: GameState
+
+    private var configuration: GameConfiguration { game.session.configuration }
+
+    var body: some View {
+        Menu {
+            Button("Restart Current Match", systemImage: "arrow.clockwise") {
+                game.newRound()
+            }
+
+            Divider()
+
+            Button("Player vs Player", systemImage: configuration.mode == .pvp ? "checkmark" : "person.2") {
+                startNewMatch(mode: .pvp)
+            }
+
+            Section("Play against AI") {
+                ForEach(AIDifficulty.allCases) { difficulty in
+                    Button {
+                        startNewMatch(mode: .ai, difficulty: difficulty)
+                    } label: {
+                        if configuration.mode == .ai, configuration.difficulty == difficulty {
+                            Label(difficulty.title, systemImage: "checkmark")
+                        } else {
+                            Text(difficulty.title)
+                        }
+                    }
+                }
+            }
+        } label: {
+            MinimalDockLabel("New Game", systemImage: "plus.circle")
+        }
+        .buttonStyle(MinimalDockActionStyle())
+        .foregroundStyle(.primary)
+        .accessibilityLabel("New Game")
+    }
+
+    private func startNewMatch(mode: GameMode, difficulty: AIDifficulty? = nil) {
+        var next = configuration
+        next.mode = mode
+        if let difficulty { next.difficulty = difficulty }
+        game.newRound(configuration: next)
     }
 }
 
@@ -534,6 +643,7 @@ private struct SettingsView: View {
     @State private var pendingSide: Player?
     @State private var customSize = 15
     @State private var showResetConfirmation = false
+    @State private var showAbout = false
 
     var body: some View {
         Form {
@@ -592,12 +702,19 @@ private struct SettingsView: View {
                     }
                 }
             }
+
+            Section("About") {
+                Button("About Just Gomoku", systemImage: "info.circle") {
+                    showAbout = true
+                }
+            }
         }
         .navigationTitle("Settings")
         .toolbar {
             ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
         }
         .onAppear { customSize = game.boardSize }
+        .sheet(isPresented: $showAbout) { AboutView() }
         .confirmationDialog("Start a new game?", isPresented: Binding(
             get: { pendingSize != nil || pendingSide != nil || showResetConfirmation },
             set: { if !$0 { pendingSize = nil; pendingSide = nil; showResetConfirmation = false } }

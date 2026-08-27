@@ -232,6 +232,7 @@ struct ReplayView: View {
 
 struct StoneDot: View {
     let player: Player?
+    var size: CGFloat = 16
 
     var body: some View {
         Group {
@@ -244,7 +245,7 @@ struct StoneDot: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .frame(width: 16, height: 16)
+        .frame(width: size, height: size)
         .accessibilityHidden(true)
     }
 }

@@ -1,5 +1,46 @@
 import SwiftUI
 
+private struct BoardGeometry {
+    let side: CGFloat
+    let boardSize: Int
+    let inset: CGFloat
+    let step: CGFloat
+    let stoneDiameter: CGFloat
+
+    init(side: CGFloat, boardSize: Int) {
+        self.side = side
+        self.boardSize = boardSize
+        step = side / CGFloat(max(1, boardSize))
+        inset = step / 2
+        stoneDiameter = min(step * 0.78, step - 2)
+    }
+
+    func point(for position: Position) -> CGPoint {
+        CGPoint(
+            x: inset + CGFloat(position.c) * step,
+            y: inset + CGFloat(position.r) * step
+        )
+    }
+
+    func stoneRect(for position: Position) -> CGRect {
+        let center = point(for: position)
+        return CGRect(
+            x: center.x - stoneDiameter / 2,
+            y: center.y - stoneDiameter / 2,
+            width: stoneDiameter,
+            height: stoneDiameter
+        )
+    }
+
+    func position(at point: CGPoint) -> Position? {
+        guard point.x >= 0, point.x <= side, point.y >= 0, point.y <= side else { return nil }
+        let column = Int(((point.x - inset) / step).rounded())
+        let row = Int(((point.y - inset) / step).rounded())
+        guard (0..<boardSize).contains(row), (0..<boardSize).contains(column) else { return nil }
+        return Position(r: row, c: column)
+    }
+}
+
 struct BoardCanvasView: View {
     @ObservedObject var game: GameState
     let palette: GomokuPalette
@@ -79,13 +120,13 @@ struct BoardCanvasView: View {
                 palette: palette
             )
         }
-        .background(palette.boardWood, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .background(palette.boardSurface, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         .overlay {
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .stroke(palette.boardWood, lineWidth: 2)
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(palette.boardEdge.opacity(0.9), lineWidth: 1)
         }
-        .shadow(color: .black.opacity(0.12), radius: 5, y: 2)
+        .shadow(color: .black.opacity(0.12), radius: 9, y: 4)
     }
 
     private func placementGesture(side: CGFloat, origin: CGPoint) -> some Gesture {
@@ -119,17 +160,14 @@ struct BoardCanvasView: View {
     }
 
     private func boardPosition(at point: CGPoint, side: CGFloat, origin: CGPoint) -> Position? {
-        let localX = point.x - origin.x
-        let localY = point.y - origin.y
-        guard localX >= 0, localX < side, localY >= 0, localY < side else { return nil }
-        let cell = side / CGFloat(game.boardSize)
-        return Position(r: min(game.boardSize - 1, Int(localY / cell)), c: min(game.boardSize - 1, Int(localX / cell)))
+        let local = CGPoint(x: point.x - origin.x, y: point.y - origin.y)
+        return BoardGeometry(side: side, boardSize: game.boardSize).position(at: local)
     }
 
     private func loupePosition(for position: Position, side: CGFloat, origin: CGPoint, container: CGSize) -> CGPoint {
-        let cell = side / CGFloat(game.boardSize)
-        let x = origin.x + (CGFloat(position.c) + 0.5) * cell
-        let targetY = origin.y + (CGFloat(position.r) + 0.5) * cell
+        let point = BoardGeometry(side: side, boardSize: game.boardSize).point(for: position)
+        let x = origin.x + point.x
+        let targetY = origin.y + point.y
         let above = targetY - 92
         return CGPoint(x: min(container.width - 74, max(74, x)), y: above < 74 ? targetY + 92 : above)
     }
@@ -178,6 +216,18 @@ struct BoardLoupe: View {
     var body: some View {
         Canvas { context, size in
             let cell = size.width / 3
+            context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(palette.boardSurface))
+
+            var grid = Path()
+            for index in 0..<3 {
+                let coordinate = (CGFloat(index) + 0.5) * cell
+                grid.move(to: CGPoint(x: coordinate, y: 0))
+                grid.addLine(to: CGPoint(x: coordinate, y: size.height))
+                grid.move(to: CGPoint(x: 0, y: coordinate))
+                grid.addLine(to: CGPoint(x: size.width, y: coordinate))
+            }
+            context.stroke(grid, with: .color(palette.boardGrid.opacity(0.78)), lineWidth: 1)
+
             for rowOffset in -1...1 {
                 for columnOffset in -1...1 {
                     let r = target.r + rowOffset
@@ -188,12 +238,15 @@ struct BoardLoupe: View {
                         width: cell,
                         height: cell
                     )
-                    context.fill(Path(rect), with: .color((r + c).isMultiple(of: 2) ? palette.cellLight : palette.cellDark))
-                    context.stroke(Path(rect), with: .color(palette.boardWood.opacity(0.75)), lineWidth: 1)
                     if (0..<boardSize).contains(r), (0..<boardSize).contains(c) {
                         let state = board[r * boardSize + c]
                         if state != .empty {
-                            BoardDrawing.drawStone(context: &context, rect: rect.insetBy(dx: 6, dy: 6), player: state.player!, palette: palette)
+                            BoardDrawing.drawStone(
+                                context: &context,
+                                rect: rect.insetBy(dx: cell * 0.15, dy: cell * 0.15),
+                                player: state.player!,
+                                palette: palette
+                            )
                         }
                     }
                 }
@@ -202,9 +255,18 @@ struct BoardLoupe: View {
             if board[target.r * boardSize + target.c] == .empty {
                 var ghost = context
                 ghost.opacity = 0.7
-                BoardDrawing.drawStone(context: &ghost, rect: targetRect.insetBy(dx: 6, dy: 6), player: player, palette: palette)
+                BoardDrawing.drawStone(
+                    context: &ghost,
+                    rect: targetRect.insetBy(dx: cell * 0.15, dy: cell * 0.15),
+                    player: player,
+                    palette: palette
+                )
             }
-            context.stroke(Path(ellipseIn: targetRect.insetBy(dx: 3, dy: 3)), with: .color(palette.winningGold), lineWidth: 3)
+            context.stroke(
+                Path(ellipseIn: targetRect.insetBy(dx: 3, dy: 3)),
+                with: .color(palette.winningGold),
+                lineWidth: 3
+            )
         }
         .clipShape(Circle())
         .overlay(Circle().stroke(.white.opacity(0.9), lineWidth: 2))
@@ -225,66 +287,173 @@ enum BoardDrawing {
         palette: GomokuPalette
     ) {
         guard boardSize > 0, board.count == boardSize * boardSize else { return }
-        let cell = min(size.width, size.height) / CGFloat(boardSize)
+        let side = min(size.width, size.height)
+        let geometry = BoardGeometry(side: side, boardSize: boardSize)
+        context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(palette.boardSurface))
+
+        var grid = Path()
+        let start = geometry.inset
+        let end = side - geometry.inset
+        for index in 0..<boardSize {
+            let coordinate = geometry.inset + CGFloat(index) * geometry.step
+            grid.move(to: CGPoint(x: coordinate, y: start))
+            grid.addLine(to: CGPoint(x: coordinate, y: end))
+            grid.move(to: CGPoint(x: start, y: coordinate))
+            grid.addLine(to: CGPoint(x: end, y: coordinate))
+        }
+        context.stroke(
+            grid,
+            with: .color(palette.boardGrid.opacity(0.82)),
+            lineWidth: max(0.7, geometry.step * 0.032)
+        )
+
+        for position in starPoints(for: boardSize) {
+            let center = geometry.point(for: position)
+            let radius = max(2, geometry.step * 0.09)
+            let rect = CGRect(
+                x: center.x - radius,
+                y: center.y - radius,
+                width: radius * 2,
+                height: radius * 2
+            )
+            context.fill(Path(ellipseIn: rect), with: .color(palette.boardGrid))
+        }
+
         for r in 0..<boardSize {
             for c in 0..<boardSize {
-                let rect = CGRect(x: CGFloat(c) * cell, y: CGFloat(r) * cell, width: cell, height: cell)
-                context.fill(Path(rect), with: .color((r + c).isMultiple(of: 2) ? palette.cellLight : palette.cellDark))
-                context.stroke(Path(rect), with: .color(palette.boardWood.opacity(0.72)), lineWidth: max(0.5, cell * 0.035))
                 let state = board[r * boardSize + c]
                 if let player = state.player {
-                    drawStone(context: &context, rect: rect.insetBy(dx: max(1.5, cell * 0.14), dy: max(1.5, cell * 0.14)), player: player, palette: palette)
+                    drawStone(
+                        context: &context,
+                        rect: geometry.stoneRect(for: Position(r: r, c: c)),
+                        player: player,
+                        palette: palette
+                    )
                 }
             }
         }
 
         if winningLine.count >= 2 {
-            let start = center(of: winningLine.first!, cell: cell)
-            let end = center(of: winningLine.last!, cell: cell)
+            let start = geometry.point(for: winningLine.first!)
+            let end = geometry.point(for: winningLine.last!)
             var path = Path()
             path.move(to: start)
             path.addLine(to: end)
-            context.stroke(path, with: .color(palette.winningGold), style: StrokeStyle(lineWidth: max(3, cell * 0.12), lineCap: .round))
+            context.stroke(
+                path,
+                with: .color(palette.winningGold),
+                style: StrokeStyle(lineWidth: max(3, geometry.step * 0.12), lineCap: .round)
+            )
             for position in winningLine {
-                let rect = cellRect(position, cell: cell).insetBy(dx: max(1, cell * 0.08), dy: max(1, cell * 0.08))
-                context.stroke(Path(ellipseIn: rect), with: .color(palette.winningGold), lineWidth: max(2, cell * 0.09))
+                let rect = geometry.stoneRect(for: position).insetBy(dx: -2, dy: -2)
+                context.stroke(
+                    Path(ellipseIn: rect),
+                    with: .color(palette.winningGold),
+                    lineWidth: max(2, geometry.step * 0.09)
+                )
             }
         }
 
         if let lastMove {
-            let rect = cellRect(lastMove, cell: cell)
-            let dot = rect.insetBy(dx: cell * 0.42, dy: cell * 0.42)
+            let stoneRect = geometry.stoneRect(for: lastMove)
+            let ring = stoneRect.insetBy(dx: stoneRect.width * 0.3, dy: stoneRect.height * 0.3)
             let color: Color = board[lastMove.r * boardSize + lastMove.c] == .black ? .white : .black
-            context.fill(Path(ellipseIn: dot), with: .color(color))
+            context.stroke(
+                Path(ellipseIn: ring),
+                with: .color(color.opacity(0.92)),
+                lineWidth: max(1.5, geometry.step * 0.075)
+            )
         }
 
         if let hint, board[hint.r * boardSize + hint.c] == .empty {
-            context.stroke(Path(ellipseIn: cellRect(hint, cell: cell).insetBy(dx: cell * 0.2, dy: cell * 0.2)), with: .color(.red), lineWidth: max(2, cell * 0.07))
+            let rect = geometry.stoneRect(for: hint).insetBy(dx: 1, dy: 1)
+            context.stroke(
+                Path(ellipseIn: rect),
+                with: .color(palette.winningGold),
+                style: StrokeStyle(lineWidth: max(2, geometry.step * 0.075), dash: [4, 3])
+            )
         }
 
         if let preview, board[preview.r * boardSize + preview.c] == .empty {
             var ghost = context
             ghost.opacity = 0.55
-            drawStone(context: &ghost, rect: cellRect(preview, cell: cell).insetBy(dx: max(1.5, cell * 0.14), dy: max(1.5, cell * 0.14)), player: board.compactMap(\.player).count.isMultiple(of: 2) ? .black : .white, palette: palette)
+            drawStone(
+                context: &ghost,
+                rect: geometry.stoneRect(for: preview),
+                player: board.compactMap(\.player).count.isMultiple(of: 2) ? .black : .white,
+                palette: palette
+            )
         }
 
         if let cursor {
-            context.stroke(Path(cellRect(cursor, cell: cell).insetBy(dx: 1, dy: 1)), with: .color(.blue), lineWidth: max(2, cell * 0.08))
+            let rect = geometry.stoneRect(for: cursor).insetBy(dx: -3, dy: -3)
+            context.stroke(
+                Path(ellipseIn: rect),
+                with: .color(.blue),
+                lineWidth: max(2, geometry.step * 0.08)
+            )
         }
     }
 
     static func drawStone(context: inout GraphicsContext, rect: CGRect, player: Player, palette: GomokuPalette) {
-        let color: Color = player == .black ? .black : .white
-        context.fill(Path(ellipseIn: rect), with: .color(color))
-        context.stroke(Path(ellipseIn: rect), with: .color(player == .white ? palette.stoneBorder : .black.opacity(0.45)), lineWidth: 1)
+        let path = Path(ellipseIn: rect)
+        let gradient = player == .black
+            ? Gradient(stops: [
+                .init(color: Color(white: 0.34), location: 0),
+                .init(color: Color(white: 0.09), location: 0.55),
+                .init(color: Color(white: 0.025), location: 1),
+            ])
+            : Gradient(stops: [
+                .init(color: .white, location: 0),
+                .init(color: Color(white: 0.92), location: 0.62),
+                .init(color: Color(white: 0.79), location: 1),
+            ])
+
+        context.drawLayer { layer in
+            layer.addFilter(.shadow(
+                color: .black.opacity(player == .black ? 0.3 : 0.2),
+                radius: max(1.25, rect.width * 0.1),
+                x: 0,
+                y: max(1, rect.height * 0.08)
+            ))
+            layer.fill(
+                path,
+                with: .radialGradient(
+                    gradient,
+                    center: CGPoint(x: rect.minX + rect.width * 0.34, y: rect.minY + rect.height * 0.28),
+                    startRadius: 0,
+                    endRadius: rect.width * 0.78
+                )
+            )
+        }
+
+        context.stroke(
+            path,
+            with: .color(player == .white ? palette.stoneBorder : .black.opacity(0.62)),
+            lineWidth: max(0.75, rect.width * 0.035)
+        )
+
     }
 
-    private static func cellRect(_ position: Position, cell: CGFloat) -> CGRect {
-        CGRect(x: CGFloat(position.c) * cell, y: CGFloat(position.r) * cell, width: cell, height: cell)
-    }
-
-    private static func center(of position: Position, cell: CGFloat) -> CGPoint {
-        CGPoint(x: (CGFloat(position.c) + 0.5) * cell, y: (CGFloat(position.r) + 0.5) * cell)
+    private static func starPoints(for boardSize: Int) -> [Position] {
+        guard boardSize >= 7 else {
+            let center = boardSize / 2
+            return [Position(r: center, c: center)]
+        }
+        if boardSize < 13 {
+            let edge = 2
+            let farEdge = boardSize - edge - 1
+            let center = boardSize / 2
+            return [
+                Position(r: edge, c: edge),
+                Position(r: edge, c: farEdge),
+                Position(r: center, c: center),
+                Position(r: farEdge, c: edge),
+                Position(r: farEdge, c: farEdge),
+            ]
+        }
+        let coordinates = [3, boardSize / 2, boardSize - 4]
+        return coordinates.flatMap { row in coordinates.map { Position(r: row, c: $0) } }
     }
 }
 
@@ -310,9 +479,9 @@ struct StaticBoardView: View {
                 palette: palette
             )
         }
-        .background(palette.boardWood)
-        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).stroke(palette.boardWood, lineWidth: 1))
+        .background(palette.boardSurface)
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(palette.boardEdge, lineWidth: 1))
         .aspectRatio(1, contentMode: .fit)
     }
 }

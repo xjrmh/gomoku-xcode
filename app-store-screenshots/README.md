@@ -1,6 +1,6 @@
 # Just Gomoku App Store screenshots
 
-The publish-ready iPhone screenshot set is in `final-6.9-inch/`.
+The publish-ready iPhone screenshot set is in `final-6.9-inch/`. A compact gallery preview is available as `final-contact-sheet.jpg`.
 
 - Export size: 1320 × 2868 px, portrait
 - Format: RGB PNG, no alpha channel
@@ -23,10 +23,10 @@ Source specification: https://developer.apple.com/help/app-store-connect/referen
 
 ## Rebuild
 
-Run the composer with a Python environment that includes Pillow and NumPy:
+Run the composer with a Python environment that includes Pillow:
 
 ```sh
 python3 app-store-screenshots/compose_screenshots.py
 ```
 
-The script verifies the source and output dimensions, removes transparency from the final exports, and writes a checksum manifest.
+The script verifies the source and output dimensions, removes transparency from the final exports, writes a checksum manifest, and rebuilds the contact sheet.

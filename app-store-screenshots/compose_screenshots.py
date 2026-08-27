@@ -7,14 +7,14 @@ import hashlib
 import json
 from pathlib import Path
 
-import numpy as np
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 
 ROOT = Path(__file__).resolve().parent
 SOURCE_DIR = ROOT / "sources"
 OUTPUT_DIR = ROOT / "final-6.9-inch"
 LOGO_PATH = ROOT / "logo.png"
+CONTACT_SHEET_PATH = ROOT / "final-contact-sheet.jpg"
 FONT_PATH = "/System/Library/Fonts/SFNS.ttf"
 
 WIDTH = 1320
@@ -23,6 +23,10 @@ SCREEN_X = 140
 SCREEN_Y = 590
 SCREEN_WIDTH = 1040
 SCREEN_RADIUS = 76
+CONTACT_COLUMNS = 3
+CONTACT_THUMB_WIDTH = 330
+CONTACT_THUMB_HEIGHT = round(HEIGHT * CONTACT_THUMB_WIDTH / WIDTH)
+CONTACT_LABEL_HEIGHT = 52
 
 
 ITEMS = [
@@ -109,12 +113,8 @@ def fit_multiline_font(text: str, start_size: int, max_width: int) -> ImageFont.
 
 
 def gradient(top: tuple[int, int, int], bottom: tuple[int, int, int]) -> Image.Image:
-    start = np.asarray(top, dtype=np.float32)
-    end = np.asarray(bottom, dtype=np.float32)
-    progress = np.linspace(0.0, 1.0, HEIGHT, dtype=np.float32)[:, None, None]
-    pixels = start[None, None, :] * (1.0 - progress) + end[None, None, :] * progress
-    pixels = np.repeat(pixels, WIDTH, axis=1)
-    return Image.fromarray(np.uint8(np.clip(pixels, 0, 255)), "RGB")
+    ramp = Image.linear_gradient("L").resize((WIDTH, HEIGHT), Image.Resampling.BILINEAR)
+    return ImageOps.colorize(ramp, black=top, white=bottom)
 
 
 def add_background_detail(canvas: Image.Image, accent: tuple[int, int, int]) -> Image.Image:
@@ -240,11 +240,46 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def compose_contact_sheet(exports: list[Path]) -> Path:
+    rows = (len(exports) + CONTACT_COLUMNS - 1) // CONTACT_COLUMNS
+    sheet = Image.new(
+        "RGB",
+        (
+            CONTACT_COLUMNS * CONTACT_THUMB_WIDTH,
+            rows * (CONTACT_LABEL_HEIGHT + CONTACT_THUMB_HEIGHT),
+        ),
+        (24, 24, 24),
+    )
+    draw = ImageDraw.Draw(sheet)
+    label_font = font(24, "Bold")
+
+    for index, export in enumerate(exports):
+        column = index % CONTACT_COLUMNS
+        row = index // CONTACT_COLUMNS
+        x = column * CONTACT_THUMB_WIDTH
+        label_y = row * (CONTACT_LABEL_HEIGHT + CONTACT_THUMB_HEIGHT)
+        image_y = label_y + CONTACT_LABEL_HEIGHT
+        label = export.stem
+
+        draw.text((x + 14, label_y + 11), label, font=label_font, fill=(255, 255, 255))
+        with Image.open(export) as source:
+            thumbnail = source.convert("RGB").resize(
+                (CONTACT_THUMB_WIDTH, CONTACT_THUMB_HEIGHT),
+                Image.Resampling.LANCZOS,
+            )
+        sheet.paste(thumbnail, (x, image_y))
+
+    sheet.save(CONTACT_SHEET_PATH, format="JPEG", quality=92, optimize=True)
+    return CONTACT_SHEET_PATH
+
+
 def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     manifest_items = []
+    exports = []
     for item in ITEMS:
         output_path = compose(item)
+        exports.append(output_path)
         with Image.open(output_path) as image:
             if image.size != (WIDTH, HEIGHT) or image.mode != "RGB":
                 raise ValueError(f"Invalid export {output_path}: {image.size}, {image.mode}")
@@ -262,12 +297,18 @@ def main() -> None:
             }
         )
 
+    contact_sheet = compose_contact_sheet(exports)
+
     manifest = {
         "app": "Just Gomoku",
         "platform": "iPhone 6.9-inch portrait",
         "device_capture": "iPhone 17 Pro Max simulator, iOS 26.5",
         "export_dimensions": [WIDTH, HEIGHT],
         "alpha_channel": False,
+        "contact_sheet": {
+            "file": str(Path("..") / contact_sheet.name),
+            "sha256": sha256(contact_sheet),
+        },
         "items": manifest_items,
     }
     (OUTPUT_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

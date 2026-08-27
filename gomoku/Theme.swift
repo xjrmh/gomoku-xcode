@@ -124,9 +124,9 @@ final class PreferencesStore: NSObject, ObservableObject {
 }
 
 struct GomokuPalette {
-    let boardWood: Color
-    let cellLight: Color
-    let cellDark: Color
+    let boardSurface: Color
+    let boardGrid: Color
+    let boardEdge: Color
     let stoneBorder: Color
     let background: Color
     let winningGold: Color
@@ -134,21 +134,21 @@ struct GomokuPalette {
     static func resolve(_ scheme: ColorScheme) -> Self {
         if scheme == .dark {
             return .init(
-                boardWood: Color(hex: 0x5B4438),
-                cellLight: Color(hex: 0x6A5347),
-                cellDark: Color(hex: 0x5D483E),
-                stoneBorder: Color.white.opacity(0.6),
-                background: Color(hex: 0x111111),
+                boardSurface: Color(hex: 0xB99062),
+                boardGrid: Color(hex: 0x68492F),
+                boardEdge: Color(hex: 0x9D744C),
+                stoneBorder: Color.black.opacity(0.42),
+                background: Color(hex: 0x12110F),
                 winningGold: Color(hex: 0xF4C542)
             )
         }
         return .init(
-            boardWood: Color(hex: 0x8B4513),
-            cellLight: Color(hex: 0xDEB887),
-            cellDark: Color(hex: 0xD2A679),
-            stoneBorder: Color.black.opacity(0.35),
-            background: Color(hex: 0xF8F8F8),
-            winningGold: Color(hex: 0xD6A615)
+            boardSurface: Color(hex: 0xF7DFB8),
+            boardGrid: Color(hex: 0xB98252),
+            boardEdge: Color(hex: 0xE7B977),
+            stoneBorder: Color.black.opacity(0.32),
+            background: Color(hex: 0xF7F5F1),
+            winningGold: Color(hex: 0xC78F2F)
         )
     }
 }
