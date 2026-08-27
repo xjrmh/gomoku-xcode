@@ -1,93 +1,97 @@
 {
   "app": "Just Gomoku",
-  "platform": "iPhone 6.9-inch portrait",
+  "platform": "iPhone 6.5-inch portrait",
   "device_capture": "iPhone 17 Pro Max simulator, iOS 26.5",
   "export_dimensions": [
-    1320,
-    2868
+    1284,
+    2778
   ],
   "alpha_channel": false,
-  "contact_sheet": {
-    "file": "../final-contact-sheet.jpg",
-    "sha256": "574179fa0e3e3e39b03387943f96d49f7c39effe79e548dcf02e8cf65ba1e8fc"
-  },
+  "derivation": "Aspect-preserving resize and centered crop from the 6.9-inch compositions.",
   "items": [
     {
       "order": 1,
       "file": "01-five-in-a-row.png",
       "source": "01-focused-play.png",
+      "derived_from": "../final-6.9-inch/01-five-in-a-row.png",
       "headline": "Five in a row. Zero distractions.",
       "subheadline": "Pure strategy in a calm, focused space.",
-      "width": 1320,
-      "height": 2868,
+      "width": 1284,
+      "height": 2778,
       "color_mode": "RGB",
-      "sha256": "2e3e69f61b86ace72b70520a65731ac32c57df52669d4d0a88159026c9eda5fd"
+      "sha256": "8ea4b8569cde778eb9f4f89ca3ab7d740ac5c4a50bb5d24d630ec586c83cb3ab"
     },
     {
       "order": 2,
       "file": "02-ai-opponent.png",
       "source": "02-ai-opponent.png",
+      "derived_from": "../final-6.9-inch/02-ai-opponent.png",
       "headline": "Meet your next opponent.",
       "subheadline": "Choose Easy, Medium, or Hard.",
-      "width": 1320,
-      "height": 2868,
+      "width": 1284,
+      "height": 2778,
       "color_mode": "RGB",
-      "sha256": "173ff0347d416439d132eb93904a818f437518a86ac14e28bddb39ef71712c22"
+      "sha256": "6ffbd3a3fec1c51ce0416d222f3ba55f1eda62bc64cbe63551f5cf7037c93fd7"
     },
     {
       "order": 3,
       "file": "03-smart-hints.png",
       "source": "03-smart-hints.png",
+      "derived_from": "../final-6.9-inch/03-smart-hints.png",
       "headline": "A hint, when you want it.",
       "subheadline": "Get a nudge only when you ask.",
-      "width": 1320,
-      "height": 2868,
+      "width": 1284,
+      "height": 2778,
       "color_mode": "RGB",
-      "sha256": "4fa632d55b0efa814b95d4e3e284d6739256afaae89247d8c68d7e3dd4ecae35"
+      "sha256": "e3c804e157bf55c0671b479bc3621df99591d0c81fd2c6fc43d9618779410687"
     },
     {
       "order": 4,
       "file": "04-customize.png",
       "source": "04-customize.png",
+      "derived_from": "../final-6.9-inch/04-customize.png",
       "headline": "Play it your way.",
       "subheadline": "Choose board size, stones, appearance, and haptics.",
-      "width": 1320,
-      "height": 2868,
+      "width": 1284,
+      "height": 2778,
       "color_mode": "RGB",
-      "sha256": "bd3ab62e4d46e0102b45519b21f3f346688be9f8274bbeb214958e0e9e9e2e9b"
+      "sha256": "9e859bd88f531687a77f70fc489f1d909cee9bd8fe4e6f520d187b69f5eb41c0"
     },
     {
       "order": 5,
       "file": "05-dark-mode.png",
       "source": "05-dark-mode.png",
+      "derived_from": "../final-6.9-inch/05-dark-mode.png",
       "headline": "Made for light and dark.",
       "subheadline": "A focused board in either appearance.",
-      "width": 1320,
-      "height": 2868,
+      "width": 1284,
+      "height": 2778,
       "color_mode": "RGB",
-      "sha256": "f885da6bb7a6baed81c1a96428786d02346234179a56bdb103d95d03347189f6"
+      "sha256": "f7b2beb277c4182b432c0620580cfc4ee81110b3c1da5bd27c838e73f915f6b2"
     },
     {
       "order": 6,
       "file": "06-private-by-design.png",
       "source": "06-private-by-design.png",
+      "derived_from": "../final-6.9-inch/06-private-by-design.png",
       "headline": "Private by design.",
       "subheadline": "No analytics or advertising identifiers.",
-      "width": 1320,
-      "height": 2868,
+      "width": 1284,
+      "height": 2778,
       "color_mode": "RGB",
-      "sha256": "27438caf5395f5052e82769b309a6fa6f0dea04910b95b4a23ad309fe492cca7"
+      "sha256": "095e17620dc4c0b3609e4ccc8a65c79505f7290572feeb1284288ed6e5a88c8b"
     },
     {
       "order": 7,
       "file": "07-game-history.png",
       "source": "07-game-history.png",
+      "derived_from": "../final-6.9-inch/07-game-history.png",
       "headline": "Every game, ready to replay.",
       "subheadline": "Review results and replay every move.",
-      "width": 1320,
-      "height": 2868,
+      "width": 1284,
+      "height": 2778,
       "color_mode": "RGB",
-      "sha256": "eb55fcc9ddbad5c3434f4951abcd755c333a6e4e7b8c0c050c74f62b5f25d2b2"
+      "sha256": "ed466697a44f92497e551fdeaa23aff979db1f498a6a279f3283a3155917b2b0"
     }
   ]
 }

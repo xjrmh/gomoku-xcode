@@ -13,12 +13,15 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 ROOT = Path(__file__).resolve().parent
 SOURCE_DIR = ROOT / "sources"
 OUTPUT_DIR = ROOT / "final-6.9-inch"
+OUTPUT_65_DIR = ROOT / "final-6.5-inch"
 LOGO_PATH = ROOT / "logo.png"
 CONTACT_SHEET_PATH = ROOT / "final-contact-sheet.jpg"
 FONT_PATH = "/System/Library/Fonts/SFNS.ttf"
 
 WIDTH = 1320
 HEIGHT = 2868
+WIDTH_65 = 1284
+HEIGHT_65 = 2778
 SCREEN_X = 140
 SCREEN_Y = 590
 SCREEN_WIDTH = 1040
@@ -83,6 +86,15 @@ ITEMS = [
         "top": "#111A29",
         "bottom": "#28557B",
         "accent": "#72B7FF",
+    },
+    {
+        "source": "07-game-history.png",
+        "output": "07-game-history.png",
+        "headline": "Every game,\nready to replay.",
+        "subheadline": "Review results and replay every move.",
+        "top": "#0C1A17",
+        "bottom": "#276654",
+        "accent": "#77E0BF",
     },
 ]
 
@@ -256,6 +268,8 @@ def compose_contact_sheet(exports: list[Path]) -> Path:
     for index, export in enumerate(exports):
         column = index % CONTACT_COLUMNS
         row = index // CONTACT_COLUMNS
+        if index == len(exports) - 1 and len(exports) % CONTACT_COLUMNS == 1:
+            column = CONTACT_COLUMNS // 2
         x = column * CONTACT_THUMB_WIDTH
         label_y = row * (CONTACT_LABEL_HEIGHT + CONTACT_THUMB_HEIGHT)
         image_y = label_y + CONTACT_LABEL_HEIGHT
@@ -271,6 +285,23 @@ def compose_contact_sheet(exports: list[Path]) -> Path:
 
     sheet.save(CONTACT_SHEET_PATH, format="JPEG", quality=92, optimize=True)
     return CONTACT_SHEET_PATH
+
+
+def compose_6_5_exports(exports: list[Path]) -> list[Path]:
+    OUTPUT_65_DIR.mkdir(parents=True, exist_ok=True)
+    destinations = []
+    for export in exports:
+        destination = OUTPUT_65_DIR / export.name
+        with Image.open(export) as source:
+            adapted = ImageOps.fit(
+                source.convert("RGB"),
+                (WIDTH_65, HEIGHT_65),
+                method=Image.Resampling.LANCZOS,
+                centering=(0.5, 0.5),
+            )
+        adapted.save(destination, format="PNG", optimize=True)
+        destinations.append(destination)
+    return destinations
 
 
 def main() -> None:
@@ -312,6 +343,38 @@ def main() -> None:
         "items": manifest_items,
     }
     (OUTPUT_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+
+    exports_65 = compose_6_5_exports(exports)
+    manifest_items_65 = []
+    for item, source_export, output_path in zip(ITEMS, exports, exports_65):
+        with Image.open(output_path) as image:
+            if image.size != (WIDTH_65, HEIGHT_65) or image.mode != "RGB":
+                raise ValueError(f"Invalid 6.5-inch export {output_path}: {image.size}, {image.mode}")
+        manifest_items_65.append(
+            {
+                "order": len(manifest_items_65) + 1,
+                "file": output_path.name,
+                "source": item["source"],
+                "derived_from": str(Path("..") / OUTPUT_DIR.name / source_export.name),
+                "headline": item["headline"].replace("\n", " "),
+                "subheadline": item["subheadline"],
+                "width": WIDTH_65,
+                "height": HEIGHT_65,
+                "color_mode": "RGB",
+                "sha256": sha256(output_path),
+            }
+        )
+
+    manifest_65 = {
+        "app": "Just Gomoku",
+        "platform": "iPhone 6.5-inch portrait",
+        "device_capture": "iPhone 17 Pro Max simulator, iOS 26.5",
+        "export_dimensions": [WIDTH_65, HEIGHT_65],
+        "alpha_channel": False,
+        "derivation": "Aspect-preserving resize and centered crop from the 6.9-inch compositions.",
+        "items": manifest_items_65,
+    }
+    (OUTPUT_65_DIR / "manifest.json").write_text(json.dumps(manifest_65, indent=2) + "\n")
 
 
 if __name__ == "__main__":
