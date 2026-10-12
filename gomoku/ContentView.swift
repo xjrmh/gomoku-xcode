@@ -7,15 +7,19 @@ import UIKit
 import AppKit
 #endif
 
+private enum GameSheet: String, Identifiable {
+    case newGame, settings, about
+    var id: Self { self }
+}
+
 struct ContentView: View {
     @EnvironmentObject private var game: GameState
     @EnvironmentObject private var preferences: PreferencesStore
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var colorScheme
-    @SceneStorage("matchInspectorExpanded") private var inspectorExpanded = true
-    @State private var showSettings = false
-    @State private var showAbout = false
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @State private var presentedSheet: GameSheet?
     @State private var sharePayload: SharePayload?
     @State private var didBootstrap = false
 
@@ -24,27 +28,34 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
-                ZStack {
-                    palette.background.ignoresSafeArea()
-                    if proxy.size.width >= 800 {
-                        wideLayout
-                    } else {
-                        compactLayout
+                ScrollView {
+                    GameplayLayout(viewportHeight: proxy.size.height, accessibilitySize: dynamicTypeSize.isAccessibilitySize) {
+                        MatchHUD(game: game)
+                        boardSection
+                        MatchDock(game: game, sharePayload: sharePayload) {
+                            presentedSheet = .newGame
+                        }
                     }
+                    .frame(maxWidth: .infinity)
                 }
+                .scrollBounceBehavior(.basedOnSize)
+                .background(palette.background.ignoresSafeArea())
             }
             .navigationTitle("")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar { toolbarContent }
-            .sheet(isPresented: $showSettings) {
+            .sheet(item: $presentedSheet) { destination in
                 NavigationStack {
-                    SettingsView(game: game)
-                        .environmentObject(preferences)
+                    switch destination {
+                    case .newGame: NewGameView(game: game)
+                    case .settings: SettingsView().environmentObject(preferences)
+                    case .about: AboutView().presentationDetents([.medium, .large])
+                    }
                 }
+                .preferredColorScheme(preferences.appearance.preferredColorScheme)
             }
-            .sheet(isPresented: $showAbout) { AboutView() }
             .preferredColorScheme(preferences.appearance.preferredColorScheme)
             .modifier(HapticFeedbackModifier(pulse: game.feedbackPulse, enabled: preferences.hapticsEnabled))
             .onChange(of: scenePhase) { _, phase in
@@ -62,7 +73,7 @@ struct ContentView: View {
             .onAppear { bootstrap() }
         }
         .focusedSceneValue(\.gameActions, GameActions(
-            newRound: { game.newRound() },
+            newRound: { presentedSheet = .newGame },
             undo: { game.undo() },
             hint: { game.askForHint() },
             canUndo: game.canUndo,
@@ -70,96 +81,34 @@ struct ContentView: View {
         ))
     }
 
-    private var compactLayout: some View {
-        GeometryReader { proxy in
-            let boardSide = max(240, min(proxy.size.width - 28, proxy.size.height - 220))
-
-            ZStack {
-                VStack(spacing: 0) {
-                    MatchHUD(game: game)
-                        .padding(.horizontal, 8)
-                        .padding(.top, 8)
-
-                    Spacer(minLength: 0)
-
-                    MatchDock(game: game, sharePayload: sharePayload)
-                        .padding(.horizontal, 12)
-                        .padding(.bottom, 4)
-                }
-
-                ZStack(alignment: .top) {
-                    BoardCanvasView(game: game, palette: palette)
-                    precisionCoachMark
-                }
-                .frame(width: boardSide, height: boardSide)
-
-                Text("Move \(game.moves.count)")
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(.secondary)
-                    .frame(width: boardSide, alignment: .trailing)
-                    .padding(.trailing, 3)
-                    .offset(y: boardSide / 2 + 14)
-                    .accessibilityLabel("Move count, \(game.moves.count)")
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-    }
-
-    private var wideLayout: some View {
-        GeometryReader { proxy in
-            let inspectorWidth: CGFloat = inspectorExpanded ? 290 : 44
-            let availableWidth = proxy.size.width - inspectorWidth - 64
-            let availableHeight = proxy.size.height - 96
-            let boardSide = max(320, min(availableWidth, availableHeight))
-
-            VStack(spacing: 16) {
-                MatchHUD(game: game)
-                    .frame(maxWidth: 720)
-                HStack(alignment: .top, spacing: 20) {
-                    ZStack(alignment: .top) {
-                        BoardCanvasView(game: game, palette: palette)
-                        precisionCoachMark
-                    }
-                    .frame(width: boardSide, height: boardSide)
-
-                    if inspectorExpanded {
-                        MatchInspector(game: game, sharePayload: sharePayload) {
-                            withAnimation(.snappy) { inspectorExpanded = false }
-                        }
-                        .frame(width: 290, height: boardSide)
-                        .transition(.move(edge: .trailing).combined(with: .opacity))
-                    } else {
-                        Button("Show match inspector", systemImage: "sidebar.right") {
-                            withAnimation(.snappy) { inspectorExpanded = true }
-                        }
-                        .labelStyle(.iconOnly)
-                        .buttonStyle(.bordered)
-                        .accessibilityHint("Shows clocks and game actions")
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .padding(.horizontal, 22)
-                .padding(.bottom, 18)
-            }
-            .padding(.top, 10)
+    private var boardSection: some View {
+        VStack(alignment: .trailing, spacing: 10) {
+            precisionCoachMark
+            BoardCanvasView(game: game, palette: palette)
+                .id(game.session.id)
+            Text("Move \(game.moves.count)")
+                .font(.caption.monospacedDigit().weight(.medium))
+                .foregroundStyle(.secondary)
+                .accessibilityLabel("Move count, \(game.moves.count)")
         }
     }
 
     @ViewBuilder
     private var precisionCoachMark: some View {
         if game.boardSize >= 19, !preferences.didShowPrecisionCoachMark {
-            HStack(spacing: 10) {
-                Image(systemName: "hand.draw")
-                Text("Hold, drag, and release for precise placement.")
+            VStack(alignment: .leading, spacing: 4) {
+                Label("Hold, drag, and release for precise placement.", systemImage: "hand.draw")
                     .font(.callout)
+                    .fixedSize(horizontal: false, vertical: true)
                 Button("Got it") { preferences.didShowPrecisionCoachMark = true }
-                    .font(.callout.bold())
+                    .font(.callout.weight(.semibold))
+                    .frame(minHeight: 44)
             }
             .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .adaptiveGlass(cornerRadius: 18, interactive: true)
-            .padding(12)
-            .transition(.move(edge: .top).combined(with: .opacity))
+            .padding(.top, 12)
+            .padding(.bottom, 4)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.background.secondary, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
     }
 
@@ -171,10 +120,10 @@ struct ContentView: View {
             } label: {
                 Label("History", systemImage: "clock.arrow.circlepath")
             }
-            Button("Settings", systemImage: "gearshape") { showSettings = true }
+            Button("Settings", systemImage: "gearshape") { presentedSheet = .settings }
             #if os(macOS)
             Menu("More", systemImage: "ellipsis.circle") {
-                Button("About Just Gomoku", systemImage: "info.circle") { showAbout = true }
+                Button("About Just Gomoku", systemImage: "info.circle") { presentedSheet = .about }
             }
             #endif
         }
@@ -225,9 +174,64 @@ struct ContentView: View {
     }
 }
 
+// Measure the status and actions before allocating board space. Short windows and
+// larger text grow the scrollable content instead of placing views over the board.
+private struct GameplayLayout: Layout {
+    let viewportHeight: CGFloat
+    let accessibilitySize: Bool
+
+    private struct Measurements {
+        let hud: CGSize
+        let board: CGSize
+        let dock: CGSize
+        var minimumHeight: CGFloat { hud.height + board.height + dock.height + 44 }
+    }
+
+    private func measure(width: CGFloat, subviews: Subviews) -> Measurements {
+        let hudWidth = max(0, min(720, width - 16))
+        let dockWidth = max(0, min(480, width - 24))
+        let hud = subviews[0].sizeThatFits(ProposedViewSize(width: hudWidth, height: nil))
+        let dock = subviews[2].sizeThatFits(ProposedViewSize(width: dockWidth, height: nil))
+        let maximumBoardWidth = max(0, min(720, width - 28))
+        var board = subviews[1].sizeThatFits(ProposedViewSize(width: maximumBoardWidth, height: nil))
+        if !accessibilitySize {
+            let overflow = max(0, hud.height + board.height + dock.height + 44 - viewportHeight)
+            let boardWidth = max(min(240, maximumBoardWidth), maximumBoardWidth - overflow)
+            board = subviews[1].sizeThatFits(ProposedViewSize(width: boardWidth, height: nil))
+        }
+        return Measurements(hud: hud, board: board, dock: dock)
+    }
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let width = proposal.width ?? 390
+        let sizes = measure(width: width, subviews: subviews)
+        return CGSize(width: width, height: max(viewportHeight, sizes.minimumHeight))
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let sizes = measure(width: bounds.width, subviews: subviews)
+        let hudTop = bounds.minY + 8
+        let dockTop = bounds.maxY - sizes.dock.height - 8
+        let boardTop = hudTop + sizes.hud.height + (dockTop - hudTop - sizes.hud.height - sizes.board.height) / 2
+        let positions = [hudTop, boardTop, dockTop]
+        let dimensions = [sizes.hud, sizes.board, sizes.dock]
+        for index in subviews.indices {
+            subviews[index].place(
+                at: CGPoint(x: bounds.midX, y: positions[index]),
+                anchor: .top,
+                proposal: ProposedViewSize(dimensions[index])
+            )
+        }
+    }
+}
+
 private struct MatchHUD: View {
     @ObservedObject var game: GameState
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    private var modeDescription: String {
+        game.session.configuration.mode == .ai ? "AI · \(game.session.configuration.difficulty.title)" : "2 Players"
+    }
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { timeline in
@@ -241,68 +245,72 @@ private struct MatchHUD: View {
                     }
                 }
             }
-            .padding(.horizontal, 11)
-            .padding(.vertical, 4)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            .adaptiveGlass(cornerRadius: 26, interactive: true)
-            .animation(.snappy, value: game.statusText)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
         }
     }
 
     private func compactLayout(now: Date) -> some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 12) {
             turnSummary
-                .frame(maxWidth: .infinity, alignment: .leading)
-            compactDivider
+            Spacer(minLength: 0)
             clock(for: .black, now: now)
-                .frame(minWidth: 70)
-            compactDivider
             clock(for: .white, now: now)
-                .frame(minWidth: 70)
-            compactDivider
-            MatchModeMenu(game: game)
-                .frame(minWidth: 84)
+            Divider().frame(height: 20)
+            Text(modeDescription)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize()
         }
     }
 
     private func expandedLayout(now: Date) -> some View {
-        VStack(spacing: 8) {
-            HStack(spacing: 10) {
-                turnSummary
-                Spacer(minLength: 8)
-                MatchModeMenu(game: game)
+        VStack(alignment: .leading, spacing: 10) {
+            turnSummary
+            Text(modeDescription)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 20) {
+                    clock(for: .black, now: now)
+                    clock(for: .white, now: now)
+                }
+                VStack(alignment: .leading, spacing: 10) {
+                    clock(for: .black, now: now)
+                    clock(for: .white, now: now)
+                }
             }
-            HStack(spacing: 18) {
-                clock(for: .black, now: now)
-                clock(for: .white, now: now)
-            }
-            .frame(maxWidth: .infinity)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var turnSummary: some View {
         HStack(spacing: 8) {
-            StoneDot(player: game.outcome == .draw ? nil : (game.winner ?? game.current), size: 16)
-            Text("\(game.statusText)")
+            StoneDot(player: game.outcome == .draw ? nil : (game.winner ?? game.current))
+            Text(game.statusText)
                 .font(.subheadline.weight(.semibold))
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .frame(minHeight: 44)
-        .layoutPriority(2)
-    }
-
-    private var compactDivider: some View {
-        Divider()
-            .frame(height: 22)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(game.session.configuration.mode == .ai && !game.gameOver
+            ? "\(game.statusText), \(game.current.name) stones" : game.statusText)
     }
 
     private func clock(for player: Player, now: Date) -> some View {
-        HStack(spacing: 6) {
+        let value = time(game.elapsed(for: player, now: now))
+        return HStack(spacing: 6) {
             StoneDot(player: player, size: 13)
-            Text("\(time(game.elapsed(for: player, now: now)))")
-                .font(.subheadline)
+            Text(value)
+                .font(.footnote.monospacedDigit())
+                .foregroundStyle(.secondary)
+                .fixedSize()
+                .accessibilityLabel("\(player.name) elapsed time, \(value)")
+                .accessibilityIdentifier(player == .black ? "black-clock" : "white-clock")
         }
         .frame(minHeight: 44)
-        .layoutPriority(1)
     }
 
     private func time(_ value: TimeInterval) -> String {
@@ -311,128 +319,57 @@ private struct MatchHUD: View {
     }
 }
 
-private struct MatchModeMenu: View {
-    @ObservedObject var game: GameState
-
-    private var configuration: GameConfiguration { game.session.configuration }
-
-    var body: some View {
-        Menu {
-            Button {
-                startNewMatch(mode: .pvp)
-            } label: {
-                if configuration.mode == .pvp {
-                    Label("Player vs Player", systemImage: "checkmark")
-                } else {
-                    Text("Player vs Player")
-                }
-            }
-
-            Section("Play against AI") {
-                ForEach(AIDifficulty.allCases) { difficulty in
-                    Button {
-                        startNewMatch(mode: .ai, difficulty: difficulty)
-                    } label: {
-                        if configuration.mode == .ai, configuration.difficulty == difficulty {
-                            Label(difficulty.title, systemImage: "checkmark")
-                        } else {
-                            Text(difficulty.title)
-                        }
-                    }
-                }
-            }
-        } label: {
-            HStack(spacing: 5) {
-                Text("\(title)")
-                    .font(.caption)
-                Image(systemName: "chevron.down")
-                    .font(.caption2.weight(.semibold))
-            }
-            .foregroundStyle(.secondary)
-            .frame(minHeight: 44)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("game-mode-menu")
-    }
-
-    private var title: String {
-        configuration.mode == .ai ? "AI · \(configuration.difficulty.title)" : "PvP"
-    }
-
-    private func startNewMatch(mode: GameMode, difficulty: AIDifficulty? = nil) {
-        var next = configuration
-        next.mode = mode
-        if let difficulty { next.difficulty = difficulty }
-        game.newRound(configuration: next)
-    }
-}
-
-private struct StatusChip: View {
-    @ObservedObject var game: GameState
-
-    var body: some View {
-        HStack(spacing: 8) {
-            StoneDot(player: game.outcome == .draw ? nil : (game.winner ?? game.current))
-            Text(game.statusText)
-                .font(.callout.weight(.semibold))
-        }
-        .padding(.horizontal, 13)
-        .padding(.vertical, 8)
-        .fixedSize()
-        .animation(.snappy, value: game.statusText)
-        .accessibilityElement(children: .combine)
-    }
-}
-
 private struct MatchDock: View {
     @ObservedObject var game: GameState
     let sharePayload: SharePayload?
+    let newGame: () -> Void
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
-        actions
-        .padding(.horizontal, 8)
-        .padding(.vertical, 6)
-        .frame(maxWidth: .infinity)
-        .adaptiveGlass(cornerRadius: 30)
-        .animation(.snappy, value: game.gameOver)
+        AdaptiveGlassContainer {
+            VStack(spacing: 10) {
+                if game.gameOver {
+                    AdaptiveGlassButton(prominent: true) { game.newRound() } label: {
+                        Label("Play Again", systemImage: "arrow.clockwise")
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                    }
+                    .controlSize(.large)
+                }
+                Group {
+                    if dynamicTypeSize.isAccessibilitySize {
+                        VStack(spacing: 4) { actions }
+                    } else {
+                        HStack(spacing: 4) { actions }
+                    }
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .frame(maxWidth: .infinity)
+                .adaptiveGlass(cornerRadius: 30)
+            }
+        }
     }
 
     @ViewBuilder
     private var actions: some View {
+        MinimalDockAction("Undo", systemImage: "arrow.uturn.backward") { game.undo() }
+            .disabled(!game.canUndo)
         if game.gameOver {
-            HStack(spacing: 4) {
-                MinimalDockAction("Undo", systemImage: "arrow.uturn.backward") { game.undo() }
-                .disabled(!game.canUndo)
-
-                NewGameMenu(game: game)
-
-                if let sharePayload {
-                    ShareLink(item: sharePayload, preview: SharePreview("Just Gomoku result")) {
-                        MinimalDockLabel("Share", systemImage: "square.and.arrow.up")
-                    }
-                    .buttonStyle(MinimalDockActionStyle())
-                    .foregroundStyle(.primary)
-                } else {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, minHeight: 58)
+            if let sharePayload {
+                ShareLink(item: sharePayload, preview: SharePreview(sharePayload.title, image: sharePayload.previewImage)) {
+                    MinimalDockLabel("Share", systemImage: "square.and.arrow.up")
                 }
+                .buttonStyle(MinimalDockActionStyle())
+                .foregroundStyle(.primary)
+            } else {
+                ProgressView("Preparing result")
+                    .frame(maxWidth: .infinity, minHeight: 58)
             }
         } else {
-            HStack(spacing: 4) {
-                MinimalDockAction("Undo", systemImage: "arrow.uturn.backward") {
-                    game.undo()
-                }
-                .disabled(!game.canUndo)
-
-                MinimalDockAction("Hint", systemImage: "lightbulb") {
-                    game.askForHint()
-                }
+            MinimalDockAction("Hint", systemImage: "lightbulb") { game.askForHint() }
                 .disabled(!game.canHint)
-
-                NewGameMenu(game: game)
-            }
         }
+        MinimalDockAction("New Game", systemImage: "plus.circle", action: newGame)
     }
 }
 
@@ -448,17 +385,16 @@ private struct MinimalDockAction: View {
     }
 
     var body: some View {
-        Button(action: action) {
-            MinimalDockLabel(title, systemImage: systemImage)
-        }
-        .buttonStyle(MinimalDockActionStyle())
-        .foregroundStyle(.primary)
+        Button(action: action) { MinimalDockLabel(title, systemImage: systemImage) }
+            .buttonStyle(MinimalDockActionStyle())
+            .foregroundStyle(.primary)
     }
 }
 
 private struct MinimalDockLabel: View {
     let title: LocalizedStringKey
     let systemImage: String
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     init(_ title: LocalizedStringKey, systemImage: String) {
         self.title = title
@@ -466,220 +402,142 @@ private struct MinimalDockLabel: View {
     }
 
     var body: some View {
-        VStack(spacing: 5) {
-            Image(systemName: systemImage)
-                .font(.system(size: 19, weight: .regular))
-                .frame(width: 28, height: 24, alignment: .center)
-            Text(title)
-                .font(.caption)
-                .lineLimit(1)
-                .minimumScaleFactor(0.85)
-                .multilineTextAlignment(.center)
-                .frame(height: 16, alignment: .center)
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                HStack(spacing: 12) {
+                    icon
+                    Text(title)
+                        .font(.body)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer(minLength: 0)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+            } else {
+                VStack(spacing: 5) {
+                    icon
+                    Text(title)
+                        .font(.caption)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
         }
         .frame(maxWidth: .infinity, minHeight: 58)
         .contentShape(Rectangle())
     }
-}
 
-private struct NewGameMenu: View {
-    @ObservedObject var game: GameState
-
-    private var configuration: GameConfiguration { game.session.configuration }
-
-    var body: some View {
-        Menu {
-            Button("Restart Current Match", systemImage: "arrow.clockwise") {
-                game.newRound()
-            }
-
-            Divider()
-
-            Button("Player vs Player", systemImage: configuration.mode == .pvp ? "checkmark" : "person.2") {
-                startNewMatch(mode: .pvp)
-            }
-
-            Section("Play against AI") {
-                ForEach(AIDifficulty.allCases) { difficulty in
-                    Button {
-                        startNewMatch(mode: .ai, difficulty: difficulty)
-                    } label: {
-                        if configuration.mode == .ai, configuration.difficulty == difficulty {
-                            Label(difficulty.title, systemImage: "checkmark")
-                        } else {
-                            Text(difficulty.title)
-                        }
-                    }
-                }
-            }
-        } label: {
-            MinimalDockLabel("New Game", systemImage: "plus.circle")
-        }
-        .buttonStyle(MinimalDockActionStyle())
-        .foregroundStyle(.primary)
-        .accessibilityLabel("New Game")
-    }
-
-    private func startNewMatch(mode: GameMode, difficulty: AIDifficulty? = nil) {
-        var next = configuration
-        next.mode = mode
-        if let difficulty { next.difficulty = difficulty }
-        game.newRound(configuration: next)
+    private var icon: some View {
+        Image(systemName: systemImage)
+            .font(.system(size: 19, weight: .regular))
+            .frame(width: 28, height: 24)
     }
 }
 
 private struct MinimalDockActionStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .opacity(isEnabled ? (configuration.isPressed ? 0.5 : 1) : 0.32)
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.98 : 1)
             .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
     }
 }
 
-private struct MatchInspector: View {
+private struct NewGameView: View {
     @ObservedObject var game: GameState
-    let sharePayload: SharePayload?
-    let collapse: () -> Void
+    @Environment(\.dismiss) private var dismiss
+    @State private var draft: GameConfiguration
+    @State private var boardChoice: Int
+    @State private var showResetConfirmation = false
+
+    init(game: GameState) {
+        self.game = game
+        _draft = State(initialValue: game.session.configuration)
+        let size = game.boardSize
+        _boardChoice = State(initialValue: [9, 15, 19].contains(size) ? size : 0)
+    }
 
     var body: some View {
-        VStack(spacing: 22) {
-            HStack {
-                Text(game.gameOver ? game.statusText : "Match")
-                    .font(.title2.bold())
-                Spacer()
-                Button("Collapse inspector", systemImage: "chevron.right", action: collapse)
-                    .labelStyle(.iconOnly)
-                    .buttonStyle(.plain)
-            }
-            StatusChip(game: game)
-            ClockSummary(game: game)
-            Spacer()
-            VStack(spacing: 12) {
-                if game.gameOver {
-                    AdaptiveGlassButton(prominent: true) { game.newRound() } label: {
-                        Label("New Round", systemImage: "arrow.clockwise")
-                            .frame(maxWidth: .infinity, minHeight: 36)
+        Form {
+            Section {
+                Picker("Opponent", selection: $draft.mode) {
+                    Text("2 Players").tag(GameMode.pvp)
+                    Text("AI").tag(GameMode.ai)
+                }
+                .accessibilityIdentifier("new-game-opponent")
+                if draft.mode == .ai {
+                    Picker("Difficulty", selection: $draft.difficulty) {
+                        ForEach(AIDifficulty.allCases) { Text($0.title).tag($0) }
                     }
-                }
-                AdaptiveGlassButton { game.undo() } label: {
-                    Label("Undo", systemImage: "arrow.uturn.backward").frame(maxWidth: .infinity, minHeight: 34)
-                }
-                .disabled(!game.canUndo)
-                if game.gameOver {
-                    AdaptiveShareButton(payload: sharePayload, expand: true)
-                } else {
-                    AdaptiveGlassButton { game.askForHint() } label: {
-                        Label("Hint", systemImage: "lightbulb").frame(maxWidth: .infinity, minHeight: 34)
+                    .accessibilityIdentifier("new-game-difficulty")
+                    Picker("Your Stones", selection: $draft.humanSide) {
+                        Text("Black").tag(Player.black)
+                        Text("White").tag(Player.white)
                     }
-                    .disabled(!game.canHint)
+                    .accessibilityIdentifier("new-game-stones")
                 }
+            } header: {
+                Text("Players")
+            } footer: {
+                Text("Black moves first.")
+            }
+            Section {
+                Picker("Board Size", selection: $boardChoice) {
+                    Text("9×9").tag(9)
+                    Text("15×15").tag(15)
+                    Text("19×19").tag(19)
+                    Text("Custom").tag(0)
+                }
+                .accessibilityIdentifier("new-game-board-size")
+                if boardChoice == 0 {
+                    Stepper("Custom Size: \(draft.boardSize)×\(draft.boardSize)", value: $draft.boardSize, in: 5...25, step: 2)
+                        .accessibilityIdentifier("custom-board-size")
+                }
+            } header: {
+                Text("Board")
+            } footer: {
+                Text("Connect five stones in a row to win.")
             }
         }
-        .padding(20)
-        .adaptiveGlass(cornerRadius: 28)
-    }
-}
-
-private struct ClockSummary: View {
-    @ObservedObject var game: GameState
-
-    var body: some View {
-        TimelineView(.periodic(from: .now, by: 1)) { timeline in
-            HStack(spacing: 10) {
-                Label("Moves \(game.moves.count)", systemImage: "number")
-                Divider().frame(height: 18)
-                Label(time(game.elapsed(for: .black, now: timeline.date)), systemImage: "circle.fill")
-                    .symbolRenderingMode(.monochrome)
-                Divider().frame(height: 18)
-                Label(time(game.elapsed(for: .white, now: timeline.date)), systemImage: "circle")
+        .pickerStyle(.menu)
+        .navigationTitle("New Game")
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Start") {
+                    if game.moves.isEmpty || game.gameOver { startGame() }
+                    else { showResetConfirmation = true }
+                }
+                .fontWeight(.semibold)
+                .accessibilityIdentifier("start-game")
             }
-            .font(.caption.monospacedDigit().weight(.semibold))
-            .foregroundStyle(.secondary)
-            .lineLimit(1)
-            .minimumScaleFactor(0.72)
-            .accessibilityElement(children: .combine)
+        }
+        .confirmationDialog("Start a new game?", isPresented: $showResetConfirmation, titleVisibility: .visible) {
+            Button("Start New Game", role: .destructive) { startGame() }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("The current board will be cleared.")
         }
     }
 
-    private func time(_ value: TimeInterval) -> String {
-        let seconds = Int(value.rounded())
-        return String(format: "%02d:%02d", seconds / 60, seconds % 60)
-    }
-}
-
-private struct AdaptiveShareButton: View {
-    let payload: SharePayload?
-    var expand = false
-
-    var body: some View {
-        if let payload {
-            if #available(iOS 26.0, macOS 26.0, *) {
-                ShareLink(item: payload, preview: SharePreview("Just Gomoku result")) {
-                    Label("Share", systemImage: "square.and.arrow.up")
-                        .frame(maxWidth: expand ? .infinity : nil, minHeight: 34)
-                }
-                .buttonStyle(.glass)
-            } else {
-                ShareLink(item: payload, preview: SharePreview("Just Gomoku result")) {
-                    Label("Share", systemImage: "square.and.arrow.up")
-                        .frame(maxWidth: expand ? .infinity : nil, minHeight: 34)
-                }
-                .buttonStyle(.bordered)
-            }
-        } else {
-            ProgressView().frame(minWidth: 44, minHeight: 44)
-        }
+    private func startGame() {
+        var configuration = draft
+        if boardChoice != 0 { configuration.boardSize = boardChoice }
+        configuration.normalize()
+        game.newRound(configuration: configuration)
+        dismiss()
     }
 }
 
 private struct SettingsView: View {
-    @ObservedObject var game: GameState
     @EnvironmentObject private var preferences: PreferencesStore
     @Environment(\.dismiss) private var dismiss
-    @State private var pendingSize: Int?
-    @State private var pendingSide: Player?
-    @State private var customSize = 15
-    @State private var showResetConfirmation = false
-    @State private var showAbout = false
 
     var body: some View {
         Form {
-            Section("Board") {
-                Picker("Board Size", selection: Binding(
-                    get: { game.boardSize },
-                    set: { requestBoardSize($0) }
-                )) {
-                    Text("9×9").tag(9)
-                    Text("15×15").tag(15)
-                    Text("19×19").tag(19)
-                    Text("Custom (\(customSize)×\(customSize))").tag(customSize)
-                }
-                Stepper("Custom: \(customSize)×\(customSize)", value: $customSize, in: 5...25, step: 2)
-                Button("Use Custom Size") { requestBoardSize(customSize) }
-            }
-
-            Section("Opponent") {
-                Picker("Difficulty", selection: Binding(
-                    get: { game.session.configuration.difficulty },
-                    set: { game.setDifficulty($0) }
-                )) {
-                    ForEach(AIDifficulty.allCases) { Text($0.title).tag($0) }
-                }
-                .disabled(game.session.configuration.mode != .ai)
-
-                Picker("Your Stones", selection: Binding(
-                    get: { game.session.configuration.humanSide },
-                    set: { requestSide($0) }
-                )) {
-                    Text("Black").tag(Player.black)
-                    Text("White").tag(Player.white)
-                }
-                .disabled(game.session.configuration.mode != .ai)
-            }
-
             Section("Appearance & Feel") {
                 Picker("Appearance", selection: Binding(
                     get: { preferences.appearance },
@@ -692,20 +550,11 @@ private struct SettingsView: View {
                     set: { preferences.hapticsEnabled = $0 }
                 ))
             }
-
-            Section {
-                Button("Restart Current Game", systemImage: "arrow.counterclockwise") {
-                    if game.moves.isEmpty {
-                        game.newRound()
-                    } else {
-                        showResetConfirmation = true
-                    }
-                }
-            }
-
             Section("About") {
-                Button("About Just Gomoku", systemImage: "info.circle") {
-                    showAbout = true
+                NavigationLink {
+                    AboutView(showsDone: false)
+                } label: {
+                    Label("About Just Gomoku", systemImage: "info.circle")
                 }
             }
         }
@@ -713,134 +562,49 @@ private struct SettingsView: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
         }
-        .onAppear { customSize = game.boardSize }
-        .sheet(isPresented: $showAbout) { AboutView() }
-        .confirmationDialog("Start a new game?", isPresented: Binding(
-            get: { pendingSize != nil || pendingSide != nil || showResetConfirmation },
-            set: { if !$0 { pendingSize = nil; pendingSide = nil; showResetConfirmation = false } }
-        ), titleVisibility: .visible) {
-            Button("Start New Game", role: .destructive) { applyPendingReset() }
-            Button("Cancel", role: .cancel) { clearPending() }
-        } message: {
-            Text("The current board will be cleared.")
-        }
-    }
-
-    private func requestBoardSize(_ size: Int) {
-        guard size != game.boardSize else { return }
-        if game.moves.isEmpty { game.setBoardSizeAndStartNewRound(size) } else { pendingSize = size }
-    }
-
-    private func requestSide(_ side: Player) {
-        guard side != game.session.configuration.humanSide else { return }
-        if game.moves.isEmpty { game.setHumanSideAndStartNewRound(side) } else { pendingSide = side }
-    }
-
-    private func applyPendingReset() {
-        if let pendingSize { game.setBoardSizeAndStartNewRound(pendingSize) }
-        else if let pendingSide { game.setHumanSideAndStartNewRound(pendingSide) }
-        else { game.newRound() }
-        clearPending()
-    }
-
-    private func clearPending() {
-        pendingSize = nil
-        pendingSide = nil
-        showResetConfirmation = false
     }
 }
 
 private struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
+    var showsDone = true
 
     var body: some View {
-        VStack(spacing: 22) {
-            VStack(spacing: 10) {
-                Image(systemName: "circle.grid.3x3.fill")
-                    .font(.system(size: 34, weight: .semibold))
-                    .foregroundStyle(.tint)
-                    .frame(width: 68, height: 68)
-                    .adaptiveGlass(cornerRadius: 20)
-
-                VStack(spacing: 4) {
-                    Text("Just Gomoku")
-                        .font(.title2.bold())
+        Form {
+            Section {
+                VStack(spacing: 10) {
+                    Image("GomokuLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 68, height: 68)
+                        .accessibilityHidden(true)
+                    Text("Just Gomoku").font(.title2.bold())
                     Text("Private, focused Gomoku for your Apple devices.")
                         .font(.subheadline)
-                        .multilineTextAlignment(.center)
                         .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
             }
-
-            VStack(spacing: 0) {
+            Section("Creator") {
                 Link(destination: URL(string: "https://flatre.ai")!) {
-                    HStack(spacing: 12) {
-                        Image("FlatreLogo")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 36, height: 36)
-                            .accessibilityHidden(true)
-
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Flatre.ai")
-                                .font(.headline)
-                            Text("Creator")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-
-                        Spacer()
-                        Image(systemName: "arrow.up.right")
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                    }
-                    .foregroundStyle(.primary)
-                    .padding(.horizontal, 16)
-                    .frame(height: 64)
-                    .contentShape(Rectangle())
+                    Label("Flatre.ai", systemImage: "arrow.up.right.square")
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel("Visit Flatre.ai website")
-
-                Divider()
-                    .padding(.leading, 64)
-
                 Link(destination: URL(string: "mailto:li@flatre.ai")!) {
-                    HStack(spacing: 12) {
-                        Image(systemName: "envelope")
-                            .foregroundStyle(.tint)
-                            .frame(width: 36)
-                        Text("li@flatre.ai")
-                            .font(.subheadline)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(.tertiary)
-                    }
-                    .foregroundStyle(.primary)
-                    .padding(.horizontal, 16)
-                    .frame(height: 50)
-                    .contentShape(Rectangle())
+                    Label("li@flatre.ai", systemImage: "envelope")
                 }
-                .buttonStyle(.plain)
             }
-            .frame(maxWidth: 340)
-            .adaptiveGlass(cornerRadius: 22)
-
-            AdaptiveGlassButton(prominent: true) {
-                dismiss()
-            } label: {
-                Text("Done")
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 3)
-            }
-            .frame(maxWidth: 320)
-            .controlSize(.large)
         }
-        .padding(.horizontal, 24)
-        .padding(.vertical, 28)
-        .presentationDetents([.medium])
+        .navigationTitle("About")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
+        .toolbar {
+            if showsDone {
+                ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
+            }
+        }
     }
 }
 

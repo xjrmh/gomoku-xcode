@@ -1,0 +1,118 @@
+Application, 0x10ae49180, pid: 82877, label: 'Gomoku' <App element pid: 82877>
+  Window (Main), 0x10ae49400, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4369257472.4>
+    Other, 0x10ae49540, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413916160.5>
+      Other, 0x10ae49680, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413743232.6>
+        Other, 0x10ae4be80, {{-402.0, -874.0}, {1206.0, 2622.0}} <AX element pid: 82877, elementOrHash.elementID: 4616328192.181>
+        Other, 0x10ae4aa80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4369256448.7>
+          Other, 0x10ae4ae40, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4555704832.8>
+            Other, 0x10ae4af80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413925376.9>
+              NavigationBar, 0x10ae4b0c0, {{0.0, 62.0}, {402.0, 54.0}}, identifier: '_TtGC7SwiftUI29PresentationHosting' <AX element pid: 82877, elementOrHash.elementID: 4368877056.10>
+                Button, 0x10ae4b200, {{272.7, 66.0}, {46.0, 36.0}}, label: 'History' <AX element pid: 82877, elementOrHash.elementID: 4555456512.13>
+                Button, 0x10ae4b340, {{334.7, 66.0}, {47.3, 36.0}}, label: 'Settings' <AX element pid: 82877, elementOrHash.elementID: 4555457792.14>
+              Other, 0x10ae4b480, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4370141120.11>
+                Other, 0x10ae4b5c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4370273088.15>
+                  Other, 0x10ae4b700, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4369417088.17>
+                    Other, 0x10ae4b840, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4555710112.18>
+                      ScrollView, 0x10ae4b980, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4369078272.19>
+                        Other, 0x10ae4bac0, {{0.0, -96.0}, {402.0, 936.0}} <AX element pid: 82877, elementOrHash.elementID: 4413927936.22>
+                          StaticText, 0x10ae4bc00, {{21.5, -80.0}, {291.5, 58.7}}, label: 'White's turn' <AX element pid: 82877, elementOrHash.elementID: 4555707232.25>
+                            StaticText, 0x10ae4bd40, {{46.0, -80.0}, {267.0, 58.7}}, label: 'White's turn' <AX element pid: 82877, elementOrHash.elementID: 4555707072.35>
+                            Other, 0x10ae497c0, {{21.5, -59.2}, {17.0, 17.0}} <AX element pid: 82877, elementOrHash.elementID: 4555706912.36>
+                          StaticText, 0x10ae4abc0, {{22.0, -11.3}, {167.0, 51.3}}, label: '2 Players' <AX element pid: 82877, elementOrHash.elementID: 4555707392.26>
+                          StaticText, 0x10ae4ad00, {{41.0, 50.0}, {118.0, 52.7}}, identifier: 'black-clock', label: 'Black elapsed time, 00:00' <AX element pid: 82877, elementOrHash.elementID: 4555707712.27>
+                          StaticText, 0x10ae48a00, {{198.0, 50.0}, {118.0, 52.7}}, identifier: 'white-clock', label: 'White elapsed time, 00:22' <AX element pid: 82877, elementOrHash.elementID: 4555708032.28>
+                          Other, 0x10ae48b40, {{14.0, 124.7}, {374.0, 374.0}}, identifier: 'game-board', label: 'Gomoku board, 15 by 15', value: Cursor H8, Black. ... <AX element pid: 82877, elementOrHash.elementID: 4608374208.177>
+                          StaticText, 0x10ae48c80, {{248.0, 508.7}, {140.0, 51.3}}, label: 'Move count, 1' <AX element pid: 82877, elementOrHash.elementID: 4555708352.30>
+                          Button, 0x10ae48dc0, {{20.0, 580.0}, {362.0, 79.3}}, label: 'Undo' <AX element pid: 82877, elementOrHash.elementID: 4555708832.31>
+                            StaticText, 0x10ae48f00, {{72.0, 588.0}, {123.7, 63.3}}, label: 'Undo' <AX element pid: 82877, elementOrHash.elementID: 4555708672.37>
+                            Image, 0x10ae49040, {{37.3, 611.0}, {17.7, 17.3}}, identifier: 'arrow.uturn.backward', label: 'Undo' <AX element pid: 82877, elementOrHash.elementID: 4555708512.38>
+                          Button, 0x10988bd40, {{20.0, 663.3}, {362.0, 79.3}}, label: 'Hint' <AX element pid: 82877, elementOrHash.elementID: 4555709312.32>
+                            StaticText, 0x10aebc000, {{72.0, 671.3}, {93.3, 63.3}}, label: 'Hint' <AX element pid: 82877, elementOrHash.elementID: 4555709152.39>
+                            Image, 0x10aebc140, {{39.7, 692.3}, {12.7, 21.7}}, identifier: 'lightbulb', label: 'Light Bulb' <AX element pid: 82877, elementOrHash.elementID: 4555708992.40>
+                          Button, 0x10aebc280, {{20.0, 746.7}, {362.0, 79.3}}, label: 'New Game' <AX element pid: 82877, elementOrHash.elementID: 4555709792.33>
+                            StaticText, 0x10aebc3c0, {{72.0, 754.7}, {249.3, 63.3}}, label: 'New Game' <AX element pid: 82877, elementOrHash.elementID: 4555709632.41>
+                            Image, 0x10aebc500, {{36.7, 777.0}, {19.0, 19.0}}, identifier: 'plus.circle', label: 'Add' <AX element pid: 82877, elementOrHash.elementID: 4555709472.42>
+                        Other, 0x10aebc640, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4370186240.20>
+                          Other, 0x10aebc780, {{0.0, 0.0}, {402.0, 156.0}} <AX element pid: 82877, elementOrHash.elementID: 4370398080.24>
+                        Other, 0x10aebc8c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4370151872.21>
+                          Other, 0x10aebca00, {{0.0, 0.0}, {402.0, 156.0}} <AX element pid: 82877, elementOrHash.elementID: 4555459072.66>
+                        Other, 0x10aebcb40, {{369.0, 116.0}, {30.0, 696.0}}, label: 'Vertical scroll bar, 2 pages', value: 100% <AX element pid: 82877, elementOrHash.elementID: 4423590400.23>
+                          Other, 0x10aebcc80, {{396.0, 253.7}, {3.0, 555.3}} <AX element pid: 82877, elementOrHash.elementID: 4370280704.34>
+                        Other, 0x10aebcdc0, {{369.0, 116.0}, {30.0, 696.0}}, label: 'Vertical scroll bar, 2 pages', value: 100% <AX element pid: 82877, elementOrHash.elementID: 4423590400.23>
+                          Other, 0x10aebcf00, {{396.0, 253.7}, {3.0, 555.3}} <AX element pid: 82877, elementOrHash.elementID: 4370280704.34>
+              Toolbar, 0x10aebd040, {{0.0, 0.0}, {402.0, 874.0}}, identifier: 'Toolbar', label: 'Toolbar' <AX element pid: 82877, elementOrHash.elementID: 4413925888.12>
+                Other, 0x10aebd180, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413926400.16>
+    Other, 0x10aebd2c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4617235456.178>
+      Other, 0x10aebd400, {{-402.0, -874.0}, {1206.0, 2622.0}} <AX element pid: 82877, elementOrHash.elementID: 4616324352.179>
+      Other, 0x10aebd540, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4616335872.180>
+        Other, 0x10aebd680, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4413234176.182>
+          Other, 0x10aebd7c0, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4615176192.183>
+            Other, 0x10aebd900, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4616913056.184>
+              Other, 0x10aebda40, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4617229824.185>
+                NavigationBar, 0x10aebdb80, {{0.0, 78.0}, {402.0, 127.0}}, identifier: 'New Game' <AX element pid: 82877, elementOrHash.elementID: 4368468992.186>
+                  Other, 0x10aebdcc0, {{20.0, 82.0}, {87.7, 36.0}} <AX element pid: 82877, elementOrHash.elementID: 4607166976.189>
+                    Other, 0x10aebde00, {{20.0, 82.0}, {87.7, 36.0}} <AX element pid: 82877, elementOrHash.elementID: 4616927456.194>
+                      Button, 0x10aebdf40, {{20.0, 82.0}, {87.7, 36.0}}, label: 'Cancel' <AX element pid: 82877, elementOrHash.elementID: 4616925216.197>
+                  Other, 0x10aebe080, {{310.3, 82.0}, {71.7, 36.0}} <AX element pid: 82877, elementOrHash.elementID: 4607169536.190>
+                    Other, 0x10aebe1c0, {{310.3, 82.0}, {71.7, 36.0}} <AX element pid: 82877, elementOrHash.elementID: 4616917536.195>
+                      Button, 0x10aebe300, {{310.3, 82.0}, {71.7, 36.0}}, identifier: 'start-game', label: 'Start' <AX element pid: 82877, elementOrHash.elementID: 4616928576.198>
+                  StaticText, 0x10aebe440, {{16.0, 132.0}, {298.7, 71.7}}, label: 'New Game' <AX element pid: 82877, elementOrHash.elementID: 4413231488.191>
+                Other, 0x10aebe580, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4413235968.187>
+                  Other, 0x10aebe6c0, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4413227008.192>
+                    Other, 0x10aebe800, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4369420672.196>
+                      Other, 0x10aebe940, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4616923776.199>
+                        CollectionView, 0x10aebea80, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4412837376.200>
+                          Other, 0x10aebebc0, {{-16.0, -1419.0}, {434.0, 2298.0}} <AX element pid: 82877, elementOrHash.elementID: 4413929984.201>
+                          Other, 0x10aebed00, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4413233728.202>
+                            Other, 0x10aebee40, {{0.0, 62.0}, {402.0, 110.0}} <AX element pid: 82877, elementOrHash.elementID: 4413160768.212>
+                          Other, 0x10aebef80, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4413229248.203>
+                          Cell, 0x10aebf0c0, {{16.0, 205.0}, {370.0, 83.3}} <AX element pid: 82877, elementOrHash.elementID: 4607177216.204>
+                            Other, 0x10aebf200, {{16.0, 205.0}, {370.0, 83.3}} <AX element pid: 82877, elementOrHash.elementID: 4607817728.213>
+                            Other, 0x10aebf340, {{16.0, 205.0}, {370.0, 83.3}} <AX element pid: 82877, elementOrHash.elementID: 4413148224.214>
+                              Other, 0x10aebf480, {{16.0, 205.0}, {370.0, 83.3}} <AX element pid: 82877, elementOrHash.elementID: 4369248256.226>
+                                Other, 0x10aebf5c0, {{16.0, 205.0}, {370.0, 83.3}} <AX element pid: 82877, elementOrHash.elementID: 4616924416.234>
+                                  StaticText, 0x10aebf700, {{16.0, 205.0}, {370.0, 83.3}}, label: 'Players' <AX element pid: 82877, elementOrHash.elementID: 4616914656.240>
+                          Cell, 0x10aebf840, {{16.0, 288.3}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4607173376.205>
+                            Other, 0x10aebf980, {{16.0, 288.3}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4607811584.215>
+                              Other, 0x10aebfac0, {{16.0, 288.3}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4413149568.227>
+                            Other, 0x10aebfc00, {{16.0, 288.3}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4413145536.216>
+                              Other, 0x10aebfd40, {{16.0, 288.3}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4369246720.228>
+                                Other, 0x10aebfe80, {{16.0, 288.3}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4616916896.235>
+                                  StaticText, 0x10aed4000, {{32.0, 303.3}, {226.7, 63.3}}, label: 'Opponent' <AX element pid: 82877, elementOrHash.elementID: 4616923616.241>
+                                  Button, 0x10aed4140, {{32.0, 303.3}, {226.7, 144.7}}, identifier: 'new-game-opponent', label: 'Opponent, AI' <AX element pid: 82877, elementOrHash.elementID: 4368473600.242>
+                                    StaticText, 0x10aed4280, {{44.0, 377.7}, {46.3, 63.3}}, label: 'AI' <AX element pid: 82877, elementOrHash.elementID: 4413149120.248>
+                          Cell, 0x10aed43c0, {{16.0, 463.0}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4369280256.279>
+                            Other, 0x10aed4500, {{16.0, 463.0}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4614430208.283>
+                              Other, 0x10aed4640, {{16.0, 463.0}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4413191296.287>
+                            Other, 0x10aed4780, {{16.0, 463.0}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4413180544.284>
+                              Other, 0x10aed48c0, {{16.0, 463.0}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4614245376.288>
+                                Other, 0x10aed4a00, {{16.0, 463.0}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4616917376.291>
+                                  StaticText, 0x10aed4b40, {{32.0, 478.0}, {200.3, 63.3}}, label: 'Difficulty' <AX element pid: 82877, elementOrHash.elementID: 4616924896.293>
+                                  Button, 0x10aed4c80, {{32.0, 478.0}, {238.0, 144.7}}, identifier: 'new-game-difficulty', label: 'Difficulty, Medium' <AX element pid: 82877, elementOrHash.elementID: 4368889344.294>
+                                    StaticText, 0x10aed4dc0, {{44.0, 552.3}, {184.0, 63.3}}, label: 'Medium' <AX element pid: 82877, elementOrHash.elementID: 4413182336.297>
+                          Other, 0x10aed4f00, {{32.0, 462.0}, {338.0, 1.0}} <AX element pid: 82877, elementOrHash.elementID: 4614436864.280>
+                          Cell, 0x10aed5040, {{16.0, 637.7}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4369278976.281>
+                            Other, 0x10aed5180, {{16.0, 637.7}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4614434816.285>
+                              Other, 0x10aed52c0, {{16.0, 637.7}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4413180992.289>
+                            Other, 0x10aed5400, {{16.0, 637.7}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4413182784.286>
+                              Other, 0x10aed5540, {{16.0, 637.7}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4614248448.290>
+                                Other, 0x10aed5680, {{16.0, 637.7}, {370.0, 174.7}} <AX element pid: 82877, elementOrHash.elementID: 4616920256.292>
+                                  StaticText, 0x10aed57c0, {{32.0, 652.7}, {269.0, 63.3}}, label: 'Your Stones' <AX element pid: 82877, elementOrHash.elementID: 4616915296.295>
+                                  Button, 0x10aed5900, {{32.0, 652.7}, {269.0, 144.7}}, identifier: 'new-game-stones', label: 'Your Stones, White' <AX element pid: 82877, elementOrHash.elementID: 4368886272.296>
+                                    StaticText, 0x10aed5a40, {{44.0, 727.0}, {132.7, 63.3}}, label: 'White' <AX element pid: 82877, elementOrHash.elementID: 4413185024.298>
+                          Other, 0x10aed5b80, {{32.0, 636.7}, {338.0, 1.0}} <AX element pid: 82877, elementOrHash.elementID: 4614433792.282>
+                          Cell, 0x10aed5cc0, {{16.0, 812.3}, {370.0, 66.7}} <AX element pid: 82877, elementOrHash.elementID: 4607178496.206>
+                            Other, 0x10aed5e00, {{16.0, 812.3}, {370.0, 66.7}} <AX element pid: 82877, elementOrHash.elementID: 4607818752.217>
+                            Other, 0x10aed5f40, {{16.0, 812.3}, {370.0, 66.7}} <AX element pid: 82877, elementOrHash.elementID: 4413151808.218>
+                              Other, 0x10aed6080, {{16.0, 812.3}, {370.0, 66.7}} <AX element pid: 82877, elementOrHash.elementID: 4369240576.229>
+                                Other, 0x10aed61c0, {{16.0, 812.3}, {370.0, 66.7}} <AX element pid: 82877, elementOrHash.elementID: 4616920416.236>
+                                  StaticText, 0x10aed6300, {{16.0, 812.3}, {370.0, 66.7}}, label: 'Black moves first.' <AX element pid: 82877, elementOrHash.elementID: 4616923456.243>
+                          Other, 0x10aed6440, {{369.0, 132.0}, {30.0, 680.0}}, label: 'Vertical scroll bar, 2 pages', value: 0% <AX element pid: 82877, elementOrHash.elementID: 4607806976.211>
+                            Other, 0x10aed6580, {{396.0, 135.0}, {3.0, 590.7}} <AX element pid: 82877, elementOrHash.elementID: 4413241792.225>
+                          Other, 0x10aed66c0, {{369.0, 132.0}, {30.0, 680.0}}, label: 'Vertical scroll bar, 2 pages', value: 0% <AX element pid: 82877, elementOrHash.elementID: 4607806976.211>
+                            Other, 0x10aed6800, {{396.0, 135.0}, {3.0, 590.7}} <AX element pid: 82877, elementOrHash.elementID: 4413241792.225>
+                Toolbar, 0x10aed6940, {{0.0, 62.0}, {402.0, 812.0}}, identifier: 'Toolbar', label: 'Toolbar' <AX element pid: 82877, elementOrHash.elementID: 4617232384.188>
+                  Other, 0x10aed6a80, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 82877, elementOrHash.elementID: 4617232896.193>
+  Window, 0x10aed6bc0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4607174656.121>
+    Other, 0x10aed6d00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4614431232.124>
+      Other, 0x10aed6e40, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413159872.126>

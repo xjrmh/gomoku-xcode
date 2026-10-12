@@ -20,8 +20,9 @@ final class ArchiveTests: XCTestCase {
     }
 
     func testRepositoryReplacesDuplicateAndReopensArchivedGame() throws {
-        let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+        let configuration = ModelConfiguration(isStoredInMemoryOnly: true, cloudKitDatabase: .none)
         let container = try ModelContainer(for: ArchivedGame.self, configurations: configuration)
+        defer { withExtendedLifetime(container) {} }
         let context = container.mainContext
         var session = GameSession(configuration: .init(boardSize: 9))
         session.outcome = .draw

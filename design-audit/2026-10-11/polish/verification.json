@@ -1,0 +1,22 @@
+{
+  "unit_tests_passed": 17,
+  "ui_tests_passed": [
+    "testBoardModeAndNavigationFlow",
+    "testBoardSwipeDoesNotPlaceAndHeldDragPlacesOneStone",
+    "testCustomBoardControlsOnlyAppearForCustomSelection",
+    "testPrimaryScreenAccessibilityAudit"
+  ],
+  "ui_text_size": "accessibility-extra-extra-extra-large",
+  "iOS_build": "passed",
+  "macOS_build": "passed",
+  "manual_checks": [
+    "Settings to About and back; Done closes Settings",
+    "Replay stepping and playback",
+    "iPad portrait and landscape layout"
+  ],
+  "test_result_bundles": [
+    "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/result-bundles/test_sim_2026-10-12T01-20-09-412Z_pid39650_e7906969.xcresult",
+    "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/result-bundles/test_sim_2026-10-12T01-32-52-801Z_pid39650_04d3f115.xcresult",
+    "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/result-bundles/test_sim_2026-10-12T01-40-02-913Z_pid39650_84352ae2.xcresult"
+  ]
+}

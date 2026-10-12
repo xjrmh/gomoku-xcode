@@ -1,0 +1,1746 @@
+{
+  "_type" : {
+    "_name" : "ActionTestSummary",
+    "_supertype" : {
+      "_name" : "ActionTestSummaryIdentifiableObject",
+      "_supertype" : {
+        "_name" : "ActionAbstractTestSummary"
+      }
+    }
+  },
+  "activitySummaries" : {
+    "_type" : {
+      "_name" : "Array"
+    },
+    "_values" : [
+      {
+        "_type" : {
+          "_name" : "ActionTestActivitySummary"
+        },
+        "activityType" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "com.apple.dt.xctest.activity-type.internal"
+        },
+        "attachments" : {
+          "_type" : {
+            "_name" : "Array"
+          },
+          "_values" : [
+            {
+              "_type" : {
+                "_name" : "ActionTestAttachment"
+              },
+              "filename" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "kXCTAttachmentScreenRecording_0_28702C61-8158-4A87-AF04-1020B72D8404.mp4"
+              },
+              "inActivityIdentifier" : {
+                "_type" : {
+                  "_name" : "Int"
+                },
+                "_value" : "0"
+              },
+              "lifetime" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "deleteOnSuccess"
+              },
+              "name" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "kXCTAttachmentScreenRecording"
+              },
+              "payloadRef" : {
+                "_type" : {
+                  "_name" : "Reference"
+                },
+                "id" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "0~BRKSa7vuhwwz7cH-QAQbKj_u2oVPEqHr5eI8LdDFWWm4yXA8ujGImCCScuiWNbTP3boD0TntN6BgvpIbIE03KQ=="
+                }
+              },
+              "payloadSize" : {
+                "_type" : {
+                  "_name" : "Int"
+                },
+                "_value" : "2358835"
+              },
+              "timestamp" : {
+                "_type" : {
+                  "_name" : "Date"
+                },
+                "_value" : "2026-10-11T20:11:14.662-0500"
+              },
+              "uniformTypeIdentifier" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "public.mpeg-4"
+              },
+              "userInfo" : {
+                "_type" : {
+                  "_name" : "SortedKeyValueArray"
+                },
+                "storage" : {
+                  "_type" : {
+                    "_name" : "Array"
+                  },
+                  "_values" : [
+                    {
+                      "_type" : {
+                        "_name" : "SortedKeyValueArrayPair"
+                      },
+                      "key" : {
+                        "_type" : {
+                          "_name" : "String"
+                        },
+                        "_value" : "initialDeviceOrientation"
+                      },
+                      "value" : {
+                        "_type" : {
+                          "_name" : "String"
+                        },
+                        "_value" : "0"
+                      }
+                    },
+                    {
+                      "_type" : {
+                        "_name" : "SortedKeyValueArrayPair"
+                      },
+                      "key" : {
+                        "_type" : {
+                          "_name" : "String"
+                        },
+                        "_value" : "initialInterfaceOrientation"
+                      },
+                      "value" : {
+                        "_type" : {
+                          "_name" : "String"
+                        },
+                        "_value" : "1"
+                      }
+                    },
+                    {
+                      "_type" : {
+                        "_name" : "SortedKeyValueArrayPair"
+                      },
+                      "key" : {
+                        "_type" : {
+                          "_name" : "String"
+                        },
+                        "_value" : "scale"
+                      },
+                      "value" : {
+                        "_type" : {
+                          "_name" : "String"
+                        },
+                        "_value" : "3"
+                      }
+                    }
+                  ]
+                }
+              },
+              "uuid" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "D0EC69EC-0E39-4444-A687-4491E406741D"
+              }
+            }
+          ]
+        },
+        "expectedFailureIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "failureSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "finish" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:14.664-0500"
+        },
+        "start" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:14.639-0500"
+        },
+        "subactivities" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "title" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "Start Test at 2026-10-11 20:11:14.639"
+        },
+        "uuid" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "28702C61-8158-4A87-AF04-1020B72D8404"
+        },
+        "warningSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        }
+      },
+      {
+        "_type" : {
+          "_name" : "ActionTestActivitySummary"
+        },
+        "activityType" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "com.apple.dt.xctest.activity-type.internal"
+        },
+        "attachments" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "expectedFailureIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "failureSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "finish" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:14.665-0500"
+        },
+        "start" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:14.665-0500"
+        },
+        "subactivities" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "title" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "Set Up"
+        },
+        "uuid" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "4EBE3B8C-404E-4C0D-A346-388E0598395C"
+        },
+        "warningSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        }
+      },
+      {
+        "_type" : {
+          "_name" : "ActionTestActivitySummary"
+        },
+        "activityType" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "com.apple.dt.xctest.activity-type.internal"
+        },
+        "attachments" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "expectedFailureIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "failureSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "finish" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:19.001-0500"
+        },
+        "start" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:14.666-0500"
+        },
+        "subactivities" : {
+          "_type" : {
+            "_name" : "Array"
+          },
+          "_values" : [
+            {
+              "_type" : {
+                "_name" : "ActionTestActivitySummary"
+              },
+              "activityType" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "com.apple.dt.xctest.activity-type.internal"
+              },
+              "attachments" : {
+                "_type" : {
+                  "_name" : "Array"
+                }
+              },
+              "expectedFailureIDs" : {
+                "_type" : {
+                  "_name" : "Array"
+                }
+              },
+              "failureSummaryIDs" : {
+                "_type" : {
+                  "_name" : "Array"
+                }
+              },
+              "finish" : {
+                "_type" : {
+                  "_name" : "Date"
+                },
+                "_value" : "2026-10-11T20:11:19.001-0500"
+              },
+              "start" : {
+                "_type" : {
+                  "_name" : "Date"
+                },
+                "_value" : "2026-10-11T20:11:14.669-0500"
+              },
+              "subactivities" : {
+                "_type" : {
+                  "_name" : "Array"
+                },
+                "_values" : [
+                  {
+                    "_type" : {
+                      "_name" : "ActionTestActivitySummary"
+                    },
+                    "activityType" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "com.apple.dt.xctest.activity-type.internal"
+                    },
+                    "attachments" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "expectedFailureIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "failureSummaryIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "finish" : {
+                      "_type" : {
+                        "_name" : "Date"
+                      },
+                      "_value" : "2026-10-11T20:11:15.709-0500"
+                    },
+                    "start" : {
+                      "_type" : {
+                        "_name" : "Date"
+                      },
+                      "_value" : "2026-10-11T20:11:14.669-0500"
+                    },
+                    "subactivities" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "title" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "Terminate com.xjrmh.gomoku:76152"
+                    },
+                    "uuid" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "F20F56DA-5F98-4B7B-922C-BD7FC8A9477D"
+                    },
+                    "warningSummaryIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    }
+                  },
+                  {
+                    "_type" : {
+                      "_name" : "ActionTestActivitySummary"
+                    },
+                    "activityType" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "com.apple.dt.xctest.activity-type.internal"
+                    },
+                    "attachments" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "expectedFailureIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "failureSummaryIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "finish" : {
+                      "_type" : {
+                        "_name" : "Date"
+                      },
+                      "_value" : "2026-10-11T20:11:17.513-0500"
+                    },
+                    "start" : {
+                      "_type" : {
+                        "_name" : "Date"
+                      },
+                      "_value" : "2026-10-11T20:11:15.919-0500"
+                    },
+                    "subactivities" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "title" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "Setting up automation session"
+                    },
+                    "uuid" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "C4A30780-A622-4BD8-9729-464BFA52C549"
+                    },
+                    "warningSummaryIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    }
+                  },
+                  {
+                    "_type" : {
+                      "_name" : "ActionTestActivitySummary"
+                    },
+                    "activityType" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "com.apple.dt.xctest.activity-type.internal"
+                    },
+                    "attachments" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "expectedFailureIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "failureSummaryIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "finish" : {
+                      "_type" : {
+                        "_name" : "Date"
+                      },
+                      "_value" : "2026-10-11T20:11:17.996-0500"
+                    },
+                    "start" : {
+                      "_type" : {
+                        "_name" : "Date"
+                      },
+                      "_value" : "2026-10-11T20:11:17.514-0500"
+                    },
+                    "subactivities" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "title" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "Wait for com.xjrmh.gomoku to idle"
+                    },
+                    "uuid" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "0DE94E36-91D6-4D2B-BA1D-697D6BB045DF"
+                    },
+                    "warningSummaryIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    }
+                  }
+                ]
+              },
+              "title" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "Launch com.xjrmh.gomoku"
+              },
+              "uuid" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "79690998-A623-4612-AE2E-717C8F923699"
+              },
+              "warningSummaryIDs" : {
+                "_type" : {
+                  "_name" : "Array"
+                }
+              }
+            }
+          ]
+        },
+        "title" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "Open com.xjrmh.gomoku"
+        },
+        "uuid" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "2B92B714-735C-4F04-9E5D-C7FE8D3747D8"
+        },
+        "warningSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        }
+      },
+      {
+        "_type" : {
+          "_name" : "ActionTestActivitySummary"
+        },
+        "activityType" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "com.apple.dt.xctest.activity-type.internal"
+        },
+        "attachments" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "expectedFailureIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "failureSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "finish" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:20.081-0500"
+        },
+        "start" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:19.002-0500"
+        },
+        "subactivities" : {
+          "_type" : {
+            "_name" : "Array"
+          },
+          "_values" : [
+            {
+              "_type" : {
+                "_name" : "ActionTestActivitySummary"
+              },
+              "activityType" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "com.apple.dt.xctest.activity-type.internal"
+              },
+              "attachments" : {
+                "_type" : {
+                  "_name" : "Array"
+                }
+              },
+              "expectedFailureIDs" : {
+                "_type" : {
+                  "_name" : "Array"
+                }
+              },
+              "failureSummaryIDs" : {
+                "_type" : {
+                  "_name" : "Array"
+                }
+              },
+              "finish" : {
+                "_type" : {
+                  "_name" : "Date"
+                },
+                "_value" : "2026-10-11T20:11:20.081-0500"
+              },
+              "start" : {
+                "_type" : {
+                  "_name" : "Date"
+                },
+                "_value" : "2026-10-11T20:11:20.017-0500"
+              },
+              "subactivities" : {
+                "_type" : {
+                  "_name" : "Array"
+                },
+                "_values" : [
+                  {
+                    "_type" : {
+                      "_name" : "ActionTestActivitySummary"
+                    },
+                    "activityType" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "com.apple.dt.xctest.activity-type.internal"
+                    },
+                    "attachments" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "expectedFailureIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "failureSummaryIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "finish" : {
+                      "_type" : {
+                        "_name" : "Date"
+                      },
+                      "_value" : "2026-10-11T20:11:20.081-0500"
+                    },
+                    "start" : {
+                      "_type" : {
+                        "_name" : "Date"
+                      },
+                      "_value" : "2026-10-11T20:11:20.017-0500"
+                    },
+                    "subactivities" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    },
+                    "title" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "Checking existence of `\"game-board\" Other`"
+                    },
+                    "uuid" : {
+                      "_type" : {
+                        "_name" : "String"
+                      },
+                      "_value" : "2011478A-D561-46E8-B5F6-2D51DB5DDBEC"
+                    },
+                    "warningSummaryIDs" : {
+                      "_type" : {
+                        "_name" : "Array"
+                      }
+                    }
+                  }
+                ]
+              },
+              "title" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "Checking `Expect predicate `existsNoRetry == 1` for object \"game-board\" Other`"
+              },
+              "uuid" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "A0C83256-3155-4E3B-BEE2-4F79759A3957"
+              },
+              "warningSummaryIDs" : {
+                "_type" : {
+                  "_name" : "Array"
+                }
+              }
+            }
+          ]
+        },
+        "title" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "Waiting 5.0s for \"game-board\" Other to exist"
+        },
+        "uuid" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "C6766DA9-4AA3-4622-B219-8CD56A36AE2B"
+        },
+        "warningSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        }
+      },
+      {
+        "_type" : {
+          "_name" : "ActionTestActivitySummary"
+        },
+        "activityType" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "com.apple.dt.xctest.activity-type.internal"
+        },
+        "attachments" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "expectedFailureIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "failureSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "finish" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:22.196-0500"
+        },
+        "start" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:22.185-0500"
+        },
+        "subactivities" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "title" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "Tear Down"
+        },
+        "uuid" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "9673AC2B-77C5-44DE-9444-DB7CF9C808B6"
+        },
+        "warningSummaryIDs" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        }
+      }
+    ]
+  },
+  "arguments" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "documentation" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "duration" : {
+    "_type" : {
+      "_name" : "Double"
+    },
+    "_value" : "7.761277079582214"
+  },
+  "expectedFailures" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "failureSummaries" : {
+    "_type" : {
+      "_name" : "Array"
+    },
+    "_values" : [
+      {
+        "_type" : {
+          "_name" : "ActionTestFailureSummary"
+        },
+        "attachments" : {
+          "_type" : {
+            "_name" : "Array"
+          },
+          "_values" : [
+            {
+              "_type" : {
+                "_name" : "ActionTestAttachment"
+              },
+              "filename" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "App Screenshot_0_499C4556-0C75-425E-B58D-A7C246675EC1.png"
+              },
+              "inActivityIdentifier" : {
+                "_type" : {
+                  "_name" : "Int"
+                },
+                "_value" : "0"
+              },
+              "lifetime" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "keepAlways"
+              },
+              "name" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "App Screenshot"
+              },
+              "payloadRef" : {
+                "_type" : {
+                  "_name" : "Reference"
+                },
+                "id" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "0~XhKEUrmM2m94nOajvo_jPwBhQT1savm45sxY16YDBAmDKHPC-CUIbUAhrSEsmGxkoaVH4bhq4mTOEzn55PeLGA=="
+                }
+              },
+              "payloadSize" : {
+                "_type" : {
+                  "_name" : "Int"
+                },
+                "_value" : "415335"
+              },
+              "timestamp" : {
+                "_type" : {
+                  "_name" : "Date"
+                },
+                "_value" : "2026-10-11T20:11:21.983-0500"
+              },
+              "uniformTypeIdentifier" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "public.png"
+              },
+              "userInfo" : {
+                "_type" : {
+                  "_name" : "SortedKeyValueArray"
+                },
+                "storage" : {
+                  "_type" : {
+                    "_name" : "Array"
+                  },
+                  "_values" : [
+                    {
+                      "_type" : {
+                        "_name" : "SortedKeyValueArrayPair"
+                      },
+                      "key" : {
+                        "_type" : {
+                          "_name" : "String"
+                        },
+                        "_value" : "Scale"
+                      },
+                      "value" : {
+                        "_type" : {
+                          "_name" : "String"
+                        },
+                        "_value" : "3"
+                      }
+                    }
+                  ]
+                }
+              },
+              "uuid" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "E734D0FC-9710-4B62-AEDA-542C54AEDDA6"
+              }
+            }
+          ]
+        },
+        "detailedDescription" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "The size of this SwiftUI.AccessibilityNode is too small for user to interact."
+        },
+        "fileName" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "\/Users\/lizheng\/Downloads\/gomoku-xcode\/just-gomokuUITests\/GameplayUITests.swift"
+        },
+        "isPerformanceFailure" : {
+          "_type" : {
+            "_name" : "Bool"
+          },
+          "_value" : "false"
+        },
+        "issueType" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "UI Automation Failure"
+        },
+        "isTopLevelFailure" : {
+          "_type" : {
+            "_name" : "Bool"
+          },
+          "_value" : "true"
+        },
+        "lineNumber" : {
+          "_type" : {
+            "_name" : "Int"
+          },
+          "_value" : "82"
+        },
+        "message" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "Hit area is too small"
+        },
+        "sourceCodeContext" : {
+          "_type" : {
+            "_name" : "SourceCodeContext"
+          },
+          "callStack" : {
+            "_type" : {
+              "_name" : "Array"
+            },
+            "_values" : [
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328411276"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4330180879"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4330585519"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4332412339"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518873663"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518861839"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328012691"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328012599"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328011279"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4327952295"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328416315"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328416399"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4327952075"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328010771"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328012219"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328013315"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328088827"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328090327"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328111487"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328089351"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328095347"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328111487"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328095051"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328093763"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4327941171"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4327940951"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328092739"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328078171"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328135395"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328134939"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328132643"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4327941171"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4327940951"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328132515"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328133723"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328078171"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328241047"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4327941171"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4327940951"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328240315"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328205975"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328206487"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328206851"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328202527"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328205687"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328203159"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328195051"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328259791"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328193831"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4328201243"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4310589035"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4310588663"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518176631"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518174467"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518171259"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518150719"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "9153124779"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7605542447"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4310589839"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4311434063"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4313046655"
+                }
+              }
+            ]
+          },
+          "location" : {
+            "_type" : {
+              "_name" : "SourceCodeLocation"
+            },
+            "filePath" : {
+              "_type" : {
+                "_name" : "String"
+              },
+              "_value" : "\/Users\/lizheng\/Downloads\/gomoku-xcode\/just-gomokuUITests\/GameplayUITests.swift"
+            },
+            "lineNumber" : {
+              "_type" : {
+                "_name" : "Int"
+              },
+              "_value" : "82"
+            }
+          }
+        },
+        "timestamp" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:11:21.982-0500"
+        },
+        "uuid" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "AAB4DD37-045B-430B-B4C8-79C960DDDF8F"
+        }
+      }
+    ]
+  },
+  "identifier" : {
+    "_type" : {
+      "_name" : "String"
+    },
+    "_value" : "GameplayUITests\/testPrimaryScreenAccessibilityAudit()"
+  },
+  "identifierURL" : {
+    "_type" : {
+      "_name" : "String"
+    },
+    "_value" : "test:\/\/com.apple.xcode\/just-gomoku\/just-gomokuUITests\/GameplayUITests\/testPrimaryScreenAccessibilityAudit"
+  },
+  "name" : {
+    "_type" : {
+      "_name" : "String"
+    },
+    "_value" : "testPrimaryScreenAccessibilityAudit()"
+  },
+  "performanceMetrics" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "tags" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "testStatus" : {
+    "_type" : {
+      "_name" : "String"
+    },
+    "_value" : "Failure"
+  },
+  "trackedIssues" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "warningSummaries" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  }
+}

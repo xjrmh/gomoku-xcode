@@ -60,3 +60,15 @@ struct AdaptiveGlassButton<Label: View>: View {
         }
     }
 }
+
+struct AdaptiveGlassContainer<Content: View>: View {
+    @ViewBuilder let content: () -> Content
+
+    var body: some View {
+        if #available(iOS 26.0, macOS 26.0, *) {
+            GlassEffectContainer(spacing: 10) { content() }
+        } else {
+            content()
+        }
+    }
+}

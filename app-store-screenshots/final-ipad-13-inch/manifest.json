@@ -1,0 +1,93 @@
+{
+  "app": "Just Gomoku",
+  "platform": "iPad 13-inch portrait",
+  "device_capture": "iPad Pro 13-inch (M5) simulator, iPadOS 26.5",
+  "export_dimensions": [
+    2064,
+    2752
+  ],
+  "alpha_channel": false,
+  "contact_sheet": {
+    "file": "../final-ipad-contact-sheet.jpg",
+    "sha256": "5038a8487befead93eb139654ed6559306beaf43e962377e80983d91ae81ef4c"
+  },
+  "items": [
+    {
+      "order": 1,
+      "file": "01-five-in-a-row.png",
+      "source": "01-focused-play.png",
+      "headline": "Five in a row. Zero distractions.",
+      "subheadline": "Pure strategy in a calm, focused space.",
+      "width": 2064,
+      "height": 2752,
+      "color_mode": "RGB",
+      "sha256": "aa2f2947f79ce2bed9f637498fc3f6a217a20f1882a745d841fd8ec7335d8383"
+    },
+    {
+      "order": 2,
+      "file": "02-ai-opponent.png",
+      "source": "02-ai-opponent.png",
+      "headline": "Meet your next opponent.",
+      "subheadline": "Choose Easy, Medium, or Hard.",
+      "width": 2064,
+      "height": 2752,
+      "color_mode": "RGB",
+      "sha256": "12cde5840c35df998b3a73bad46672f6631fb6a90730467a308dc6b3a757efd0"
+    },
+    {
+      "order": 3,
+      "file": "03-smart-hints.png",
+      "source": "03-smart-hints.png",
+      "headline": "A hint, when you want it.",
+      "subheadline": "Get a nudge only when you ask.",
+      "width": 2064,
+      "height": 2752,
+      "color_mode": "RGB",
+      "sha256": "76ed96ecdddf9d73eb6c5fd28ac18bdda6afb88b0400ffe0d3cecc616696a5dd"
+    },
+    {
+      "order": 4,
+      "file": "04-customize.png",
+      "source": "04-customize.png",
+      "headline": "Play it your way.",
+      "subheadline": "Choose board size, stones, appearance, and haptics.",
+      "width": 2064,
+      "height": 2752,
+      "color_mode": "RGB",
+      "sha256": "5b1bcc68442b5eb0d78f6c606885edad0bd5f3c6a0777ffc27bd5f3f755043a0"
+    },
+    {
+      "order": 5,
+      "file": "05-dark-mode.png",
+      "source": "05-dark-mode.png",
+      "headline": "Made for light and dark.",
+      "subheadline": "A focused board in either appearance.",
+      "width": 2064,
+      "height": 2752,
+      "color_mode": "RGB",
+      "sha256": "30e9d704d300310744b2fc36c948d11ab3874a08ae05acd7e7dffb1b9c6743d9"
+    },
+    {
+      "order": 6,
+      "file": "06-private-by-design.png",
+      "source": "06-private-by-design.png",
+      "headline": "Private by design.",
+      "subheadline": "No analytics or advertising identifiers.",
+      "width": 2064,
+      "height": 2752,
+      "color_mode": "RGB",
+      "sha256": "6aa74df38d861d4a8fc3cd79d976ab958d6a1efa830881b23553191e15b1f384"
+    },
+    {
+      "order": 7,
+      "file": "07-game-history.png",
+      "source": "07-game-history.png",
+      "headline": "Every game, ready to replay.",
+      "subheadline": "Review results and replay every move.",
+      "width": 2064,
+      "height": 2752,
+      "color_mode": "RGB",
+      "sha256": "3d5e932a4ab028e21675a03d32ff46d2a8d2846d9d866d9c8c89c565ab168579"
+    }
+  ]
+}

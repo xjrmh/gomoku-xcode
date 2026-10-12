@@ -1,0 +1,47 @@
+2026-10-11 20:11:20.078778-0500 just-gomoku[76244:310661] [Default] Current tree:
+Application, 0x10f96ad00, pid: 76244, label: 'Gomoku' <App element pid: 76244>
+  Window (Main), 0x10f968000 <AX element pid: 76244, elementOrHash.elementID: 4373566464.4>
+    Other, 0x10f96aa80 <AX element pid: 76244, elementOrHash.elementID: 4418044928.5>
+      Other, 0x10f96a1c0 <AX element pid: 76244, elementOrHash.elementID: 4417873920.6>
+        Other, 0x10f96a6c0 <AX element pid: 76244, elementOrHash.elementID: 4373565440.7>
+          Other, 0x10f968140 <AX element pid: 76244, elementOrHash.elementID: 4555931808.8>
+            Other, 0x10f969540 <AX element pid: 76244, elementOrHash.elementID: 4418057728.9>
+              NavigationBar, 0x10f969f40, identifier: '_TtGC7SwiftUI32NavigationStackHosting' <AX element pid: 76244, elementOrHash.elementID: 4372661760.10>
+                Button, 0x10f9683c0, label: 'History' <AX element pid: 76244, elementOrHash.elementID: 4555898880.13>
+                Button, 0x10f96be80, label: 'Settings' <AX element pid: 76244, elementOrHash.elementID: 4555900160.14>
+              Other, 0x10f9697c0 <AX element pid: 76244, elementOrHash.elementID: 4374302656.11>
+                Other, 0x10f865e00 <AX element pid: 76244, elementOrHash.elementID: 4374434624.15>
+                  Other, 0x10f8643c0 <AX element pid: 76244, elementOrHash.elementID: 4373513088.17>
+                    Other, 0x10f8670c0 <AX element pid: 76244, elementOrHash.elementID: 4555940448.18>
+                      ScrollView, 0x10f8657c0 <AX element pid: 76244, elementOrHash.elementID: 4373108736.19>
+                        Other, 0x10f8648c0 <AX element pid: 76244, elementOrHash.elementID: 4374347776.20>
+                          Other, 0x10f866300 <AX element pid: 76244, elementOrHash.elementID: 4374576000.24>
+                        Other, 0x10f867480 <AX element pid: 76244, elementOrHash.elementID: 4374313408.21>
+                        Other, 0x107c28000 <AX element pid: 76244, elementOrHash.elementID: 4418059776.22>
+                          StaticText, 0x107c2aa80, label: 'Your move, White stones' <AX element pid: 76244, elementOrHash.elementID: 4555937248.25>
+                            Other, 0x107c2a1c0 <AX element pid: 76244, elementOrHash.elementID: 4555936928.35>
+                            StaticText, 0x107c28780, label: 'Your move' <AX element pid: 76244, elementOrHash.elementID: 4555937088.36>
+                          Other, 0x107c288c0, label: 'Black elapsed time', value: 00:00 <AX element pid: 76244, elementOrHash.elementID: 4555937728.26>
+                            Other, 0x107c29540 <AX element pid: 76244, elementOrHash.elementID: 4555937408.37>
+                            StaticText, 0x107c2b840, label: '00:00' <AX element pid: 76244, elementOrHash.elementID: 4555937568.38>
+                          Other, 0x107c2b0c0, label: 'White elapsed time', value: 00:02 <AX element pid: 76244, elementOrHash.elementID: 4555938208.27>
+                            Other, 0x107c2bc00 <AX element pid: 76244, elementOrHash.elementID: 4555937888.39>
+                            StaticText, 0x107c28140, label: '00:02' <AX element pid: 76244, elementOrHash.elementID: 4555938048.40>
+                          StaticText, 0x107c2abc0, label: 'AI · Medium' <AX element pid: 76244, elementOrHash.elementID: 4555938368.28>
+                          Other, 0x107c2b5c0, identifier: 'game-board', label: 'Gomoku board, 15 by 15', value: Cursor H8, Black. ... <AX element pid: 76244, elementOrHash.elementID: 4555938528.29>
+                          StaticText, 0x107c2ad00, label: 'Move count, 1' <AX element pid: 76244, elementOrHash.elementID: 4555938688.30>
+                          Button, 0x107c2b480, label: 'Undo' <AX element pid: 76244, elementOrHash.elementID: 4555939168.31>
+                            Image, 0x107c2b200, identifier: 'arrow.uturn.backward', label: 'Undo' <AX element pid: 76244, elementOrHash.elementID: 4555938848.41>
+                            StaticText, 0x107c2bac0, label: 'Undo' <AX element pid: 76244, elementOrHash.elementID: 4555939008.42>
+                          Button, 0x107c28280, label: 'Hint' <AX element pid: 76244, elementOrHash.elementID: 4555939648.32>
+                            Image, 0x107c29e00, identifier: 'lightbulb', label: 'Light Bulb' <AX element pid: 76244, elementOrHash.elementID: 4555939328.43>
+                            StaticText, 0x107c297c0, label: 'Hint' <AX element pid: 76244, elementOrHash.elementID: 4555939488.44>
+                          Button, 0x107c2a580, label: 'New Game' <AX element pid: 76244, elementOrHash.elementID: 4555940128.33>
+                            Image, 0x107c2a300, identifier: 'plus.circle', label: 'Add' <AX element pid: 76244, elementOrHash.elementID: 4555939808.45>
+                            StaticText, 0x107c28500, label: 'New Game' <AX element pid: 76244, elementOrHash.elementID: 4555939968.46>
+                        Other, 0x107c2a080, label: 'Vertical scroll bar, 1 page', value: 0% <AX element pid: 76244, elementOrHash.elementID: 4428259840.23>
+                          Other, 0x107c28640 <AX element pid: 76244, elementOrHash.elementID: 4374442240.34>
+                        Other, 0x107c29f40, label: 'Vertical scroll bar, 1 page', value: 0% <AX element pid: 76244, elementOrHash.elementID: 4428259840.23>
+                          Other, 0x107c2a800 <AX element pid: 76244, elementOrHash.elementID: 4374442240.34>
+              Toolbar, 0x107c28a00, identifier: 'Toolbar', label: 'Toolbar' <AX element pid: 76244, elementOrHash.elementID: 4418058240.12>
+                Other, 0x107c2a940 <AX element pid: 76244, elementOrHash.elementID: 4418058752.16>

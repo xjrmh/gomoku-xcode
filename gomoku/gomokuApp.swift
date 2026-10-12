@@ -55,7 +55,7 @@ private struct GameCommands: Commands {
 
     var body: some Commands {
         CommandMenu("Game") {
-            Button("New Round", systemImage: "arrow.clockwise") { actions?.newRound() }
+            Button("New Game", systemImage: "plus.circle") { actions?.newRound() }
                 .keyboardShortcut("n", modifiers: .command)
                 .disabled(actions == nil)
             Button("Undo", systemImage: "arrow.uturn.backward") { actions?.undo() }

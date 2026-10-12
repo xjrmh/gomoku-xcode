@@ -1,0 +1,51 @@
+Attributes: Other, 0x105ba0000, {{14.0, 124.7}, {374.0, 374.0}}, identifier: 'game-board', label: 'Gomoku board, 15 by 15', value: Cursor H8, empty. ...
+Element subtree:
+ →Other, 0x105ba0000, {{14.0, 124.7}, {374.0, 374.0}}, identifier: 'game-board', label: 'Gomoku board, 15 by 15', value: Cursor H8, empty. ...
+Path to element:
+ →Application, 0x105ba0640, pid: 81383, label: 'Gomoku'
+  ↳Window (Main), 0x105ba0780, {{0.0, 0.0}, {402.0, 874.0}}
+   ↳Other, 0x105ba08c0, {{0.0, 0.0}, {402.0, 874.0}}
+    ↳Other, 0x105ba0a00, {{0.0, 0.0}, {402.0, 874.0}}
+     ↳Other, 0x105ba0b40, {{0.0, 0.0}, {402.0, 874.0}}
+      ↳Other, 0x105ba0c80, {{0.0, 0.0}, {402.0, 874.0}}
+       ↳Other, 0x105ba0dc0, {{0.0, 0.0}, {402.0, 874.0}}
+        ↳Other, 0x105ba0f00, {{0.0, 0.0}, {402.0, 874.0}}
+         ↳Other, 0x105ba1040, {{0.0, 0.0}, {402.0, 874.0}}
+          ↳Other, 0x105ba1180, {{0.0, 0.0}, {402.0, 874.0}}
+           ↳Other, 0x105ba12c0, {{0.0, 0.0}, {402.0, 874.0}}
+            ↳ScrollView, 0x105ba1400, {{0.0, 0.0}, {402.0, 874.0}}
+             ↳Other, 0x105ba1540, {{0.0, -96.0}, {402.0, 936.0}}
+              ↳Other, 0x105ba0000, {{14.0, 124.7}, {374.0, 374.0}}, identifier: 'game-board', label: 'Gomoku board, 15 by 15', value: Cursor H8, empty. ...
+Query chain:
+ →Find: Target Application 'com.xjrmh.gomoku'
+  Output: {
+    Application, 0x105b94c80, pid: 81383, label: 'Gomoku'
+  }
+  ↪︎Find: Descendants matching type Other
+    Output: {
+      Other, 0x105b75540, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b94780, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b75680, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b94b40, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b757c0, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b75900, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b75a40, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b761c0, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b76080, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b94280, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b76440, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b743c0, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b77e80, {{0.0, -96.0}, {402.0, 936.0}}
+      Other, 0x105b75f40, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b75e00, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x105b75cc0, {{369.0, 116.0}, {30.0, 696.0}}, label: 'Vertical scroll bar, 2 pages', value: 100%
+      Other, 0x105b77200, {{14.0, 124.7}, {374.0, 374.0}}, identifier: 'game-board', label: 'Gomoku board, 15 by 15', value: Cursor H8, empty. ...
+      Other, 0x105b77480, {{0.0, 0.0}, {402.0, 156.0}}
+      Other, 0x105b77c00, {{0.0, 0.0}, {402.0, 156.0}}
+      Other, 0x105b77d40, {{396.0, 253.7}, {3.0, 555.3}}
+      Other, 0x105b77ac0, {{22.0, -58.7}, {16.0, 16.0}}
+    }
+    ↪︎Find: Elements matching predicate '"game-board" IN identifiers'
+      Output: {
+        Other, 0x105ba3840, {{14.0, 124.7}, {374.0, 374.0}}, identifier: 'game-board', label: 'Gomoku board, 15 by 15', value: Cursor H8, empty. ...
+      }

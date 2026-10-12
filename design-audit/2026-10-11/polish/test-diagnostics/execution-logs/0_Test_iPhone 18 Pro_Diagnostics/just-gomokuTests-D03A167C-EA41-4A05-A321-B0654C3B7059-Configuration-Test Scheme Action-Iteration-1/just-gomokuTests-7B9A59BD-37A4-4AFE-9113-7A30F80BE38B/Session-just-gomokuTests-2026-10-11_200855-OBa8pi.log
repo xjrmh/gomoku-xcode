@@ -1,0 +1,694 @@
+Xcode version: 27.0 (27A266a)
+20:08:55.193 xcodebuild[75008:294781] Beginning test session just-gomokuTests-A6A12D8D-0E5F-4AA5-9344-EC85598F4E7D at 2026-10-11 20:08:55.192 on target <DVTiPhoneSimulator: 0x7893827c00> {
+		SimDevice: Clone 1 of iPhone 18 Pro (10B50E20-4E0C-4108-83B2-73321E6A3D0A, iOS 27.0, Shutdown)
+} (27.0 (24A434))
+20:08:55.193 xcodebuild[75008:294781] 	/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+-testProductsPath
+/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts
+-destination
+platform=iOS Simulator,id=366770B3-279A-4E5B-BFB8-6C7BC5A85D3A
+-collect-test-diagnostics
+never
+-resultBundlePath
+/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/result-bundles/test_sim_2026-10-12T01-08-43-804Z_pid39650_0e741bb3.xcresult
+test-without-building
+20:08:55.193 xcodebuild[75008:294781] Test standard output and standard error is at /Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/result-bundles/test_sim_2026-10-12T01-08-43-804Z_pid39650_0e741bb3.xcresult/Staging/1_Test/Diagnostics/just-gomokuTests-D03A167C-EA41-4A05-A321-B0654C3B7059-Configuration-Test Scheme Action-Iteration-1/just-gomokuTests-7B9A59BD-37A4-4AFE-9113-7A30F80BE38B/StandardOutputAndStandardError.txt
+20:08:55.389 xcodebuild[75008:294781] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Received sim device notification: {
+    notification = "availableDevices_changed";
+}
+20:08:55.389 xcodebuild[75008:294781] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Received sim device notification: {
+    device = "Clone 1 of iPhone 18 Pro (10B50E20-4E0C-4108-83B2-73321E6A3D0A, iOS 27.0, Booting)";
+    "last_used_at" = "2026-10-12 01:08:55 +0000";
+    "new_state" = 2;
+    notification = "device_state";
+    "prev_state" = 1;
+}
+20:08:55.389 xcodebuild[75008:294781] /Users/lizheng/Library/Developer/XCTestDevices: Received sim device set notification: {
+    device = "Clone 1 of iPhone 18 Pro (10B50E20-4E0C-4108-83B2-73321E6A3D0A, iOS 27.0, Booting)";
+    "last_used_at" = "2026-10-12 01:08:55 +0000";
+    "new_state" = 2;
+    notification = "device_state";
+    "prev_state" = 1;
+}
+20:08:55.462 xcodebuild[75008:294781] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Received sim device notification: {
+    notification = "availableDevices_changed";
+}
+20:08:55.462 xcodebuild[75008:294781] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Received sim device notification: {
+    device = "Clone 1 of iPhone 18 Pro (10B50E20-4E0C-4108-83B2-73321E6A3D0A, iOS 27.0, Booted)";
+    "new_state" = 3;
+    notification = "device_state";
+    "prev_state" = 2;
+}
+20:08:55.462 xcodebuild[75008:294781] /Users/lizheng/Library/Developer/XCTestDevices: Received sim device set notification: {
+    device = "Clone 1 of iPhone 18 Pro (10B50E20-4E0C-4108-83B2-73321E6A3D0A, iOS 27.0, Booted)";
+    "new_state" = 3;
+    notification = "device_state";
+    "prev_state" = 2;
+}
+20:08:55.463 xcodebuild[75008:294790] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7893d16700 on simulator was issued, 2 claims exist.
+20:08:55.463 xcodebuild[75008:294781] Setting up test runner session
+20:08:55.463 xcodebuild[75008:294790] Sim Clone 1 of iPhone 18 Pro: Unregistering for sim device notification with token 5
+20:08:55.463 xcodebuild[75008:294790] Calling -[SimDevice getenv:error:] for TESTMANAGERD_SIM_SOCK
+20:08:55.463 xcodebuild[75008:294781] Registering/updating daemon-based crash report observer for process names (
+    xctest,
+    debugserver,
+    FrontBoard,
+    assertiond,
+    runningboardd,
+    SpringBoard,
+    testmanagerd,
+    backboardd,
+    DTServiceHub,
+    "just-gomoku",
+    "just-gomokuUITests-Runner"
+)
+20:08:55.509 xcodebuild[75008:294790] Sim Clone 1 of iPhone 18 Pro has testmanagerd socket at /private/var/tmp/com.apple.launchd.2TsLwtg4Dk/com.apple.testmanagerd.unix-domain.socket
+20:08:55.509 xcodebuild[75008:294790] Validating test connection socket path (/private/var/tmp/com.apple.launchd.2TsLwtg4Dk/com.apple.testmanagerd.unix-domain.socket)
+20:08:55.509 xcodebuild[75008:294790] Constructing transport for test connection socket
+20:08:55.509 xcodebuild[75008:294790] Connected socket 29 to testmanagerd for Sim Clone 1 of iPhone 18 Pro
+20:08:55.509 xcodebuild[75008:294802] Received connection for test runner session
+20:08:55.509 xcodebuild[75008:294802] Listening for proxy connection request from the test bundle
+20:08:55.509 xcodebuild[75008:294781] Test runner session acquired connection.
+20:08:55.509 xcodebuild[75008:294802] Initiating session with identifier: A6A12D8D-0E5F-4AA5-9344-EC85598F4E7D
+20:08:56.147 xcodebuild[75008:294783] Got reply to session initiation request with identifier A6A12D8D-0E5F-4AA5-9344-EC85598F4E7D (error: (null))
+20:08:56.240 xcodebuild[75008:294781] Finished requesting crash reports. Continuing with testing.
+20:08:56.265 xcodebuild[75008:294781] Launch session started.
+20:08:56.272 xcodebuild[75008:294802] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7893d16700 on simulator was issued, 2 claims exist.
+20:08:56.274 xcodebuild[75008:294790] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7893d16700 on simulator was issued, 2 claims exist.
+20:08:56.274 xcodebuild[75008:294790] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Registered for sim device notification, got token 8
+20:08:56.274 xcodebuild[75008:294802] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Unregistering for sim device notification with token 8
+20:08:56.275 xcodebuild[75008:294802] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Installing app at path: /Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator/just-gomoku.app and options: {
+    SkipWatchAppInstall = 1;
+}
+20:09:01.762 xcodebuild[75008:294802] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Installed app at path: /Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator/just-gomoku.app and options: {
+    SkipWatchAppInstall = 1;
+}
+20:09:01.766 xcodebuild[75008:294802] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Launching app with identifier: com.xjrmh.gomoku and options: {
+    "activate_suspended" = 0;
+    arguments =     (
+    );
+    environment =     {
+        "APP_DISTRIBUTOR_ID_OVERRIDE" = "com.apple.AppStore";
+        "CA_ASSERT_MAIN_THREAD_TRANSACTIONS" = 0;
+        "CA_DEBUG_TRANSACTIONS" = 0;
+        "DYLD_FRAMEWORK_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks";
+        "DYLD_INSERT_LIBRARIES" = "/usr/lib/libRPAC.dylib:/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Tests/0/Debug-iphonesimulator/just-gomoku.app/Frameworks/libXCTestBundleInject.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_24A434/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 27.0.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/usr/lib/libRPAC.dylib";
+        "DYLD_LIBRARY_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib";
+        "IDE_CHOSEN_LOGGING_METHOD" = 1;
+        "LLVM_PROFILE_FILE" = "/var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/com.xjrmh.gomoku/A2240CD2-F2FF-41E1-A33A-2B8189E1BED8-75008-0000002EB9BB0A03/F79F4B0F-A808-43AE-8F9D-8F692986ED1A-%p%c.profraw";
+        NSApplicationQuitWithoutSuddenTermination = YES;
+        NSUnbufferedIO = YES;
+        "OS_ACTIVITY_DT_MODE" = YES;
+        "PERFC_ENABLE_EXTENDED_DIAGNOSTIC_FORMAT" = 1;
+        "PERFC_ENABLE_PROFILE_MODE" = 1;
+        "PERFC_RESET_INSERT_LIBRARIES" = 1;
+        "PERFC_SUPPRESS_SYSTEM_REPORTS" = 1;
+        "RUN_DESTINATION_DEVICE_NAME" = "Clone 1 of iPhone 18 Pro";
+        "RUN_DESTINATION_DEVICE_PLATFORM_IDENTIFIER" = "com.apple.platform.iphonesimulator";
+        "RUN_DESTINATION_DEVICE_UDID" = "10B50E20-4E0C-4108-83B2-73321E6A3D0A";
+        "SQLITE_ENABLE_THREAD_ASSERTIONS" = 1;
+        "SWIFT_BACKTRACE" = "enable=no";
+        TERM = dumb;
+        XCInjectBundleInto = unused;
+        "XCODE_SCHEME_NAME" = "just-gomoku";
+        "XCODE_TEST_PLAN_NAME" = "just-gomoku";
+        XCTestBundleInjectPath = "/usr/lib/libRPAC.dylib:/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Tests/0/Debug-iphonesimulator/just-gomoku.app/Frameworks/libXCTestBundleInject.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_24A434/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 27.0.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib:/usr/lib/libRPAC.dylib";
+        XCTestBundlePath = "PlugIns/just-gomokuTests.xctest";
+        XCTestConfigurationFilePath = "";
+        XCTestSessionIdentifier = "A6A12D8D-0E5F-4AA5-9344-EC85598F4E7D";
+        "__XCODE_BUILT_PRODUCTS_DIR_PATHS" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator";
+        "__XPC_DYLD_FRAMEWORK_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator";
+        "__XPC_DYLD_LIBRARY_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator";
+        "__XPC_LLVM_PROFILE_FILE" = "/var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/com.xjrmh.gomoku/A2240CD2-F2FF-41E1-A33A-2B8189E1BED8-75008-0000002EB9BB0A03/F79F4B0F-A808-43AE-8F9D-8F692986ED1A-%p%c.profraw";
+    };
+    stderr = "/dev/ttys000";
+    stdout = "/dev/ttys000";
+    "terminate_running_process" = 1;
+    "wait_for_debugger" = 1;
+}
+20:09:05.811 xcodebuild[75008:294802] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Launched app with identifier: com.xjrmh.gomoku (pid = 75372)
+20:09:05.811 xcodebuild[75008:294802] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> tracking pid 75372
+20:09:05.812 xcodebuild[75008:294802] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> checking to see if pid 75372 is valid: kill(pid, 0) = 0 (YES, it's still running)
+20:09:05.812 xcodebuild[75008:294797] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Registered for sim device notification, got token 10
+20:09:05.812 xcodebuild[75008:294792] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Unregistering for sim device notification with token 10
+20:09:11.420 xcodebuild[75008:295656] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> checking to see if pid 75372 is valid: kill(pid, 0) = 0 (YES, it's still running)
+20:09:11.613 xcodebuild[75008:294781] Test process runnable PID is 75372.
+20:09:11.613 xcodebuild[75008:295655] XCTHTestOperationStateMachine: Transitioning from state Initial to AcquiredPID
+2026-10-11 20:09:12.329248-0500 just-gomoku[75372:298237] [MenuBuilder] Inserted elements conflict with existing elements:
+
+Keyboard Shortcut (duplicate modifierFlags: command, input: Z):
+- Existing keyboard shortcut: <UIKeyCommand: 0x10769bd00; title = Undo; action: undo:; input: z; modifierFlags: Cmd>
+- Conflicting keyboard shortcut: <UIKeyCommand: 0x10a467300; title = Undo; action: _performMainMenuShortcutKeyCommand:; input: z; modifierFlags: Cmd>
+Ensure all keyboard shortcuts are unique to avoid undefined behavior.
+
+Make a symbolic breakpoint at _UIMenuBuilderError to catch this in the debugger.
+IOSurfaceClientSetSurfaceNotify failed e00002c7
+2026-10-11 20:09:12.587262-0500 just-gomoku[75372:298237] [XPCErrors] non-launching port is incompatible with service identifier "com.apple.PointerUI.pointeruid.default-service"
+2026-10-11 20:09:12.588333-0500 just-gomoku[75372:298237] [API] cannot add handler to 0 from 0 - dropping
+2026-10-11 20:09:12.589188-0500 just-gomoku[75372:298237] [API] cannot add handler to 0 from 0 - dropping
+20:09:12.767 xcodebuild[75008:295656] Handling proxy channel request from test runner
+20:09:12.767 just-gomoku[75372:298237] Creating future for 'requesting test configuration' with timeout 600.00
+20:09:12.767 just-gomoku[75372:298237] Notifying test runner ready
+20:09:12.767 xcodebuild[75008:295656] Test runner is ready with capabilities: <XCTCapabilities: 0x7896c082d0>: {
+    "delayed attachment transfer" = 1;
+    "fetch all test identifiers" = 2;
+    "supports crashlog generation progress" = 4;
+    "ubiquitous test identifiers" = 1;
+}
+20:09:12.767 xcodebuild[75008:294781] Test runner session successfully initiated.
+20:09:12.767 xcodebuild[75008:294781] Authorizing test process ID 75372
+20:09:12.767 just-gomoku[75372:298237] <XCTWaiter: 0x112491830> entering wait loop for 600.00s with expectations: `requesting test configuration`
+20:09:12.767 xcodebuild[75008:295656] XCTHTestOperationStateMachine: Transitioning from state AcquiredPID to ReportedReady
+20:09:12.768 xcodebuild[75008:294781] Got authorization response from test daemon: Success
+20:09:12.768 xcodebuild[75008:294781] Registering/updating daemon-based crash report observer for process names (
+    xctest,
+    debugserver,
+    FrontBoard,
+    assertiond,
+    runningboardd,
+    SpringBoard,
+    testmanagerd,
+    backboardd,
+    DTServiceHub,
+    "just-gomoku",
+    "just-gomokuUITests-Runner"
+)
+20:09:12.768 xcodebuild[75008:294781] Telling test runner to start executing tests.
+20:09:12.768 just-gomoku[75372:299596] Received test runner ready reply. Waiting for request to start running tests.
+20:09:12.768 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x112491830>
+20:09:12.768 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x1127b6cc0> completed after 0.002s
+20:09:12.768 just-gomoku[75372:298237] cleaning up requesting test configuration
+20:09:12.768 just-gomoku[75372:298237] Loading test bundle at: file:///Users/lizheng/Library/Developer/XCTestDevices/10B50E20-4E0C-4108-83B2-73321E6A3D0A/data/Containers/Bundle/Application/52E068BA-77DD-43BF-96AE-5A2CAA19B9B0/just-gomoku.app/PlugIns/just-gomokuTests.xctest/
+20:09:12.768 just-gomoku[75372:298237] Finished loading test bundle
+20:09:12.768 just-gomoku[75372:299537] _IDE_startExecutingTestPlanWithProtocolVersion:36
+20:09:12.769 just-gomoku[75372:299537] <XCTWaiter: 0x1127e8570> waiting asynchronously for 599.82s with expectations: `preparing execution worker`
+20:09:12.770 just-gomoku[75372:298237] Interop: installing the default fallback event handler
+20:09:12.770 just-gomoku[75372:298237] Interop: fallback event handler installation outcome: true
+20:09:12.770 just-gomoku[75372:298237] Registering in-process symbolication service with image names: just-gomokuUITests-Runner, just-gomokuUITests, just-gomoku, just-gomokuTests
+20:09:12.770 just-gomoku[75372:298237] Running tests with active test configuration: <XCTestConfiguration: 0x1125a2400>
+	                  testBundleURL:file:///Users/lizheng/Library/Developer/XCTestDevices/10B50E20-4E0C-4108-83B2-73321E6A3D0A/data/Containers/Bundle/Application/52E068BA-77DD-43BF-96AE-5A2CAA19B9B0/just-gomoku.app/PlugIns/just-gomokuTests.xctest/
+	         testBundleRelativePath:PlugIns/just-gomokuTests.xctest
+	              productModuleName:just_gomokuTests
+	                  testSelection:<XCTTestSelection: 0x10a5d9e00>
+	            identifiersToRun:(null)
+	            identifiersToSkip:
+	            tagsToRun:(null)
+	            tagsToSkip:<XCTTagSelection: 0x10a63a620>
+	            mode:and
+	            tags:{(
+)}
+	  includeXCTests:NO
+
+
+	             reportResultsToIDE:YES
+	     resultChannelConfiguration:(null)
+	                   baseTestsURL:test://com.apple.xcode/just-gomoku/just-gomokuTests
+	               testsDrivenByIDE:YES
+	inProcessParallelizationEnabled:YES
+	              sessionIdentifier:A6A12D8D-0E5F-4AA5-9344-EC85598F4E7D
+	      disablePerformanceMetrics:NO
+	treatMissingBaselinesAsFailures:NO
+	                baselineFileURL:(null)
+	       baselineFileRelativePath:(null)
+	          targetApplicationPath:(null)
+	      targetApplicationBundleID:(null)
+	 testApplicationDependencies:
+{
+    "com.xjrmh.gomoku" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator/just-gomoku.app";
+    "com.xjrmh.gomokuUITests.xctrunner" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator/just-gomokuUITests-Runner.app";
+}
+	 bundleIDsForCrashReportEmphasis:
+{(
+    "com.xjrmh.gomokuTests",
+    "com.xjrmh.gomoku",
+    "com.xjrmh.gomokuUITests"
+)}
+	 testApplicationUserOverrides:(null)
+	     targetApplicationArguments:(null)
+	   targetApplicationEnvironment:(null)
+	                  reportActivities:YES
+	          testsMustRunOnMainThread:NO
+	            initializeForUITesting:NO
+	            traceCollectionEnabled:(null)
+	 enablePerformanceTestsDiagnostics:(null)
+	 aggregateStatisticsBeforeCrash:
+{
+    XCSuiteRecordsKey =     {
+    };
+}
+	        automationFrameworkPath:/Library/Developer/CoreSimulator/Volumes/iOS_24A434/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 27.0.simruntime/Contents/Resources/RuntimeRoot/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework
+	                     emitOSLogs:NO
+	       systemAttachmentLifetime:deleteOnSuccess
+	         userAttachmentLifetime:deleteOnSuccess
+	   preferredScreenCaptureFormat:screenRecording
+	   gatherLocalizableStringsData:NO
+	          testExecutionOrdering:alphabetical
+	    randomExecutionOrderingSeed:(null)
+	               repetitionPolicy:<XCTRepetitionPolicy: 0x10a63b420>
+	            mode:None
+	            maximumIterations:1
+	            repeatInNewRunnerProcess:NO
+
+	       runtimeDiagnosticsPolicy:<XCTRuntimeDiagnosticsPolicy: 0x10a5d86c0>
+	            otherRuntimeIssuesDetectionPolicy:<XCTRuntimeIssueDetectionPolicy: 0x10a63b400>
+	            detectionEnabled:YES
+	            severity:warning
+
+	            threadPerformanceCheckerRuntimeIssueDetectionPolicy:<XCTRuntimeIssueDetectionPolicy: 0x10a63b400>
+	            detectionEnabled:YES
+	            severity:warning
+
+	            mainThreadCheckerDetectionPolicy:<XCTRuntimeIssueDetectionPolicy: 0x10a63b400>
+	            detectionEnabled:YES
+	            severity:warning
+
+	            checkedAllocations:disabled
+
+	 isMemoryTaggingAddressSanitizerEnabled:NO
+	    deferSymbolicationToHarness:NO
+	applicationCrashDetectionPolicy:<XCTApplicationCrashDetectionPolicy: 0x10a63bfc0>
+	            severity:Failure
+
+	          hangDetectionPolicy:<XCTHangDetectionPolicy: detectionEnabled=NO, severity=off, durationThreshold=1.000s>
+	            testTimeoutsEnabled:NO
+	              leaksCheckingMode:off
+	                testInteropMode:complete
+	 defaultTestExecutionTimeAllowance:600
+	 maximumTestExecutionTimeAllowance:0
+	                IDECapabilities:<XCTCapabilities: 0x107742390>: {
+    "XCTIssue capability" = 1;
+    "delayed attachment transfer" = 1;
+    "expected failure test capability" = 1;
+    "in-process test parallelization capability" = 1;
+    "lazy test case snapshots" = 1;
+    "monitoring crash reports for additional processes" = 1;
+    "request diagnostics for specific devices" = 1;
+    "request spindump capability" = 1;
+    "runner plan" = 1;
+    "skipped suite capability" = 1;
+    "skipped test capability" = 1;
+    "sync crash reporter capability" = 1;
+    "test case run configurations" = 1;
+    "test iterations" = 3;
+    "test timeout capability" = 1;
+    traits = 1;
+    "ubiquitous test identifiers" = 1;
+    "unified issue recorded" = 1;
+}
+	        symbolicationImageNames:just-gomokuUITests-Runner, just-gomoku, just-gomokuUITests, just-gomokuTests
+	         applicationBundleInfos:(null)
+
+20:09:12.771 just-gomoku[75372:298237] <XCTWaiter: 0x112493b70> entering wait loop for 600.00s with expectations: `requesting ready for testing`
+20:09:12.771 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x112493b70>
+20:09:12.771 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x1127b6f40> completed after 0.000s
+20:09:12.771 just-gomoku[75372:298237] cleaning up requesting ready for testing
+20:09:12.771 just-gomoku[75372:298237] <XCTWaiter: 0x112493ea0> entering wait loop for 600.00s with expectations: `IDE proxy`
+20:09:12.771 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x112493ea0>
+20:09:12.771 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x1127b7080> completed after 0.000s
+20:09:12.771 just-gomoku[75372:298237] cleaning up IDE proxy
+20:09:12.771 just-gomoku[75372:298237] Bypassing UI testing initialization because the test configuration does not request it.
+20:09:12.772 just-gomoku[75372:298237] KVO change: checked status of Expect value of 'hasFinished' of <XCTFuture: 0x1074882a0> to be '1': fulfill=NO
+20:09:12.772 just-gomoku[75372:298237] KVO change: checked status of Expect value of 'hasFinished' of <XCTFuture: 0x1074882a0> to be '1': fulfill=NO
+20:09:12.772 just-gomoku[75372:298237] <XCTWaiter: 0x1127e9e00> entering wait loop for 599.82s with expectations: `Expect value of 'hasFinished' of <XCTFuture: 0x1074882a0> to be '1'`
+20:09:12.782 just-gomoku[75372:299537] Returning result XCTWaiterResultCompleted for asynchronous waiter <XCTWaiter: 0x1127e8570>
+20:09:12.782 just-gomoku[75372:299537] Wait <XCTWaiterWait: 0x1127b6dc0> completed after 0.014s
+20:09:12.783 just-gomoku[75372:299537] cleaning up preparing execution worker
+20:09:12.783 just-gomoku[75372:299537] KVO change: checked status of Expect value of 'hasFinished' of <XCTFuture: 0x1074882a0> to be '1': fulfill=YES
+20:09:12.783 just-gomoku[75372:299537] Test driver received request to enumerate tests with options: XCTTestEnumerationOptions(includeAllTestIdentifiers: false, includeParallelizableTestIdentifierGroups: true
+20:09:12.783 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e9e00>
+20:09:12.783 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x1127b72c0> completed after 0.011s
+20:09:12.783 just-gomoku[75372:298237] cleaning up Expect value of 'hasFinished' of <XCTFuture: 0x1074882a0> to be '1'
+20:09:12.783 just-gomoku[75372:298237] cleaning up Expect value of 'hasFinished' of <XCTFuture: 0x1074882a0> to be '1'
+20:09:12.783 just-gomoku[75372:298237] Secondary wait on future result returned XCTWaiterResultCompleted
+20:09:12.786 xcodebuild[75008:294781] Test runner started executing tests.
+20:09:12.783 just-gomoku[75372:298237] Entering test execution event loop
+20:09:12.786 xcodebuild[75008:295655] XCTHTestOperationStateMachine: Transitioning from state ReportedReady to ExecutingTests
+20:09:13.032 just-gomoku[75372:298237] <XCTWaiter: 0x1127e9bf0> entering indefinite wait loop for expectations: `XCTAsyncEnumerateWithWaiter(<XCTest.SwiftTestingExecutionExtension: 0x1144d4c80>)`
+20:09:13.032 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e9bf0>
+20:09:13.032 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x1127b7a40> completed after 0.000s
+20:09:13.032 just-gomoku[75372:298237] cleaning up XCTAsyncEnumerateWithWaiter(<XCTest.SwiftTestingExecutionExtension: 0x1144d4c80>)
+20:09:13.032 just-gomoku[75372:298237] <XCTWaiter: 0x1127e9bf0> entering indefinite wait loop for expectations: `XCTAsyncEnumerateWithWaiter(<XCTTestRunSession: 0x10775f580>)`
+20:09:13.032 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e9bf0>
+20:09:13.032 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x1127b7b80> completed after 0.000s
+20:09:13.032 just-gomoku[75372:298237] cleaning up XCTAsyncEnumerateWithWaiter(<XCTTestRunSession: 0x10775f580>)
+20:09:13.033 just-gomoku[75372:299596] LOCAL HARNESS CI STATE: none
+20:09:13.034 just-gomoku[75372:299596] Test driver received request to execute test identifiers <XCTTestIdentifier container, class ["ActiveSessionStoreTests"]> and skip test identifiers 
+20:09:13.036 just-gomoku[75372:298237] Setting a new interop record handler: Optional(XCTestCore.XCTestInteropRecordHandler())
+20:09:13.036 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testBundleWillStart:]
+20:09:13.037 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testSuiteWillStart:]
+20:09:13.038 xcodebuild[75008:294781] _XCT_testSuiteWithIdentifier:<XCTTestIdentifier container, class ["ActiveSessionStoreTests"]> didStartAt:2026-10-12 01:09:13 +0000 traits:(null)
+20:09:13.038 xcodebuild[75008:294781] Nothing to delete
+Test Suite 'ActiveSessionStoreTests' started at 2026-10-11 20:09:13.037.
+Test Case '-[just_gomokuTests.ActiveSessionStoreTests testCorruptSessionFailsClosed]' started.
+20:09:13.038 just-gomoku[75372:298237] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.038 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseWillStart:] just_gomokuTests.ActiveSessionStoreTests testCorruptSessionFailsClosed
+20:09:13.039 xcodebuild[75008:294781] Nothing to delete
+20:09:13.039 xcodebuild[75008:294781] _XCT_testCaseDidStartWithIdentifier:<XCTTestIdentifier leaf, method, swift ["ActiveSessionStoreTests", "testCorruptSessionFailsClosed"]>testCaseRunConfiguration:<XCTestCaseRunConfiguration: 0x7893c01500>traits:(null)
+20:09:13.039 xcodebuild[75008:294781] Test case did start: <XCTTestIdentifier leaf, method, swift ["ActiveSessionStoreTests", "testCorruptSessionFailsClosed"]>
+20:09:13.039 xcodebuild[75008:294781] Nothing to delete
+20:09:13.038 just-gomoku[75372:298237] <XCTWaiter: 0x1127eb9c0> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.038 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127eb9c0>
+20:09:13.038 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10774a980> completed after 0.000s
+20:09:13.038 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.041 just-gomoku[75372:298237] <XCTWaiter: 0x1127ebc90> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.041 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127ebc90>
+20:09:13.041 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10774a980> completed after 0.000s
+20:09:13.041 just-gomoku[75372:298237] cleaning up failable invocation block completion
+Test Case '-[just_gomokuTests.ActiveSessionStoreTests testCorruptSessionFailsClosed]' passed (0.003 seconds).
+20:09:13.041 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseDidFinish:] just_gomokuTests.ActiveSessionStoreTests testCorruptSessionFailsClosed
+20:09:13.043 xcodebuild[75008:294781] Nothing to delete
+Test Case '-[just_gomokuTests.ActiveSessionStoreTests testSaveLoadAndClear]' started.
+20:09:13.043 xcodebuild[75008:294781] _XCT_testCaseWithIdentifier:<XCTTestIdentifier leaf, method, swift ["ActiveSessionStoreTests", "testCorruptSessionFailsClosed"]> didFinishWithStatus:passed duration:0.003196001052856445
+20:09:13.043 xcodebuild[75008:294781] Test case (<XCTTestIdentifier leaf, method, swift ["ActiveSessionStoreTests", "testCorruptSessionFailsClosed"]>) finished - enqueuing console chunks to delegate.
+20:09:13.043 xcodebuild[75008:294781] Nothing to delete
+20:09:13.042 just-gomoku[75372:298237] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.042 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseWillStart:] just_gomokuTests.ActiveSessionStoreTests testSaveLoadAndClear
+20:09:13.043 xcodebuild[75008:294781] _XCT_testCaseDidStartWithIdentifier:<XCTTestIdentifier leaf, method, swift ["ActiveSessionStoreTests", "testSaveLoadAndClear"]>testCaseRunConfiguration:<XCTestCaseRunConfiguration: 0x7893c00640>traits:(null)
+20:09:13.043 xcodebuild[75008:294781] Test case did start: <XCTTestIdentifier leaf, method, swift ["ActiveSessionStoreTests", "testSaveLoadAndClear"]>
+20:09:13.043 xcodebuild[75008:294781] Nothing to delete
+20:09:13.042 just-gomoku[75372:298237] <XCTWaiter: 0x1127eba20> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.042 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127eba20>
+20:09:13.042 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10774a980> completed after 0.000s
+20:09:13.042 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.043 xcodebuild[75008:294781] Finishing test with new console chunk Test Case '-[just_gomokuTests.ActiveSessionStoreTests testCorruptSessionFailsClosed]' passed (0.003 seconds).
+
+20:09:13.044 xcodebuild[75008:294781] Nothing to delete
+Test Case '-[just_gomokuTests.ActiveSessionStoreTests testSaveLoadAndClear]' passed (0.001 seconds).
+20:09:13.043 just-gomoku[75372:298237] <XCTWaiter: 0x1127ebe10> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.043 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127ebe10>
+20:09:13.043 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10774a980> completed after 0.000s
+20:09:13.043 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.043 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseDidFinish:] just_gomokuTests.ActiveSessionStoreTests testSaveLoadAndClear
+20:09:13.044 xcodebuild[75008:294781] _XCT_testCaseWithIdentifier:<XCTTestIdentifier leaf, method, swift ["ActiveSessionStoreTests", "testSaveLoadAndClear"]> didFinishWithStatus:passed duration:0.001496076583862305
+20:09:13.044 xcodebuild[75008:294781] Test case (<XCTTestIdentifier leaf, method, swift ["ActiveSessionStoreTests", "testSaveLoadAndClear"]>) finished - enqueuing console chunks to delegate.
+20:09:13.044 xcodebuild[75008:294781] Nothing to delete
+20:09:13.043 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testSuiteDidFinish:]
+20:09:13.044 xcodebuild[75008:294781] _XCT_testSuiteWithIdentifier:<XCTTestIdentifier container, class ["ActiveSessionStoreTests"]> didFinishAt:2026-10-12 01:09:13 +0000 runCount:2 skipCount:0 failureCount:0 expectedFailureCount:0 uncaughtExceptionCount:0 testDuration:0.00469207763671875 totalDuration:0.006080985069274902
+20:09:13.044 xcodebuild[75008:294781] Nothing to delete
+20:09:13.045 xcodebuild[75008:294781] Nothing to delete
+20:09:13.043 just-gomoku[75372:298237] Setting a new interop record handler: nil
+20:09:13.043 just-gomoku[75372:298237] <XCTWaiter: 0x1127e9bf0> entering indefinite wait loop for expectations: `XCTAsyncEnumerateWithWaiter(<XCTest.SwiftTestingExecutionExtension: 0x1144d4c80>)`
+20:09:13.043 just-gomoku[75372:299537] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.044 just-gomoku[75372:299537] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.045 xcodebuild[75008:294781] Nothing to delete
+20:09:13.045 xcodebuild[75008:294781] Nothing to delete
+Test Suite 'ActiveSessionStoreTests' passed at 2026-10-11 20:09:13.043.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.005 (0.006) seconds
+20:09:13.045 xcodebuild[75008:294781] Nothing to delete
+20:09:13.045 xcodebuild[75008:294781] Finishing test with new console chunk Test Case '-[just_gomokuTests.ActiveSessionStoreTests testSaveLoadAndClear]' passed (0.001 seconds).
+
+20:09:13.045 xcodebuild[75008:294781] Nothing to delete
+20:09:13.045 just-gomoku[75372:299537] Setting a new interop record handler: Optional(XCTest.SwiftTestingInteropRecordHandler(interruptTestHandler: nil))
+20:09:13.045 xcodebuild[75008:294781] Nothing to delete
+20:09:13.047 just-gomoku[75372:299537] Setting a new interop record handler: nil
+20:09:13.047 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e9bf0>
+20:09:13.047 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10774b780> completed after 0.003s
+20:09:13.047 just-gomoku[75372:298237] cleaning up XCTAsyncEnumerateWithWaiter(<XCTest.SwiftTestingExecutionExtension: 0x1144d4c80>)
+20:09:13.047 just-gomoku[75372:298237] <XCTWaiter: 0x1127e9bf0> entering indefinite wait loop for expectations: `XCTAsyncEnumerateWithWaiter(<XCTTestRunSession: 0x10775f580>)`
+20:09:13.047 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e9bf0>
+20:09:13.047 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x107748fc0> completed after 0.000s
+20:09:13.047 just-gomoku[75372:298237] cleaning up XCTAsyncEnumerateWithWaiter(<XCTTestRunSession: 0x10775f580>)
+20:09:13.048 just-gomoku[75372:299541] LOCAL HARNESS CI STATE: none
+20:09:13.048 just-gomoku[75372:299541] Test driver received request to execute test identifiers <XCTTestIdentifier container, class ["AIEngineTests"]> and skip test identifiers 
+20:09:13.048 just-gomoku[75372:298237] Setting a new interop record handler: Optional(XCTestCore.XCTestInteropRecordHandler())
+20:09:13.048 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testSuiteWillStart:]
+Test Suite 'AIEngineTests' started at 2026-10-11 20:09:13.048.
+20:09:13.048 xcodebuild[75008:294781] _XCT_testSuiteWithIdentifier:<XCTTestIdentifier container, class ["AIEngineTests"]> didStartAt:2026-10-12 01:09:13 +0000 traits:(null)
+20:09:13.048 xcodebuild[75008:294781] Nothing to delete
+20:09:13.048 xcodebuild[75008:294781] Nothing to delete
+20:09:13.048 just-gomoku[75372:298237] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysBlocksImmediateLoss]' started.
+20:09:13.048 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseWillStart:] just_gomokuTests.AIEngineTests testAIAlwaysBlocksImmediateLoss
+20:09:13.048 xcodebuild[75008:294781] _XCT_testCaseDidStartWithIdentifier:<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testAIAlwaysBlocksImmediateLoss"]>testCaseRunConfiguration:<XCTestCaseRunConfiguration: 0x7893c011a0>traits:(null)
+20:09:13.048 xcodebuild[75008:294781] Test case did start: <XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testAIAlwaysBlocksImmediateLoss"]>
+20:09:13.048 xcodebuild[75008:294781] Nothing to delete
+20:09:13.048 xcodebuild[75008:294781] Nothing to delete
+20:09:13.048 just-gomoku[75372:298237] <XCTWaiter: 0x1127e8d80> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.049 xcodebuild[75008:294781] Nothing to delete
+20:09:13.048 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e8d80>
+20:09:13.048 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x1127b7ec0> completed after 0.000s
+20:09:13.048 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.049 xcodebuild[75008:294781] Nothing to delete
+20:09:13.049 just-gomoku[75372:298237] <XCTWaiter: 0x1127eba50> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.049 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127eba50>
+20:09:13.049 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6ce940> completed after 0.000s
+Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysBlocksImmediateLoss]' passed (0.001 seconds).
+20:09:13.049 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.049 xcodebuild[75008:294781] Nothing to delete
+20:09:13.049 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseDidFinish:] just_gomokuTests.AIEngineTests testAIAlwaysBlocksImmediateLoss
+20:09:13.049 xcodebuild[75008:294781] _XCT_testCaseWithIdentifier:<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testAIAlwaysBlocksImmediateLoss"]> didFinishWithStatus:passed duration:0.0007070302963256836
+20:09:13.049 xcodebuild[75008:294781] Test case (<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testAIAlwaysBlocksImmediateLoss"]>) finished - enqueuing console chunks to delegate.
+20:09:13.049 xcodebuild[75008:294781] Nothing to delete
+20:09:13.049 just-gomoku[75372:298237] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysTakesImmediateWin]' started.
+20:09:13.049 xcodebuild[75008:294781] Finishing test with new console chunk Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysBlocksImmediateLoss]' passed (0.001 seconds).
+
+20:09:13.049 xcodebuild[75008:294781] Nothing to delete
+20:09:13.049 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseWillStart:] just_gomokuTests.AIEngineTests testAIAlwaysTakesImmediateWin
+20:09:13.049 xcodebuild[75008:294781] _XCT_testCaseDidStartWithIdentifier:<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testAIAlwaysTakesImmediateWin"]>testCaseRunConfiguration:<XCTestCaseRunConfiguration: 0x7893c01ba0>traits:(null)
+20:09:13.050 xcodebuild[75008:294781] Test case did start: <XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testAIAlwaysTakesImmediateWin"]>
+20:09:13.050 xcodebuild[75008:294781] Nothing to delete
+Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysTakesImmediateWin]' passed (0.000 seconds).
+20:09:13.049 just-gomoku[75372:298237] <XCTWaiter: 0x107731380> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.049 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x107731380>
+20:09:13.049 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cd5c0> completed after 0.000s
+20:09:13.049 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.049 just-gomoku[75372:298237] <XCTWaiter: 0x1077313e0> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.049 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1077313e0>
+20:09:13.050 xcodebuild[75008:294781] Nothing to delete
+20:09:13.049 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cd5c0> completed after 0.000s
+20:09:13.049 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.049 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseDidFinish:] just_gomokuTests.AIEngineTests testAIAlwaysTakesImmediateWin
+20:09:13.050 xcodebuild[75008:294781] _XCT_testCaseWithIdentifier:<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testAIAlwaysTakesImmediateWin"]> didFinishWithStatus:passed duration:0.0004409551620483398
+20:09:13.050 xcodebuild[75008:294781] Test case (<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testAIAlwaysTakesImmediateWin"]>) finished - enqueuing console chunks to delegate.
+20:09:13.050 xcodebuild[75008:294781] Nothing to delete
+Test Case '-[just_gomokuTests.AIEngineTests testEasyMoveIsDeterministicForSeed]' started.
+20:09:13.050 just-gomoku[75372:298237] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.050 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseWillStart:] just_gomokuTests.AIEngineTests testEasyMoveIsDeterministicForSeed
+20:09:13.050 xcodebuild[75008:294781] _XCT_testCaseDidStartWithIdentifier:<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testEasyMoveIsDeterministicForSeed"]>testCaseRunConfiguration:<XCTestCaseRunConfiguration: 0x7893c010e0>traits:(null)
+20:09:13.050 xcodebuild[75008:294781] Test case did start: <XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testEasyMoveIsDeterministicForSeed"]>
+20:09:13.050 xcodebuild[75008:294781] Nothing to delete
+20:09:13.050 just-gomoku[75372:298237] <XCTWaiter: 0x1127e8cc0> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.050 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e8cc0>
+20:09:13.050 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cdc40> completed after 0.000s
+20:09:13.050 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.050 xcodebuild[75008:294781] Finishing test with new console chunk Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysTakesImmediateWin]' passed (0.000 seconds).
+
+20:09:13.050 xcodebuild[75008:294781] Nothing to delete
+20:09:13.050 xcodebuild[75008:294781] Nothing to delete
+Test Case '-[just_gomokuTests.AIEngineTests testEasyMoveIsDeterministicForSeed]' passed (0.006 seconds).
+20:09:13.056 just-gomoku[75372:298237] <XCTWaiter: 0x1127e8ab0> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.056 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e8ab0>
+20:09:13.056 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cdc40> completed after 0.000s
+20:09:13.056 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.056 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseDidFinish:] just_gomokuTests.AIEngineTests testEasyMoveIsDeterministicForSeed
+20:09:13.056 xcodebuild[75008:294781] Nothing to delete
+Test Case '-[just_gomokuTests.AIEngineTests testEmptyBoardStartsAtCenterForEveryDifficulty]' started.
+20:09:13.056 xcodebuild[75008:294781] _XCT_testCaseWithIdentifier:<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testEasyMoveIsDeterministicForSeed"]> didFinishWithStatus:passed duration:0.006376981735229492
+20:09:13.056 xcodebuild[75008:294781] Test case (<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testEasyMoveIsDeterministicForSeed"]>) finished - enqueuing console chunks to delegate.
+20:09:13.057 xcodebuild[75008:294781] Nothing to delete
+20:09:13.056 just-gomoku[75372:298237] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.056 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseWillStart:] just_gomokuTests.AIEngineTests testEmptyBoardStartsAtCenterForEveryDifficulty
+20:09:13.057 xcodebuild[75008:294781] _XCT_testCaseDidStartWithIdentifier:<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testEmptyBoardStartsAtCenterForEveryDifficulty"]>testCaseRunConfiguration:<XCTestCaseRunConfiguration: 0x7893c00140>traits:(null)
+20:09:13.057 xcodebuild[75008:294781] Test case did start: <XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testEmptyBoardStartsAtCenterForEveryDifficulty"]>
+20:09:13.057 xcodebuild[75008:294781] Nothing to delete
+20:09:13.057 xcodebuild[75008:294781] Finishing test with new console chunk Test Case '-[just_gomokuTests.AIEngineTests testEasyMoveIsDeterministicForSeed]' passed (0.006 seconds).
+
+20:09:13.057 xcodebuild[75008:294781] Nothing to delete
+20:09:13.056 just-gomoku[75372:298237] <XCTWaiter: 0x1077312c0> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.056 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1077312c0>
+20:09:13.056 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cfd40> completed after 0.000s
+20:09:13.056 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.057 just-gomoku[75372:298237] <XCTWaiter: 0x1077313e0> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.057 xcodebuild[75008:294781] Nothing to delete
+20:09:13.057 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1077313e0>
+20:09:13.057 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cfd40> completed after 0.000s
+20:09:13.057 just-gomoku[75372:298237] cleaning up failable invocation block completion
+Test Case '-[just_gomokuTests.AIEngineTests testEmptyBoardStartsAtCenterForEveryDifficulty]' passed (0.000 seconds).
+20:09:13.057 xcodebuild[75008:294781] Nothing to delete
+20:09:13.057 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseDidFinish:] just_gomokuTests.AIEngineTests testEmptyBoardStartsAtCenterForEveryDifficulty
+Test Suite 'AIEngineTests' passed at 2026-10-11 20:09:13.057.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.008 (0.009) seconds
+20:09:13.057 xcodebuild[75008:294781] _XCT_testCaseWithIdentifier:<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testEmptyBoardStartsAtCenterForEveryDifficulty"]> didFinishWithStatus:passed duration:0.0004169940948486328
+20:09:13.057 xcodebuild[75008:294781] Test case (<XCTTestIdentifier leaf, method, swift ["AIEngineTests", "testEmptyBoardStartsAtCenterForEveryDifficulty"]>) finished - enqueuing console chunks to delegate.
+20:09:13.057 xcodebuild[75008:294781] Nothing to delete
+20:09:13.057 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testSuiteDidFinish:]
+20:09:13.057 xcodebuild[75008:294781] Finishing test with new console chunk Test Case '-[just_gomokuTests.AIEngineTests testEmptyBoardStartsAtCenterForEveryDifficulty]' passed (0.000 seconds).
+
+20:09:13.057 xcodebuild[75008:294781] Nothing to delete
+20:09:13.057 xcodebuild[75008:294781] _XCT_testSuiteWithIdentifier:<XCTTestIdentifier container, class ["AIEngineTests"]> didFinishAt:2026-10-12 01:09:13 +0000 runCount:4 skipCount:0 failureCount:0 expectedFailureCount:0 uncaughtExceptionCount:0 testDuration:0.007941961288452148 totalDuration:0.008841991424560547
+20:09:13.057 xcodebuild[75008:294781] Nothing to delete
+20:09:13.057 xcodebuild[75008:294781] Nothing to delete
+20:09:13.057 just-gomoku[75372:298237] Setting a new interop record handler: nil
+20:09:13.057 just-gomoku[75372:298237] <XCTWaiter: 0x1127e9bf0> entering indefinite wait loop for expectations: `XCTAsyncEnumerateWithWaiter(<XCTest.SwiftTestingExecutionExtension: 0x1144d4c80>)`
+20:09:13.057 just-gomoku[75372:299541] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.057 just-gomoku[75372:299541] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.057 just-gomoku[75372:299541] Setting a new interop record handler: Optional(XCTest.SwiftTestingInteropRecordHandler(interruptTestHandler: nil))
+20:09:13.058 just-gomoku[75372:299537] Setting a new interop record handler: nil
+20:09:13.058 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e9bf0>
+20:09:13.058 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cda00> completed after 0.001s
+20:09:13.058 just-gomoku[75372:298237] cleaning up XCTAsyncEnumerateWithWaiter(<XCTest.SwiftTestingExecutionExtension: 0x1144d4c80>)
+20:09:13.058 just-gomoku[75372:298237] <XCTWaiter: 0x1127e9bf0> entering indefinite wait loop for expectations: `XCTAsyncEnumerateWithWaiter(<XCTTestRunSession: 0x10775f580>)`
+20:09:13.058 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1127e9bf0>
+20:09:13.058 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cd600> completed after 0.000s
+20:09:13.058 just-gomoku[75372:298237] cleaning up XCTAsyncEnumerateWithWaiter(<XCTTestRunSession: 0x10775f580>)
+20:09:13.058 just-gomoku[75372:299595] LOCAL HARNESS CI STATE: none
+20:09:13.059 just-gomoku[75372:299595] Test driver received request to execute test identifiers <XCTTestIdentifier container, class ["ArchiveTests"]> and skip test identifiers 
+20:09:13.059 just-gomoku[75372:298237] Setting a new interop record handler: Optional(XCTestCore.XCTestInteropRecordHandler())
+20:09:13.059 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testSuiteWillStart:]
+Test Suite 'ArchiveTests' started at 2026-10-11 20:09:13.059.
+20:09:13.059 xcodebuild[75008:294781] Nothing to delete
+20:09:13.059 xcodebuild[75008:294781] _XCT_testSuiteWithIdentifier:<XCTTestIdentifier container, class ["ArchiveTests"]> didStartAt:2026-10-12 01:09:13 +0000 traits:(null)
+20:09:13.059 xcodebuild[75008:294781] Nothing to delete
+Test Case '-[just_gomokuTests.ArchiveTests testArchivePreservesReplayAndMixedModes]' started.
+20:09:13.059 just-gomoku[75372:298237] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.059 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseWillStart:] just_gomokuTests.ArchiveTests testArchivePreservesReplayAndMixedModes
+20:09:13.059 xcodebuild[75008:294781] _XCT_testCaseDidStartWithIdentifier:<XCTTestIdentifier leaf, method, swift ["ArchiveTests", "testArchivePreservesReplayAndMixedModes"]>testCaseRunConfiguration:<XCTestCaseRunConfiguration: 0x7893c00720>traits:(null)
+20:09:13.059 xcodebuild[75008:294781] Test case did start: <XCTTestIdentifier leaf, method, swift ["ArchiveTests", "testArchivePreservesReplayAndMixedModes"]>
+20:09:13.060 xcodebuild[75008:294781] Nothing to delete
+20:09:13.059 just-gomoku[75372:298237] <XCTWaiter: 0x107467810> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.060 xcodebuild[75008:294781] Nothing to delete
+20:09:13.059 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x107467810>
+20:09:13.059 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cd940> completed after 0.000s
+20:09:13.059 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.060 xcodebuild[75008:294781] Nothing to delete
+20:09:13.062 just-gomoku[75372:298237] <XCTWaiter: 0x107467f90> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.062 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x107467f90>
+20:09:13.062 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cd940> completed after 0.000s
+20:09:13.062 just-gomoku[75372:298237] cleaning up failable invocation block completion
+Test Case '-[just_gomokuTests.ArchiveTests testArchivePreservesReplayAndMixedModes]' passed (0.003 seconds).
+20:09:13.063 xcodebuild[75008:294781] Nothing to delete
+20:09:13.062 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseDidFinish:] just_gomokuTests.ArchiveTests testArchivePreservesReplayAndMixedModes
+Test Case '-[just_gomokuTests.ArchiveTests testRepositoryReplacesDuplicateAndReopensArchivedGame]' started.
+20:09:13.063 xcodebuild[75008:294781] _XCT_testCaseWithIdentifier:<XCTTestIdentifier leaf, method, swift ["ArchiveTests", "testArchivePreservesReplayAndMixedModes"]> didFinishWithStatus:passed duration:0.003062963485717773
+20:09:13.063 xcodebuild[75008:294781] Test case (<XCTTestIdentifier leaf, method, swift ["ArchiveTests", "testArchivePreservesReplayAndMixedModes"]>) finished - enqueuing console chunks to delegate.
+20:09:13.063 xcodebuild[75008:294781] Nothing to delete
+20:09:13.062 just-gomoku[75372:298237] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:13.062 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCaseWillStart:] just_gomokuTests.ArchiveTests testRepositoryReplacesDuplicateAndReopensArchivedGame
+20:09:13.063 xcodebuild[75008:294781] Finishing test with new console chunk Test Case '-[just_gomokuTests.ArchiveTests testArchivePreservesReplayAndMixedModes]' passed (0.003 seconds).
+
+20:09:13.063 xcodebuild[75008:294781] Nothing to delete
+20:09:13.063 xcodebuild[75008:294781] _XCT_testCaseDidStartWithIdentifier:<XCTTestIdentifier leaf, method, swift ["ArchiveTests", "testRepositoryReplacesDuplicateAndReopensArchivedGame"]>testCaseRunConfiguration:<XCTestCaseRunConfiguration: 0x7893c010e0>traits:(null)
+20:09:13.063 xcodebuild[75008:294781] Test case did start: <XCTTestIdentifier leaf, method, swift ["ArchiveTests", "testRepositoryReplacesDuplicateAndReopensArchivedGame"]>
+20:09:13.063 xcodebuild[75008:294781] Nothing to delete
+20:09:13.063 just-gomoku[75372:298237] <XCTWaiter: 0x1074668e0> entering indefinite wait loop for expectations: `failable invocation block completion`
+20:09:13.063 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1074668e0>
+20:09:13.063 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x10a6cd500> completed after 0.000s
+20:09:13.063 just-gomoku[75372:298237] cleaning up failable invocation block completion
+20:09:13.085 just-gomoku[75372:298237] Performing in-process symbolication of 95-frame call stack for reporting
+20:09:13.167 xcodebuild[75008:294781] Nothing to delete
+20:09:13.252 just-gomoku[75372:298237] -[XCTRunnerIDESession(_XCTestObservationInternal) testCase:didRecordIssue:]
+/Users/lizheng/Downloads/gomoku-xcode/just-gomokuTests/ArchiveTests.swift:29: error: -[just_gomokuTests.ArchiveTests testRepositoryReplacesDuplicateAndReopensArchivedGame] : No eligible connection available (NSInternalInconsistencyException)
+2026-10-11 20:09:13.252173-0500 just-gomoku[75372:298237] [Default] Flushing outgoing messages to the IDE with timeout 30.00s
+20:09:13.252 xcodebuild[75008:294781] Nothing to delete
+2026-10-11 20:09:13.252394-0500 just-gomoku[75372:299595] [Default] Received confirmation that IDE processed remaining outgoing messages
+20:09:13.253 xcodebuild[75008:294781] _XCT_testWithIdentifier:<XCTTestIdentifier leaf, method, swift ["ArchiveTests", "testRepositoryReplacesDuplicateAndReopensArchivedGame"]> didRecordIssue:Uncaught Exception at ArchiveTests.swift:29: No eligible connection available (NSInternalInconsistencyException)
+20:09:13.255 xcodebuild[75008:294781] Nothing to delete
+20:09:13.252 just-gomoku[75372:298237] <XCTWaiter: 0x114700c00> entering wait loop for 30.00s with expectations: `Uncaught exception recorded`
+20:09:13.252 just-gomoku[75372:298237] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x114700c00>
+20:09:13.252 just-gomoku[75372:298237] Wait <XCTWaiterWait: 0x1146fca00> completed after 0.000s
+20:09:13.252 just-gomoku[75372:298237] cleaning up Uncaught exception recorded
+2026-10-11 20:09:13.258311-0500 just-gomoku[75372:298237] *** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'No eligible connection available'
+*** First throw call stack:
+(
+	0   CoreFoundation                      0x00000001c0287f24 __exceptionPreprocess + 172
+	1   libobjc.A.dylib                     0x00000001c008194c objc_exception_throw + 72
+	2   CoreData                            0x00000001c8579d4c -[NSSQLDefaultConnectionManager handleStoreRequest:] + 748
+	3   CoreData                            0x00000001c86c2aac -[NSSQLCoreDispatchManager routeStoreRequest:] + 220
+	4   CoreData                            0x00000001c85c7fe4 -[NSSQLCore dispatchRequest:withRetries:] + 184
+	5   CoreData                            0x00000001c85c9fe8 -[NSSQLCore _obtainPermanentIDsForObjects:withNotification:error:] + 1324
+	6   CoreData                            0x00000001c85ca5cc -[NSSQLCore _prepareForExecuteRequest:withContext:error:] + 268
+	7   CoreData                            0x00000001c858be14 __65-[NSPersistentStoreCoordinator e
+*** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'No eligible connection available'
+*** First throw call stack:
+(
+	0   CoreFoundation                      0x00000001c0287f24 __exceptionPreprocess + 172
+	1   libobjc.A.dylib                     0x00000001c008194c objc_exception_throw + 72
+	2   CoreData                            0x00000001c8579d4c -[NSSQLDefaultConnectionManager handleStoreRequest:] + 748
+	3   CoreData                            0x00000001c86c2aac -[NSSQLCoreDispatchManager routeStoreRequest:] + 220
+	4   CoreData                            0x00000001c85c7fe4 -[NSSQLCore dispatchRequest:withRetries:] + 184
+	5   CoreData                            0x00000001c85c9fe8 -[NSSQLCore _obtainPermanentIDsForObjects:withNotification:error:] + 1324
+	6   CoreData                            0x00000001c85ca5cc -[NSSQLCore _prepareForExecuteRequest:withContext:error:] + 268
+	7   CoreData                            0x00000001c858be14 __65-[NSPersistentStoreCoordinator executeRequest:withContext:error:]_block_invoke.374 + 8928
+	8   CoreData                            0x00000001c857f5d4 -[NSPersistentStoreCoordinator _routeHeavyweightBlock:] + 220
+	9   CoreData                            0x00000001c8589258 -[NSPersistentStoreCoordinator executeRequest:withContext:error:] + 1080
+	10  CoreData                            0x00000001c853cff8 -[NSManagedObjectContext save:] + 1108
+	11  SwiftData                           0x00000001d57e4af0 __swift_allocate_value_buffer + 51208
+	12  SwiftData                           0x00000001d58024c0 block_destroy_helper + 180
+	13  SwiftData                           0x00000001d57dd350 __swift_allocate_value_buffer + 20584
+	14  SwiftData                           0x00000001d5803f84 __swift_assign_boxed_opaque_existential_0 + 432
+	15  CoreData                            0x00000001c87195a4 $sxs5Error_pIgrzo_xsAA_pIegrzo_lTR + 20
+	16  CoreData                            0x00000001c8757b74 $sxs5Error_pIgrzo_xsAA_pIegrzo_lTRTA + 20
+	17  CoreData                            0x00000001c871961c $sSo22NSManagedObjectContextC8CoreDataE30_rethrowsHelper_performAndWait33_A0F63BA25A751D403694B89F4AD0A24ELL2fn7execute6rescuexyyyYbXEXE_xyKXExs5Error_pKXEtKlFyxyKcXEfU_yyYbXEfU_ + 108
+	18  CoreData                            0x00000001c8719b1c $sIgh_Iegh_TR + 20
+	19  CoreData                            0x00000001c8719b3c $sIegh_IyBh_TR + 20
+	20  CoreData                            0x00000001c8546794 developerSubmittedBlockToNSManagedObjectContextPerform + 220
+	21  libdispatch.dylib                   0x00000001e6435fb8 _dispatch_client_callout + 12
+	22  libdispatch.dylib                   0x00000001e642bb28 _dispatch_lane_barrier_sync_invoke_and_complete + 92
+	23  CoreData                            0x00000001c8546660 -[NSManagedObjectContext performBlockAndWait:] + 304
+	24  CoreData                            0x00000001c8757a28 $sSo22NSManagedObjectContextC8CoreDataE14performAndWaityxxyKXEKlF + 332
+	25  SwiftData                           0x00000001d57dc770 __swift_allocate_value_buffer + 17544
+	26  SwiftData                           0x00000001d57e4048 __swift_allocate_value_buffer + 48480
+	27  SwiftData                           0x00000001d57e84bc __swift_allocate_value_buffer + 66004
+	28  SwiftData                           0x00000001d5870f14 __swift_closure_destructor.46 + 76184
+	29  SwiftData                           0x00000001d586f9b0 __swift_closure_destructor.46 + 70708
+	30  SwiftData                           0x00000001d5884500 __swift__destructor.10 + 2140
+	31  just-gomoku.debug.dylib             0x00000001059d7060 $s11just_gomoku17ArchiveRepositoryO7archive_2inyAA11GameSessionV_9SwiftData12ModelContextCtFZ + 1128
+	32  just-gomokuTests                    0x0000000105e47a5c $s16just_gomokuTests07ArchiveC0C53testRepositoryReplacesDuplicateAndReopensArchivedGameyyKF + 692
+	33  just-gomokuTests                    0x0000000105e48278 $s16just_gomokuTests07ArchiveC0C53testRepositoryReplacesDuplicateAndReopensArchivedGameyyKFTo + 56
+	34  CoreFoundation                      0x00000001c028e840 __invoking___ + 144
+	35  CoreFoundation                      0x00000001c028ba10 -[NSInvocation invoke] + 276
+	36  XCTestCore                          0x000000010575fb94 +[XCTFailableInvocation invokeErrorConventionInvocation:completion:] + 84
+	37  XCTestCore                          0x000000010575fb38 __90+[XCTFailableInvocation invokeInvocation:withTestMethodConvention:lastObservedErrorIssue:]_block_invoke + 24
+	38  XCTestCore                          0x000000010575f610 __81+[XCTFailableInvocation invokeWithAsynchronousWait:lastObservedErrorIssue:block:]_block_invoke + 292
+	39  XCTestCore                          0x0000000105750fa8 __49+[XCTSwiftErrorObservation observeErrorsInBlock:]_block_invoke + 28
+	40  XCTestCore                          0x00000001057c243c $sSo24XCTSwiftErrorObservationC10XCTestCoreE14_observeErrors33_4641E344ACA55A25D2B1EC985574C54DLL2inSo0abC6ResultCSgyyXE_tFZ12$sIyB_Ieg_TRIyB_Tf1cn_n + 172
+	41  XCTestCore                          0x00000001057c2490 $sSo24XCTSwiftErrorObservationC10XCTestCoreE14_observeErrors33_4641E344ACA55A25D2B1EC985574C54DLL2inSo0abC6ResultCSgyyXE_tFZTo + 28
+	42  XCTestCore                          0x0000000105750ecc +[XCTSwiftErrorObservation observeErrorsInBlock:] + 156
+	43  XCTestCore                          0x000000010575f414 +[XCTFailableInvocation invokeWithAsynchronousWait:lastObservedErrorIssue:block:] + 176
+	44  XCTestCore                          0x000000010575f9bc +[XCTFailableInvocation invokeInvocation:withTestMethodConvention:lastObservedErrorIssue:] + 140
+	45  XCTestCore                          0x000000010575fe04 +[XCTFailableInvocation invokeInvocation:lastObservedErrorIssue:] + 64
+	46  XCTestCore                          0x00000001057724fc -[XCTestCase invokeTestMethod:] + 56
+	47  XCTestCore                          0x0000000105772ad8 __24-[XCTestCase invokeTest]_block_invoke.98 + 60
+	48  XCTestCore                          0x0000000105777d80 -[XCTestCase(XCTIssueHandling) _caughtUnhandledDeveloperExceptionPermittingControlFlowInterruptions:caughtInterruptionException:whileExecutingBlock:] + 144
+	49  XCTestCore                          0x0000000105772708 -[XCTestCase invokeTest] + 476
+	50  XCTestCore                          0x0000000105773e74 __45-[XCTestCase _invokeTestIfSupportedOSVersion]_block_invoke + 32
+	51  XCTestCore                          0x0000000105777d80 -[XCTestCase(XCTIssueHandling) _caughtUnhandledDeveloperExceptionPermittingControlFlowInterruptions:caughtInterruptionException:whileExecutingBlock:] + 144
+	52  XCTestCore                          0x0000000105773d4c -[XCTestCase _invokeTestIfSupportedOSVersion] + 156
+	53  XCTestCore                          0x0000000105773844 __26-[XCTestCase performTest:]_block_invoke.125 + 324
+	54  XCTestCore                          0x000000010574e434 +[XCTContext _runInChildOfContext:forTestCase:markAsReportingBase:block:] + 152
+	55  XCTestCore                          0x000000010574e358 +[XCTContext runInContextForTestCase:markAsReportingBase:block:] + 88
+	56  XCTestCore                          0x0000000105773444 -[XCTestCase performTest:] + 236
+	57  XCTestCore                          0x000000010576fb5c -[XCTest runTest] + 44
+	58  XCTestCore                          0x000000010577dae4 -[XCTestSuite runTestBasedOnRepetitionPolicy:testRun:] + 60
+	59  XCTestCore                          0x000000010577d91c __27-[XCTestSuite performTest:]_block_invoke + 172
+	60  XCTestCore                          0x000000010577d024 __59-[XCTestSuite _performProtectedSectionForTest:testSection:]_block_invoke + 40
+	61  XCTestCore                          0x000000010574e434 +[XCTContext _runInChildOfContext:forTestCase:markAsReportingBase:block:] + 152
+	62  XCTestCore                          0x000000010574e358 +[XCTContext runInContextForTestCase:markAsReportingBase:block:] + 88
+	63  XCTestCore                          0x000000010577cfa4 -[XCTestSuite _performProtectedSectionForTest:testSection:] + 140
+	64  XCTestCore                          0x000000010577d45c -[XCTestSuite performTest:] + 208
+	65  X
+libc++abi: terminating due to uncaught exception of type NSException
+20:09:13.260 xcodebuild[75008:294792] Closing socket 29 to testmanagerd for Sim Clone 1 of iPhone 18 Pro
+20:09:13.260 xcodebuild[75008:295656] <XCTTestRunnerSession: 0x7896adc3c0> lost its connection.
+20:09:13.260 xcodebuild[75008:294781] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> got death notice for pid 75372 (exit code: (null), signal: 6), removing from SimulatorSessionMap
+20:09:13.261 xcodebuild[75008:294781] Lost connection to test process
+20:09:13.261 xcodebuild[75008:294781] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7893d16700 on simulator was relinquished, 1 claims remain.
+20:09:13.262 xcodebuild[75008:294781] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7893d16700 on simulator was relinquished, 1 claims remain.
+20:09:13.262 xcodebuild[75008:294781] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7893d16700 on simulator was relinquished, 1 claims remain.
+20:09:13.262 xcodebuild[75008:294781] Launch session expired.
+20:09:13.262 xcodebuild[75008:294792] XCTHTestOperationStateMachine: Transitioning from state ExecutingTests to PendingFinalization
+20:09:13.262 xcodebuild[75008:294781] Requesting crash reporter synchronization
+20:09:13.514 xcodebuild[75008:294781] <XCTHTestOperationCoordinator: 0x7893d17000> finished receiving data from testing launch session
+20:09:13.514 xcodebuild[75008:294781] <XCTHTestOperationCoordinator: 0x7893d17000>: _considerFlushingDelegateBlockQueue - nothing to flush
+20:09:13.514 xcodebuild[75008:294781] Nothing to delete
+20:09:18.248 xcodebuild[75008:294790] XCTHTestOperationStateMachine: Transitioning from state PendingFinalization to PendingFinalizationAndIncomingCrashReport
+20:09:19.340 xcodebuild[75008:294781] Handling Crash: just-gomoku at +[XCTFailableInvocation invokeErrorConventionInvocation:completion:]
+20:09:19.340 xcodebuild[75008:295656] Crash reporter sync completed successfully
+20:09:19.340 xcodebuild[75008:295656] XCTHTestOperationStateMachine: Received crash report for test runner process in state PendingFinalizationAndIncomingCrashReport: just-gomoku at +[XCTFailableInvocation invokeErrorConventionInvocation:completion:]
+20:09:19.340 xcodebuild[75008:295656] XCTHTestOperationStateMachine: Transitioning from state PendingFinalizationAndIncomingCrashReport to Finalized
+20:09:19.340 xcodebuild[75008:295656] XCTHTestOperationStateMachine: Crash reporter sync completed with success=YES
+20:09:19.341 xcodebuild[75008:294781] Test operation failure: Error Domain=XCTHTestOperationCoordinatorErrorDomain Code=5 "Crash: just-gomoku at +[XCTFailableInvocation invokeErrorConventionInvocation:completion:]" UserInfo={NSLocalizedDescription=Crash: just-gomoku at +[XCTFailableInvocation invokeErrorConventionInvocation:completion:]}
+20:09:19.341 xcodebuild[75008:294781] _finishWithError:Error Domain=XCTHTestOperationCoordinatorErrorDomain Code=5 "Crash: just-gomoku at +[XCTFailableInvocation invokeErrorConventionInvocation:completion:]" UserInfo={NSLocalizedDescription=Crash: just-gomoku at +[XCTFailableInvocation invokeErrorConventionInvocation:completion:]}
+20:09:19.341 xcodebuild[75008:294781] Current state: testRunnerLaunchSessionHasFinishedReceivingData: YES, delegateBlockQueue.count: 0
+20:09:19.341 xcodebuild[75008:294781] <XCTHTestOperationCoordinator: 0x7893d17000>: _considerFlushingDelegateBlockQueue - nothing to flush

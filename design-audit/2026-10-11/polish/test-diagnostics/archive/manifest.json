@@ -1,0 +1,25 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "366770B3-279A-4E5B-BFB8-6C7BC5A85D3A",
+        "deviceName" : "iPhone 18 Pro",
+        "exportedFileName" : "402AA54F-A550-4203-9718-B10E177530A0.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "Complete Issue Description.txt"
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "366770B3-279A-4E5B-BFB8-6C7BC5A85D3A",
+        "deviceName" : "iPhone 18 Pro",
+        "exportedFileName" : "21FE396B-4394-43A5-9ABA-CF74C1DC3A4D.ips",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "Crash Log 2026-10-11 at 08.09.19 PM.ips",
+        "timestamp" : 1791767359.341
+      }
+    ],
+    "testIdentifier" : "ArchiveTests/testRepositoryReplacesDuplicateAndReopensArchivedGame()",
+    "testIdentifierURL" : "test://com.apple.xcode/just-gomoku/just-gomokuTests/ArchiveTests/testRepositoryReplacesDuplicateAndReopensArchivedGame"
+  }
+]

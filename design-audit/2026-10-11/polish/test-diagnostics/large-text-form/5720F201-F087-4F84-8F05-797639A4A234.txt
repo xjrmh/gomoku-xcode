@@ -1,0 +1,46 @@
+Application, 0x10988bc00, pid: 82877, label: 'Gomoku' <App element pid: 82877>
+  Window (Main), 0x109888500, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4369257472.4>
+    Other, 0x109888640, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413916160.5>
+      Other, 0x10988be80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413743232.6>
+        Other, 0x10988b340, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4369256448.7>
+          Other, 0x10988b5c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4555704832.8>
+            Other, 0x10988b480, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413925376.9>
+              NavigationBar, 0x10988b700, {{0.0, 62.0}, {402.0, 54.0}}, identifier: '_TtGC7SwiftUI32NavigationStackHosting' <AX element pid: 82877, elementOrHash.elementID: 4368877056.10>
+                Button, 0x10988af80, {{272.7, 66.0}, {46.0, 36.0}}, label: 'History' <AX element pid: 82877, elementOrHash.elementID: 4555456512.13>
+                Button, 0x10988a1c0, {{334.7, 66.0}, {47.3, 36.0}}, label: 'Settings' <AX element pid: 82877, elementOrHash.elementID: 4555457792.14>
+              Other, 0x10988a580, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4370141120.11>
+                Other, 0x10988a800, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4370273088.15>
+                  Other, 0x109888c80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4369417088.17>
+                    Other, 0x109889a40, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4555710112.18>
+                      ScrollView, 0x109889040, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4369078272.19>
+                        Other, 0x109889180, {{0.0, -96.0}, {402.0, 936.0}} <AX element pid: 82877, elementOrHash.elementID: 4413927936.22>
+                          StaticText, 0x1098892c0, {{22.0, -80.0}, {282.3, 58.7}}, label: 'Black's turn' <AX element pid: 82877, elementOrHash.elementID: 4555707232.25>
+                            StaticText, 0x10988b840, {{46.0, -80.0}, {258.3, 58.7}}, label: 'Black's turn' <AX element pid: 82877, elementOrHash.elementID: 4555707072.35>
+                            Other, 0x10988bac0, {{22.0, -58.7}, {16.0, 16.0}} <AX element pid: 82877, elementOrHash.elementID: 4555706912.36>
+                          StaticText, 0x10988b980, {{22.0, -11.3}, {167.0, 51.3}}, label: '2 Players' <AX element pid: 82877, elementOrHash.elementID: 4555707392.26>
+                          StaticText, 0x109888f00, {{41.0, 50.0}, {118.0, 52.7}}, identifier: 'black-clock', label: 'Black elapsed time, 00:00' <AX element pid: 82877, elementOrHash.elementID: 4555707712.27>
+                          StaticText, 0x109889400, {{198.0, 50.0}, {118.0, 52.7}}, identifier: 'white-clock', label: 'White elapsed time, 00:00' <AX element pid: 82877, elementOrHash.elementID: 4555708032.28>
+                          Other, 0x109889900, {{14.0, 124.7}, {374.0, 374.0}}, identifier: 'game-board', label: 'Gomoku board, 15 by 15', value: Cursor H8, empty. ... <AX element pid: 82877, elementOrHash.elementID: 4608374208.177>
+                          StaticText, 0x109889b80, {{248.0, 508.7}, {140.0, 51.3}}, label: 'Move count, 0' <AX element pid: 82877, elementOrHash.elementID: 4555708352.30>
+                          Button, 0x10988b200, {{20.0, 580.0}, {362.0, 79.3}}, label: 'Undo', Disabled <AX element pid: 82877, elementOrHash.elementID: 4555708832.31>
+                            StaticText, 0x10988a940, {{72.0, 588.0}, {123.7, 63.3}}, label: 'Undo', Disabled <AX element pid: 82877, elementOrHash.elementID: 4555708672.37>
+                            Image, 0x10988abc0, {{37.3, 611.0}, {17.7, 17.3}}, identifier: 'arrow.uturn.backward', label: 'Undo', Disabled <AX element pid: 82877, elementOrHash.elementID: 4555708512.38>
+                          Button, 0x10988aa80, {{20.0, 663.3}, {362.0, 79.3}}, label: 'Hint' <AX element pid: 82877, elementOrHash.elementID: 4555709312.32>
+                            StaticText, 0x10988ad00, {{72.0, 671.3}, {93.3, 63.3}}, label: 'Hint' <AX element pid: 82877, elementOrHash.elementID: 4555709152.39>
+                            Image, 0x10988ae40, {{39.7, 692.3}, {12.7, 21.7}}, identifier: 'lightbulb', label: 'Light Bulb' <AX element pid: 82877, elementOrHash.elementID: 4555708992.40>
+                          Button, 0x10988b0c0, {{20.0, 746.7}, {362.0, 79.3}}, label: 'New Game' <AX element pid: 82877, elementOrHash.elementID: 4555709792.33>
+                            StaticText, 0x10988a080, {{72.0, 754.7}, {249.3, 63.3}}, label: 'New Game' <AX element pid: 82877, elementOrHash.elementID: 4555709632.41>
+                            Image, 0x109889e00, {{36.7, 777.0}, {19.0, 19.0}}, identifier: 'plus.circle', label: 'Add' <AX element pid: 82877, elementOrHash.elementID: 4555709472.42>
+                        Other, 0x10988a300, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4370186240.20>
+                          Other, 0x10988a440, {{0.0, 0.0}, {402.0, 156.0}} <AX element pid: 82877, elementOrHash.elementID: 4370398080.24>
+                        Other, 0x106a7bac0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4370151872.21>
+                          Other, 0x106a7bc00, {{0.0, 0.0}, {402.0, 156.0}} <AX element pid: 82877, elementOrHash.elementID: 4555459072.66>
+                        Other, 0x106a7b980, {{369.0, 116.0}, {30.0, 696.0}}, label: 'Vertical scroll bar, 2 pages', value: 100% <AX element pid: 82877, elementOrHash.elementID: 4423590400.23>
+                          Other, 0x106a792c0, {{396.0, 253.7}, {3.0, 555.3}} <AX element pid: 82877, elementOrHash.elementID: 4370280704.34>
+                        Other, 0x106a79400, {{369.0, 116.0}, {30.0, 696.0}}, label: 'Vertical scroll bar, 2 pages', value: 100% <AX element pid: 82877, elementOrHash.elementID: 4423590400.23>
+                          Other, 0x10ae48000, {{396.0, 253.7}, {3.0, 555.3}} <AX element pid: 82877, elementOrHash.elementID: 4370280704.34>
+              Toolbar, 0x10ae48140, {{0.0, 0.0}, {402.0, 874.0}}, identifier: 'Toolbar', label: 'Toolbar' <AX element pid: 82877, elementOrHash.elementID: 4413925888.12>
+                Other, 0x10ae48280, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413926400.16>
+  Window, 0x10ae483c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4607174656.121>
+    Other, 0x10ae48500, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4614431232.124>
+      Other, 0x10ae48640, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 82877, elementOrHash.elementID: 4413159872.126>

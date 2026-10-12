@@ -46,10 +46,8 @@ struct BoardCanvasView: View {
     let palette: GomokuPalette
     var interactive = true
 
-    @State private var gestureStart: Date?
     @State private var target: Position?
-    @State private var precisionActive = false
-    @State private var holdTask: Task<Void, Never>?
+    @GestureState(resetTransaction: Transaction(animation: .easeOut(duration: 0.12))) private var precisionActive = false
     @State private var cursor: Position = .init(r: 7, c: 7)
     @FocusState private var keyboardFocused: Bool
 
@@ -102,7 +100,10 @@ struct BoardCanvasView: View {
             let center = game.boardSize / 2
             cursor = Position(r: center, c: center)
         }
-        .onDisappear { holdTask?.cancel() }
+        .onChange(of: precisionActive) { _, isActive in
+            if !isActive { target = nil }
+        }
+        .onDisappear { target = nil }
     }
 
     private func boardCanvas(side: CGFloat) -> some View {
@@ -130,32 +131,37 @@ struct BoardCanvasView: View {
     }
 
     private func placementGesture(side: CGFloat, origin: CGPoint) -> some Gesture {
-        DragGesture(minimumDistance: 0)
-            .onChanged { value in
-                let position = boardPosition(at: value.location, side: side, origin: origin)
-                if gestureStart == nil {
-                    gestureStart = .now
-                    target = position
-                    holdTask?.cancel()
-                    holdTask = Task {
-                        try? await Task.sleep(for: .milliseconds(250))
-                        guard !Task.isCancelled else { return }
-                        await MainActor.run {
-                            withAnimation(.snappy(duration: 0.18)) { precisionActive = true }
-                        }
-                    }
-                } else if position != target {
-                    target = position
-                    if precisionActive, position != nil { game.emitTargetChanged() }
+        let precision = LongPressGesture(minimumDuration: 0.25, maximumDistance: 10)
+            .sequenced(before: DragGesture(minimumDistance: 0))
+            .updating($precisionActive) { value, isActive, transaction in
+                if case .second(true, _) = value {
+                    isActive = true
+                    transaction.animation = .snappy(duration: 0.18)
                 }
             }
+            .onChanged { value in
+                guard case .second(true, let drag?) = value else { return }
+                let position = boardPosition(at: drag.location, side: side, origin: origin)
+                if position != target, position != nil {
+                    game.emitTargetChanged()
+                }
+                target = position
+            }
+
+        // Both recognizers receive the touch from the beginning. Commit once from
+        // their combined completion so a failed hold still permits a quick tap.
+        return precision.simultaneously(with: SpatialTapGesture())
             .onEnded { value in
-                holdTask?.cancel()
-                let final = boardPosition(at: value.location, side: side, origin: origin) ?? target
-                if let final { game.playHuman(at: final) }
-                withAnimation(.easeOut(duration: 0.12)) { precisionActive = false }
+                if let precision = value.first, case .second(true, let drag) = precision {
+                    if let drag,
+                       let final = boardPosition(at: drag.location, side: side, origin: origin) {
+                        game.playHuman(at: final)
+                    }
+                } else if let tap = value.second,
+                          let position = boardPosition(at: tap.location, side: side, origin: origin) {
+                    game.playHuman(at: position)
+                }
                 target = nil
-                gestureStart = nil
             }
     }
 

@@ -1,0 +1,4 @@
+Query chain:
+ →Find: Target Application 'com.xjrmh.gomoku'
+  ↪︎Find: Descendants matching type Button
+    ↪︎Find: Elements matching predicate '"new-game-board-size" IN identifiers'

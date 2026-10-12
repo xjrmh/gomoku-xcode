@@ -1,0 +1,400 @@
+Xcode version: 27.0 (27A266a)
+20:09:21.203 xcodebuild[75008:294781] Beginning test session just-gomokuUITests-0A6471FC-CAD3-45CA-B23D-D48D4E3D65EA at 2026-10-11 20:09:21.203 on target <DVTiPhoneSimulator: 0x7893827c00> {
+		SimDevice: Clone 1 of iPhone 18 Pro (10B50E20-4E0C-4108-83B2-73321E6A3D0A, iOS 27.0, Booted)
+} (27.0 (24A434))
+20:09:21.204 xcodebuild[75008:294781] 	/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+-testProductsPath
+/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts
+-destination
+platform=iOS Simulator,id=366770B3-279A-4E5B-BFB8-6C7BC5A85D3A
+-collect-test-diagnostics
+never
+-resultBundlePath
+/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/result-bundles/test_sim_2026-10-12T01-08-43-804Z_pid39650_0e741bb3.xcresult
+test-without-building
+20:09:21.204 xcodebuild[75008:294781] Test standard output and standard error is at /Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/result-bundles/test_sim_2026-10-12T01-08-43-804Z_pid39650_0e741bb3.xcresult/Staging/1_Test/Diagnostics/just-gomokuUITests-502D47F6-9E90-4122-A682-D167D3F4140D-Configuration-Test Scheme Action-Iteration-1/just-gomokuUITests-ED824FC1-BA4E-4C19-99FA-56A2EC64AD8F/StandardOutputAndStandardError.txt
+20:09:21.204 xcodebuild[75008:300805] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7894299f80 on simulator was issued, 2 claims exist.
+20:09:21.204 xcodebuild[75008:294781] Setting up test runner session
+20:09:21.204 xcodebuild[75008:300805] Sim Clone 1 of iPhone 18 Pro: Unregistering for sim device notification with token 17
+20:09:21.204 xcodebuild[75008:294781] Registering/updating daemon-based crash report observer for process names (
+    xctest,
+    debugserver,
+    FrontBoard,
+    assertiond,
+    runningboardd,
+    SpringBoard,
+    testmanagerd,
+    backboardd,
+    DTServiceHub,
+    "just-gomoku",
+    "just-gomokuUITests-Runner"
+)
+20:09:21.204 xcodebuild[75008:300805] Calling -[SimDevice getenv:error:] for TESTMANAGERD_SIM_SOCK
+20:09:21.204 xcodebuild[75008:294781] Finished requesting crash reports. Continuing with testing.
+20:09:21.205 xcodebuild[75008:300805] Sim Clone 1 of iPhone 18 Pro has testmanagerd socket at /private/var/tmp/com.apple.launchd.2TsLwtg4Dk/com.apple.testmanagerd.unix-domain.socket
+20:09:21.205 xcodebuild[75008:300805] Validating test connection socket path (/private/var/tmp/com.apple.launchd.2TsLwtg4Dk/com.apple.testmanagerd.unix-domain.socket)
+20:09:21.205 xcodebuild[75008:294781] Launch session started.
+20:09:21.205 xcodebuild[75008:300805] Constructing transport for test connection socket
+20:09:21.205 xcodebuild[75008:300805] Connected socket 29 to testmanagerd for Sim Clone 1 of iPhone 18 Pro
+20:09:21.205 xcodebuild[75008:294802] Received connection for test runner session
+20:09:21.205 xcodebuild[75008:294802] Listening for proxy connection request from the test bundle
+20:09:21.205 xcodebuild[75008:294802] Initiating session with identifier: 0A6471FC-CAD3-45CA-B23D-D48D4E3D65EA
+20:09:21.206 xcodebuild[75008:294781] Test runner session acquired connection.
+20:09:21.206 xcodebuild[75008:299726] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7894299f80 on simulator was issued, 2 claims exist.
+20:09:21.208 xcodebuild[75008:300803] Got reply to session initiation request with identifier 0A6471FC-CAD3-45CA-B23D-D48D4E3D65EA (error: (null))
+20:09:21.208 xcodebuild[75008:294802] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7894299f80 on simulator was issued, 2 claims exist.
+20:09:21.208 xcodebuild[75008:294802] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Registered for sim device notification, got token 20
+20:09:21.208 xcodebuild[75008:299726] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Unregistering for sim device notification with token 20
+20:09:21.209 xcodebuild[75008:300803] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Installing app at path: /Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator/just-gomokuUITests-Runner.app and options: {
+    SkipWatchAppInstall = 1;
+}
+20:09:21.390 xcodebuild[75008:300803] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Installed app at path: /Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator/just-gomokuUITests-Runner.app and options: {
+    SkipWatchAppInstall = 1;
+}
+20:09:21.391 xcodebuild[75008:300803] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Launching app with identifier: com.xjrmh.gomokuUITests.xctrunner and options: {
+    "activate_suspended" = 1;
+    arguments =     (
+    );
+    environment =     {
+        "APP_DISTRIBUTOR_ID_OVERRIDE" = "com.apple.AppStore";
+        "CA_ASSERT_MAIN_THREAD_TRANSACTIONS" = 0;
+        "CA_DEBUG_TRANSACTIONS" = 0;
+        "DYLD_FRAMEWORK_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks";
+        "DYLD_INSERT_LIBRARIES" = "/usr/lib/libRPAC.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_24A434/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 27.0.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib";
+        "DYLD_LIBRARY_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib";
+        "IDE_CHOSEN_LOGGING_METHOD" = 1;
+        "LLVM_PROFILE_FILE" = "/var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/com.xjrmh.gomokuUITests.xctrunner/9A5F8620-5B6A-449F-8AE5-0C5495E9646E-75008-0000002EDD664A33/CF51BDA1-1E53-496A-AB95-96F7E30BC486-%p%c.profraw";
+        NSApplicationQuitWithoutSuddenTermination = YES;
+        NSUnbufferedIO = YES;
+        "OS_ACTIVITY_DT_MODE" = YES;
+        "PERFC_ENABLE_EXTENDED_DIAGNOSTIC_FORMAT" = 1;
+        "PERFC_ENABLE_PROFILE_MODE" = 1;
+        "PERFC_RESET_INSERT_LIBRARIES" = 1;
+        "PERFC_SUPPRESS_SYSTEM_REPORTS" = 1;
+        "RUN_DESTINATION_DEVICE_NAME" = "Clone 1 of iPhone 18 Pro";
+        "RUN_DESTINATION_DEVICE_PLATFORM_IDENTIFIER" = "com.apple.platform.iphonesimulator";
+        "RUN_DESTINATION_DEVICE_UDID" = "10B50E20-4E0C-4108-83B2-73321E6A3D0A";
+        "SQLITE_ENABLE_THREAD_ASSERTIONS" = 1;
+        "SWIFT_BACKTRACE" = "enable=no";
+        TERM = dumb;
+        "XCODE_SCHEME_NAME" = "just-gomoku";
+        "XCODE_TEST_PLAN_NAME" = "just-gomoku";
+        XCTestBundleInjectPath = "/usr/lib/libRPAC.dylib:/Library/Developer/CoreSimulator/Volumes/iOS_24A434/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 27.0.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib";
+        XCTestBundlePath = "PlugIns/just-gomokuUITests.xctest";
+        XCTestConfigurationFilePath = "";
+        XCTestSessionIdentifier = "0A6471FC-CAD3-45CA-B23D-D48D4E3D65EA";
+        "__XCODE_BUILT_PRODUCTS_DIR_PATHS" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator";
+        "__XPC_DYLD_FRAMEWORK_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator";
+        "__XPC_DYLD_LIBRARY_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator";
+        "__XPC_LLVM_PROFILE_FILE" = "/var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/com.xjrmh.gomokuUITests.xctrunner/9A5F8620-5B6A-449F-8AE5-0C5495E9646E-75008-0000002EDD664A33/CF51BDA1-1E53-496A-AB95-96F7E30BC486-%p%c.profraw";
+    };
+    stderr = "/dev/ttys000";
+    stdout = "/dev/ttys000";
+    "terminate_running_process" = 1;
+    "wait_for_debugger" = 1;
+}
+20:09:21.425 xcodebuild[75008:300803] 10B50E20-4E0C-4108-83B2-73321E6A3D0A: Launched app with identifier: com.xjrmh.gomokuUITests.xctrunner (pid = 75539)
+20:09:21.426 xcodebuild[75008:300803] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> tracking pid 75539
+20:09:21.426 xcodebuild[75008:300803] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> checking to see if pid 75539 is valid: kill(pid, 0) = 0 (YES, it's still running)
+20:09:21.675 xcodebuild[75008:294781] Test process runnable PID is 75539.
+20:09:21.675 xcodebuild[75008:294802] XCTHTestOperationStateMachine: Transitioning from state Initial to AcquiredPID
+2026-10-11 20:09:22.174453-0500 just-gomokuUITests-Runner[75539:301176] [Default] Running tests...
+20:09:22.195 xcodebuild[75008:294790] Handling proxy channel request from test runner
+20:09:22.195 just-gomokuUITests-Runner[75539:301176] Creating future for 'requesting test configuration' with timeout 600.00
+20:09:22.195 just-gomokuUITests-Runner[75539:301176] Notifying test runner ready
+20:09:22.195 xcodebuild[75008:294790] Test runner is ready with capabilities: <XCTCapabilities: 0x78958bbee0>: {
+    "delayed attachment transfer" = 1;
+    "fetch all test identifiers" = 2;
+    "supports crashlog generation progress" = 4;
+    "ubiquitous test identifiers" = 1;
+}
+20:09:22.196 xcodebuild[75008:294781] Test runner session successfully initiated.
+20:09:22.196 xcodebuild[75008:294781] Authorizing test process ID 75539
+20:09:22.196 xcodebuild[75008:299726] XCTHTestOperationStateMachine: Transitioning from state AcquiredPID to ReportedReady
+20:09:22.195 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x106a91f80> entering wait loop for 600.00s with expectations: `requesting test configuration`
+20:09:22.197 xcodebuild[75008:294781] Got authorization response from test daemon: Success
+20:09:22.197 xcodebuild[75008:294781] Registering/updating daemon-based crash report observer for process names (
+    xctest,
+    debugserver,
+    FrontBoard,
+    assertiond,
+    runningboardd,
+    SpringBoard,
+    testmanagerd,
+    backboardd,
+    DTServiceHub,
+    "just-gomoku",
+    "just-gomokuUITests-Runner"
+)
+20:09:22.197 xcodebuild[75008:294781] Telling test runner to start executing tests.
+20:09:22.197 just-gomokuUITests-Runner[75539:301258] Received test runner ready reply. Waiting for request to start running tests.
+20:09:22.197 just-gomokuUITests-Runner[75539:301258] _IDE_startExecutingTestPlanWithProtocolVersion:36
+20:09:22.198 just-gomokuUITests-Runner[75539:301258] LOCAL HARNESS CI STATE: none
+20:09:22.198 just-gomokuUITests-Runner[75539:301258] <XCTWaiter: 0x106a91bf0> waiting asynchronously for 599.98s with expectations: `preparing execution worker`
+20:09:22.213 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x106a91f80>
+20:09:22.213 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x106abe080> completed after 0.018s
+20:09:22.213 just-gomokuUITests-Runner[75539:301176] cleaning up requesting test configuration
+20:09:22.213 just-gomokuUITests-Runner[75539:301176] Loading test bundle at: file:///Users/lizheng/Library/Developer/XCTestDevices/10B50E20-4E0C-4108-83B2-73321E6A3D0A/data/Containers/Bundle/Application/B3326127-DFAE-4097-AE76-166AFD738720/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/
+20:09:22.225 just-gomokuUITests-Runner[75539:301176] Finished loading test bundle
+20:09:22.225 just-gomokuUITests-Runner[75539:301176] Interop: installing the default fallback event handler
+20:09:22.225 just-gomokuUITests-Runner[75539:301176] Interop: fallback event handler installation outcome: true
+20:09:22.225 just-gomokuUITests-Runner[75539:301176] Registering in-process symbolication service with image names: just-gomokuUITests-Runner, just-gomoku, just-gomokuUITests, just-gomokuTests
+20:09:22.225 just-gomokuUITests-Runner[75539:301176] Running tests with active test configuration: <XCTestConfiguration: 0x106a60480>
+	                  testBundleURL:file:///Users/lizheng/Library/Developer/XCTestDevices/10B50E20-4E0C-4108-83B2-73321E6A3D0A/data/Containers/Bundle/Application/B3326127-DFAE-4097-AE76-166AFD738720/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/
+	         testBundleRelativePath:PlugIns/just-gomokuUITests.xctest
+	              productModuleName:just_gomokuUITests
+	                  testSelection:<XCTTestSelection: 0x1068624f0>
+	            identifiersToRun:(null)
+	            identifiersToSkip:
+	            tagsToRun:(null)
+	            tagsToSkip:<XCTTagSelection: 0x106b8e780>
+	            mode:and
+	            tags:{(
+)}
+	  includeXCTests:NO
+
+
+	             reportResultsToIDE:YES
+	     resultChannelConfiguration:(null)
+	                   baseTestsURL:test://com.apple.xcode/just-gomoku/just-gomokuUITests
+	               testsDrivenByIDE:YES
+	inProcessParallelizationEnabled:YES
+	              sessionIdentifier:0A6471FC-CAD3-45CA-B23D-D48D4E3D65EA
+	      disablePerformanceMetrics:NO
+	treatMissingBaselinesAsFailures:NO
+	                baselineFileURL:(null)
+	       baselineFileRelativePath:(null)
+	          targetApplicationPath:/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator/just-gomoku.app
+	      targetApplicationBundleID:com.xjrmh.gomoku
+	 testApplicationDependencies:
+{
+    "com.xjrmh.gomoku" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator/just-gomoku.app";
+    "com.xjrmh.gomokuUITests.xctrunner" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Binaries/0/Debug-iphonesimulator/just-gomokuUITests-Runner.app";
+}
+	 bundleIDsForCrashReportEmphasis:
+{(
+    "com.xjrmh.gomokuTests",
+    "com.xjrmh.gomoku",
+    "com.xjrmh.gomokuUITests"
+)}
+	 testApplicationUserOverrides:(null)
+	     targetApplicationArguments:
+	   targetApplicationEnvironment:
+{
+    "APP_DISTRIBUTOR_ID_OVERRIDE" = "com.apple.AppStore";
+    "DYLD_FRAMEWORK_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Tests/0/Debug-iphonesimulator";
+    "DYLD_LIBRARY_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Tests/0/Debug-iphonesimulator";
+    "XCODE_SCHEME_NAME" = "just-gomoku";
+    "XCODE_TEST_PLAN_NAME" = "just-gomoku";
+    "__XCODE_BUILT_PRODUCTS_DIR_PATHS" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Tests/0/Debug-iphonesimulator";
+    "__XPC_DYLD_FRAMEWORK_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Tests/0/Debug-iphonesimulator";
+    "__XPC_DYLD_LIBRARY_PATH" = "/Users/lizheng/Library/Developer/XcodeBuildMCP/workspaces/gomoku-xcode-71e02180ce2c/test-products/test_sim_2026-10-12T01-08-43-804Z_pid39650_1b8e2771.xctestproducts/Tests/0/Debug-iphonesimulator";
+}
+	                  reportActivities:YES
+	          testsMustRunOnMainThread:YES
+	            initializeForUITesting:YES
+	            traceCollectionEnabled:(null)
+	 enablePerformanceTestsDiagnostics:(null)
+	 aggregateStatisticsBeforeCrash:
+{
+    XCSuiteRecordsKey =     {
+    };
+}
+	        automationFrameworkPath:/Library/Developer/CoreSimulator/Volumes/iOS_24A434/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 27.0.simruntime/Contents/Resources/RuntimeRoot/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework
+	                     emitOSLogs:NO
+	       systemAttachmentLifetime:deleteOnSuccess
+	         userAttachmentLifetime:deleteOnSuccess
+	   preferredScreenCaptureFormat:screenRecording
+	   gatherLocalizableStringsData:NO
+	          testExecutionOrdering:alphabetical
+	    randomExecutionOrderingSeed:(null)
+	               repetitionPolicy:<XCTRepetitionPolicy: 0x106b8e5e0>
+	            mode:None
+	            maximumIterations:1
+	            repeatInNewRunnerProcess:NO
+
+	       runtimeDiagnosticsPolicy:<XCTRuntimeDiagnosticsPolicy: 0x106863d80>
+	            otherRuntimeIssuesDetectionPolicy:<XCTRuntimeIssueDetectionPolicy: 0x106b8e600>
+	            detectionEnabled:YES
+	            severity:warning
+
+	            threadPerformanceCheckerRuntimeIssueDetectionPolicy:<XCTRuntimeIssueDetectionPolicy: 0x106b8e600>
+	            detectionEnabled:YES
+	            severity:warning
+
+	            mainThreadCheckerDetectionPolicy:<XCTRuntimeIssueDetectionPolicy: 0x106b8e600>
+	            detectionEnabled:YES
+	            severity:warning
+
+	            checkedAllocations:disabled
+
+	 isMemoryTaggingAddressSanitizerEnabled:NO
+	    deferSymbolicationToHarness:NO
+	applicationCrashDetectionPolicy:<XCTApplicationCrashDetectionPolicy: 0x106b8e8a0>
+	            severity:Failure
+
+	          hangDetectionPolicy:<XCTHangDetectionPolicy: detectionEnabled=NO, severity=off, durationThreshold=1.000s>
+	            testTimeoutsEnabled:NO
+	              leaksCheckingMode:off
+	                testInteropMode:complete
+	 defaultTestExecutionTimeAllowance:600
+	 maximumTestExecutionTimeAllowance:0
+	                IDECapabilities:<XCTCapabilities: 0x106aa4c60>: {
+    "XCTIssue capability" = 1;
+    "delayed attachment transfer" = 1;
+    "expected failure test capability" = 1;
+    "in-process test parallelization capability" = 1;
+    "lazy test case snapshots" = 1;
+    "monitoring crash reports for additional processes" = 1;
+    "request diagnostics for specific devices" = 1;
+    "request spindump capability" = 1;
+    "runner plan" = 1;
+    "skipped suite capability" = 1;
+    "skipped test capability" = 1;
+    "sync crash reporter capability" = 1;
+    "test case run configurations" = 1;
+    "test iterations" = 3;
+    "test timeout capability" = 1;
+    traits = 1;
+    "ubiquitous test identifiers" = 1;
+    "unified issue recorded" = 1;
+}
+	        symbolicationImageNames:just-gomoku, just-gomokuUITests, just-gomokuUITests-Runner, just-gomokuTests
+	         applicationBundleInfos:
+{
+    "com.xjrmh.gomoku" = "<XCTApplicationBundleInfo localizations:[en] infoDictionary:[UISupportedInterfaceOrientations~ipad: (\n    UIInterfaceOrientationLandscapeLeft,\n    UIInterfaceOrientationLandscapeRight,\n    UIInterfaceOrientationPortrait,\n    UIInterfaceOrientationPortraitUpsideDown\n), UISupportedInterfaceOrientations~iphone: (\n    UIInterfaceOrientationPortrait\n)]>";
+    "com.xjrmh.gomokuUITests.xctrunner" = "<XCTApplicationBundleInfo localizations:[en] infoDictionary:[UISupportedInterfaceOrientations: (\n    UIInterfaceOrientationPortrait,\n    UIInterfaceOrientationLandscapeLeft,\n    UIInterfaceOrientationLandscapeRight\n), UISupportedInterfaceOrientations~ipad: (\n    UIInterfaceOrientationPortrait,\n    UIInterfaceOrientationPortraitUpsideDown,\n    UIInterfaceOrientationLandscapeLeft,\n    UIInterfaceOrientationLandscapeRight\n)]>";
+}
+
+20:09:22.226 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x109858e40> entering wait loop for 600.00s with expectations: `requesting ready for testing`
+20:09:22.226 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x109858e40>
+20:09:22.226 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x10686a280> completed after 0.000s
+20:09:22.226 just-gomokuUITests-Runner[75539:301176] cleaning up requesting ready for testing
+20:09:22.226 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x10985b1e0> entering wait loop for 600.00s with expectations: `IDE proxy`
+20:09:22.226 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x10985b1e0>
+20:09:22.226 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x10686aa40> completed after 0.000s
+20:09:22.226 just-gomokuUITests-Runner[75539:301176] cleaning up IDE proxy
+20:09:22.226 just-gomokuUITests-Runner[75539:301176] Initializing for UI testing.
+20:09:22.227 just-gomokuUITests-Runner[75539:301176] Linked XCTAutomationSupport.framework from /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework/XCTAutomationSupport, built with Xcode 2700(27A252a), modified on Monday, August 17, 2026 at 4:30:55 AM Central Daylight Time, bundle version: 25228
+20:09:22.227 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x10985b390> entering wait loop for 60.00s with expectations: `initiating daemon session`
+20:09:22.227 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x10985b390>
+20:09:22.227 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x10686ae00> completed after 0.000s
+20:09:22.227 just-gomokuUITests-Runner[75539:301176] cleaning up initiating daemon session
+20:09:22.227 just-gomokuUITests-Runner[75539:301176] Creating future for 'enabling automation mode' with timeout 60.00
+20:09:22.227 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x109859bc0> entering wait loop for 60.00s with expectations: `enabling automation mode`
+20:09:22.231 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x109859bc0>
+20:09:22.231 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x106869d00> completed after 0.004s
+20:09:22.231 just-gomokuUITests-Runner[75539:301176] cleaning up enabling automation mode
+20:09:22.231 just-gomokuUITests-Runner[75539:301176] Creating future for 'loading Accessibility' with timeout 70.00
+20:09:22.231 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cc300> entering wait loop for 70.00s with expectations: `loading Accessibility`
+20:09:22.500 xcodebuild[75008:300802] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> checking to see if pid 75539 is valid: kill(pid, 0) = 0 (YES, it's still running)
+    t =      nans Interface orientation changed to Portrait
+20:09:24.015 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cc300>
+20:09:24.015 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x10686b880> completed after 1.784s
+20:09:24.015 just-gomokuUITests-Runner[75539:301176] cleaning up loading Accessibility
+20:09:24.015 just-gomokuUITests-Runner[75539:301176] Creating future for 'enabling localized string gathering' with timeout 70.00
+20:09:24.015 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cdad0> entering wait loop for 70.00s with expectations: `enabling localized string gathering`
+20:09:24.017 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cdad0>
+20:09:24.017 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x1099d4980> completed after 0.002s
+20:09:24.017 just-gomokuUITests-Runner[75539:301176] cleaning up enabling localized string gathering
+20:09:24.017 just-gomokuUITests-Runner[75539:301176] Creating future for 'setting AX timeout to 60.00s' with timeout 65.00
+20:09:24.017 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cdad0> entering wait loop for 65.00s with expectations: `setting AX timeout to 60.00s`
+20:09:24.017 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cdad0>
+20:09:24.017 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x109a32300> completed after 0.000s
+20:09:24.017 just-gomokuUITests-Runner[75539:301176] cleaning up setting AX timeout to 60.00s
+20:09:24.017 just-gomokuUITests-Runner[75539:301176] Creating future for 'registering for kAXUserTestingNotification' with timeout 65.00
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098ce490> entering wait loop for 65.00s with expectations: `registering for kAXUserTestingNotification`
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098ce490>
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x109a32440> completed after 0.000s
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] cleaning up registering for kAXUserTestingNotification
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] Creating future for 'registering for kAXAlertNotification' with timeout 65.00
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cdec0> entering wait loop for 65.00s with expectations: `registering for kAXAlertNotification`
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cdec0>
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x109a32580> completed after 0.000s
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] cleaning up registering for kAXAlertNotification
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] Creating future for 'registering for kAXPidStatusChangedNotification' with timeout 65.00
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cea30> entering wait loop for 65.00s with expectations: `registering for kAXPidStatusChangedNotification`
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cea30>
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x109a31e40> completed after 0.000s
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] cleaning up registering for kAXPidStatusChangedNotification
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] Creating future for 'registering for AXNotification 3031' with timeout 65.00
+20:09:24.018 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cdcb0> entering wait loop for 65.00s with expectations: `registering for AXNotification 3031`
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cdcb0>
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x109a31b00> completed after 0.000s
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] cleaning up registering for AXNotification 3031
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] Creating future for 'requesting background assertion for test process' with timeout 30.00
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cd110> entering wait loop for 30.00s with expectations: `requesting background assertion for test process`
+20:09:24.019 just-gomokuUITests-Runner[75539:301259] Got reply for background assertion for 75539, acquired: YES.
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cd110>
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x109a317c0> completed after 0.001s
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] cleaning up requesting background assertion for test process
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] Test runner is already executing in the background.
+20:09:24.019 just-gomokuUITests-Runner[75539:301176] Done initializing for UI testing.
+20:09:24.020 xcodebuild[75008:294781] Test runner began initialization for UI testing.
+20:09:24.025 just-gomokuUITests-Runner[75539:301176] KVO change: checked status of Expect value of 'hasFinished' of <XCTFuture: 0x106a84a80> to be '1': fulfill=NO
+20:09:24.025 just-gomokuUITests-Runner[75539:301176] KVO change: checked status of Expect value of 'hasFinished' of <XCTFuture: 0x106a84a80> to be '1': fulfill=NO
+20:09:24.025 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cde00> entering wait loop for 598.15s with expectations: `Expect value of 'hasFinished' of <XCTFuture: 0x106a84a80> to be '1'`
+20:09:24.038 just-gomokuUITests-Runner[75539:301261] Returning result XCTWaiterResultCompleted for asynchronous waiter <XCTWaiter: 0x106a91bf0>
+20:09:24.038 just-gomokuUITests-Runner[75539:301261] Wait <XCTWaiterWait: 0x106abe640> completed after 1.840s
+20:09:24.038 just-gomokuUITests-Runner[75539:301261] cleaning up preparing execution worker
+20:09:24.038 just-gomokuUITests-Runner[75539:301261] KVO change: checked status of Expect value of 'hasFinished' of <XCTFuture: 0x106a84a80> to be '1': fulfill=YES
+20:09:24.038 just-gomokuUITests-Runner[75539:301261] Test driver received request to execute test identifiers <XCTTestIdentifier container ["__SwiftTestingParallelizationPlaceholderIdentifier"]> and skip test identifiers 
+20:09:24.038 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cde00>
+20:09:24.038 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x109a30200> completed after 0.013s
+20:09:24.038 just-gomokuUITests-Runner[75539:301176] cleaning up Expect value of 'hasFinished' of <XCTFuture: 0x106a84a80> to be '1'
+20:09:24.039 just-gomokuUITests-Runner[75539:301176] cleaning up Expect value of 'hasFinished' of <XCTFuture: 0x106a84a80> to be '1'
+20:09:24.039 just-gomokuUITests-Runner[75539:301176] Secondary wait on future result returned XCTWaiterResultCompleted
+20:09:24.039 xcodebuild[75008:294781] Test runner started executing tests.
+20:09:24.039 just-gomokuUITests-Runner[75539:301176] Entering test execution event loop
+20:09:24.039 xcodebuild[75008:300803] XCTHTestOperationStateMachine: Transitioning from state ReportedReady to ExecutingTests
+20:09:24.047 just-gomokuUITests-Runner[75539:301176] Setting a new interop record handler: Optional(XCTestCore.XCTestInteropRecordHandler())
+20:09:24.047 just-gomokuUITests-Runner[75539:301176] -[XCTRunnerIDESession(_XCTestObservationInternal) testBundleWillStart:]
+20:09:24.048 just-gomokuUITests-Runner[75539:301176] Setting a new interop record handler: nil
+20:09:24.048 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098ce6a0> entering indefinite wait loop for expectations: `XCTAsyncEnumerateWithWaiter(<XCTest.SwiftTestingExecutionExtension: 0x109ab1400>)`
+20:09:24.048 just-gomokuUITests-Runner[75539:301268] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:24.048 just-gomokuUITests-Runner[75539:301268] -[XCTRuntimeIssueDetectionManager runtimeIssueDetectionEnabled] runtimeIssueDetectionEnabled based on XCTDisableRuntimeIssues and runtime diagnostics policies: YES
+20:09:24.054 just-gomokuUITests-Runner[75539:301268] Setting a new interop record handler: Optional(XCTest.SwiftTestingInteropRecordHandler(interruptTestHandler: Optional((Function))))
+20:09:24.055 just-gomokuUITests-Runner[75539:301263] Setting a new interop record handler: nil
+20:09:24.055 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098ce6a0>
+20:09:24.055 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x1099cf280> completed after 0.008s
+20:09:24.055 just-gomokuUITests-Runner[75539:301176] cleaning up XCTAsyncEnumerateWithWaiter(<XCTest.SwiftTestingExecutionExtension: 0x109ab1400>)
+20:09:24.055 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098ce6a0> entering indefinite wait loop for expectations: `XCTAsyncEnumerateWithWaiter(<XCTTestRunSession: 0x109a5dfe0>)`
+20:09:24.055 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098ce6a0>
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x1099cf400> completed after 0.000s
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] cleaning up XCTAsyncEnumerateWithWaiter(<XCTTestRunSession: 0x109a5dfe0>)
+20:09:24.056 just-gomokuUITests-Runner[75539:301260] Test driver received request to shutdown
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] -[XCTRunnerIDESession(_XCTestObservationInternal) testBundleDidFinish:], Flushing connection to IDE...
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] Exited test execution event loop
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] Creating future for 'flushing telemetry' with timeout 10.00
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cf240> entering wait loop for 10.00s with expectations: `flushing telemetry`
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cf240>
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x1099cf400> completed after 0.000s
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] cleaning up flushing telemetry
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] Creating future for 'confirming end of session with the harness' with timeout 1800.00
+20:09:24.056 xcodebuild[75008:294781] -[XCTTestRunnerSession _XCT_didFinishExecutingTestPlan]_block_invoke
+20:09:24.056 just-gomokuUITests-Runner[75539:301176] <XCTWaiter: 0x1098cf4b0> entering wait loop for 1800.00s with expectations: `confirming end of session with the harness`
+20:09:24.057 xcodebuild[75008:294781] Nothing to delete
+20:09:24.057 just-gomokuUITests-Runner[75539:301260] Creating future for 'flushing telemetry' with timeout 10.00
+20:09:24.057 just-gomokuUITests-Runner[75539:301260] <XCTWaiter: 0x109ba5200> entering wait loop for 10.00s with expectations: `flushing telemetry`
+20:09:24.057 just-gomokuUITests-Runner[75539:301260] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x109ba5200>
+20:09:24.057 just-gomokuUITests-Runner[75539:301260] Wait <XCTWaiterWait: 0x1099cfec0> completed after 0.000s
+20:09:24.057 just-gomokuUITests-Runner[75539:301260] cleaning up flushing telemetry
+20:09:24.057 just-gomokuUITests-Runner[75539:301176] Returning result XCTWaiterResultCompleted for synchronous waiter <XCTWaiter: 0x1098cf4b0>
+20:09:24.057 just-gomokuUITests-Runner[75539:301176] Wait <XCTWaiterWait: 0x1099cf680> completed after 0.000s
+20:09:24.057 just-gomokuUITests-Runner[75539:301176] cleaning up confirming end of session with the harness
+20:09:24.064 xcodebuild[75008:300802] <XCTTestRunnerSession: 0x7896adcd70> lost its connection.
+20:09:24.064 xcodebuild[75008:300805] Closing socket 29 to testmanagerd for Sim Clone 1 of iPhone 18 Pro
+20:09:24.064 xcodebuild[75008:294781] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> got death notice for pid 75539 (exit code: 0, signal: (null)), removing from SimulatorSessionMap
+20:09:24.064 xcodebuild[75008:294781] Lost connection to test process
+20:09:24.065 xcodebuild[75008:294781] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7894299f80 on simulator was relinquished, 1 claims remain.
+20:09:24.065 xcodebuild[75008:294781] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7894299f80 on simulator was relinquished, 1 claims remain.
+20:09:24.065 xcodebuild[75008:294781] 📱<DVTiPhoneSimulator (0x7893827c00), Clone 1 of iPhone 18 Pro, unknown class, 27.0 (24A434), 10B50E20-4E0C-4108-83B2-73321E6A3D0A> claim LaunchSessionClaim_0x7894299f80 on simulator was relinquished, 1 claims remain.
+20:09:24.065 xcodebuild[75008:294781] Launch session expired.
+20:09:24.161 xcodebuild[75008:294781] Nothing to delete
+20:09:24.319 xcodebuild[75008:294781] <XCTHTestOperationCoordinator: 0x789429ad00> finished receiving data from testing launch session
+20:09:24.319 xcodebuild[75008:294781] <XCTHTestOperationCoordinator: 0x789429ad00>: _considerFlushingDelegateBlockQueue - nothing to flush
+20:09:24.319 xcodebuild[75008:294781] Nothing to delete
+20:09:24.319 xcodebuild[75008:294781] Can finish test, forceToNotWaitForAsynchronousDiagnostics is NO. Finishing...
+20:09:24.319 xcodebuild[75008:294781] _finishWithError:(null)
+20:09:24.319 xcodebuild[75008:294781] Current state: testRunnerLaunchSessionHasFinishedReceivingData: YES, delegateBlockQueue.count: 0
+20:09:24.319 xcodebuild[75008:294781] <XCTHTestOperationCoordinator: 0x789429ad00>: _considerFlushingDelegateBlockQueue - nothing to flush

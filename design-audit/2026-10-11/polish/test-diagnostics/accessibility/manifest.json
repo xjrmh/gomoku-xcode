@@ -1,0 +1,25 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "366770B3-279A-4E5B-BFB8-6C7BC5A85D3A",
+        "deviceName" : "iPhone 18 Pro",
+        "exportedFileName" : "D25E9675-EF84-4545-88C0-74C733ED2F6D.txt",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "Complete Issue Description.txt"
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "366770B3-279A-4E5B-BFB8-6C7BC5A85D3A",
+        "deviceName" : "iPhone 18 Pro",
+        "exportedFileName" : "E734D0FC-9710-4B62-AEDA-542C54AEDDA6.png",
+        "isAssociatedWithFailure" : true,
+        "suggestedHumanReadableName" : "App Screenshot_0_499C4556-0C75-425E-B58D-A7C246675EC1.png",
+        "timestamp" : 1791767481.982
+      }
+    ],
+    "testIdentifier" : "GameplayUITests/testPrimaryScreenAccessibilityAudit()",
+    "testIdentifierURL" : "test://com.apple.xcode/just-gomoku/just-gomokuUITests/GameplayUITests/testPrimaryScreenAccessibilityAudit"
+  }
+]

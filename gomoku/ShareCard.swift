@@ -10,6 +10,20 @@ import AppKit
 
 struct SharePayload: Transferable {
     let pngData: Data
+    let title: String
+
+    var previewImage: Image {
+        #if os(iOS)
+        if let image = UIImage(data: pngData) {
+            return Image(uiImage: image)
+        }
+        #elseif os(macOS)
+        if let image = NSImage(data: pngData) {
+            return Image(nsImage: image)
+        }
+        #endif
+        return Image("GomokuLogo")
+    }
 
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(exportedContentType: .png) { payload in payload.pngData }
@@ -21,18 +35,22 @@ enum ShareCardRenderer {
     static func render(session: GameSession, palette: GomokuPalette, colorScheme: ColorScheme) -> SharePayload? {
         let view = ShareCardView(session: session, palette: palette)
             .environment(\.colorScheme, colorScheme)
-            .frame(width: 900, height: 1_160)
+            .environment(\.dynamicTypeSize, .large)
+            .frame(width: 900, height: 1_280)
         let renderer = ImageRenderer(content: view)
         renderer.scale = 2
+        let result = session.outcome.winner.map { "\($0.name) wins" } ?? "Draw"
+        let moveCount = session.moves.count
+        let title = "\(result) · \(moveCount) \(moveCount == 1 ? "move" : "moves")"
         #if os(iOS)
         guard let image = renderer.uiImage, let data = image.pngData() else { return nil }
-        return SharePayload(pngData: data)
+        return SharePayload(pngData: data, title: title)
         #elseif os(macOS)
         guard let image = renderer.nsImage,
               let tiff = image.tiffRepresentation,
               let bitmap = NSBitmapImageRep(data: tiff),
               let data = bitmap.representation(using: .png, properties: [:]) else { return nil }
-        return SharePayload(pngData: data)
+        return SharePayload(pngData: data, title: title)
         #else
         return nil
         #endif
@@ -44,9 +62,9 @@ private struct ShareCardView: View {
     let palette: GomokuPalette
 
     var body: some View {
-        VStack(spacing: 34) {
+        VStack(spacing: 28) {
             Text("Just Gomoku")
-                .font(.system(size: 52, weight: .bold, design: .rounded))
+                .font(.system(size: 44, weight: .bold, design: .rounded))
             StaticBoardView(
                 board: session.board,
                 boardSize: session.boardSize,
@@ -55,20 +73,22 @@ private struct ShareCardView: View {
                 palette: palette
             )
             .frame(width: 820, height: 820)
-            HStack(spacing: 18) {
-                StoneDot(player: session.outcome.winner)
-                    .frame(width: 28, height: 28)
-                Text(resultTitle)
-                    .font(.system(size: 44, weight: .bold, design: .rounded))
+            VStack(spacing: 12) {
+                HStack(spacing: 18) {
+                    StoneDot(player: session.outcome.winner, size: 28)
+                    Text(resultTitle)
+                        .font(.system(size: 40, weight: .bold, design: .rounded))
+                }
+                Text("\(session.configuration.mode.title) · \(session.boardSize)×\(session.boardSize) · \(session.moves.count) moves")
+                    .font(.title2)
+                    .foregroundStyle(.secondary)
+                Text("Black \(time(session.clocks.black))  ·  White \(time(session.clocks.white))")
+                    .font(.title2.monospacedDigit())
+                    .foregroundStyle(.secondary)
             }
-            Text("\(session.configuration.mode.title) · \(session.boardSize)×\(session.boardSize) · \(session.moves.count) moves")
-                .font(.title2)
-                .foregroundStyle(.secondary)
-            Text("Black \(time(session.clocks.black))  ·  White \(time(session.clocks.white))")
-                .font(.title2.monospacedDigit())
-                .foregroundStyle(.secondary)
         }
         .padding(40)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(palette.background)
     }
 

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gomoku — Native iOS Design Review</title>
+  <style>
+    :root { color-scheme: light dark; --page:#f7f5ef; --surface:#fffefa; --ink:#252820; --muted:#63695c; --line:#dedfd5; --accent:#3f6450; --tag:#ebf0e7; --urgent:#9c4333; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--page); color:var(--ink); font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { max-width:1120px; margin:auto; padding:52px 28px 64px; }
+    h1,h2,h3,p,figure { margin:0; }
+    h1 { font-size:clamp(30px,4vw,44px); line-height:1.12; letter-spacing:-1.3px; max-width:800px; }
+    h2 { font-size:26px; line-height:1.25; letter-spacing:-.5px; margin-bottom:18px; }
+    h3 { font-size:21px; line-height:1.3; margin-bottom:12px; }
+    p + p { margin-top:12px; }
+    a { color:var(--accent); text-underline-offset:3px; }
+    a:focus-visible { outline:3px solid var(--accent); outline-offset:5px; border-radius:3px; }
+    .eyebrow { font-size:13px; font-weight:650; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+    .lead { max-width:790px; font-size:20px; line-height:1.55; margin-top:22px; }
+    .meta { margin-top:20px; color:var(--muted); font-size:14px; }
+    nav { display:flex; flex-wrap:wrap; gap:8px 24px; margin-top:24px; font-size:15px; }
+    .overview { border-top:1px solid var(--line); margin-top:36px; padding-top:30px; }
+    .retain { background:var(--tag); padding:20px 24px; border-radius:16px; margin:24px 0; }
+    .priority-list { padding-left:23px; margin:0; }
+    .priority-list li { padding-left:4px; margin:11px 0; }
+    .priority-list li::marker { font-weight:700; color:var(--accent); }
+    .note { color:var(--muted); font-size:14px; margin-top:16px; }
+    #screens { margin-top:44px; }
+    .screen { scroll-margin-top:24px; display:grid; grid-template-columns:minmax(220px,340px) 1fr; gap:32px; padding:30px; margin-top:18px; border:1px solid var(--line); border-radius:20px; background:var(--surface); }
+    .screen.ipad { grid-template-columns:minmax(260px,440px) 1fr; }
+    .screen figure { align-self:start; text-align:center; }
+    .screen img { display:block; width:auto; height:auto; max-width:100%; max-height:570px; margin:auto; border-radius:12px; }
+    figcaption { font-size:12px; line-height:1.5; margin-top:10px; overflow-wrap:anywhere; }
+    .step { font-size:13px; font-weight:650; color:var(--muted); margin-bottom:8px; }
+    .health { display:inline-block; background:var(--tag); color:var(--accent); font-size:13px; font-weight:650; padding:3px 10px; border-radius:8px; margin-bottom:16px; }
+    .health.urgent { color:var(--urgent); background:#faece4; }
+    .screen p { font-size:15px; }
+    .label { font-weight:650; }
+    .limits { border-top:1px solid var(--line); margin-top:40px; padding-top:28px; }
+    .limits p { color:var(--muted); max-width:900px; font-size:14px; }
+    footer { margin-top:28px; color:var(--muted); font-size:12px; }
+    @media (max-width:720px) { main { padding:30px 18px 40px; } .screen,.screen.ipad { grid-template-columns:1fr; padding:22px; gap:24px; } .screen figure { order:2; } .screen img { max-height:540px; } .lead { font-size:18px; } }
+    @media (prefers-color-scheme:dark) { :root { --page:#1c201c; --surface:#252b25; --ink:#f2f1e9; --muted:#b1b7a9; --line:#3e473e; --accent:#a6ccb3; --tag:#303d32; --urgent:#ffc0a8; } .health.urgent { background:#50352b; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+    @media print { :root { --page:#fff; --surface:#fff; --ink:#222; --muted:#555; --line:#ddd; --accent:#31523c; --tag:#eee; } main { padding:0; } nav { display:none; } .screen { break-inside:avoid; } .screen img { max-height:420px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Gomoku · UI design audit · October 11, 2026</p>
+    <h1>Polish the hierarchy.<br>Keep the native simplicity.</h1>
+    <p class="lead">The visual foundation is strong. The biggest improvement will come from simplifying game setup, protecting the board’s space, and making layouts adapt reliably to text size and iPad width.</p>
+    <p class="meta">Current fresh build · iPhone 18 Pro and iPad Pro 13-inch (M5) · iOS / iPadOS 27 · 19 captured states</p>
+    <nav aria-label="Report navigation"><a href="#priorities">Priorities</a><a href="#screens">Screenshot review</a><a href="#limits">Coverage and limits</a></nav>
+  </header>
+
+  <section class="overview" id="priorities">
+    <h2>A focused polish pass</h2>
+    <div class="retain"><strong>Retain:</strong> the warm board, cream background, system typography, SF Symbols, native grouped Form, navigation, confirmation prompts, and share sheet. These already give the game a quiet identity.</div>
+    <ol class="priority-list">
+      <li><strong>Fix accessibility-size gameplay first.</strong> Replace overlapping placement with normal vertical layout. Let status rows stack and supporting content scroll while preserving usable board space.</li>
+      <li><strong>Consolidate match setup.</strong> One native New Game sheet should contain opponent, difficulty, stones, and board size, followed by an explicit Start action. Confirm resets consistently during active play. Rename PvP to “2 Players”; use “Restart” during play and “Play Again” after results.</li>
+      <li><strong>Make Settings conditional.</strong> Keep the native Form. Show custom-size fields only for Custom and difficulty only for AI. Resolve duplicate custom/preset selection tags.</li>
+      <li><strong>Simplify iPad composition.</strong> Use one status region, board, and familiar action dock with sensible maximum widths. Remove repeated inspector information and expose New Game during active play.</li>
+      <li><strong>Clarify supporting flows.</strong> Emphasize Play Again, quiet the About contact card, improve replay targets/context, and strengthen history and share metadata.</li>
+    </ol>
+    <p class="note">These recommendations follow Apple’s guidance on restrained <a href="https://developer.apple.com/design/human-interface-guidelines/materials">materials</a>, a clear hierarchy of <a href="https://developer.apple.com/design/human-interface-guidelines/buttons">buttons</a>, and adaptable <a href="https://developer.apple.com/design/human-interface-guidelines/layout">layouts</a>. Board-specific composition recommendations are design judgments based on the captured app.</p>
+  </section>
+
+  <section id="screens" aria-label="Screenshot review">
+    <h2>Every captured state</h2>
+
+    <article class="screen" id="screen-01">
+      <figure><a href="01-iphone-gameplay.png"><img src="01-iphone-gameplay.png" width="1206" height="2622" alt="iPhone gameplay with warm Gomoku board and player information" loading="lazy"></a><figcaption><a href="01-iphone-gameplay.png">01-iphone-gameplay.png</a></figcaption></figure>
+      <div><p class="step">Step 01 · Open gameplay</p><h3>Board and everyday play</h3><span class="health">Strong foundation</span><p>The warm board and restrained palette communicate the game immediately.</p><p><span class="label">Polish:</span> Reduce repeated match configuration in the HUD. Keep turn, player, and time information compact; give the board the strongest visual priority and leave setup to New Game.</p></div>
+    </article>
+
+    <article class="screen" id="screen-02">
+      <figure><a href="02-iphone-settings.png"><img src="02-iphone-settings.png" width="1206" height="2622" alt="iPhone Settings with native grouped rows and game options" loading="lazy"></a><figcaption><a href="02-iphone-settings.png">02-iphone-settings.png</a></figcaption></figure>
+      <div><p class="step">Step 02 · Open Settings</p><h3>Native settings structure</h3><span class="health">Refine the choices</span><p>The grouped Form feels familiar and straightforward.</p><p><span class="label">Polish:</span> Hide irrelevant AI rows in 2 Players mode instead of leaving disabled controls visible. Consolidate match configuration into New Game and keep Settings focused on ongoing preferences.</p></div>
+    </article>
+
+    <article class="screen" id="screen-03">
+      <figure><a href="03-iphone-about.png"><img src="03-iphone-about.png" width="1206" height="2622" alt="About sheet with app information and translucent contact card" loading="lazy"></a><figcaption><a href="03-iphone-about.png">03-iphone-about.png</a></figcaption></figure>
+      <div><p class="step">Step 03 · Open About</p><h3>A quieter information sheet</h3><span class="health">Simplify the surface</span><p>The content is approachable, but the contact card adds unnecessary material treatment. Green from the underlying Haptics toggle bleeds through.</p><p><span class="label">Polish:</span> Use ordinary contact rows, toolbar Done, and a sheet that accommodates larger text. Keep <a href="https://developer.apple.com/design/human-interface-guidelines/materials">glass restrained</a>.</p></div>
+    </article>
+
+    <article class="screen" id="screen-04">
+      <figure><a href="04-iphone-history-empty.png"><img src="04-iphone-history-empty.png" width="1206" height="2622" alt="Empty game history screen" loading="lazy"></a><figcaption><a href="04-iphone-history-empty.png">04-iphone-history-empty.png</a></figcaption></figure>
+      <div><p class="step">Step 04 · Open empty History</p><h3>An actionable empty state</h3><span class="health">Clear starting point</span><p>The empty history presentation is uncluttered.</p><p><span class="label">Polish:</span> Retain this clear empty state. Source review identifies a need to distinguish an empty archive from filters matching no games; the latter state was not visually verified.</p></div>
+    </article>
+
+    <article class="screen" id="screen-05">
+      <figure><a href="05-iphone-new-game-menu.png"><img src="05-iphone-new-game-menu.png" width="1206" height="2622" alt="New Game menu on iPhone" loading="lazy"></a><figcaption><a href="05-iphone-new-game-menu.png">05-iphone-new-game-menu.png</a></figcaption></figure>
+      <div><p class="step">Step 05 · Choose New Game</p><h3>One complete setup flow</h3><span class="health">Consolidate</span><p>The menu is native, but setup is spread across this menu, the HUD, and Settings.</p><p><span class="label">Polish:</span> Replace the scattered choices with one native sheet: opponent, difficulty when relevant, stones, board size, and Start. Use “2 Players” for immediate comprehension.</p></div>
+    </article>
+
+    <article class="screen" id="screen-06">
+      <figure><a href="06-iphone-ai.png"><img src="06-iphone-ai.png" width="1206" height="2622" alt="AI game on iPhone with game status and board" loading="lazy"></a><figcaption><a href="06-iphone-ai.png">06-iphone-ai.png</a></figcaption></figure>
+      <div><p class="step">Step 06 · Play against AI</p><h3>Keep attention on the turn</h3><span class="health">Good gameplay baseline</span><p>The board remains the central feature during AI play.</p><p><span class="label">Polish:</span> Give player/turn status a stable hierarchy. Keep difficulty as compact context, and place changes in the New Game sheet so setup controls do not compete with play.</p></div>
+    </article>
+
+    <article class="screen" id="screen-07">
+      <figure><a href="07-iphone-large-text.png"><img src="07-iphone-large-text.png" width="1206" height="2622" alt="Gameplay at largest Dynamic Type showing overlapping and truncated interface content" loading="lazy"></a><figcaption><a href="07-iphone-large-text.png">07-iphone-large-text.png</a></figcaption></figure>
+      <div><p class="step">Step 07 · Increase text to largest size</p><h3>Repair gameplay reflow</h3><span class="health urgent">Highest priority</span><p>Gameplay information overlaps and truncates at the largest Dynamic Type size.</p><p><span class="label">Polish:</span> Use normal vertical layout, expandable rows, and adaptive stacking. Allow supporting content to scroll when needed. Apple explicitly recommends <a href="https://developer.apple.com/design/human-interface-guidelines/layout">layout changes for larger text</a>.</p></div>
+    </article>
+
+    <article class="screen" id="screen-08">
+      <figure><a href="08-iphone-settings-large-text.png"><img src="08-iphone-settings-large-text.png" width="1206" height="2622" alt="Settings Form at largest Dynamic Type with rows reflowing" loading="lazy"></a><figcaption><a href="08-iphone-settings-large-text.png">08-iphone-settings-large-text.png</a></figcaption></figure>
+      <div><p class="step">Step 08 · Inspect Settings at largest text</p><h3>A useful native reference</h3><span class="health">Reflows correctly</span><p>The Form adapts to larger text successfully in this capture.</p><p><span class="label">Polish:</span> Preserve this system-managed behavior when simplifying settings. Use the same willingness to grow rows and wrap content in gameplay, rather than forcing the default-size arrangement.</p></div>
+    </article>
+
+    <article class="screen" id="screen-09">
+      <figure><a href="09-iphone-board-size-menu.png"><img src="09-iphone-board-size-menu.png" width="1206" height="2622" alt="Board-size selection menu on iPhone" loading="lazy"></a><figcaption><a href="09-iphone-board-size-menu.png">09-iphone-board-size-menu.png</a></figcaption></figure>
+      <div><p class="step">Step 09 · Choose board size</p><h3>Unambiguous selection</h3><span class="health">Needs source correction</span><p>The native picker is an appropriate lightweight control.</p><p><span class="label">Polish:</span> Source review finds duplicate custom/preset tags. Give each choice a unique identity; reveal editable dimensions only for Custom. Move match-specific size selection into the New Game sheet.</p></div>
+    </article>
+
+    <article class="screen" id="screen-10">
+      <figure><a href="10-iphone-confirmation.png"><img src="10-iphone-confirmation.png" width="1206" height="2622" alt="Native confirmation prompt before resetting a game" loading="lazy"></a><figcaption><a href="10-iphone-confirmation.png">10-iphone-confirmation.png</a></figcaption></figure>
+      <div><p class="step">Step 10 · Request a reset</p><h3>Preserve the native prompt</h3><span class="health">Works clearly</span><p>The system confirmation is familiar and legible.</p><p><span class="label">Polish:</span> Apply the same protection to every action that replaces an active board, including setup changes. Broader reset-path consistency is a source-review recommendation; this capture verifies the native prompt. Keep “Restart” wording during play.</p></div>
+    </article>
+
+    <article class="screen" id="screen-11">
+      <figure><a href="11-iphone-precision-coach.png"><img src="11-iphone-precision-coach.png" width="1206" height="2622" alt="Precision placement coaching tip covering upper board intersections" loading="lazy"></a><figcaption><a href="11-iphone-precision-coach.png">11-iphone-precision-coach.png</a></figcaption></figure>
+      <div><p class="step">Step 11 · Show placement guidance</p><h3>Keep coaching outside play</h3><span class="health">Move the tip</span><p>The precision tip explains useful interaction, but obscures top intersections.</p><p><span class="label">Polish:</span> Place brief guidance outside the board and let it dismiss cleanly. Dense-board touch and loupe precision need a separate physical-device check before choosing further interaction changes.</p></div>
+    </article>
+
+    <article class="screen" id="screen-12">
+      <figure><a href="12-iphone-result.png"><img src="12-iphone-result.png" width="1206" height="2622" alt="Completed game with winning line and result actions" loading="lazy"></a><figcaption><a href="12-iphone-result.png">12-iphone-result.png</a></figcaption></figure>
+      <div><p class="step">Step 12 · Complete a winning game</p><h3>Make the next game obvious</h3><span class="health">Refine action hierarchy</span><p>The visible winning line gives the result useful context.</p><p><span class="label">Polish:</span> Preserve that line. Make Play Again the prominent action and Share secondary; avoid equal emphasis for every option. Follow Apple’s <a href="https://developer.apple.com/design/human-interface-guidelines/buttons">button hierarchy guidance</a>.</p></div>
+    </article>
+
+    <article class="screen" id="screen-13">
+      <figure><a href="13-iphone-history.png"><img src="13-iphone-history.png" width="1206" height="2622" alt="Populated history with saved game thumbnail and metadata" loading="lazy"></a><figcaption><a href="13-iphone-history.png">13-iphone-history.png</a></figcaption></figure>
+      <div><p class="step">Step 13 · Inspect saved History</p><h3>Readable match summaries</h3><span class="health">Keep the thumbnails</span><p>The board thumbnail helps identify a saved game.</p><p><span class="label">Polish:</span> Establish a consistent row hierarchy: result/opponent first, then date, size, and move count. Only one simulated completed match was available; large archives and exact filter/search edge cases remain unchecked.</p></div>
+    </article>
+
+    <article class="screen" id="screen-14">
+      <figure><a href="14-iphone-replay.png"><img src="14-iphone-replay.png" width="1206" height="2622" alt="Saved game replay with board and playback controls" loading="lazy"></a><figcaption><a href="14-iphone-replay.png">14-iphone-replay.png</a></figcaption></figure>
+      <div><p class="step">Step 14 · Replay the saved game</p><h3>Clear playback and move context</h3><span class="health">Improve controls</span><p>Replay stepping and playback were exercised successfully.</p><p><span class="label">Polish:</span> Give separate playback actions <a href="https://developer.apple.com/design/human-interface-guidelines/buttons">44-point hit regions</a>. Show the selected move number, player, and coordinate together so viewers can connect the control state with the board.</p></div>
+    </article>
+
+    <article class="screen ipad" id="screen-15">
+      <figure><a href="15-ipad-gameplay.png"><img src="15-ipad-gameplay.png" width="2064" height="2752" alt="iPad portrait gameplay with board and surrounding controls" loading="lazy"></a><figcaption><a href="15-ipad-gameplay.png">15-ipad-gameplay.png</a></figcaption></figure>
+      <div><p class="step">Step 15 · Play on portrait iPad</p><h3>A single composed game surface</h3><span class="health">Simplify iPad hierarchy</span><p>The larger canvas offers useful room, but repeated information weakens focus.</p><p><span class="label">Polish:</span> Use one status region, board, and the same action dock as iPhone. Apply sensible width caps and add a dedicated New Game action during active play.</p></div>
+    </article>
+
+    <article class="screen" id="screen-16">
+      <figure><a href="16-iphone-dark.png"><img src="16-iphone-dark.png" width="1206" height="2622" alt="iPhone gameplay in dark appearance with black stone status indicator" loading="lazy"></a><figcaption><a href="16-iphone-dark.png">16-iphone-dark.png</a></figcaption></figure>
+      <div><p class="step">Step 16 · Switch to Dark Mode</p><h3>Legible player indicators</h3><span class="health">Small clarity improvement</span><p>The dark palette retains the game’s restrained character.</p><p><span class="label">Polish:</span> Add a subtle outline to the black stone indicator. Use monospaced digits for clocks and named accessibility labels that identify both player and elapsed time. Contrast ratios were not measured.</p></div>
+    </article>
+
+    <article class="screen" id="screen-17">
+      <figure><a href="17-iphone-share.png"><img src="17-iphone-share.png" width="1206" height="2622" alt="Native share sheet with placeholder-style item preview" loading="lazy"></a><figcaption><a href="17-iphone-share.png">17-iphone-share.png</a></figcaption></figure>
+      <div><p class="step">Step 17 · Share a result</p><h3>Useful shared-item metadata</h3><span class="health">Keep the system sheet</span><p>The share sheet is native; the captured item preview appears placeholder-like.</p><p><span class="label">Polish:</span> Supply a result thumbnail and clear title. Validate the preview on a physical device and release build before treating its icon appearance as a confirmed product defect.</p></div>
+    </article>
+
+    <article class="screen ipad" id="screen-18">
+      <figure><a href="18-ipad-landscape.png"><img src="18-ipad-landscape.png" width="2752" height="2064" alt="Landscape iPad gameplay with board and side inspector" loading="lazy"></a><figcaption><a href="18-ipad-landscape.png">18-ipad-landscape.png</a></figcaption></figure>
+      <div><p class="step">Step 18 · Rotate iPad to landscape</p><h3>Use width without duplication</h3><span class="health">Refine composition</span><p>Landscape provides space for a comfortable board and nearby controls.</p><p><span class="label">Polish:</span> Remove the duplicate inspector. Place one concise status/action region beside the board where useful, preserving the same game structure. Check narrow windows as part of <a href="https://developer.apple.com/design/human-interface-guidelines/layout">adaptive layout</a> work.</p></div>
+    </article>
+
+    <article class="screen ipad" id="screen-19">
+      <figure><a href="19-ipad-settings.png"><img src="19-ipad-settings.png" width="2752" height="2064" alt="Native Settings Form on iPad" loading="lazy"></a><figcaption><a href="19-ipad-settings.png">19-ipad-settings.png</a></figcaption></figure>
+      <div><p class="step">Step 19 · Open iPad Settings</p><h3>Preserve familiar controls</h3><span class="health">Solid native base</span><p>The system settings presentation fits the platform.</p><p><span class="label">Polish:</span> Apply the same conditional fields and consolidated setup as iPhone. Keep the form comfortably readable at a sensible width; verify it when the iPad window becomes narrow and text size increases.</p></div>
+    </article>
+  </section>
+
+  <section class="limits" id="limits">
+    <h2>Coverage and limits</h2>
+    <p>This review uses the current simulator captures and supporting source inspection. One simulated match was completed; replay stepping/playback and board accessibility actions were exercised. The review did not cover a full VoiceOver user journey, physical-device behavior, measured contrast, iOS 18 fallback, draws, large history datasets, windowed iPad layouts, or dense-board touch/loupe precision. Exact filter/search edge cases were not visually checked. Recommendations distinguish visible issues from source findings and follow-up validation.</p>
+  </section>
+  <footer>Design recommendations only. App source was not changed for this report.</footer>
+</main>
+</body>
+</html>

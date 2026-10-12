@@ -1,0 +1,75 @@
+{
+  "root": {
+    "frame": {
+      "NS.rectval": "{{14, 124.66666666666667}, {374, 374}}",
+      "NS.special": 3
+    },
+    "accessibilityElement": {
+      "element-or-hash": 4621238272,
+      "element-type": 2,
+      "context": "4D9272C7-3024-4062-B0FA-E16EF426F17A",
+      "element-id": 212,
+      "processIdentifier": 81383,
+      "origin-platform": 2,
+      "payload": {
+        "NS.keys": [
+          "pid",
+          "uid.elementOrHash",
+          "uid.elementID"
+        ],
+        "NS.objects": [
+          81383,
+          4621238272,
+          212
+        ]
+      },
+      "encoding-version": 1
+    },
+    "title": "",
+    "hasKeyboardFocus": false,
+    "windowContextID": 3733743116,
+    "additionalAttributes": {
+      "NS.keys": [
+        5004
+      ],
+      "NS.objects": [
+        "NSObject"
+      ]
+    },
+    "isMainWindow": false,
+    "children": {
+      "NS.objects": []
+    },
+    "traits": 8589934592,
+    "identifier": "game-board",
+    "label": "Gomoku board, 15 by 15",
+    "hasFocus": false,
+    "enabled": true,
+    "selected": false,
+    "value": "Cursor H8, empty. Black's turn. 0 moves.",
+    "elementType": 1,
+    "placeholderValue": "",
+    "parentAccessibilityElement": {
+      "element-or-hash": 4422169088,
+      "element-type": 2,
+      "context": "4D9272C7-3024-4062-B0FA-E16EF426F17A",
+      "element-id": 22,
+      "processIdentifier": 81383,
+      "origin-platform": 2,
+      "payload": {
+        "NS.keys": [
+          "pid",
+          "uid.elementOrHash",
+          "uid.elementID"
+        ],
+        "NS.objects": [
+          81383,
+          4422169088,
+          22
+        ]
+      },
+      "encoding-version": 1
+    },
+    "displayID": 1
+  }
+}

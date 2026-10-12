@@ -1,0 +1,1424 @@
+{
+  "_type" : {
+    "_name" : "ActionTestSummary",
+    "_supertype" : {
+      "_name" : "ActionTestSummaryIdentifiableObject",
+      "_supertype" : {
+        "_name" : "ActionAbstractTestSummary"
+      }
+    }
+  },
+  "activitySummaries" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "arguments" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "documentation" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "duration" : {
+    "_type" : {
+      "_name" : "Double"
+    },
+    "_value" : "0.0"
+  },
+  "expectedFailures" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "failureSummaries" : {
+    "_type" : {
+      "_name" : "Array"
+    },
+    "_values" : [
+      {
+        "_type" : {
+          "_name" : "ActionTestFailureSummary"
+        },
+        "attachments" : {
+          "_type" : {
+            "_name" : "Array"
+          }
+        },
+        "detailedDescription" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "failed: caught \"NSInternalInconsistencyException\", \"No eligible connection available\"\n(\n\t0   CoreFoundation                      0x00000001c0287f24 __exceptionPreprocess + 172\n\t1   libobjc.A.dylib                     0x00000001c008194c objc_exception_throw + 72\n\t2   CoreData                            0x00000001c8579d4c -[NSSQLDefaultConnectionManager handleStoreRequest:] + 748\n\t3   CoreData                            0x00000001c86c2aac -[NSSQLCoreDispatchManager routeStoreRequest:] + 220\n\t4   CoreData                            0x00000001c85c7fe4 -[NSSQLCore dispatchRequest:withRetries:] + 184\n\t5   CoreData                            0x00000001c85c9fe8 -[NSSQLCore _obtainPermanentIDsForObjects:withNotification:error:] + 1324\n\t6   CoreData                            0x00000001c85ca5cc -[NSSQLCore _prepareForExecuteRequest:withContext:error:] + 268\n\t7   CoreData                            0x00000001c858be14 __65-[NSPersistentStoreCoordinator executeRequest:withContext:error:]_block_invoke.374 + 8928\n\t8   CoreData                            0x00000001c857f5d4 -[NSPersistentStoreCoordinator _routeHeavyweightBlock:] + 220\n\t9   CoreData                            0x00000001c8589258 -[NSPersistentStoreCoordinator executeRequest:withContext:error:] + 1080\n\t10  CoreData                            0x00000001c853cff8 -[NSManagedObjectContext save:] + 1108\n\t11  SwiftData                           0x00000001d57e4af0 __swift_allocate_value_buffer + 51208\n\t12  SwiftData                           0x00000001d58024c0 block_destroy_helper + 180\n\t13  SwiftData                           0x00000001d57dd350 __swift_allocate_value_buffer + 20584\n\t14  SwiftData                           0x00000001d5803f84 __swift_assign_boxed_opaque_existential_0 + 432\n\t15  CoreData                            0x00000001c87195a4 $sxs5Error_pIgrzo_xsAA_pIegrzo_lTR + 20\n\t16  CoreData                            0x00000001c8757b74 $sxs5Error_pIgrzo_xsAA_pIegrzo_lTRTA + 20\n\t17  CoreData                            0x00000001c871961c $sSo22NSManagedObjectContextC8CoreDataE30_rethrowsHelper_performAndWait33_A0F63BA25A751D403694B89F4AD0A24ELL2fn7execute6rescuexyyyYbXEXE_xyKXExs5Error_pKXEtKlFyxyKcXEfU_yyYbXEfU_ + 108\n\t18  CoreData                            0x00000001c8719b1c $sIgh_Iegh_TR + 20\n\t19  CoreData                            0x00000001c8719b3c $sIegh_IyBh_TR + 20\n\t20  CoreData                            0x00000001c8546794 developerSubmittedBlockToNSManagedObjectContextPerform + 220\n\t21  libdispatch.dylib                   0x00000001e6435fb8 _dispatch_client_callout + 12\n\t22  libdispatch.dylib                   0x00000001e642bb28 _dispatch_lane_barrier_sync_invoke_and_complete + 92\n\t23  CoreData                            0x00000001c8546660 -[NSManagedObjectContext performBlockAndWait:] + 304\n\t24  CoreData                            0x00000001c8757a28 $sSo22NSManagedObjectContextC8CoreDataE14performAndWaityxxyKXEKlF + 332\n\t25  SwiftData                           0x00000001d57dc770 __swift_allocate_value_buffer + 17544\n\t26  SwiftData                           0x00000001d57e4048 __swift_allocate_value_buffer + 48480\n\t27  SwiftData                           0x00000001d57e84bc __swift_allocate_value_buffer + 66004\n\t28  SwiftData                           0x00000001d5870f14 __swift_closure_destructor.46 + 76184\n\t29  SwiftData                           0x00000001d586f9b0 __swift_closure_destructor.46 + 70708\n\t30  SwiftData                           0x00000001d5884500 __swift__destructor.10 + 2140\n\t31  just-gomoku.debug.dylib             0x00000001059d7060 $s11just_gomoku17ArchiveRepositoryO7archive_2inyAA11GameSessionV_9SwiftData12ModelContextCtFZ + 1128\n\t32  just-gomokuTests                    0x0000000105e47a5c $s16just_gomokuTests07ArchiveC0C53testRepositoryReplacesDuplicateAndReopensArchivedGameyyKF + 692\n\t33  just-gomokuTests                    0x0000000105e48278 $s16just_gomokuTests07ArchiveC0C53testRepositoryReplacesDuplicateAndReopensArchivedGameyyKFTo + 56\n\t34  CoreFoundation                      0x00000001c028e840 __invoking___ + 144\n\t35  CoreFoundation                      0x00000001c028ba10 -[NSInvocation invoke] + 276\n\t36  XCTestCore                          0x000000010575fb94 +[XCTFailableInvocation invokeErrorConventionInvocation:completion:] + 84\n\t37  XCTestCore                          0x000000010575fb38 __90+[XCTFailableInvocation invokeInvocation:withTestMethodConvention:lastObservedErrorIssue:]_block_invoke + 24\n\t38  XCTestCore                          0x000000010575f610 __81+[XCTFailableInvocation invokeWithAsynchronousWait:lastObservedErrorIssue:block:]_block_invoke + 292\n\t39  XCTestCore                          0x0000000105750fa8 __49+[XCTSwiftErrorObservation observeErrorsInBlock:]_block_invoke + 28\n\t40  XCTestCore                          0x00000001057c243c $sSo24XCTSwiftErrorObservationC10XCTestCoreE14_observeErrors33_4641E344ACA55A25D2B1EC985574C54DLL2inSo0abC6ResultCSgyyXE_tFZ12$sIyB_Ieg_TRIyB_Tf1cn_n + 172\n\t41  XCTestCore                          0x00000001057c2490 $sSo24XCTSwiftErrorObservationC10XCTestCoreE14_observeErrors33_4641E344ACA55A25D2B1EC985574C54DLL2inSo0abC6ResultCSgyyXE_tFZTo + 28\n\t42  XCTestCore                          0x0000000105750ecc +[XCTSwiftErrorObservation observeErrorsInBlock:] + 156\n\t43  XCTestCore                          0x000000010575f414 +[XCTFailableInvocation invokeWithAsynchronousWait:lastObservedErrorIssue:block:] + 176\n\t44  XCTestCore                          0x000000010575f9bc +[XCTFailableInvocation invokeInvocation:withTestMethodConvention:lastObservedErrorIssue:] + 140\n\t45  XCTestCore                          0x000000010575fe04 +[XCTFailableInvocation invokeInvocation:lastObservedErrorIssue:] + 64\n\t46  XCTestCore                          0x00000001057724fc -[XCTestCase invokeTestMethod:] + 56\n\t47  XCTestCore                          0x0000000105772ad8 __24-[XCTestCase invokeTest]_block_invoke.98 + 60\n\t48  XCTestCore                          0x0000000105777d80 -[XCTestCase(XCTIssueHandling) _caughtUnhandledDeveloperExceptionPermittingControlFlowInterruptions:caughtInterruptionException:whileExecutingBlock:] + 144\n\t49  XCTestCore                          0x0000000105772708 -[XCTestCase invokeTest] + 476\n\t50  XCTestCore                          0x0000000105773e74 __45-[XCTestCase _invokeTestIfSupportedOSVersion]_block_invoke + 32\n\t51  XCTestCore                          0x0000000105777d80 -[XCTestCase(XCTIssueHandling) _caughtUnhandledDeveloperExceptionPermittingControlFlowInterruptions:caughtInterruptionException:whileExecutingBlock:] + 144\n\t52  XCTestCore                          0x0000000105773d4c -[XCTestCase _invokeTestIfSupportedOSVersion] + 156\n\t53  XCTestCore                          0x0000000105773844 __26-[XCTestCase performTest:]_block_invoke.125 + 324\n\t54  XCTestCore                          0x000000010574e434 +[XCTContext _runInChildOfContext:forTestCase:markAsReportingBase:block:] + 152\n\t55  XCTestCore                          0x000000010574e358 +[XCTContext runInContextForTestCase:markAsReportingBase:block:] + 88\n\t56  XCTestCore                          0x0000000105773444 -[XCTestCase performTest:] + 236\n\t57  XCTestCore                          0x000000010576fb5c -[XCTest runTest] + 44\n\t58  XCTestCore                          0x000000010577dae4 -[XCTestSuite runTestBasedOnRepetitionPolicy:testRun:] + 60\n\t59  XCTestCore                          0x000000010577d91c __27-[XCTestSuite performTest:]_block_invoke + 172\n\t60  XCTestCore                          0x000000010577d024 __59-[XCTestSuite _performProtectedSectionForTest:testSection:]_block_invoke + 40\n\t61  XCTestCore                          0x000000010574e434 +[XCTContext _runInChildOfContext:forTestCase:markAsReportingBase:block:] + 152\n\t62  XCTestCore                          0x000000010574e358 +[XCTContext runInContextForTestCase:markAsReportingBase:block:] + 88\n\t63  XCTestCore                          0x000000010577cfa4 -[XCTestSuite _performProtectedSectionForTest:testSection:] + 140\n\t64  XCTestCore                          0x000000010577d45c -[XCTestSuite performTest:] + 208\n\t65  XCTestCore                          0x000000010576fb5c -[XCTest runTest] + 44\n\t66  XCTestCore                          0x0000000105797798 __89-[XCTTestRunSession executeTestsWithIdentifiers:skippingTestsWithIdentifiers:completion:]_block_invoke + 512\n\t67  XCTestCore                          0x000000010574e434 +[XCTContext _runInChildOfContext:forTestCase:markAsReportingBase:block:] + 152\n\t68  XCTestCore                          0x000000010574e358 +[XCTContext runInContextForTestCase:markAsReportingBase:block:] + 88\n\t69  XCTestCore                          0x00000001057974bc -[XCTTestRunSession executeTestsWithIdentifiers:skippingTestsWithIdentifiers:completion:] + 288\n\t70  XCTestCore                          0x000000010578ee98 __103-[XCTExecutionWorker executeTestIdentifiers:skippingTestIdentifiers:completionHandler:completionQueue:]_block_invoke_2 + 116\n\t71  XCTestCore                          0x000000010578f098 __XCTAsyncEnumerateWithWaiter_block_invoke + 212\n\t72  XCTestCore                          0x000000010578f204 __XCTAsyncEnumerate_block_invoke.99 + 52\n\t73  XCTestCore                          0x000000010578e120 XCTAsyncEnumerateWithWaiter + 464\n\t74  XCTestCore                          0x000000010578ed78 __103-[XCTExecutionWorker executeTestIdentifiers:skippingTestIdentifiers:completionHandler:completionQueue:]_block_invoke + 116\n\t75  XCTestCore                          0x000000010578e398 -[XCTExecutionWorker runWithError:] + 68\n\t76  XCTestCore                          0x000000010578c3ec __25-[XCTestDriver _runTests]_block_invoke.324 + 52\n\t77  XCTestCore                          0x000000010579c0d0 -[XCTestObservationCenter _observeTestExecutionForTestBundle:inBlock:] + 92\n\t78  XCTestCore                          0x000000010578bf28 -[XCTestDriver _runTests] + 932\n\t79  XCTestCore                          0x000000010578dc1c _XCTestMain + 84\n\t80  libXCTestBundleInject.dylib         0x0000000104ac9274 __RunTests_block_invoke_2 + 0\n\t81  CoreFoundation                      0x00000001c01a5270 __CFMachPortPerform + 164\n\t82  CoreFoundation                      0x00000001c01e4e78 __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE1_PERFORM_FUNCTION__ + 56\n\t83  CoreFoundation                      0x00000001c01e44c8 __CFRunLoopDoSource1 + 476\n\t84  CoreFoundation                      0x00000001c01e35d8 __CFRunLoopRun + 2116\n\t85  CoreFoundation                      0x00000001c01de040 _CFRunLoopRunSpecificWithOptions + 496\n\t86  GraphicsServices                    0x00000002219199ac GSEventRunModal + 116\n\t87  UIKitCore                           0x00000001c5535e30 UIApplicationMain + 124\n\t88  SwiftUI                             0x00000001c9d8b908 $s7SwiftUI17KitRendererCommon33_ACC2C5639A7D76F611E170E831FCA491LLys5NeverOyXlXpFAESpySpys4Int8VGSgGXEfU_ + 164\n\t89  SwiftUI                             0x00000001c9d8b784 $s7SwiftUI6runAppys5NeverOxAA0D0RzlF + 204\n\t90  SwiftUI                             0x00000001c9b09750 $s7SwiftUI3AppPAAE4mainyyFZ + 148\n\t91  just-gomoku.debug.dylib             0x0000000105a4f6d8 $s11just_gomoku9GomokuAppV5$mainyyFZ + 40\n\t92  just-gomoku.debug.dylib             0x0000000105a51348 __debug_main_executable_dylib_entry_point + 12\n\t93  dyld                                0x0000000104d90350 dyld-internal + 20\n\t94  ???                                 0x0000000104c45e80 0x0 + 4374945408\n)"
+        },
+        "fileName" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "\/Users\/lizheng\/Downloads\/gomoku-xcode\/just-gomokuTests\/ArchiveTests.swift"
+        },
+        "isPerformanceFailure" : {
+          "_type" : {
+            "_name" : "Bool"
+          },
+          "_value" : "false"
+        },
+        "issueType" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "Uncaught Exception"
+        },
+        "isTopLevelFailure" : {
+          "_type" : {
+            "_name" : "Bool"
+          },
+          "_value" : "true"
+        },
+        "lineNumber" : {
+          "_type" : {
+            "_name" : "Int"
+          },
+          "_value" : "29"
+        },
+        "message" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "No eligible connection available (NSInternalInconsistencyException)"
+        },
+        "sourceCodeContext" : {
+          "_type" : {
+            "_name" : "SourceCodeContext"
+          },
+          "callStack" : {
+            "_type" : {
+              "_name" : "Array"
+            },
+            "_values" : [
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518846744"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7516723531"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7656152395"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7657499307"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7656472547"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7656480743"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7656482251"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7656226323"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7656175059"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7656215127"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7655903223"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7876791023"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7876912319"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7876760399"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7876919171"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7657854371"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7658109811"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7657854491"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7657855771"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7657855803"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7655942035"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "8158142391"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "8158100263"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7655941727"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7658109479"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7876757359"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7876788295"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7876805819"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7877365523"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7877360047"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7877444863"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4389171295"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4393826907"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518873663"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518861839"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386585491"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386585399"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386584079"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386525095"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386989115"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386989199"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386524875"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386583571"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386585019"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386586115"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386661627"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386663127"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386684287"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386662151"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386668147"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386684287"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386667851"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386666563"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386513971"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386513751"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386665539"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386650971"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386708195"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386707739"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386705443"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386513971"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386513751"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386705315"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386706523"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386650971"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386813847"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386513971"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386513751"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386813115"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386778775"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386779287"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386779651"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386775327"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386778487"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386775959"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386767851"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386832591"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386766631"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4386774043"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4373385843"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7517917807"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518178935"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518176455"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518172631"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7518150719"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "9153124779"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7605542447"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7681390855"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7681390467"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "7678760783"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4389664471"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4389671751"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4376298319"
+                }
+              },
+              {
+                "_type" : {
+                  "_name" : "SourceCodeFrame"
+                },
+                "addressString" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "4374945407"
+                }
+              }
+            ]
+          },
+          "location" : {
+            "_type" : {
+              "_name" : "SourceCodeLocation"
+            },
+            "filePath" : {
+              "_type" : {
+                "_name" : "String"
+              },
+              "_value" : "\/Users\/lizheng\/Downloads\/gomoku-xcode\/just-gomokuTests\/ArchiveTests.swift"
+            },
+            "lineNumber" : {
+              "_type" : {
+                "_name" : "Int"
+              },
+              "_value" : "29"
+            }
+          }
+        },
+        "timestamp" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:09:13.085-0500"
+        },
+        "uuid" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "825F8F7B-DA86-4A31-8404-2C6F7FB8EA76"
+        }
+      },
+      {
+        "_type" : {
+          "_name" : "ActionTestFailureSummary"
+        },
+        "associatedError" : {
+          "_type" : {
+            "_name" : "TestAssociatedError"
+          },
+          "code" : {
+            "_type" : {
+              "_name" : "Int"
+            },
+            "_value" : "5"
+          },
+          "domain" : {
+            "_type" : {
+              "_name" : "String"
+            },
+            "_value" : "XCTHTestOperationCoordinatorErrorDomain"
+          },
+          "userInfo" : {
+            "_type" : {
+              "_name" : "SortedKeyValueArray"
+            },
+            "storage" : {
+              "_type" : {
+                "_name" : "Array"
+              },
+              "_values" : [
+                {
+                  "_type" : {
+                    "_name" : "SortedKeyValueArrayPair"
+                  },
+                  "key" : {
+                    "_type" : {
+                      "_name" : "String"
+                    },
+                    "_value" : "NSLocalizedDescription"
+                  },
+                  "value" : {
+                    "_type" : {
+                      "_name" : "String"
+                    },
+                    "_value" : "Crash: just-gomoku at +[XCTFailableInvocation invokeErrorConventionInvocation:completion:]"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "attachments" : {
+          "_type" : {
+            "_name" : "Array"
+          },
+          "_values" : [
+            {
+              "_type" : {
+                "_name" : "ActionTestAttachment"
+              },
+              "filename" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "just-gomoku-2026-10-11-200918.ips"
+              },
+              "inActivityIdentifier" : {
+                "_type" : {
+                  "_name" : "Int"
+                },
+                "_value" : "0"
+              },
+              "lifetime" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "keepAlways"
+              },
+              "name" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "kXCTAttachmentLegacyDiagnosticReportData"
+              },
+              "payloadRef" : {
+                "_type" : {
+                  "_name" : "Reference"
+                },
+                "id" : {
+                  "_type" : {
+                    "_name" : "String"
+                  },
+                  "_value" : "0~OxjIr87anGWkmZYV5s_5fZUvMLfSM1Yqoc-92q34wbPItHM833GZMVUPxPnEsXd-X6ws9tqcR_0VxbqBIDlgIw=="
+                }
+              },
+              "payloadSize" : {
+                "_type" : {
+                  "_name" : "Int"
+                },
+                "_value" : "52871"
+              },
+              "timestamp" : {
+                "_type" : {
+                  "_name" : "Date"
+                },
+                "_value" : "2026-10-11T20:09:19.341-0500"
+              },
+              "uniformTypeIdentifier" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "com.apple.ips"
+              },
+              "userInfo" : {
+                "_type" : {
+                  "_name" : "SortedKeyValueArray"
+                },
+                "storage" : {
+                  "_type" : {
+                    "_name" : "Array"
+                  },
+                  "_values" : [
+                    {
+                      "_type" : {
+                        "_name" : "SortedKeyValueArrayPair"
+                      },
+                      "key" : {
+                        "_type" : {
+                          "_name" : "String"
+                        },
+                        "_value" : "HasOriginalFileName"
+                      },
+                      "value" : {
+                        "_type" : {
+                          "_name" : "Bool"
+                        },
+                        "_value" : "true"
+                      }
+                    }
+                  ]
+                }
+              },
+              "uuid" : {
+                "_type" : {
+                  "_name" : "String"
+                },
+                "_value" : "21FE396B-4394-43A5-9ABA-CF74C1DC3A4D"
+              }
+            }
+          ]
+        },
+        "fileName" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : ""
+        },
+        "isPerformanceFailure" : {
+          "_type" : {
+            "_name" : "Bool"
+          },
+          "_value" : "false"
+        },
+        "issueType" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "Assertion Failure"
+        },
+        "isTopLevelFailure" : {
+          "_type" : {
+            "_name" : "Bool"
+          },
+          "_value" : "true"
+        },
+        "lineNumber" : {
+          "_type" : {
+            "_name" : "Int"
+          },
+          "_value" : "1"
+        },
+        "message" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "Crash: just-gomoku at +[XCTFailableInvocation invokeErrorConventionInvocation:completion:]"
+        },
+        "sourceCodeContext" : {
+          "_type" : {
+            "_name" : "SourceCodeContext"
+          },
+          "callStack" : {
+            "_type" : {
+              "_name" : "Array"
+            }
+          }
+        },
+        "timestamp" : {
+          "_type" : {
+            "_name" : "Date"
+          },
+          "_value" : "2026-10-11T20:09:19.341-0500"
+        },
+        "uuid" : {
+          "_type" : {
+            "_name" : "String"
+          },
+          "_value" : "4FB6B318-8BA6-4250-B907-0FAE02B423C0"
+        }
+      }
+    ]
+  },
+  "identifier" : {
+    "_type" : {
+      "_name" : "String"
+    },
+    "_value" : "ArchiveTests\/testRepositoryReplacesDuplicateAndReopensArchivedGame()"
+  },
+  "identifierURL" : {
+    "_type" : {
+      "_name" : "String"
+    },
+    "_value" : "test:\/\/com.apple.xcode\/just-gomoku\/just-gomokuTests\/ArchiveTests\/testRepositoryReplacesDuplicateAndReopensArchivedGame"
+  },
+  "name" : {
+    "_type" : {
+      "_name" : "String"
+    },
+    "_value" : "testRepositoryReplacesDuplicateAndReopensArchivedGame()"
+  },
+  "performanceMetrics" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "tags" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "testStatus" : {
+    "_type" : {
+      "_name" : "String"
+    },
+    "_value" : "Failure"
+  },
+  "trackedIssues" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  },
+  "warningSummaries" : {
+    "_type" : {
+      "_name" : "Array"
+    }
+  }
+}

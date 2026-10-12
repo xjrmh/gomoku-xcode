@@ -6,7 +6,7 @@ enum GameMode: String, Codable, CaseIterable, Identifiable, Sendable {
     case ai
 
     var id: Self { self }
-    var title: String { self == .pvp ? "PvP" : "AI" }
+    var title: String { self == .pvp ? "2 Players" : "AI" }
 }
 
 enum AIDifficulty: String, Codable, CaseIterable, Identifiable, Sendable {

@@ -12,16 +12,25 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parent
 SOURCE_DIR = ROOT / "sources"
+IPAD_SOURCE_DIR = ROOT / "sources-ipad"
 OUTPUT_DIR = ROOT / "final-6.9-inch"
 OUTPUT_65_DIR = ROOT / "final-6.5-inch"
+IPAD_OUTPUT_DIR = ROOT / "final-ipad-13-inch"
 LOGO_PATH = ROOT / "logo.png"
 CONTACT_SHEET_PATH = ROOT / "final-contact-sheet.jpg"
+IPAD_CONTACT_SHEET_PATH = ROOT / "final-ipad-contact-sheet.jpg"
 FONT_PATH = "/System/Library/Fonts/SFNS.ttf"
 
 WIDTH = 1320
 HEIGHT = 2868
 WIDTH_65 = 1284
 HEIGHT_65 = 2778
+IPAD_WIDTH = 2064
+IPAD_HEIGHT = 2752
+IPAD_SCREEN_X = 202
+IPAD_SCREEN_Y = 500
+IPAD_SCREEN_WIDTH = 1660
+IPAD_SCREEN_RADIUS = 52
 SCREEN_X = 140
 SCREEN_Y = 590
 SCREEN_WIDTH = 1040
@@ -129,6 +138,16 @@ def gradient(top: tuple[int, int, int], bottom: tuple[int, int, int]) -> Image.I
     return ImageOps.colorize(ramp, black=top, white=bottom)
 
 
+def sized_gradient(
+    width: int,
+    height: int,
+    top: tuple[int, int, int],
+    bottom: tuple[int, int, int],
+) -> Image.Image:
+    ramp = Image.linear_gradient("L").resize((width, height), Image.Resampling.BILINEAR)
+    return ImageOps.colorize(ramp, black=top, white=bottom)
+
+
 def add_background_detail(canvas: Image.Image, accent: tuple[int, int, int]) -> Image.Image:
     base = canvas.convert("RGBA")
 
@@ -147,6 +166,41 @@ def add_background_detail(canvas: Image.Image, accent: tuple[int, int, int]) -> 
         pattern_draw.line((850, y, 1320, y), fill=(255, 255, 255, 10), width=2)
     pattern_draw.ellipse((1090, 68, 1218, 196), fill=(0, 0, 0, 35))
     pattern_draw.ellipse((1190, 182, 1318, 310), fill=(255, 255, 255, 30))
+    return Image.alpha_composite(base, pattern)
+
+
+def add_ipad_background_detail(canvas: Image.Image, accent: tuple[int, int, int]) -> Image.Image:
+    base = canvas.convert("RGBA")
+    width, height = canvas.size
+
+    glow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+    glow_draw = ImageDraw.Draw(glow)
+    glow_draw.ellipse(
+        (-round(width * 0.12), -round(height * 0.14), round(width * 0.55), round(height * 0.28)),
+        fill=(*accent, 42),
+    )
+    glow_draw.ellipse(
+        (round(width * 0.72), -round(height * 0.07), round(width * 1.08), round(height * 0.22)),
+        fill=(255, 255, 255, 18),
+    )
+    glow = glow.filter(ImageFilter.GaussianBlur(170))
+    base = Image.alpha_composite(base, glow)
+
+    pattern = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+    pattern_draw = ImageDraw.Draw(pattern)
+    spacing = 104
+    for x in range(round(width * 0.66), width + spacing, spacing):
+        pattern_draw.line((x, 0, x, 500), fill=(255, 255, 255, 10), width=2)
+    for y in range(-20, 560, spacing):
+        pattern_draw.line((round(width * 0.64), y, width, y), fill=(255, 255, 255, 10), width=2)
+    pattern_draw.ellipse(
+        (round(width * 0.82), 58, round(width * 0.90), 58 + round(width * 0.08)),
+        fill=(0, 0, 0, 35),
+    )
+    pattern_draw.ellipse(
+        (round(width * 0.89), 150, round(width * 0.97), 150 + round(width * 0.08)),
+        fill=(255, 255, 255, 28),
+    )
     return Image.alpha_composite(base, pattern)
 
 
@@ -175,6 +229,22 @@ def rounded_capture(source_path: Path) -> tuple[Image.Image, Image.Image]:
     ImageDraw.Draw(mask).rounded_rectangle(
         (0, 0, capture.width - 1, capture.height - 1),
         radius=SCREEN_RADIUS,
+        fill=255,
+    )
+    return capture, mask
+
+
+def rounded_ipad_capture(source_path: Path) -> tuple[Image.Image, Image.Image]:
+    source = Image.open(source_path).convert("RGB")
+    if source.size != (IPAD_WIDTH, IPAD_HEIGHT):
+        raise ValueError(f"Unexpected iPad source dimensions for {source_path}: {source.size}")
+
+    capture_height = round(IPAD_HEIGHT * IPAD_SCREEN_WIDTH / IPAD_WIDTH)
+    capture = source.resize((IPAD_SCREEN_WIDTH, capture_height), Image.Resampling.LANCZOS)
+    mask = Image.new("L", capture.size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle(
+        (0, 0, capture.width - 1, capture.height - 1),
+        radius=IPAD_SCREEN_RADIUS,
         fill=255,
     )
     return capture, mask
@@ -244,6 +314,78 @@ def compose(item: dict[str, str]) -> Path:
     return destination
 
 
+def compose_ipad(item: dict[str, str]) -> Path:
+    accent = hex_rgb(item["accent"])
+    canvas = sized_gradient(
+        IPAD_WIDTH,
+        IPAD_HEIGHT,
+        hex_rgb(item["top"]),
+        hex_rgb(item["bottom"]),
+    )
+    canvas = add_ipad_background_detail(canvas, accent)
+    draw = ImageDraw.Draw(canvas)
+
+    logo = Image.open(LOGO_PATH).convert("RGBA").resize((82, 82), Image.Resampling.LANCZOS)
+    canvas.alpha_composite(logo, (140, 64))
+    draw_letterspaced(draw, (250, 84), "JUST GOMOKU", font(42, "Bold"), (*accent, 255), 7)
+
+    title_font = fit_multiline_font(item["headline"], 120, 1780)
+    title_position = (138, 162)
+    draw.multiline_text(
+        title_position,
+        item["headline"],
+        font=title_font,
+        fill=(255, 255, 255, 255),
+        spacing=-8,
+    )
+    title_box = draw.multiline_textbbox(
+        title_position,
+        item["headline"],
+        font=title_font,
+        spacing=-8,
+    )
+    draw.text(
+        (142, title_box[3] + 18),
+        item["subheadline"],
+        font=font(42, "Medium"),
+        fill=(255, 255, 255, 205),
+    )
+
+    capture, capture_mask = rounded_ipad_capture(IPAD_SOURCE_DIR / item["source"])
+    capture_height = capture.height
+
+    shadow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+    shadow_shape = Image.new("L", (IPAD_SCREEN_WIDTH, capture_height), 0)
+    ImageDraw.Draw(shadow_shape).rounded_rectangle(
+        (0, 0, IPAD_SCREEN_WIDTH - 1, capture_height - 1),
+        radius=IPAD_SCREEN_RADIUS,
+        fill=190,
+    )
+    shadow_shape = shadow_shape.filter(ImageFilter.GaussianBlur(36))
+    shadow_patch = Image.new("RGBA", (IPAD_SCREEN_WIDTH, capture_height), (0, 0, 0, 130))
+    shadow_patch.putalpha(shadow_shape)
+    shadow.alpha_composite(shadow_patch, (IPAD_SCREEN_X, IPAD_SCREEN_Y + 20))
+    canvas = Image.alpha_composite(canvas, shadow)
+
+    canvas.paste(capture.convert("RGBA"), (IPAD_SCREEN_X, IPAD_SCREEN_Y), capture_mask)
+    border = ImageDraw.Draw(canvas)
+    border.rounded_rectangle(
+        (
+            IPAD_SCREEN_X,
+            IPAD_SCREEN_Y,
+            IPAD_SCREEN_X + IPAD_SCREEN_WIDTH - 1,
+            IPAD_SCREEN_Y + capture_height - 1,
+        ),
+        radius=IPAD_SCREEN_RADIUS,
+        outline=(255, 255, 255, 64),
+        width=3,
+    )
+
+    destination = IPAD_OUTPUT_DIR / item["output"]
+    canvas.convert("RGB").save(destination, format="PNG", optimize=True)
+    return destination
+
+
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -285,6 +427,40 @@ def compose_contact_sheet(exports: list[Path]) -> Path:
 
     sheet.save(CONTACT_SHEET_PATH, format="JPEG", quality=92, optimize=True)
     return CONTACT_SHEET_PATH
+
+
+def compose_ipad_contact_sheet(exports: list[Path]) -> Path:
+    columns = 3
+    thumb_width = 412
+    thumb_height = round(IPAD_HEIGHT * thumb_width / IPAD_WIDTH)
+    label_height = 52
+    rows = (len(exports) + columns - 1) // columns
+    sheet = Image.new(
+        "RGB",
+        (columns * thumb_width, rows * (label_height + thumb_height)),
+        (24, 24, 24),
+    )
+    draw = ImageDraw.Draw(sheet)
+    label_font = font(24, "Bold")
+
+    for index, export in enumerate(exports):
+        column = index % columns
+        row = index // columns
+        if index == len(exports) - 1 and len(exports) % columns == 1:
+            column = columns // 2
+        x = column * thumb_width
+        label_y = row * (label_height + thumb_height)
+        image_y = label_y + label_height
+        draw.text((x + 14, label_y + 11), export.stem, font=label_font, fill=(255, 255, 255))
+        with Image.open(export) as source:
+            thumbnail = source.convert("RGB").resize(
+                (thumb_width, thumb_height),
+                Image.Resampling.LANCZOS,
+            )
+        sheet.paste(thumbnail, (x, image_y))
+
+    sheet.save(IPAD_CONTACT_SHEET_PATH, format="JPEG", quality=92, optimize=True)
+    return IPAD_CONTACT_SHEET_PATH
 
 
 def compose_6_5_exports(exports: list[Path]) -> list[Path]:
@@ -375,6 +551,44 @@ def main() -> None:
         "items": manifest_items_65,
     }
     (OUTPUT_65_DIR / "manifest.json").write_text(json.dumps(manifest_65, indent=2) + "\n")
+
+    IPAD_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    ipad_exports = []
+    ipad_manifest_items = []
+    for item in ITEMS:
+        output_path = compose_ipad(item)
+        ipad_exports.append(output_path)
+        with Image.open(output_path) as image:
+            if image.size != (IPAD_WIDTH, IPAD_HEIGHT) or image.mode != "RGB":
+                raise ValueError(f"Invalid iPad export {output_path}: {image.size}, {image.mode}")
+        ipad_manifest_items.append(
+            {
+                "order": len(ipad_manifest_items) + 1,
+                "file": output_path.name,
+                "source": item["source"],
+                "headline": item["headline"].replace("\n", " "),
+                "subheadline": item["subheadline"],
+                "width": IPAD_WIDTH,
+                "height": IPAD_HEIGHT,
+                "color_mode": "RGB",
+                "sha256": sha256(output_path),
+            }
+        )
+
+    ipad_contact_sheet = compose_ipad_contact_sheet(ipad_exports)
+    ipad_manifest = {
+        "app": "Just Gomoku",
+        "platform": "iPad 13-inch portrait",
+        "device_capture": "iPad Pro 13-inch (M5) simulator, iPadOS 26.5",
+        "export_dimensions": [IPAD_WIDTH, IPAD_HEIGHT],
+        "alpha_channel": False,
+        "contact_sheet": {
+            "file": str(Path("..") / ipad_contact_sheet.name),
+            "sha256": sha256(ipad_contact_sheet),
+        },
+        "items": ipad_manifest_items,
+    }
+    (IPAD_OUTPUT_DIR / "manifest.json").write_text(json.dumps(ipad_manifest, indent=2) + "\n")
 
 
 if __name__ == "__main__":

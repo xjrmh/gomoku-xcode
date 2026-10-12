@@ -1,0 +1,155 @@
+2026-10-11 20:09:12.329248-0500 just-gomoku[75372:298237] [MenuBuilder] Inserted elements conflict with existing elements:
+
+Keyboard Shortcut (duplicate modifierFlags: command, input: Z):
+- Existing keyboard shortcut: <UIKeyCommand: 0x10769bd00; title = Undo; action: undo:; input: z; modifierFlags: Cmd>
+- Conflicting keyboard shortcut: <UIKeyCommand: 0x10a467300; title = Undo; action: _performMainMenuShortcutKeyCommand:; input: z; modifierFlags: Cmd>
+Ensure all keyboard shortcuts are unique to avoid undefined behavior.
+
+Make a symbolic breakpoint at _UIMenuBuilderError to catch this in the debugger.
+IOSurfaceClientSetSurfaceNotify failed e00002c7
+2026-10-11 20:09:12.587262-0500 just-gomoku[75372:298237] [XPCErrors] non-launching port is incompatible with service identifier "com.apple.PointerUI.pointeruid.default-service"
+2026-10-11 20:09:12.588333-0500 just-gomoku[75372:298237] [API] cannot add handler to 0 from 0 - dropping
+2026-10-11 20:09:12.589188-0500 just-gomoku[75372:298237] [API] cannot add handler to 0 from 0 - dropping
+Test Suite 'ActiveSessionStoreTests' started at 2026-10-11 20:09:13.037.
+Test Case '-[just_gomokuTests.ActiveSessionStoreTests testCorruptSessionFailsClosed]' started.
+Test Case '-[just_gomokuTests.ActiveSessionStoreTests testCorruptSessionFailsClosed]' passed (0.003 seconds).
+Test Case '-[just_gomokuTests.ActiveSessionStoreTests testSaveLoadAndClear]' started.
+Test Case '-[just_gomokuTests.ActiveSessionStoreTests testSaveLoadAndClear]' passed (0.001 seconds).
+Test Suite 'ActiveSessionStoreTests' passed at 2026-10-11 20:09:13.043.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.005 (0.006) seconds
+Test Suite 'AIEngineTests' started at 2026-10-11 20:09:13.048.
+Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysBlocksImmediateLoss]' started.
+Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysBlocksImmediateLoss]' passed (0.001 seconds).
+Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysTakesImmediateWin]' started.
+Test Case '-[just_gomokuTests.AIEngineTests testAIAlwaysTakesImmediateWin]' passed (0.000 seconds).
+Test Case '-[just_gomokuTests.AIEngineTests testEasyMoveIsDeterministicForSeed]' started.
+Test Case '-[just_gomokuTests.AIEngineTests testEasyMoveIsDeterministicForSeed]' passed (0.006 seconds).
+Test Case '-[just_gomokuTests.AIEngineTests testEmptyBoardStartsAtCenterForEveryDifficulty]' started.
+Test Case '-[just_gomokuTests.AIEngineTests testEmptyBoardStartsAtCenterForEveryDifficulty]' passed (0.000 seconds).
+Test Suite 'AIEngineTests' passed at 2026-10-11 20:09:13.057.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.008 (0.009) seconds
+Test Suite 'ArchiveTests' started at 2026-10-11 20:09:13.059.
+Test Case '-[just_gomokuTests.ArchiveTests testArchivePreservesReplayAndMixedModes]' started.
+Test Case '-[just_gomokuTests.ArchiveTests testArchivePreservesReplayAndMixedModes]' passed (0.003 seconds).
+Test Case '-[just_gomokuTests.ArchiveTests testRepositoryReplacesDuplicateAndReopensArchivedGame]' started.
+/Users/lizheng/Downloads/gomoku-xcode/just-gomokuTests/ArchiveTests.swift:29: error: -[just_gomokuTests.ArchiveTests testRepositoryReplacesDuplicateAndReopensArchivedGame] : No eligible connection available (NSInternalInconsistencyException)
+2026-10-11 20:09:13.252173-0500 just-gomoku[75372:298237] [Default] Flushing outgoing messages to the IDE with timeout 30.00s
+2026-10-11 20:09:13.252394-0500 just-gomoku[75372:299595] [Default] Received confirmation that IDE processed remaining outgoing messages
+2026-10-11 20:09:13.258311-0500 just-gomoku[75372:298237] *** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'No eligible connection available'
+*** First throw call stack:
+(
+	0   CoreFoundation                      0x00000001c0287f24 __exceptionPreprocess + 172
+	1   libobjc.A.dylib                     0x00000001c008194c objc_exception_throw + 72
+	2   CoreData                            0x00000001c8579d4c -[NSSQLDefaultConnectionManager handleStoreRequest:] + 748
+	3   CoreData                            0x00000001c86c2aac -[NSSQLCoreDispatchManager routeStoreRequest:] + 220
+	4   CoreData                            0x00000001c85c7fe4 -[NSSQLCore dispatchRequest:withRetries:] + 184
+	5   CoreData                            0x00000001c85c9fe8 -[NSSQLCore _obtainPermanentIDsForObjects:withNotification:error:] + 1324
+	6   CoreData                            0x00000001c85ca5cc -[NSSQLCore _prepareForExecuteRequest:withContext:error:] + 268
+	7   CoreData                            0x00000001c858be14 __65-[NSPersistentStoreCoordinator e
+*** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'No eligible connection available'
+*** First throw call stack:
+(
+	0   CoreFoundation                      0x00000001c0287f24 __exceptionPreprocess + 172
+	1   libobjc.A.dylib                     0x00000001c008194c objc_exception_throw + 72
+	2   CoreData                            0x00000001c8579d4c -[NSSQLDefaultConnectionManager handleStoreRequest:] + 748
+	3   CoreData                            0x00000001c86c2aac -[NSSQLCoreDispatchManager routeStoreRequest:] + 220
+	4   CoreData                            0x00000001c85c7fe4 -[NSSQLCore dispatchRequest:withRetries:] + 184
+	5   CoreData                            0x00000001c85c9fe8 -[NSSQLCore _obtainPermanentIDsForObjects:withNotification:error:] + 1324
+	6   CoreData                            0x00000001c85ca5cc -[NSSQLCore _prepareForExecuteRequest:withContext:error:] + 268
+	7   CoreData                            0x00000001c858be14 __65-[NSPersistentStoreCoordinator executeRequest:withContext:error:]_block_invoke.374 + 8928
+	8   CoreData                            0x00000001c857f5d4 -[NSPersistentStoreCoordinator _routeHeavyweightBlock:] + 220
+	9   CoreData                            0x00000001c8589258 -[NSPersistentStoreCoordinator executeRequest:withContext:error:] + 1080
+	10  CoreData                            0x00000001c853cff8 -[NSManagedObjectContext save:] + 1108
+	11  SwiftData                           0x00000001d57e4af0 __swift_allocate_value_buffer + 51208
+	12  SwiftData                           0x00000001d58024c0 block_destroy_helper + 180
+	13  SwiftData                           0x00000001d57dd350 __swift_allocate_value_buffer + 20584
+	14  SwiftData                           0x00000001d5803f84 __swift_assign_boxed_opaque_existential_0 + 432
+	15  CoreData                            0x00000001c87195a4 $sxs5Error_pIgrzo_xsAA_pIegrzo_lTR + 20
+	16  CoreData                            0x00000001c8757b74 $sxs5Error_pIgrzo_xsAA_pIegrzo_lTRTA + 20
+	17  CoreData                            0x00000001c871961c $sSo22NSManagedObjectContextC8CoreDataE30_rethrowsHelper_performAndWait33_A0F63BA25A751D403694B89F4AD0A24ELL2fn7execute6rescuexyyyYbXEXE_xyKXExs5Error_pKXEtKlFyxyKcXEfU_yyYbXEfU_ + 108
+	18  CoreData                            0x00000001c8719b1c $sIgh_Iegh_TR + 20
+	19  CoreData                            0x00000001c8719b3c $sIegh_IyBh_TR + 20
+	20  CoreData                            0x00000001c8546794 developerSubmittedBlockToNSManagedObjectContextPerform + 220
+	21  libdispatch.dylib                   0x00000001e6435fb8 _dispatch_client_callout + 12
+	22  libdispatch.dylib                   0x00000001e642bb28 _dispatch_lane_barrier_sync_invoke_and_complete + 92
+	23  CoreData                            0x00000001c8546660 -[NSManagedObjectContext performBlockAndWait:] + 304
+	24  CoreData                            0x00000001c8757a28 $sSo22NSManagedObjectContextC8CoreDataE14performAndWaityxxyKXEKlF + 332
+	25  SwiftData                           0x00000001d57dc770 __swift_allocate_value_buffer + 17544
+	26  SwiftData                           0x00000001d57e4048 __swift_allocate_value_buffer + 48480
+	27  SwiftData                           0x00000001d57e84bc __swift_allocate_value_buffer + 66004
+	28  SwiftData                           0x00000001d5870f14 __swift_closure_destructor.46 + 76184
+	29  SwiftData                           0x00000001d586f9b0 __swift_closure_destructor.46 + 70708
+	30  SwiftData                           0x00000001d5884500 __swift__destructor.10 + 2140
+	31  just-gomoku.debug.dylib             0x00000001059d7060 $s11just_gomoku17ArchiveRepositoryO7archive_2inyAA11GameSessionV_9SwiftData12ModelContextCtFZ + 1128
+	32  just-gomokuTests                    0x0000000105e47a5c $s16just_gomokuTests07ArchiveC0C53testRepositoryReplacesDuplicateAndReopensArchivedGameyyKF + 692
+	33  just-gomokuTests                    0x0000000105e48278 $s16just_gomokuTests07ArchiveC0C53testRepositoryReplacesDuplicateAndReopensArchivedGameyyKFTo + 56
+	34  CoreFoundation                      0x00000001c028e840 __invoking___ + 144
+	35  CoreFoundation                      0x00000001c028ba10 -[NSInvocation invoke] + 276
+	36  XCTestCore                          0x000000010575fb94 +[XCTFailableInvocation invokeErrorConventionInvocation:completion:] + 84
+	37  XCTestCore                          0x000000010575fb38 __90+[XCTFailableInvocation invokeInvocation:withTestMethodConvention:lastObservedErrorIssue:]_block_invoke + 24
+	38  XCTestCore                          0x000000010575f610 __81+[XCTFailableInvocation invokeWithAsynchronousWait:lastObservedErrorIssue:block:]_block_invoke + 292
+	39  XCTestCore                          0x0000000105750fa8 __49+[XCTSwiftErrorObservation observeErrorsInBlock:]_block_invoke + 28
+	40  XCTestCore                          0x00000001057c243c $sSo24XCTSwiftErrorObservationC10XCTestCoreE14_observeErrors33_4641E344ACA55A25D2B1EC985574C54DLL2inSo0abC6ResultCSgyyXE_tFZ12$sIyB_Ieg_TRIyB_Tf1cn_n + 172
+	41  XCTestCore                          0x00000001057c2490 $sSo24XCTSwiftErrorObservationC10XCTestCoreE14_observeErrors33_4641E344ACA55A25D2B1EC985574C54DLL2inSo0abC6ResultCSgyyXE_tFZTo + 28
+	42  XCTestCore                          0x0000000105750ecc +[XCTSwiftErrorObservation observeErrorsInBlock:] + 156
+	43  XCTestCore                          0x000000010575f414 +[XCTFailableInvocation invokeWithAsynchronousWait:lastObservedErrorIssue:block:] + 176
+	44  XCTestCore                          0x000000010575f9bc +[XCTFailableInvocation invokeInvocation:withTestMethodConvention:lastObservedErrorIssue:] + 140
+	45  XCTestCore                          0x000000010575fe04 +[XCTFailableInvocation invokeInvocation:lastObservedErrorIssue:] + 64
+	46  XCTestCore                          0x00000001057724fc -[XCTestCase invokeTestMethod:] + 56
+	47  XCTestCore                          0x0000000105772ad8 __24-[XCTestCase invokeTest]_block_invoke.98 + 60
+	48  XCTestCore                          0x0000000105777d80 -[XCTestCase(XCTIssueHandling) _caughtUnhandledDeveloperExceptionPermittingControlFlowInterruptions:caughtInterruptionException:whileExecutingBlock:] + 144
+	49  XCTestCore                          0x0000000105772708 -[XCTestCase invokeTest] + 476
+	50  XCTestCore                          0x0000000105773e74 __45-[XCTestCase _invokeTestIfSupportedOSVersion]_block_invoke + 32
+	51  XCTestCore                          0x0000000105777d80 -[XCTestCase(XCTIssueHandling) _caughtUnhandledDeveloperExceptionPermittingControlFlowInterruptions:caughtInterruptionException:whileExecutingBlock:] + 144
+	52  XCTestCore                          0x0000000105773d4c -[XCTestCase _invokeTestIfSupportedOSVersion] + 156
+	53  XCTestCore                          0x0000000105773844 __26-[XCTestCase performTest:]_block_invoke.125 + 324
+	54  XCTestCore                          0x000000010574e434 +[XCTContext _runInChildOfContext:forTestCase:markAsReportingBase:block:] + 152
+	55  XCTestCore                          0x000000010574e358 +[XCTContext runInContextForTestCase:markAsReportingBase:block:] + 88
+	56  XCTestCore                          0x0000000105773444 -[XCTestCase performTest:] + 236
+	57  XCTestCore                          0x000000010576fb5c -[XCTest runTest] + 44
+	58  XCTestCore                          0x000000010577dae4 -[XCTestSuite runTestBasedOnRepetitionPolicy:testRun:] + 60
+	59  XCTestCore                          0x000000010577d91c __27-[XCTestSuite performTest:]_block_invoke + 172
+	60  XCTestCore                          0x000000010577d024 __59-[XCTestSuite _performProtectedSectionForTest:testSection:]_block_invoke + 40
+	61  XCTestCore                          0x000000010574e434 +[XCTContext _runInChildOfContext:forTestCase:markAsReportingBase:block:] + 152
+	62  XCTestCore                          0x000000010574e358 +[XCTContext runInContextForTestCase:markAsReportingBase:block:] + 88
+	63  XCTestCore                          0x000000010577cfa4 -[XCTestSuite _performProtectedSectionForTest:testSection:] + 140
+	64  XCTestCore                          0x000000010577d45c -[XCTestSuite performTest:] + 208
+	65  X
+libc++abi: terminating due to uncaught exception of type NSException
+2026-10-11 20:09:20.037222-0500 just-gomoku[75532:300823] [MenuBuilder] Inserted elements conflict with existing elements:
+
+Keyboard Shortcut (duplicate modifierFlags: command, input: Z):
+- Existing keyboard shortcut: <UIKeyCommand: 0x103a9bd00; title = Undo; action: undo:; input: z; modifierFlags: Cmd>
+- Conflicting keyboard shortcut: <UIKeyCommand: 0x106867300; title = Undo; action: _performMainMenuShortcutKeyCommand:; input: z; modifierFlags: Cmd>
+Ensure all keyboard shortcuts are unique to avoid undefined behavior.
+
+Make a symbolic breakpoint at _UIMenuBuilderError to catch this in the debugger.
+IOSurfaceClientSetSurfaceNotify failed e00002c7
+2026-10-11 20:09:20.283793-0500 just-gomoku[75532:300941] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2026-10-11 20:09:20.286543-0500 just-gomoku[75532:300823] [XPCErrors] non-launching port is incompatible with service identifier "com.apple.PointerUI.pointeruid.default-service"
+2026-10-11 20:09:20.287554-0500 just-gomoku[75532:300823] [API] cannot add handler to 0 from 0 - dropping
+2026-10-11 20:09:20.288946-0500 just-gomoku[75532:300823] [API] cannot add handler to 0 from 0 - dropping
+Test Suite 'ArchiveTests' started at 2026-10-11 20:09:20.333.
+Test Suite 'ArchiveTests' passed at 2026-10-11 20:09:20.334.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'GameSessionTests' started at 2026-10-11 20:09:20.344.
+Test Case '-[just_gomokuTests.GameSessionTests testAIControlsBlackByDefault]' started.
+Test Case '-[just_gomokuTests.GameSessionTests testAIControlsBlackByDefault]' passed (0.001 seconds).
+Test Case '-[just_gomokuTests.GameSessionTests testBackgroundTimeIsNotCounted]' started.
+Test Case '-[just_gomokuTests.GameSessionTests testBackgroundTimeIsNotCounted]' passed (0.000 seconds).
+Test Case '-[just_gomokuTests.GameSessionTests testConfigurationNormalizesToSupportedOddSizes]' started.
+Test Case '-[just_gomokuTests.GameSessionTests testConfigurationNormalizesToSupportedOddSizes]' passed (0.000 seconds).
+Test Case '-[just_gomokuTests.GameSessionTests testFreestyleOverlineWinsAndReturnsWholeLine]' started.
+Test Case '-[just_gomokuTests.GameSessionTests testFreestyleOverlineWinsAndReturnsWholeLine]' passed (0.000 seconds).
+Test Case '-[just_gomokuTests.GameSessionTests testFullBoardWithoutFiveEndsInDraw]' started.
+Test Case '-[just_gomokuTests.GameSessionTests testFullBoardWithoutFiveEndsInDraw]' passed (0.000 seconds).
+Test Case '-[just_gomokuTests.GameSessionTests testSessionCodableRoundTripAndValidation]' started.
+Test Case '-[just_gomokuTests.GameSessionTests testSessionCodableRoundTripAndValidation]' passed (0.001 seconds).
+Test Case '-[just_gomokuTests.GameSessionTests testSwitchingModePreservesBoardAndRecordsTransition]' started.
+Test Case '-[just_gomokuTests.GameSessionTests testSwitchingModePreservesBoardAndRecordsTransition]' passed (0.000 seconds).
+Test Case '-[just_gomokuTests.GameSessionTests testUndoRestoresExactClockSnapshotAndRestartsCurrentTurn]' started.
+Test Case '-[just_gomokuTests.GameSessionTests testUndoRestoresExactClockSnapshotAndRestartsCurrentTurn]' passed (0.000 seconds).
+Test Case '-[just_gomokuTests.GameSessionTests testValidationRejectsInconsistentPersistedBoard]' started.
+Test Case '-[just_gomokuTests.GameSessionTests testValidationRejectsInconsistentPersistedBoard]' passed (0.000 seconds).
+Test Suite 'GameSessionTests' passed at 2026-10-11 20:09:20.350.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.004 (0.006) seconds

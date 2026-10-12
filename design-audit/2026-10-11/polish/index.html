@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Just Gomoku — polished UI</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f7f6f3; color: #222321; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
+    main { width: min(1220px, calc(100% - 48px)); margin: 48px auto; }
+    header { max-width: 780px; margin-bottom: 32px; }
+    .eyebrow { color: #666963; font-size: 13px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+    h1 { margin: 8px 0 12px; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.035em; line-height: 1.15; }
+    header p { margin: 0; color: #575b54; font-size: 17px; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; align-items: start; }
+    figure { margin: 0; min-width: 0; border: 1px solid #e2e3de; border-radius: 16px; background: #fff; overflow: hidden; }
+    .capture { display: flex; justify-content: center; background: #f1f0ec; padding: 12px; }
+    img { display: block; width: 100%; height: auto; max-height: 610px; object-fit: contain; border-radius: 8px; }
+    figcaption { padding: 18px 20px 20px; }
+    h2 { font-size: 18px; line-height: 1.3; letter-spacing: -.015em; margin: 0 0 6px; }
+    figcaption p { margin: 0 0 12px; color: #5d615a; font-size: 14px; }
+    a { color: #0868c9; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible { outline: 3px solid #0868c9; outline-offset: 4px; }
+    .full-size { font-size: 13px; font-weight: 500; }
+    .notes { max-width: 780px; margin-top: 32px; padding-top: 24px; border-top: 1px solid #dedfd9; }
+    .notes p { margin: 0 0 12px; color: #575b54; font-size: 15px; }
+    footer { margin-top: 24px; font-size: 13px; color: #70746b; }
+    @media (max-width: 540px) { main { width: calc(100% - 28px); margin: 28px auto; } .gallery { gap: 18px; } img { max-height: none; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Native iOS · implementation preview</div>
+    <h1>Just Gomoku — polished UI</h1>
+    <p>The warm board and simple controls remain. Setup is consolidated, the game adapts to larger text, and iPad uses one clear composition.</p>
+  </header>
+  <section class="gallery" aria-label="Native app screenshots">
+    <figure>
+      <a class="capture" href="05-gameplay.png" aria-label="Open full-size Gameplay screenshot">
+        <img src="05-gameplay.png" width="1206" height="2622" alt="Gameplay in the native Just Gomoku app" loading="lazy">
+      </a>
+      <figcaption><h2>Gameplay</h2><p>One status row, quieter clocks, and the familiar warm board.</p><a class="full-size" href="05-gameplay.png">View full-size screenshot <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <figure>
+      <a class="capture" href="07-ai-setup.png" aria-label="Open full-size New Game screenshot">
+        <img src="07-ai-setup.png" width="1206" height="2622" alt="New Game in the native Just Gomoku app" loading="lazy">
+      </a>
+      <figcaption><h2>New Game</h2><p>Opponent, difficulty, stones, and board size live in one native sheet with an explicit Start action.</p><a class="full-size" href="07-ai-setup.png">View full-size screenshot <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <figure>
+      <a class="capture" href="03-ipad.png" aria-label="Open full-size iPad screenshot">
+        <img src="03-ipad.png" width="2064" height="2752" alt="iPad in the native Just Gomoku app" loading="lazy">
+      </a>
+      <figcaption><h2>iPad</h2><p>A single game layout and shared action dock replace the duplicate inspector.</p><a class="full-size" href="03-ipad.png">View full-size screenshot <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <figure>
+      <a class="capture" href="01-result.png" aria-label="Open full-size Finished game screenshot">
+        <img src="01-result.png" width="1206" height="2622" alt="Finished game in the native Just Gomoku app" loading="lazy">
+      </a>
+      <figcaption><h2>Finished game</h2><p>Play Again is prominent; Share remains available in the action dock.</p><a class="full-size" href="01-result.png">View full-size screenshot <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <figure>
+      <a class="capture" href="02-large-text-top.png" aria-label="Open full-size Larger text screenshot">
+        <img src="02-large-text-top.png" width="1206" height="2622" alt="Larger text in the native Just Gomoku app" loading="lazy">
+      </a>
+      <figcaption><h2>Larger text</h2><p>Status and clocks stack above the board. The screen scrolls to keep the remaining actions reachable.</p><a class="full-size" href="02-large-text-top.png">View full-size screenshot <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <figure><a class="capture" href="08-settings.png" aria-label="Open full-size Settings screenshot"><img src="08-settings.png" width="1206" height="2622" alt="Settings in the native Just Gomoku app" loading="lazy"></a><figcaption><h2>Settings</h2><p>Only appearance, haptics, and About remain in Settings.</p><a class="full-size" href="08-settings.png">View full-size screenshot</a></figcaption></figure>
+    <figure><a class="capture" href="09-about.png" aria-label="Open full-size About screenshot"><img src="09-about.png" width="1206" height="2622" alt="About in the native Just Gomoku app" loading="lazy"></a><figcaption><h2>About</h2><p>A simple information screen opens within Settings, with familiar back navigation.</p><a class="full-size" href="09-about.png">View full-size screenshot</a></figcaption></figure>
+    <figure><a class="capture" href="10-replay.png" aria-label="Open full-size Replay screenshot"><img src="10-replay.png" width="1206" height="2622" alt="Replay in the native Just Gomoku app" loading="lazy"></a><figcaption><h2>Replay</h2><p>Larger transport controls and clear player/coordinate context accompany each move.</p><a class="full-size" href="10-replay.png">View full-size screenshot</a></figcaption></figure>
+    <figure><a class="capture" href="11-ipad-landscape.png" aria-label="Open full-size iPad landscape screenshot"><img src="11-ipad-landscape.png" width="2752" height="2064" alt="iPad landscape in the native Just Gomoku app" loading="lazy"></a><figcaption><h2>iPad landscape</h2><p>The same focused game structure adapts to landscape without a second inspector.</p><a class="full-size" href="11-ipad-landscape.png">View full-size screenshot</a></figcaption></figure>
+  </section>
+  <div class="notes">
+    <p>Verification: 17 unit tests and four UI tests passed across the final focused runs. The UI checks covered the largest text size, draft cancellation, AI startup, conditional Custom controls, tap placement, held dragging, scroll gestures, and accessibility. iOS and macOS builds succeeded. Settings/About navigation and replay were also checked in Simulator.</p>
+    <p>These are captures of the native app in iPhone and iPad simulators. This page is a static screenshot gallery; tap an image to inspect the full capture.</p>
+  </div>
+  <footer><a href="../audit.html">Open the original UI review</a></footer>
+</main>
+</body>
+</html>
