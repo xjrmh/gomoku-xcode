@@ -24,7 +24,6 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var colorScheme
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var presentedSheet: GameSheet?
     @State private var sharePayload: SharePayload?
     @State private var didBootstrap = false
@@ -35,11 +34,15 @@ struct ContentView: View {
         NavigationStack {
             GeometryReader { proxy in
                 ScrollView {
-                    GameplayLayout(viewportHeight: proxy.size.height, accessibilitySize: dynamicTypeSize.isAccessibilitySize) {
+                    GameplayLayout(viewportHeight: proxy.size.height) {
+                        gameplayControls
                         MatchHUD(game: game)
                         boardSection
-                        MatchDock(game: game, sharePayload: sharePayload) {
-                            presentedSheet = .newGame
+                        VStack(spacing: 10) {
+                            auxiliaryControls
+                            MatchDock(game: game, sharePayload: sharePayload) {
+                                presentedSheet = .newGame
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -50,8 +53,8 @@ struct ContentView: View {
             .navigationTitle("")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .navigationBar)
             #endif
-            .toolbar { toolbarContent }
             .sheet(item: $presentedSheet) { destination in
                 NavigationStack {
                     switch destination {
@@ -98,7 +101,6 @@ struct ContentView: View {
 
     private var boardSection: some View {
         VStack(alignment: .trailing, spacing: 10) {
-            precisionCoachMark
             BoardCanvasView(game: game, palette: palette)
                 .id(game.session.id)
             Text("Move \(game.moves.count)")
@@ -109,39 +111,57 @@ struct ContentView: View {
         }
     }
 
-    @ViewBuilder
-    private var precisionCoachMark: some View {
-        if game.boardSize >= 19, !preferences.didShowPrecisionCoachMark {
-            VStack(alignment: .leading, spacing: 4) {
-                Label("Hold, drag, and release for precise placement.", systemImage: "hand.draw")
-                    .font(.callout)
-                    .fixedSize(horizontal: false, vertical: true)
-                Button("Got it") { preferences.didShowPrecisionCoachMark = true }
-                    .font(.callout.weight(.semibold))
-                    .frame(minHeight: 44)
+    private var auxiliaryControls: some View {
+        let showsTip = game.boardSize >= 19 && !preferences.didShowPrecisionCoachMark && !game.gameOver
+        return ZStack {
+            PrecisionCoachMark { preferences.didShowPrecisionCoachMark = true }
+                .opacity(showsTip ? 1 : 0)
+                .disabled(!showsTip)
+                .allowsHitTesting(showsTip)
+                .accessibilityHidden(!showsTip)
+            AdaptiveGlassButton(prominent: true) { game.newRound() } label: {
+                Label("Play Again", systemImage: "arrow.clockwise")
+                    .frame(maxWidth: .infinity, minHeight: 44)
             }
-            .padding(.horizontal, 14)
-            .padding(.top, 12)
-            .padding(.bottom, 4)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.background.secondary, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .controlSize(.large)
+            .opacity(game.gameOver ? 1 : 0)
+            .disabled(!game.gameOver)
+            .allowsHitTesting(game.gameOver)
+            .accessibilityHidden(!game.gameOver)
         }
     }
 
-    @ToolbarContentBuilder
-    private var toolbarContent: some ToolbarContent {
-        ToolbarItemGroup(placement: .automatic) {
-            NavigationLink {
-                HistoryView()
-            } label: {
-                Label("History", systemImage: "clock.arrow.circlepath")
+    private var gameplayControls: some View {
+        HStack {
+            Spacer(minLength: 0)
+            HStack(spacing: 0) {
+                NavigationLink {
+                    HistoryView()
+                        #if os(iOS)
+                        .toolbar(.visible, for: .navigationBar)
+                        #endif
+                } label: {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .frame(width: 44, height: 44)
+                }
+                .accessibilityLabel("History")
+                Button { presentedSheet = .settings } label: {
+                    Image(systemName: "gearshape")
+                        .frame(width: 44, height: 44)
+                }
+                .accessibilityLabel("Settings")
+                #if os(macOS)
+                Menu("More", systemImage: "ellipsis.circle") {
+                    Button("About Just Gomoku", systemImage: "info.circle") { presentedSheet = .about }
+                }
+                .frame(width: 44, height: 44)
+                #endif
             }
-            Button("Settings", systemImage: "gearshape") { presentedSheet = .settings }
-            #if os(macOS)
-            Menu("More", systemImage: "ellipsis.circle") {
-                Button("About Just Gomoku", systemImage: "info.circle") { presentedSheet = .about }
-            }
-            #endif
+            .font(.system(size: 20))
+            .buttonStyle(.plain)
+            .adaptiveGlass(cornerRadius: 24)
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("gameplay-controls")
         }
     }
 
@@ -190,32 +210,31 @@ struct ContentView: View {
     }
 }
 
-// Measure the status and actions before allocating board space. Short windows and
-// larger text grow the scrollable content instead of placing views over the board.
+// All surfaces share one column. A measured auxiliary slot keeps the board and
+// scroll extent stable when tips or result actions appear and disappear.
 private struct GameplayLayout: Layout {
     let viewportHeight: CGFloat
-    let accessibilitySize: Bool
 
     private struct Measurements {
-        let hud: CGSize
-        let board: CGSize
-        let dock: CGSize
-        var minimumHeight: CGFloat { hud.height + board.height + dock.height + 44 }
+        let dimensions: [CGSize]
+        let positions: [CGFloat]
+        var minimumHeight: CGFloat { positions[3] + dimensions[3].height + 8 }
     }
 
     private func measure(width: CGFloat, subviews: Subviews) -> Measurements {
-        let hudWidth = max(0, min(720, width - 16))
-        let dockWidth = max(0, min(480, width - 24))
-        let hud = subviews[0].sizeThatFits(ProposedViewSize(width: hudWidth, height: nil))
-        let dock = subviews[2].sizeThatFits(ProposedViewSize(width: dockWidth, height: nil))
-        let maximumBoardWidth = max(0, min(720, width - 28))
-        var board = subviews[1].sizeThatFits(ProposedViewSize(width: maximumBoardWidth, height: nil))
-        if !accessibilitySize {
-            let overflow = max(0, hud.height + board.height + dock.height + 44 - viewportHeight)
-            let boardWidth = max(min(240, maximumBoardWidth), maximumBoardWidth - overflow)
-            board = subviews[1].sizeThatFits(ProposedViewSize(width: boardWidth, height: nil))
+        let columnWidth = max(0, min(720, width - 16))
+        let dimensions = subviews.map {
+            $0.sizeThatFits(ProposedViewSize(width: columnWidth, height: nil))
         }
-        return Measurements(hud: hud, board: board, dock: dock)
+        let controlsTop: CGFloat = 8
+        let hudTop = controlsTop + dimensions[0].height + 8
+        let hudBottom = hudTop + dimensions[1].height
+        let footerTop = viewportHeight - dimensions[3].height - 8
+        let boardTop = max(hudBottom + 16,
+                           (hudBottom + footerTop - dimensions[2].height) / 2)
+        let dockTop = max(boardTop + dimensions[2].height + 16,
+                          viewportHeight - dimensions[3].height - 8)
+        return Measurements(dimensions: dimensions, positions: [controlsTop, hudTop, boardTop, dockTop])
     }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
@@ -226,18 +245,43 @@ private struct GameplayLayout: Layout {
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         let sizes = measure(width: bounds.width, subviews: subviews)
-        let hudTop = bounds.minY + 8
-        let dockTop = bounds.maxY - sizes.dock.height - 8
-        let boardTop = hudTop + sizes.hud.height + (dockTop - hudTop - sizes.hud.height - sizes.board.height) / 2
-        let positions = [hudTop, boardTop, dockTop]
-        let dimensions = [sizes.hud, sizes.board, sizes.dock]
         for index in subviews.indices {
             subviews[index].place(
-                at: CGPoint(x: bounds.midX, y: positions[index]),
+                at: CGPoint(x: bounds.midX, y: bounds.minY + sizes.positions[index]),
                 anchor: .top,
-                proposal: ProposedViewSize(dimensions[index])
+                proposal: ProposedViewSize(sizes.dimensions[index])
             )
         }
+    }
+}
+
+private struct PrecisionCoachMark: View {
+    let dismiss: () -> Void
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    var body: some View {
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 4) { content }
+            } else {
+                HStack(spacing: 12) { content }
+            }
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.background.secondary, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        Label("Hold, drag, and release for precise placement.", systemImage: "hand.draw")
+            .font(.callout)
+            .fixedSize(horizontal: false, vertical: true)
+        Button("Got it", action: dismiss)
+            .font(.callout.weight(.semibold))
+            .fixedSize()
+            .frame(minHeight: 44)
     }
 }
 
@@ -266,6 +310,8 @@ private struct MatchHUD: View {
             .frame(maxWidth: .infinity)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("match-hud")
     }
 
     private func compactLayout(now: Date) -> some View {
@@ -306,9 +352,17 @@ private struct MatchHUD: View {
     private var turnSummary: some View {
         HStack(spacing: 8) {
             StoneDot(player: game.outcome == .draw ? nil : (game.winner ?? game.current))
-            Text(game.statusText)
-                .font(.subheadline.weight(.semibold))
-                .fixedSize(horizontal: false, vertical: true)
+            // Reserve every status label so a result or turn change
+            // cannot switch the HUD between its compact and expanded layouts.
+            ZStack(alignment: .leading) {
+                ForEach(["Black's turn", "White's turn", "AI thinking…", "Your move",
+                         "Black wins", "White wins", "Draw"], id: \.self) { status in
+                    Text(status).hidden()
+                }
+                Text(game.statusText)
+            }
+            .font(.subheadline.weight(.semibold))
+            .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(game.session.configuration.mode == .ai && !game.gameOver
@@ -344,13 +398,6 @@ private struct MatchDock: View {
     var body: some View {
         AdaptiveGlassContainer {
             VStack(spacing: 10) {
-                if game.gameOver {
-                    AdaptiveGlassButton(prominent: true) { game.newRound() } label: {
-                        Label("Play Again", systemImage: "arrow.clockwise")
-                            .frame(maxWidth: .infinity, minHeight: 44)
-                    }
-                    .controlSize(.large)
-                }
                 Group {
                     if dynamicTypeSize.isAccessibilitySize {
                         VStack(spacing: 4) { actions }
@@ -364,6 +411,8 @@ private struct MatchDock: View {
                 .adaptiveGlass(cornerRadius: 30)
             }
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("match-dock")
     }
 
     @ViewBuilder
@@ -378,8 +427,12 @@ private struct MatchDock: View {
                 .buttonStyle(MinimalDockActionStyle())
                 .foregroundStyle(.primary)
             } else {
-                ProgressView("Preparing result")
-                    .frame(maxWidth: .infinity, minHeight: 58)
+                ZStack {
+                    MinimalDockLabel("Share", systemImage: "square.and.arrow.up")
+                        .hidden()
+                    ProgressView()
+                        .accessibilityLabel("Preparing result")
+                }
             }
         } else {
             MinimalDockAction("Hint", systemImage: "lightbulb") { game.askForHint() }
@@ -520,17 +573,31 @@ private struct NewGameView: View {
         }
         .pickerStyle(.menu)
         .navigationTitle("New Game")
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            startButton
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+                .padding(.bottom, 16)
+                .background(.bar)
+        }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
-            ToolbarItem(placement: .confirmationAction) {
-                Button("Start") {
-                    if game.moves.isEmpty || game.gameOver { startGame() }
-                    else { showResetConfirmation = true }
-                }
-                .fontWeight(.semibold)
-                .accessibilityIdentifier("start-game")
-            }
         }
+    }
+
+    private var startButton: some View {
+        AdaptiveGlassButton(prominent: true) {
+            if game.moves.isEmpty || game.gameOver { startGame() }
+            else { showResetConfirmation = true }
+        } label: {
+            Text("Start Game")
+                .fontWeight(.semibold)
+                .frame(maxWidth: .infinity, minHeight: 32)
+        }
+        .controlSize(.large)
+        .buttonBorderShape(.capsule)
+        .keyboardShortcut(.defaultAction)
+        .accessibilityIdentifier("start-game")
         .confirmationDialog("Start a new game?", isPresented: $showResetConfirmation, titleVisibility: .visible) {
             Button("Start New Game", role: .destructive) { startGame() }
             Button("Cancel", role: .cancel) { }
