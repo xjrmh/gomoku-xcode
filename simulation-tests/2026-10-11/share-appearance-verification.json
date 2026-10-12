@@ -1,0 +1,32 @@
+{
+  "light": {
+    "file": "share-light-after.png",
+    "dimensions": [
+      1800,
+      2560
+    ],
+    "expected_board_rgb": [
+      247,
+      223,
+      184
+    ],
+    "matching_board_pixels": 2251525,
+    "opposite_board_pixels": 0,
+    "sha256": "4aa080aa39cc6b7c62301c0c9931fcc51208249bc96850d5a8eb2977a0e54d11"
+  },
+  "dark": {
+    "file": "share-dark-after.png",
+    "dimensions": [
+      1800,
+      2560
+    ],
+    "expected_board_rgb": [
+      185,
+      144,
+      98
+    ],
+    "matching_board_pixels": 2255978,
+    "opposite_board_pixels": 0,
+    "sha256": "bee6506286b785a1f4f025c4c5ef6831469e16084009d43aafccd58460e8d3ce"
+  }
+}

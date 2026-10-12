@@ -1,0 +1,57 @@
+{
+  "recordedAt" : "2026-10-12T03:24:17Z",
+  "windows" : [
+    {
+      "boundsSize" : {
+        "height" : 667,
+        "width" : 375
+      },
+      "isHidden" : false,
+      "isKeyWindow" : true,
+      "sceneID" : "01A8589D-8991-41F3-B38A-C5828C7DF50D",
+      "scrollViews" : [
+        {
+          "adjustedContentInset" : {
+            "bottom" : 0,
+            "left" : 0,
+            "right" : 0,
+            "top" : 74
+          },
+          "boundsSize" : {
+            "height" : 667,
+            "width" : 375
+          },
+          "class" : "HostingScrollView",
+          "contentInset" : {
+            "bottom" : 0,
+            "left" : 0,
+            "right" : 0,
+            "top" : 0
+          },
+          "contentOffset" : {
+            "x" : 0,
+            "y" : -74
+          },
+          "contentSize" : {
+            "height" : 910,
+            "width" : 375
+          },
+          "frameInWindow" : {
+            "height" : 667,
+            "width" : 375,
+            "x" : 0,
+            "y" : 0
+          },
+          "isDecelerating" : false,
+          "isDragging" : false,
+          "isHidden" : false,
+          "isScrollEnabled" : true,
+          "isTracking" : false,
+          "isUserInteractionEnabled" : true,
+          "path" : "UIWindow[0]\/UITransitionView[0]\/UIDropShadowView[0]\/_UIHostingView<ModifiedContent<LazyView<ModifiedContent<ModifiedContent<ContentView, _EnvironmentKeyWritingModifier<Optional<GameState>>>, _EnvironmentKeyWritingModifier<Optional<PreferencesStore>>>>, RootModifier>>[0]\/UIKitPlatformViewHost<PlatformViewControllerRepresentableAdaptor<NavigationStackRepresentable>>[0]\/UILayoutContainerView[0]\/UINavigationTransitionView[0]\/UIViewControllerWrapperView[0]\/HostingView[0]\/PlatformContainer[0]\/HostingScrollView[0]"
+        }
+      ],
+      "windowIndex" : 0
+    }
+  ]
+}

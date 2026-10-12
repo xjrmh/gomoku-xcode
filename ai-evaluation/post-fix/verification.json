@@ -1,0 +1,20 @@
+{
+  "productionEngineSHA256": "544007f651ab0a0dba8544eb85cccee079279eb1b61a55cec770874f49069e9b",
+  "iOSUnitTests": {
+    "configuration": "Release",
+    "testsPassed": 33,
+    "aiTestsPassed": 12,
+    "failures": 0,
+    "destination": "iPhone18Pro (366770B3-279A-4E5B-BFB8-6C7BC5A85D3A)",
+    "parallelTesting": false,
+    "log": "/tmp/gomoku-ai-fix-xcode-tests-final.log",
+    "resultBundle": "/tmp/gomoku-ai-fix-tests-final.xcresult",
+    "command": "xcodebuild -project just-gomoku.xcodeproj -scheme just-gomoku -configuration Release -destination 'platform=iOS Simulator,id=366770B3-279A-4E5B-BFB8-6C7BC5A85D3A' -parallel-testing-enabled NO -only-testing:just-gomokuTests ENABLE_TESTABILITY=YES test"
+  },
+  "macOSBuild": {
+    "configuration": "Release",
+    "passed": true,
+    "log": "/tmp/gomoku-ai-fix-macos-build.log",
+    "command": "xcodebuild -project just-gomoku.xcodeproj -scheme just-gomoku -configuration Release -destination 'platform=macOS' -derivedDataPath /tmp/gomoku-ai-fix-macos-derived-data CODE_SIGNING_ALLOWED=NO build"
+  }
+}

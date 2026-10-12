@@ -1,0 +1,1130 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/just-gomoku.xcodeproj -scheme just-gomoku -configuration Debug -destination "platform=iOS Simulator,id=36907811-ECC3-4A00-9E5A-DC714B4A5454" -derivedDataPath /tmp/gomoku-dedicated-edge-derived -resultBundlePath /Users/lizheng/Downloads/gomoku-xcode/simulation-tests/2026-10-11/ios18-edge.xcresult "-only-testing:just-gomokuUITests/EdgeCaseUITests" "-only-testing:just-gomokuUITests/HistoryEdgeCaseUITests" -parallel-testing-enabled NO test
+
+2026-10-11 21:54:19.871 xcodebuild[23158:594160] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+Writing result bundle at path:
+	/Users/lizheng/Downloads/gomoku-xcode/simulation-tests/2026-10-11/ios18-edge.xcresult
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (3 targets)
+    Target 'just-gomokuUITests' in project 'just-gomoku'
+        ➜ Explicit dependency on target 'just-gomoku' in project 'just-gomoku'
+    Target 'just-gomokuTests' in project 'just-gomoku'
+        ➜ Explicit dependency on target 'just-gomoku' in project 'just-gomoku'
+    Target 'just-gomoku' in project 'just-gomoku' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/Assets.xcassets /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/gomoku-icon.icon /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/gomoku-icon-dark.icon
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+Build description signature: ab854b40d3e718c4dc5042b65fdfb53c
+Build description path: /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/XCBuildData/ab854b40d3e718c4dc5042b65fdfb53c.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk /tmp/gomoku-dedicated-edge-derived/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/just-gomoku.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -o /tmp/gomoku-dedicated-edge-derived/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache
+
+Ld /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/__preview.dylib normal (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -F/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -install_name @rpath/just-gomoku.debug.dylib -Xlinker -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/Objects-normal/arm64/just-gomoku_dependency_info.dat -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku.app-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku.app-Simulated.xcent.der -Xlinker -no_adhoc_codesign -o /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/__preview.dylib
+
+CompileAssetCatalogVariant thinned /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/Assets.xcassets /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/gomoku-icon.icon /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/gomoku-icon-dark.icon (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/Assets.xcassets /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/gomoku-icon.icon /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/gomoku-icon-dark.icon --compile /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_dependencies_thinned --output-partial-info-plist /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_generated_info.plist_thinned --app-icon gomoku-icon --include-all-app-icons --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --filter-for-thinning-device-configuration iPhone17,1 --filter-for-device-os-version 18.6 --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 18.0 --platform iphonesimulator
+/* com.apple.actool.compilation-results */
+/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_generated_info.plist_thinned
+/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_output/thinned/Assets.car
+/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_output/thinned/gomoku-icon60x60@2x.png
+/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_output/thinned/gomoku-icon76x76@2x~ipad.png
+
+
+Ld /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku.debug.dylib normal (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -F/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -filelist /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/Objects-normal/arm64/just-gomoku.LinkFileList -install_name @rpath/just-gomoku.debug.dylib -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/Objects-normal/arm64/just-gomoku_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/Objects-normal/arm64/just-gomoku_dependency_info.dat -fobjc-link-runtime -fprofile-instr-generate -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/Objects-normal/arm64/just_gomoku.swiftmodule -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -Xlinker -no_adhoc_codesign -o /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku.debug.dylib
+
+ConstructStubExecutorLinkFileList /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku-ExecutorLinkFileList-normal-arm64.txt (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    construct-stub-executor-link-file-list /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'just-gomoku' from project 'just-gomoku')
+
+Ld /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku normal (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0-simulator -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -F/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku-ExecutorLinkFileList-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku.app-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku.app-Simulated.xcent.der /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku.debug.dylib -Xlinker -no_adhoc_codesign -o /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku
+
+LinkAssetCatalog /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/Assets.xcassets /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/gomoku-icon.icon /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/gomoku-icon-dark.icon (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    builtin-linkAssetCatalog --thinned /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_output/thinned --thinned-dependencies /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_generated_info.plist_thinned --unthinned /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_output/unthinned --unthinned-dependencies /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_generated_info.plist_unthinned --output /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app --plist-output /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_generated_info.plist
+note: Emplaced /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/gomoku-icon60x60@2x.png (in target 'just-gomoku' from project 'just-gomoku')
+note: Emplaced /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/Assets.car (in target 'just-gomoku' from project 'just-gomoku')
+note: Emplaced /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/gomoku-icon76x76@2x~ipad.png (in target 'just-gomoku' from project 'just-gomoku')
+
+ProcessInfoPlistFile /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/Info.plist /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/Info.plist (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    builtin-infoPlistUtility /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/gomoku/Info.plist -producttype com.apple.product-type.application -genpkginfo /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/assetcatalog_generated_info.plist -o /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/Info.plist
+
+CopySwiftLibs /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    builtin-swiftStdLibTool --copy --verbose --sign - --scan-executable /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku.debug.dylib --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/Frameworks --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/SystemExtensions --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os --back-deploy-swift-span
+
+ExtractAppIntentsMetadata (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name just_gomoku --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk --xcode-version 27A266a --platform-family iOS --deployment-target 18.0 --bundle-identifier com.xjrmh.gomoku --output /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app --target-triple arm64-apple-ios18.0-simulator --binary-file /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku --dependency-file /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/Objects-normal/arm64/just-gomoku_dependency_info.dat --stringsdata-file /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/Objects-normal/arm64/just-gomoku.SwiftFileList --metadata-file-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku.DependencyMetadataFileList --static-metadata-file-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/Objects-normal/arm64/just-gomoku.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --no-app-shortcuts-localization
+2026-10-11 21:54:25.674 appintentsmetadataprocessor[23191:594616] Starting appintentsmetadataprocessor export
+2026-10-11 21:54:25.676 appintentsmetadataprocessor[23191:594616] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+
+ProcessInfoPlistFile /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/Info.plist /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/empty-just-gomokuTests.plist (in target 'just-gomokuTests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    builtin-infoPlistUtility /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/empty-just-gomokuTests.plist -producttype com.apple.product-type.bundle.unit-test -expandbuildsettings -format binary -platform iphonesimulator -o /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/Info.plist
+
+Ld /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/just-gomokuTests normal (in target 'just-gomokuTests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0-simulator -bundle -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -L/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk/Developer/Library/Frameworks -filelist /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/Objects-normal/arm64/just-gomokuTests.LinkFileList -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @loader_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -bundle_loader /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku -Xlinker -object_path_lto -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/Objects-normal/arm64/just-gomokuTests_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/Objects-normal/arm64/just-gomokuTests_dependency_info.dat -fobjc-link-runtime -fprofile-instr-generate -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/Objects-normal/arm64/just_gomokuTests.swiftmodule -Xlinker -needed_framework -Xlinker XCTest -framework XCTest -Xlinker -needed-lXCTestSwiftSupport -lXCTestSwiftSupport /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku.debug.dylib -Xlinker -no_adhoc_codesign -o /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/just-gomokuTests
+
+CopySwiftLibs /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest (in target 'just-gomokuTests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    builtin-swiftStdLibTool --copy --verbose --sign - --scan-executable /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/just-gomokuTests --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/Frameworks --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/PlugIns --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/SystemExtensions --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os --back-deploy-swift-span
+
+ExtractAppIntentsMetadata (in target 'just-gomokuTests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name just_gomokuTests --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk --xcode-version 27A266a --platform-family iOS --deployment-target 18.0 --bundle-identifier com.xjrmh.gomokuTests --output /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest --target-triple arm64-apple-ios18.0-simulator --binary-file /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest/just-gomokuTests --dependency-file /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/Objects-normal/arm64/just-gomokuTests_dependency_info.dat --stringsdata-file /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/Objects-normal/arm64/just-gomokuTests.SwiftFileList --metadata-file-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/just-gomokuTests.DependencyMetadataFileList --static-metadata-file-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/just-gomokuTests.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuTests.build/Objects-normal/arm64/just-gomokuTests.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --no-app-shortcuts-localization
+2026-10-11 21:54:25.853 appintentsmetadataprocessor[23195:594650] Starting appintentsmetadataprocessor export
+2026-10-11 21:54:25.854 appintentsmetadataprocessor[23195:594650] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+
+CodeSign /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest (in target 'just-gomokuTests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest
+
+CodeSign /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku.debug.dylib (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/just-gomoku.debug.dylib
+
+CodeSign /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/__preview.dylib (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/__preview.dylib
+
+CodeSign /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --entitlements /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomoku.build/just-gomoku.app.xcent --timestamp\=none --generate-entitlement-der /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app
+
+Validate /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app (in target 'just-gomoku' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    builtin-validationUtility /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app -shallow-bundle -infoplist-subpath Info.plist
+
+ProcessInfoPlistFile /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/Info.plist /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/empty-just-gomokuUITests.plist (in target 'just-gomokuUITests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    builtin-infoPlistUtility /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/empty-just-gomokuUITests.plist -producttype com.apple.product-type.bundle.ui-testing -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/ProductTypeInfoPlistAdditions.plist -o /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/Info.plist
+
+Ld /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/just-gomokuUITests normal (in target 'just-gomokuUITests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0-simulator -bundle -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -L/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F/tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk/Developer/Library/Frameworks -filelist /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/Objects-normal/arm64/just-gomokuUITests.LinkFileList -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @loader_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/Objects-normal/arm64/just-gomokuUITests_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/Objects-normal/arm64/just-gomokuUITests_dependency_info.dat -fobjc-link-runtime -fprofile-instr-generate -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/Objects-normal/arm64/just_gomokuUITests.swiftmodule -Xlinker -needed_framework -Xlinker XCTest -framework XCTest -Xlinker -needed-lXCTestSwiftSupport -lXCTestSwiftSupport -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/just-gomokuUITests.xctest-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/just-gomokuUITests.xctest-Simulated.xcent.der -Xlinker -no_adhoc_codesign -o /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/just-gomokuUITests
+
+ExtractAppIntentsMetadata (in target 'just-gomokuUITests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name just_gomokuUITests --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk --xcode-version 27A266a --platform-family iOS --deployment-target 18.0 --bundle-identifier com.xjrmh.gomokuUITests --output /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest --target-triple arm64-apple-ios18.0-simulator --binary-file /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/just-gomokuUITests --dependency-file /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/Objects-normal/arm64/just-gomokuUITests_dependency_info.dat --stringsdata-file /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/Objects-normal/arm64/just-gomokuUITests.SwiftFileList --metadata-file-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/just-gomokuUITests.DependencyMetadataFileList --static-metadata-file-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/just-gomokuUITests.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/Objects-normal/arm64/just-gomokuUITests.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --no-app-shortcuts-localization
+2026-10-11 21:54:26.073 appintentsmetadataprocessor[23202:594690] Starting appintentsmetadataprocessor export
+2026-10-11 21:54:26.073 appintentsmetadataprocessor[23202:594690] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+
+CopySwiftLibs /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest (in target 'just-gomokuUITests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    builtin-swiftStdLibTool --copy --verbose --sign - --scan-executable /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/just-gomokuUITests --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/Frameworks --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/PlugIns --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/SystemExtensions --scan-folder /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/just-gomoku.build/Debug-iphonesimulator/just-gomokuUITests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os --back-deploy-swift-span
+
+CodeSign /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest (in target 'just-gomokuUITests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest
+
+CodeSign /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app (in target 'just-gomokuUITests' from project 'just-gomoku')
+    cd /var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app
+/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app: replacing existing signature
+
+PruneExplicitPrecompiledModules /tmp/gomoku-dedicated-edge-derived/SDKExplicitPrecompiledModules
+
+PruneExplicitPrecompiledModules /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+PruneExplicitPrecompiledModules /tmp/gomoku-dedicated-edge-derived/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+note: Removed stale file '/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app/PlugIns/just-gomokuTests.xctest.dSYM'
+
+note: Removed stale file '/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomokuUITests-Runner.app/PlugIns/just-gomokuUITests.xctest.dSYM'
+
+note: Removed stale file '/tmp/gomoku-dedicated-edge-derived/Build/Products/Debug-iphonesimulator/just-gomoku.app.dSYM'
+
+note: Disabling hardened runtime with ad-hoc codesigning. (in target 'just-gomoku' from project 'just-gomoku')
+2026-10-11 21:54:33.751350-0500 just-gomokuUITests-Runner[23227:595185] [Default] Running tests...
+2026-10-11 21:54:33.790886-0500 just-gomokuUITests-Runner[23227:595235] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2026-10-11 21:54:33.831845-0500 just-gomokuUITests-Runner[23227:595238] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+objc[23227]: Class AKAlertImageURLProvider is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_22G86/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.6.simruntime/Contents/Resources/RuntimeRoot/System/Library/PrivateFrameworks/AuthKit.framework/AuthKit (0x120ccd9b0) and /Library/Developer/CoreSimulator/Volumes/iOS_22G86/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.6.simruntime/Contents/Resources/RuntimeRoot/System/Library/PrivateFrameworks/AuthKitUI.framework/AuthKitUI (0x7034aad878). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[23227]: Class AKBiometricRatchetUtility is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_22G86/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.6.simruntime/Contents/Resources/RuntimeRoot/System/Library/PrivateFrameworks/AuthKit.framework/AuthKit (0x120ccf4b8) and /Library/Developer/CoreSimulator/Volumes/iOS_22G86/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.6.simruntime/Contents/Resources/RuntimeRoot/System/Library/PrivateFrameworks/AuthKitUI.framework/AuthKitUI (0x7034aad8f0). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[23227]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_22G86/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.6.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x703b59c398) and /Library/Developer/CoreSimulator/Volumes/iOS_22G86/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.6.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x703b704310). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-11 21:54:38.133.
+Test Suite 'just-gomokuUITests.xctest' started at 2026-10-11 21:54:38.136.
+Test Suite 'EdgeCaseUITests' started at 2026-10-11 21:54:38.136.
+Test Case '-[just_gomokuUITests.EdgeCaseUITests testActiveGameResumesAfterRelaunchAndRemainsUndoable]' started.
+    t =     0.00s Start Test at 2026-10-11 21:54:38.136
+    t =     0.13s Set Up
+    t =     0.13s Open com.xjrmh.gomoku
+    t =     0.13s     Launch com.xjrmh.gomoku
+2026-10-11 21:54:38.318 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:54:38.318 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.21s         Setting up automation session
+    t =     1.96s         Wait for com.xjrmh.gomoku to idle
+    t =     4.50s Waiting 5.0s for "New Game" Button to exist
+    t =     5.53s     Checking `Expect predicate `existsNoRetry == 1` for object "New Game" Button`
+    t =     5.53s         Checking existence of `"New Game" Button`
+    t =     5.60s Find the "New Game" Button
+    t =     5.63s Find the "New Game" Button
+    t =     5.65s Tap "New Game" Button
+    t =     5.65s     Wait for com.xjrmh.gomoku to idle
+    t =     5.65s     Find the "New Game" Button
+    t =     5.66s     Check for interrupting elements affecting "New Game" Button
+    t =     5.69s     Synthesize event
+    t =     6.10s     Wait for com.xjrmh.gomoku to idle
+    t =     6.26s Waiting 2.0s for "New Game" NavigationBar to exist
+    t =     7.29s     Checking `Expect predicate `existsNoRetry == 1` for object "New Game" NavigationBar`
+    t =     7.29s         Checking existence of `"New Game" NavigationBar`
+    t =     7.32s Waiting 2.0s for "new-game-opponent" Button to exist
+    t =     8.36s     Checking `Expect predicate `existsNoRetry == 1` for object "new-game-opponent" Button`
+    t =     8.36s         Checking existence of `"new-game-opponent" Button`
+    t =     8.39s Find the "new-game-opponent" Button
+    t =     8.42s Find the "new-game-opponent" Button
+    t =     8.45s Tap "new-game-opponent" Button
+    t =     8.45s     Wait for com.xjrmh.gomoku to idle
+    t =     8.45s     Find the "new-game-opponent" Button
+    t =     8.47s     Check for interrupting elements affecting "new-game-opponent" Button
+    t =     8.48s     Synthesize event
+    t =     8.77s     Wait for com.xjrmh.gomoku to idle
+    t =     8.77s Waiting 2.0s for "2 Players" Button to exist
+    t =     9.80s     Checking `Expect predicate `existsNoRetry == 1` for object "2 Players" Button`
+    t =     9.80s         Checking existence of `"2 Players" Button`
+    t =     9.83s Tap "2 Players" Button
+    t =     9.83s     Wait for com.xjrmh.gomoku to idle
+    t =     9.83s     Find the "2 Players" Button
+    t =     9.86s     Check for interrupting elements affecting "2 Players" Button
+    t =     9.88s     Synthesize event
+    t =    10.17s     Wait for com.xjrmh.gomoku to idle
+    t =    10.18s Waiting 2.0s for "new-game-board-size" Button to exist
+    t =    11.20s     Checking `Expect predicate `existsNoRetry == 1` for object "new-game-board-size" Button`
+    t =    11.20s         Checking existence of `"new-game-board-size" Button`
+    t =    11.24s Find the "new-game-board-size" Button
+    t =    11.27s Find the "new-game-board-size" Button
+    t =    11.29s Tap "new-game-board-size" Button
+    t =    11.29s     Wait for com.xjrmh.gomoku to idle
+    t =    11.30s     Find the "new-game-board-size" Button
+    t =    11.31s     Check for interrupting elements affecting "new-game-board-size" Button
+    t =    11.33s     Synthesize event
+    t =    11.62s     Wait for com.xjrmh.gomoku to idle
+    t =    11.62s Waiting 2.0s for "9×9" Button to exist
+    t =    12.65s     Checking `Expect predicate `existsNoRetry == 1` for object "9×9" Button`
+    t =    12.65s         Checking existence of `"9×9" Button`
+    t =    12.69s Tap "9×9" Button
+    t =    12.69s     Wait for com.xjrmh.gomoku to idle
+    t =    12.70s     Find the "9×9" Button
+    t =    12.72s     Check for interrupting elements affecting "9×9" Button
+    t =    12.74s     Synthesize event
+    t =    13.03s     Wait for com.xjrmh.gomoku to idle
+    t =    13.04s Tap "start-game" Button
+    t =    13.04s     Wait for com.xjrmh.gomoku to idle
+    t =    13.04s     Find the "start-game" Button
+    t =    13.07s     Check for interrupting elements affecting "start-game" Button
+    t =    13.09s     Synthesize event
+    t =    13.09s         Scroll element to visible
+    t =    13.10s         Find the "start-game" Button
+    t =    13.12s         Computed hit point {-1, -1} after scrolling to visible
+    t =    13.40s     Wait for com.xjrmh.gomoku to idle
+    t =    13.80s Waiting 1.0s for "Start New Game" Button to exist
+    t =    14.80s     Checking `Expect predicate `existsNoRetry == 1` for object "Start New Game" Button`
+    t =    14.80s         Checking existence of `"Start New Game" Button`
+    t =    14.82s         Capturing element debug description
+    t =    14.82s     Checking existence of `"Start New Game" Button`
+    t =    14.84s Collecting debug information to assist test failure triage
+    t =    14.84s     Requesting snapshot of accessibility hierarchy for app with pid 23249
+    t =    15.87s Checking `Expect predicate `exists == 0` for object "New Game" NavigationBar`
+    t =    15.87s     Checking existence of `"New Game" NavigationBar`
+    t =    15.89s Waiting 5.0s for "game-board" Other to exist
+    t =    16.92s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =    16.92s         Checking existence of `"game-board" Other`
+    t =    16.94s Find the "game-board" Other
+    t =    17.99s Checking `Expect predicate `value ENDSWITH "0 moves."` for object "game-board" Other`
+    t =    17.99s     Find the "game-board" Other
+    t =    18.01s Tap "game-board" Other[0.50, 0.50]
+    t =    18.01s     Wait for com.xjrmh.gomoku to idle
+    t =    18.01s     Find the "game-board" Other
+    t =    18.03s     Check for interrupting elements affecting "game-board" Other
+    t =    18.04s     Synthesize event
+    t =    18.04s         Find the "game-board" Other
+    t =    18.05s         Find the "game-board" Other
+    t =    18.07s         Find the "game-board" Other
+    t =    18.36s     Wait for com.xjrmh.gomoku to idle
+    t =    19.40s Checking `Expect predicate `value ENDSWITH "1 moves."` for object "game-board" Other`
+    t =    19.40s     Find the "game-board" Other
+    t =    19.42s Tap "game-board" Other[0.61, 0.50]
+    t =    19.42s     Wait for com.xjrmh.gomoku to idle
+    t =    19.43s     Find the "game-board" Other
+    t =    19.44s     Check for interrupting elements affecting "game-board" Other
+    t =    19.45s     Synthesize event
+    t =    19.45s         Find the "game-board" Other
+    t =    19.46s         Find the "game-board" Other
+    t =    19.48s         Find the "game-board" Other
+    t =    19.77s     Wait for com.xjrmh.gomoku to idle
+    t =    20.81s Checking `Expect predicate `value ENDSWITH "2 moves."` for object "game-board" Other`
+    t =    20.81s     Find the "game-board" Other
+    t =    20.83s Find the "game-board" Other
+    t =    20.84s Terminate com.xjrmh.gomoku:23249
+    t =    21.89s Open com.xjrmh.gomoku
+    t =    21.90s     Launch com.xjrmh.gomoku
+2026-10-11 21:55:00.032 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:55:00.032 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =    22.10s         Setting up automation session
+    t =    22.91s         Wait for com.xjrmh.gomoku to idle
+    t =    24.26s Waiting 5.0s for "game-board" Other to exist
+    t =    25.29s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =    25.29s         Checking existence of `"game-board" Other`
+    t =    25.34s Find the "game-board" Other
+    t =    26.39s Checking `Expect predicate `value ENDSWITH "2 moves."` for object "game-board" Other`
+    t =    26.39s     Find the "game-board" Other
+    t =    26.41s Find the "game-board" Other
+    t =    26.42s Tap "Undo" Button
+    t =    26.42s     Wait for com.xjrmh.gomoku to idle
+    t =    26.42s     Find the "Undo" Button
+    t =    26.43s     Check for interrupting elements affecting "Undo" Button
+    t =    26.45s     Synthesize event
+    t =    26.74s     Wait for com.xjrmh.gomoku to idle
+    t =    27.78s Checking `Expect predicate `value ENDSWITH "1 moves."` for object "game-board" Other`
+    t =    27.78s     Find the "game-board" Other
+    t =    27.80s Find the "game-board" Other
+    t =    27.80s Tear Down
+Test Case '-[just_gomokuUITests.EdgeCaseUITests testActiveGameResumesAfterRelaunchAndRemainsUndoable]' passed (28.050 seconds).
+Test Case '-[just_gomokuUITests.EdgeCaseUITests testDenseBoardRejectsOccupiedAndCancelledGesturesAndUndoesToEmpty]' started.
+    t =     0.00s Start Test at 2026-10-11 21:55:06.187
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.02s     Launch com.xjrmh.gomoku
+    t =     0.02s         Terminate com.xjrmh.gomoku:23310
+2026-10-11 21:55:07.254 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:55:07.254 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.47s         Setting up automation session
+    t =     2.05s         Wait for com.xjrmh.gomoku to idle
+    t =     3.41s Waiting 5.0s for "New Game" Button to exist
+    t =     4.44s     Checking `Expect predicate `existsNoRetry == 1` for object "New Game" Button`
+    t =     4.44s         Checking existence of `"New Game" Button`
+    t =     4.47s Find the "New Game" Button
+    t =     4.49s Find the "New Game" Button
+    t =     4.50s Tap "New Game" Button
+    t =     4.50s     Wait for com.xjrmh.gomoku to idle
+    t =     4.50s     Find the "New Game" Button
+    t =     4.51s     Check for interrupting elements affecting "New Game" Button
+    t =     4.52s     Synthesize event
+    t =     4.80s     Wait for com.xjrmh.gomoku to idle
+    t =     5.31s Waiting 2.0s for "New Game" NavigationBar to exist
+    t =     6.34s     Checking `Expect predicate `existsNoRetry == 1` for object "New Game" NavigationBar`
+    t =     6.34s         Checking existence of `"New Game" NavigationBar`
+    t =     6.40s Waiting 2.0s for "new-game-opponent" Button to exist
+    t =     7.42s     Checking `Expect predicate `existsNoRetry == 1` for object "new-game-opponent" Button`
+    t =     7.42s         Checking existence of `"new-game-opponent" Button`
+    t =     7.46s Find the "new-game-opponent" Button
+    t =     7.49s Find the "new-game-opponent" Button
+    t =     7.51s Tap "new-game-opponent" Button
+    t =     7.51s     Wait for com.xjrmh.gomoku to idle
+    t =     7.51s     Find the "new-game-opponent" Button
+    t =     7.53s     Check for interrupting elements affecting "new-game-opponent" Button
+    t =     7.55s     Synthesize event
+    t =     7.84s     Wait for com.xjrmh.gomoku to idle
+    t =     7.84s Waiting 2.0s for "2 Players" Button to exist
+    t =     8.86s     Checking `Expect predicate `existsNoRetry == 1` for object "2 Players" Button`
+    t =     8.86s         Checking existence of `"2 Players" Button`
+    t =     8.89s Tap "2 Players" Button
+    t =     8.89s     Wait for com.xjrmh.gomoku to idle
+    t =     8.90s     Find the "2 Players" Button
+    t =     8.93s     Check for interrupting elements affecting "2 Players" Button
+    t =     8.95s     Synthesize event
+    t =     9.24s     Wait for com.xjrmh.gomoku to idle
+    t =     9.24s Waiting 2.0s for "new-game-board-size" Button to exist
+    t =    10.27s     Checking `Expect predicate `existsNoRetry == 1` for object "new-game-board-size" Button`
+    t =    10.27s         Checking existence of `"new-game-board-size" Button`
+    t =    10.29s Find the "new-game-board-size" Button
+    t =    10.31s Find the "new-game-board-size" Button
+    t =    10.35s Tap "new-game-board-size" Button
+    t =    10.35s     Wait for com.xjrmh.gomoku to idle
+    t =    10.35s     Find the "new-game-board-size" Button
+    t =    10.38s     Check for interrupting elements affecting "new-game-board-size" Button
+    t =    10.39s     Synthesize event
+    t =    10.68s     Wait for com.xjrmh.gomoku to idle
+    t =    10.69s Waiting 2.0s for "Custom" Button to exist
+    t =    11.71s     Checking `Expect predicate `existsNoRetry == 1` for object "Custom" Button`
+    t =    11.71s         Checking existence of `"Custom" Button`
+    t =    11.74s Tap "Custom" Button
+    t =    11.74s     Wait for com.xjrmh.gomoku to idle
+    t =    11.74s     Find the "Custom" Button
+    t =    11.76s     Check for interrupting elements affecting "Custom" Button
+    t =    11.78s     Synthesize event
+    t =    12.07s     Wait for com.xjrmh.gomoku to idle
+    t =    12.13s Waiting 2.0s for "custom-board-size" Stepper to exist
+    t =    13.16s     Checking `Expect predicate `existsNoRetry == 1` for object "custom-board-size" Stepper`
+    t =    13.16s         Checking existence of `"custom-board-size" Stepper`
+    t =    13.19s Find the "custom-board-size" Stepper
+    t =    13.22s Checking existence of `CollectionView (First Match)`
+    t =    13.25s Swipe up CollectionView (First Match)
+    t =    13.25s     Wait for com.xjrmh.gomoku to idle
+    t =    13.25s     Find the CollectionView (First Match)
+    t =    13.27s     Check for interrupting elements affecting CollectionView
+    t =    13.29s     Synthesize event
+    t =    13.74s     Wait for com.xjrmh.gomoku to idle
+    t =    14.24s Find the "custom-board-size" Stepper
+    t =    14.28s Checking existence of `CollectionView (First Match)`
+    t =    14.30s Swipe up CollectionView (First Match)
+    t =    14.30s     Wait for com.xjrmh.gomoku to idle
+    t =    14.31s     Find the CollectionView (First Match)
+    t =    14.33s     Check for interrupting elements affecting CollectionView
+    t =    14.35s     Synthesize event
+    t =    14.78s     Wait for com.xjrmh.gomoku to idle
+    t =    15.26s Find the "custom-board-size" Stepper
+    t =    15.30s Checking existence of `CollectionView (First Match)`
+    t =    15.32s Swipe up CollectionView (First Match)
+    t =    15.32s     Wait for com.xjrmh.gomoku to idle
+    t =    15.32s     Find the CollectionView (First Match)
+    t =    15.34s     Check for interrupting elements affecting CollectionView
+    t =    15.36s     Synthesize event
+    t =    15.80s     Wait for com.xjrmh.gomoku to idle
+    t =    16.29s Find the "custom-board-size" Stepper
+    t =    16.33s Checking existence of `CollectionView (First Match)`
+    t =    16.35s Swipe up CollectionView (First Match)
+    t =    16.35s     Wait for com.xjrmh.gomoku to idle
+    t =    16.36s     Find the CollectionView (First Match)
+    t =    16.38s     Check for interrupting elements affecting CollectionView
+    t =    16.40s     Synthesize event
+    t =    16.83s     Wait for com.xjrmh.gomoku to idle
+    t =    17.34s Find the "custom-board-size" Stepper
+    t =    17.45s Added attachment named 'Edge case failure'
+    t =    17.45s Requesting snapshot of accessibility hierarchy for app with pid 23366
+    t =    17.59s Requesting snapshot of accessibility hierarchy for app with pid 23366
+    t =    17.61s Added attachment named 'Edge case accessibility hierarchy'
+/var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/just-gomokuUITests/EdgeCaseUITests.swift:177: error: -[just_gomokuUITests.EdgeCaseUITests testDenseBoardRejectsOccupiedAndCancelledGesturesAndUndoesToEmpty] : XCTAssertTrue failed - Control should be reachable after bounded scrolling
+    t =    17.66s Tear Down
+Test Case '-[just_gomokuUITests.EdgeCaseUITests testDenseBoardRejectsOccupiedAndCancelledGesturesAndUndoesToEmpty]' failed (17.882 seconds).
+Test Case '-[just_gomokuUITests.EdgeCaseUITests testSmallBoardDraftCancellationResetAndCornerPlacement]' started.
+    t =     0.00s Start Test at 2026-10-11 21:55:24.070
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.02s     Launch com.xjrmh.gomoku
+    t =     0.02s         Terminate com.xjrmh.gomoku:23366
+2026-10-11 21:55:25.184 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:55:25.184 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.52s         Setting up automation session
+    t =     2.15s         Wait for com.xjrmh.gomoku to idle
+    t =     3.53s Waiting 5.0s for "New Game" Button to exist
+    t =     4.55s     Checking `Expect predicate `existsNoRetry == 1` for object "New Game" Button`
+    t =     4.55s         Checking existence of `"New Game" Button`
+    t =     4.59s Find the "New Game" Button
+    t =     4.61s Find the "New Game" Button
+    t =     4.63s Tap "New Game" Button
+    t =     4.63s     Wait for com.xjrmh.gomoku to idle
+    t =     4.63s     Find the "New Game" Button
+    t =     4.64s     Check for interrupting elements affecting "New Game" Button
+    t =     4.65s     Synthesize event
+    t =     4.94s     Wait for com.xjrmh.gomoku to idle
+    t =     4.97s Waiting 2.0s for "New Game" NavigationBar to exist
+    t =     6.01s     Checking `Expect predicate `existsNoRetry == 1` for object "New Game" NavigationBar`
+    t =     6.01s         Checking existence of `"New Game" NavigationBar`
+    t =     6.05s Waiting 2.0s for "new-game-opponent" Button to exist
+    t =     7.08s     Checking `Expect predicate `existsNoRetry == 1` for object "new-game-opponent" Button`
+    t =     7.08s         Checking existence of `"new-game-opponent" Button`
+    t =     7.10s Find the "new-game-opponent" Button
+    t =     7.15s Find the "new-game-opponent" Button
+    t =     7.18s Tap "new-game-opponent" Button
+    t =     7.18s     Wait for com.xjrmh.gomoku to idle
+    t =     7.19s     Find the "new-game-opponent" Button
+    t =     7.21s     Check for interrupting elements affecting "new-game-opponent" Button
+    t =     7.23s     Synthesize event
+    t =     7.52s     Wait for com.xjrmh.gomoku to idle
+    t =     7.53s Waiting 2.0s for "2 Players" Button to exist
+    t =     8.56s     Checking `Expect predicate `existsNoRetry == 1` for object "2 Players" Button`
+    t =     8.56s         Checking existence of `"2 Players" Button`
+    t =     8.60s Tap "2 Players" Button
+    t =     8.60s     Wait for com.xjrmh.gomoku to idle
+    t =     8.60s     Find the "2 Players" Button
+    t =     8.63s     Check for interrupting elements affecting "2 Players" Button
+    t =     8.65s     Synthesize event
+    t =     8.94s     Wait for com.xjrmh.gomoku to idle
+    t =     8.94s Waiting 2.0s for "new-game-board-size" Button to exist
+    t =     9.97s     Checking `Expect predicate `existsNoRetry == 1` for object "new-game-board-size" Button`
+    t =     9.97s         Checking existence of `"new-game-board-size" Button`
+    t =     9.99s Find the "new-game-board-size" Button
+    t =    10.02s Find the "new-game-board-size" Button
+    t =    10.07s Tap "new-game-board-size" Button
+    t =    10.07s     Wait for com.xjrmh.gomoku to idle
+    t =    10.07s     Find the "new-game-board-size" Button
+    t =    10.09s     Check for interrupting elements affecting "new-game-board-size" Button
+    t =    10.11s     Synthesize event
+    t =    10.40s     Wait for com.xjrmh.gomoku to idle
+    t =    10.40s Waiting 2.0s for "9×9" Button to exist
+    t =    11.42s     Checking `Expect predicate `existsNoRetry == 1` for object "9×9" Button`
+    t =    11.42s         Checking existence of `"9×9" Button`
+    t =    11.47s Tap "9×9" Button
+    t =    11.47s     Wait for com.xjrmh.gomoku to idle
+    t =    11.48s     Find the "9×9" Button
+    t =    11.50s     Check for interrupting elements affecting "9×9" Button
+    t =    11.53s     Synthesize event
+    t =    11.83s     Wait for com.xjrmh.gomoku to idle
+    t =    11.83s Tap "start-game" Button
+    t =    11.83s     Wait for com.xjrmh.gomoku to idle
+    t =    11.84s     Find the "start-game" Button
+    t =    11.86s     Check for interrupting elements affecting "start-game" Button
+    t =    11.89s     Synthesize event
+    t =    11.89s         Scroll element to visible
+    t =    11.89s         Find the "start-game" Button
+    t =    11.92s         Computed hit point {-1, -1} after scrolling to visible
+    t =    12.20s     Wait for com.xjrmh.gomoku to idle
+    t =    12.63s Waiting 1.0s for "Start New Game" Button to exist
+    t =    13.63s     Checking `Expect predicate `existsNoRetry == 1` for object "Start New Game" Button`
+    t =    13.63s         Checking existence of `"Start New Game" Button`
+    t =    13.64s         Capturing element debug description
+    t =    13.64s     Checking existence of `"Start New Game" Button`
+    t =    13.65s Collecting debug information to assist test failure triage
+    t =    13.65s     Requesting snapshot of accessibility hierarchy for app with pid 23422
+    t =    14.70s Checking `Expect predicate `exists == 0` for object "New Game" NavigationBar`
+    t =    14.70s     Checking existence of `"New Game" NavigationBar`
+    t =    14.71s Waiting 5.0s for "game-board" Other to exist
+    t =    15.73s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =    15.73s         Checking existence of `"game-board" Other`
+    t =    15.75s Find the "game-board" Other
+    t =    16.79s Checking `Expect predicate `value ENDSWITH "0 moves."` for object "game-board" Other`
+    t =    16.79s     Find the "game-board" Other
+    t =    16.81s Tap "game-board" Other[0.50, 0.50]
+    t =    16.81s     Wait for com.xjrmh.gomoku to idle
+    t =    16.81s     Find the "game-board" Other
+    t =    16.82s     Check for interrupting elements affecting "game-board" Other
+    t =    16.83s     Synthesize event
+    t =    16.84s         Find the "game-board" Other
+    t =    16.85s         Find the "game-board" Other
+    t =    16.86s         Find the "game-board" Other
+    t =    17.16s     Wait for com.xjrmh.gomoku to idle
+    t =    18.20s Checking `Expect predicate `value ENDSWITH "1 moves."` for object "game-board" Other`
+    t =    18.20s     Find the "game-board" Other
+    t =    18.21s Find the "game-board" Other
+    t =    18.22s Waiting 5.0s for "New Game" Button to exist
+    t =    19.25s     Checking `Expect predicate `existsNoRetry == 1` for object "New Game" Button`
+    t =    19.25s         Checking existence of `"New Game" Button`
+    t =    19.26s Find the "New Game" Button
+    t =    19.28s Find the "New Game" Button
+    t =    19.30s Tap "New Game" Button
+    t =    19.30s     Wait for com.xjrmh.gomoku to idle
+    t =    19.30s     Find the "New Game" Button
+    t =    19.32s     Check for interrupting elements affecting "New Game" Button
+    t =    19.33s     Synthesize event
+    t =    19.63s     Wait for com.xjrmh.gomoku to idle
+    t =    20.02s Waiting 2.0s for "New Game" NavigationBar to exist
+    t =    21.05s     Checking `Expect predicate `existsNoRetry == 1` for object "New Game" NavigationBar`
+    t =    21.05s         Checking existence of `"New Game" NavigationBar`
+    t =    21.10s Waiting 2.0s for "new-game-board-size" Button to exist
+    t =    22.12s     Checking `Expect predicate `existsNoRetry == 1` for object "new-game-board-size" Button`
+    t =    22.13s         Checking existence of `"new-game-board-size" Button`
+    t =    22.16s Find the "new-game-board-size" Button
+    t =    22.19s Find the "new-game-board-size" Button
+    t =    22.22s Tap "new-game-board-size" Button
+    t =    22.22s     Wait for com.xjrmh.gomoku to idle
+    t =    22.22s     Find the "new-game-board-size" Button
+    t =    22.24s     Check for interrupting elements affecting "new-game-board-size" Button
+    t =    22.25s     Synthesize event
+    t =    22.55s     Wait for com.xjrmh.gomoku to idle
+    t =    22.55s Waiting 2.0s for "Custom" Button to exist
+    t =    23.57s     Checking `Expect predicate `existsNoRetry == 1` for object "Custom" Button`
+    t =    23.57s         Checking existence of `"Custom" Button`
+    t =    23.59s Tap "Custom" Button
+    t =    23.59s     Wait for com.xjrmh.gomoku to idle
+    t =    23.59s     Find the "Custom" Button
+    t =    23.62s     Check for interrupting elements affecting "Custom" Button
+    t =    23.65s     Synthesize event
+    t =    23.94s     Wait for com.xjrmh.gomoku to idle
+    t =    23.95s Waiting 2.0s for "custom-board-size" Stepper to exist
+    t =    24.97s     Checking `Expect predicate `existsNoRetry == 1` for object "custom-board-size" Stepper`
+    t =    24.97s         Checking existence of `"custom-board-size" Stepper`
+    t =    25.01s Find the "custom-board-size" Stepper
+    t =    25.05s Checking existence of `CollectionView (First Match)`
+    t =    25.07s Swipe up CollectionView (First Match)
+    t =    25.07s     Wait for com.xjrmh.gomoku to idle
+    t =    25.07s     Find the CollectionView (First Match)
+    t =    25.10s     Check for interrupting elements affecting CollectionView
+    t =    25.11s     Synthesize event
+    t =    25.56s     Wait for com.xjrmh.gomoku to idle
+    t =    26.05s Find the "custom-board-size" Stepper
+    t =    26.09s Checking existence of `CollectionView (First Match)`
+    t =    26.12s Swipe up CollectionView (First Match)
+    t =    26.12s     Wait for com.xjrmh.gomoku to idle
+    t =    26.12s     Find the CollectionView (First Match)
+    t =    26.14s     Check for interrupting elements affecting CollectionView
+    t =    26.16s     Synthesize event
+    t =    26.60s     Wait for com.xjrmh.gomoku to idle
+    t =    27.09s Find the "custom-board-size" Stepper
+    t =    27.13s Checking existence of `CollectionView (First Match)`
+    t =    27.15s Swipe up CollectionView (First Match)
+    t =    27.15s     Wait for com.xjrmh.gomoku to idle
+    t =    27.16s     Find the CollectionView (First Match)
+    t =    27.18s     Check for interrupting elements affecting CollectionView
+    t =    27.20s     Synthesize event
+    t =    27.64s     Wait for com.xjrmh.gomoku to idle
+    t =    28.13s Find the "custom-board-size" Stepper
+    t =    28.16s Checking existence of `CollectionView (First Match)`
+    t =    28.18s Swipe up CollectionView (First Match)
+    t =    28.18s     Wait for com.xjrmh.gomoku to idle
+    t =    28.19s     Find the CollectionView (First Match)
+    t =    28.21s     Check for interrupting elements affecting CollectionView
+    t =    28.23s     Synthesize event
+    t =    28.67s     Wait for com.xjrmh.gomoku to idle
+    t =    29.17s Find the "custom-board-size" Stepper
+    t =    29.25s Added attachment named 'Edge case failure'
+    t =    29.25s Requesting snapshot of accessibility hierarchy for app with pid 23422
+    t =    29.37s Requesting snapshot of accessibility hierarchy for app with pid 23422
+    t =    29.40s Added attachment named 'Edge case accessibility hierarchy'
+/var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53/just-gomokuUITests/EdgeCaseUITests.swift:177: error: -[just_gomokuUITests.EdgeCaseUITests testSmallBoardDraftCancellationResetAndCornerPlacement] : XCTAssertTrue failed - Control should be reachable after bounded scrolling
+    t =    29.41s Tear Down
+Test Case '-[just_gomokuUITests.EdgeCaseUITests testSmallBoardDraftCancellationResetAndCornerPlacement]' failed (29.636 seconds).
+Test Suite 'EdgeCaseUITests' failed at 2026-10-11 21:55:53.705.
+	 Executed 3 tests, with 2 failures (0 unexpected) in 75.568 (75.570) seconds
+Test Suite 'HistoryEdgeCaseUITests' started at 2026-10-11 21:55:53.706.
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testDrawResultCanShareAndPlayAgainKeepsBoardSize]' started.
+    t =     0.00s Start Test at 2026-10-11 21:55:53.707
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.02s     Launch com.xjrmh.gomoku
+    t =     0.02s         Terminate com.xjrmh.gomoku:23422
+2026-10-11 21:55:54.766 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:55:54.766 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.47s         Setting up automation session
+    t =     2.12s         Wait for com.xjrmh.gomoku to idle
+    t =     4.41s Waiting 5.0s for "game-board" Other to exist
+    t =     5.43s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     5.43s         Checking existence of `"game-board" Other`
+    t =     5.48s Waiting 5.0s for "game-board" Other to exist
+    t =     6.52s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     6.52s         Checking existence of `"game-board" Other`
+    t =     6.53s Find the "game-board" Other
+    t =     6.54s Find the "game-board" Other
+    t =     6.55s Checking existence of `"Play Again" Button`
+    t =     6.56s Waiting 5.0s for "Share" Button to exist
+    t =     7.59s     Checking `Expect predicate `existsNoRetry == 1` for object "Share" Button`
+    t =     7.59s         Checking existence of `"Share" Button`
+    t =     7.61s Tap "Share" Button
+    t =     7.61s     Wait for com.xjrmh.gomoku to idle
+    t =     7.61s     Find the "Share" Button
+    t =     7.62s     Check for interrupting elements affecting "Share" Button
+    t =     7.64s     Synthesize event
+    t =     7.93s     Wait for com.xjrmh.gomoku to idle
+    t =     7.98s Waiting 5.0s for "ShareSheet.RemoteContainerView" Other to exist
+    t =     9.02s     Checking `Expect predicate `existsNoRetry == 1` for object "ShareSheet.RemoteContainerView" Other`
+    t =     9.02s         Checking existence of `"ShareSheet.RemoteContainerView" Other`
+    t =     9.17s Waiting 3.0s for "Draw · 25 moves" NavigationBar to exist
+    t =    10.19s     Checking `Expect predicate `existsNoRetry == 1` for object "Draw · 25 moves" NavigationBar`
+    t =    10.19s         Checking existence of `"Draw · 25 moves" NavigationBar`
+    t =    10.24s Checking existence of `Image (First Match)`
+    t =    10.28s Checking existence of `"Copy" Cell`
+    t =    10.30s Terminate com.xjrmh.gomoku:23755
+    t =    11.34s Open com.xjrmh.gomoku
+    t =    11.35s     Launch com.xjrmh.gomoku
+2026-10-11 21:56:05.053 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:56:05.053 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =    11.75s         Setting up automation session
+    t =    12.40s         Wait for com.xjrmh.gomoku to idle
+    t =    13.96s Waiting 5.0s for "Play Again" Button to exist
+    t =    14.99s     Checking `Expect predicate `existsNoRetry == 1` for object "Play Again" Button`
+    t =    14.99s         Checking existence of `"Play Again" Button`
+    t =    15.02s Tap "Play Again" Button
+    t =    15.02s     Wait for com.xjrmh.gomoku to idle
+    t =    15.02s     Find the "Play Again" Button
+    t =    15.03s     Check for interrupting elements affecting "Play Again" Button
+    t =    15.04s     Synthesize event
+    t =    15.34s     Wait for com.xjrmh.gomoku to idle
+    t =    15.34s Waiting 3.0s for "game-board" Other to exist
+    t =    16.37s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =    16.38s         Checking existence of `"game-board" Other`
+    t =    17.43s Checking `Expect predicate `value ENDSWITH "0 moves."` for object "game-board" Other`
+    t =    17.43s     Find the "game-board" Other
+    t =    17.45s Find the "game-board" Other
+    t =    17.46s Checking existence of `"Share" Button`
+    t =    17.47s Checking existence of `"Hint" Button`
+    t =    17.48s Tear Down
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testDrawResultCanShareAndPlayAgainKeepsBoardSize]' passed (17.711 seconds).
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testEmptyArchiveUsesNoGamesMessage]' started.
+    t =     0.00s Start Test at 2026-10-11 21:56:11.419
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.03s     Launch com.xjrmh.gomoku
+    t =     0.03s         Terminate com.xjrmh.gomoku:23780
+2026-10-11 21:56:12.497 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:56:12.497 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.49s         Setting up automation session
+    t =     2.16s         Wait for com.xjrmh.gomoku to idle
+    t =     3.54s Waiting 5.0s for "game-board" Other to exist
+    t =     4.56s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     4.56s         Checking existence of `"game-board" Other`
+    t =     4.61s Tap "History" Button
+    t =     4.61s     Wait for com.xjrmh.gomoku to idle
+    t =     4.61s     Find the "History" Button
+    t =     4.63s     Check for interrupting elements affecting "History" Button
+    t =     4.64s     Synthesize event
+    t =     4.93s     Wait for com.xjrmh.gomoku to idle
+    t =     5.04s Waiting 3.0s for "History" NavigationBar to exist
+    t =     6.06s     Checking `Expect predicate `existsNoRetry == 1` for object "History" NavigationBar`
+    t =     6.06s         Checking existence of `"History" NavigationBar`
+    t =     6.08s Waiting 3.0s for "No Games Yet" StaticText to exist
+    t =     7.10s     Checking `Expect predicate `existsNoRetry == 1` for object "No Games Yet" StaticText`
+    t =     7.10s         Checking existence of `"No Games Yet" StaticText`
+    t =     7.12s Checking existence of `"Completed games will appear here." StaticText`
+    t =     7.13s Checking existence of `"No Matches" StaticText`
+    t =     7.14s Tear Down
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testEmptyArchiveUsesNoGamesMessage]' passed (7.364 seconds).
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testEmptyModeFilterDoesNotClaimArchiveIsEmpty]' started.
+    t =     0.00s Start Test at 2026-10-11 21:56:18.783
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.02s     Launch com.xjrmh.gomoku
+    t =     0.02s         Terminate com.xjrmh.gomoku:23789
+2026-10-11 21:56:19.939 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:56:19.939 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.57s         Setting up automation session
+    t =     2.21s         Wait for com.xjrmh.gomoku to idle
+    t =     3.55s Waiting 5.0s for "game-board" Other to exist
+    t =     4.57s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     4.57s         Checking existence of `"game-board" Other`
+    t =     4.60s Tap "History" Button
+    t =     4.60s     Wait for com.xjrmh.gomoku to idle
+    t =     4.60s     Find the "History" Button
+    t =     4.61s     Check for interrupting elements affecting "History" Button
+    t =     4.63s     Synthesize event
+    t =     4.92s     Wait for com.xjrmh.gomoku to idle
+    t =     5.39s Waiting 3.0s for "History" NavigationBar to exist
+    t =     6.41s     Checking `Expect predicate `existsNoRetry == 1` for object "History" NavigationBar`
+    t =     6.41s         Checking existence of `"History" NavigationBar`
+    t =     6.45s Checking existence of `"history-game-card" Button`
+    t =     6.48s Waiting 3.0s for "history-game-card" Button to exist
+    t =     7.49s     Checking `Expect predicate `existsNoRetry == 1` for object "history-game-card" Button`
+    t =     7.49s         Checking existence of `"history-game-card" Button`
+    t =     7.52s Tap "AI" Button
+    t =     7.52s     Wait for com.xjrmh.gomoku to idle
+    t =     7.52s     Find the "AI" Button
+    t =     7.54s     Check for interrupting elements affecting "AI" Button
+    t =     7.55s     Synthesize event
+    t =     7.84s     Wait for com.xjrmh.gomoku to idle
+    t =     8.06s Waiting 3.0s for "No Matches" StaticText to exist
+    t =     9.09s     Checking `Expect predicate `existsNoRetry == 1` for object "No Matches" StaticText`
+    t =     9.09s         Checking existence of `"No Matches" StaticText`
+    t =     9.11s Checking existence of `"No Games Yet" StaticText`
+    t =     9.12s Tap "All" Button
+    t =     9.12s     Wait for com.xjrmh.gomoku to idle
+    t =     9.12s     Find the "All" Button
+    t =     9.13s     Check for interrupting elements affecting "All" Button
+    t =     9.15s     Synthesize event
+    t =     9.44s     Wait for com.xjrmh.gomoku to idle
+    t =     9.65s Checking existence of `"history-game-card" Button`
+    t =     9.67s Waiting 3.0s for "history-game-card" Button to exist
+    t =    10.69s     Checking `Expect predicate `existsNoRetry == 1` for object "history-game-card" Button`
+    t =    10.69s         Checking existence of `"history-game-card" Button`
+    t =    10.71s Checking existence of `"No Matches" StaticText`
+    t =    10.73s Tear Down
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testEmptyModeFilterDoesNotClaimArchiveIsEmpty]' passed (10.945 seconds).
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testReplayClampsAtStartingAndFinalPositions]' started.
+    t =     0.00s Start Test at 2026-10-11 21:56:29.728
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.02s     Launch com.xjrmh.gomoku
+    t =     0.02s         Terminate com.xjrmh.gomoku:23807
+2026-10-11 21:56:30.795 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:56:30.795 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.48s         Setting up automation session
+    t =     2.15s         Wait for com.xjrmh.gomoku to idle
+    t =     3.52s Waiting 5.0s for "game-board" Other to exist
+    t =     4.54s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     4.55s         Checking existence of `"game-board" Other`
+    t =     4.59s Tap "History" Button
+    t =     4.59s     Wait for com.xjrmh.gomoku to idle
+    t =     4.60s     Find the "History" Button
+    t =     4.61s     Check for interrupting elements affecting "History" Button
+    t =     4.62s     Synthesize event
+    t =     4.91s     Wait for com.xjrmh.gomoku to idle
+    t =     5.00s Waiting 3.0s for "History" NavigationBar to exist
+    t =     6.03s     Checking `Expect predicate `existsNoRetry == 1` for object "History" NavigationBar`
+    t =     6.03s         Checking existence of `"History" NavigationBar`
+    t =     6.07s Waiting 3.0s for Button (First Match) to exist
+    t =     7.09s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+    t =     7.09s         Checking existence of `Button (First Match)`
+    t =     7.12s Tap Button (First Match)
+    t =     7.12s     Wait for com.xjrmh.gomoku to idle
+    t =     7.12s     Find the Button (First Match)
+    t =     7.14s     Check for interrupting elements affecting "history-game-card" Button
+    t =     7.16s     Synthesize event
+    t =     7.45s     Wait for com.xjrmh.gomoku to idle
+    t =     7.90s Waiting 3.0s for "Replay position" Slider to exist
+    t =     8.93s     Checking `Expect predicate `existsNoRetry == 1` for object "Replay position" Slider`
+    t =     8.93s         Checking existence of `"Replay position" Slider`
+    t =     8.96s Waiting 3.0s for "Move 25 of 25" StaticText to exist
+    t =     9.97s     Checking `Expect predicate `existsNoRetry == 1` for object "Move 25 of 25" StaticText`
+    t =     9.97s         Checking existence of `"Move 25 of 25" StaticText`
+    t =     9.98s Find the "Next move" Button
+    t =     9.99s Find the "Final position" Button
+    t =    10.00s Tap "Previous move" Button
+    t =    10.00s     Wait for com.xjrmh.gomoku to idle
+    t =    10.00s     Find the "Previous move" Button
+    t =    10.01s     Check for interrupting elements affecting "backward.frame" Button
+    t =    10.03s     Synthesize event
+    t =    10.31s     Wait for com.xjrmh.gomoku to idle
+    t =    10.32s Waiting 2.0s for "Move 24 of 25" StaticText to exist
+    t =    11.34s     Checking `Expect predicate `existsNoRetry == 1` for object "Move 24 of 25" StaticText`
+    t =    11.34s         Checking existence of `"Move 24 of 25" StaticText`
+    t =    11.35s Tap "Final position" Button
+    t =    11.35s     Wait for com.xjrmh.gomoku to idle
+    t =    11.36s     Find the "Final position" Button
+    t =    11.37s     Check for interrupting elements affecting "forward.end" Button
+    t =    11.38s     Synthesize event
+    t =    11.67s     Wait for com.xjrmh.gomoku to idle
+    t =    11.67s Waiting 2.0s for "Move 25 of 25" StaticText to exist
+    t =    12.69s     Checking `Expect predicate `existsNoRetry == 1` for object "Move 25 of 25" StaticText`
+    t =    12.70s         Checking existence of `"Move 25 of 25" StaticText`
+    t =    12.71s Set normalized position of "Replay position" Slider to 0.00
+    t =    12.71s     Wait for com.xjrmh.gomoku to idle
+    t =    12.72s     Find the "Replay position" Slider
+    t =    12.73s     Check for interrupting elements affecting "Replay position" Slider
+    t =    12.75s     Synthesize event
+    t =    13.87s     Wait for com.xjrmh.gomoku to idle
+    t =    13.87s Waiting 2.0s for "Move 0 of 25" StaticText to exist
+    t =    14.90s     Checking `Expect predicate `existsNoRetry == 1` for object "Move 0 of 25" StaticText`
+    t =    14.90s         Checking existence of `"Move 0 of 25" StaticText`
+    t =    14.92s Checking existence of `"Starting position" StaticText`
+    t =    14.93s Find the "Previous move" Button
+    t =    14.94s Find the "Next move" Button
+    t =    14.95s Tap "Next move" Button
+    t =    14.95s     Wait for com.xjrmh.gomoku to idle
+    t =    14.95s     Find the "Next move" Button
+    t =    14.96s     Check for interrupting elements affecting "forward.frame" Button
+    t =    14.97s     Synthesize event
+    t =    15.26s     Wait for com.xjrmh.gomoku to idle
+    t =    15.27s Waiting 2.0s for "Move 1 of 25" StaticText to exist
+    t =    16.30s     Checking `Expect predicate `existsNoRetry == 1` for object "Move 1 of 25" StaticText`
+    t =    16.30s         Checking existence of `"Move 1 of 25" StaticText`
+    t =    16.32s Tap "Previous move" Button
+    t =    16.32s     Wait for com.xjrmh.gomoku to idle
+    t =    16.33s     Find the "Previous move" Button
+    t =    16.34s     Check for interrupting elements affecting "backward.frame" Button
+    t =    16.35s     Synthesize event
+    t =    16.64s     Wait for com.xjrmh.gomoku to idle
+    t =    16.65s Waiting 2.0s for "Move 0 of 25" StaticText to exist
+    t =    17.67s     Checking `Expect predicate `existsNoRetry == 1` for object "Move 0 of 25" StaticText`
+    t =    17.67s         Checking existence of `"Move 0 of 25" StaticText`
+    t =    17.69s Tear Down
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testReplayClampsAtStartingAndFinalPositions]' passed (17.904 seconds).
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testReplayFromEndRestartsAndScrubbingPausesPlayback]' started.
+    t =     0.00s Start Test at 2026-10-11 21:56:47.633
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.02s     Launch com.xjrmh.gomoku
+    t =     0.02s         Terminate com.xjrmh.gomoku:23854
+2026-10-11 21:56:48.704 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:56:48.705 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.48s         Setting up automation session
+    t =     2.13s         Wait for com.xjrmh.gomoku to idle
+    t =     3.50s Waiting 5.0s for "game-board" Other to exist
+    t =     4.52s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     4.52s         Checking existence of `"game-board" Other`
+    t =     4.57s Tap "History" Button
+    t =     4.57s     Wait for com.xjrmh.gomoku to idle
+    t =     4.57s     Find the "History" Button
+    t =     4.59s     Check for interrupting elements affecting "History" Button
+    t =     4.60s     Synthesize event
+    t =     4.89s     Wait for com.xjrmh.gomoku to idle
+    t =     4.96s Waiting 3.0s for "History" NavigationBar to exist
+    t =     5.99s     Checking `Expect predicate `existsNoRetry == 1` for object "History" NavigationBar`
+    t =     5.99s         Checking existence of `"History" NavigationBar`
+    t =     6.03s Waiting 3.0s for Button (First Match) to exist
+    t =     7.05s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+    t =     7.05s         Checking existence of `Button (First Match)`
+    t =     7.07s Tap Button (First Match)
+    t =     7.07s     Wait for com.xjrmh.gomoku to idle
+    t =     7.07s     Find the Button (First Match)
+    t =     7.09s     Check for interrupting elements affecting "history-game-card" Button
+    t =     7.11s     Synthesize event
+    t =     7.40s     Wait for com.xjrmh.gomoku to idle
+    t =     7.82s Waiting 3.0s for "Replay position" Slider to exist
+    t =     8.84s     Checking `Expect predicate `existsNoRetry == 1` for object "Replay position" Slider`
+    t =     8.85s         Checking existence of `"Replay position" Slider`
+    t =     8.87s Tap "Play replay" Button
+    t =     8.87s     Wait for com.xjrmh.gomoku to idle
+    t =     8.87s     Find the "Play replay" Button
+    t =     8.88s     Check for interrupting elements affecting "play.fill" Button
+    t =     8.90s     Synthesize event
+    t =     9.19s     Wait for com.xjrmh.gomoku to idle
+    t =     9.19s Waiting 2.0s for "Pause replay" Button to exist
+    t =    10.22s     Checking `Expect predicate `existsNoRetry == 1` for object "Pause replay" Button`
+    t =    10.22s         Checking existence of `"Pause replay" Button`
+    t =    11.25s Checking `Expect predicate `value MATCHES "Move ([1-9]|1[0-9]|2[0-4]) of 25\\..*"` for object "Replay position" Slider`
+    t =    11.25s     Find the "Replay position" Slider
+    t =    11.26s Find the "Replay position" Slider
+    t =    12.29s Checking `Expect predicate `value != "Move 3 of 25. Black at B1" AND value MATCHES "Move ([1-9]|1[0-9]|2[0-4]) of 25\\..*"` for object "Replay position" Slider`
+    t =    12.30s     Find the "Replay position" Slider
+    t =    12.32s     Find the "Replay position" Slider
+    t =    12.33s Set normalized position of "Replay position" Slider to 0.50
+    t =    12.33s     Wait for com.xjrmh.gomoku to idle
+    t =    12.33s     Find the "Replay position" Slider
+    t =    12.35s     Check for interrupting elements affecting "Replay position" Slider
+    t =    12.36s     Synthesize event
+    t =    13.03s     Wait for com.xjrmh.gomoku to idle
+    t =    13.04s Waiting 2.0s for "Play replay" Button to exist
+    t =    14.06s     Checking `Expect predicate `existsNoRetry == 1` for object "Play replay" Button`
+    t =    14.07s         Checking existence of `"Play replay" Button`
+    t =    14.08s Checking existence of `"Pause replay" Button`
+    t =    14.09s Find the "Replay position" Slider
+    t =    15.13s Checking `Expect predicate `value != "Move 13 of 25. Black at B3"` for object "Replay position" Slider`
+    t =    15.13s     Find the "Replay position" Slider
+    t =    15.15s     Capturing element debug description
+    t =    15.22s         Requesting snapshot of accessibility hierarchy for app with pid 23928
+    t =    15.23s         Find: Descendants matching type Slider
+    t =    15.23s         Find: Elements matching predicate '"Replay position" IN identifiers'
+    t =    15.23s         Requesting snapshot of accessibility hierarchy for app with pid 23928
+    t =    15.24s         Find: Descendants matching type Slider
+    t =    15.24s         Requesting snapshot of accessibility hierarchy for app with pid 23928
+    t =    15.41s Tear Down
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testReplayFromEndRestartsAndScrubbingPausesPlayback]' passed (15.648 seconds).
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testSearchMatchesDisplayedBoardSizeAndASCIIAlias]' started.
+    t =     0.00s Start Test at 2026-10-11 21:57:03.282
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.02s     Launch com.xjrmh.gomoku
+    t =     0.02s         Terminate com.xjrmh.gomoku:23928
+2026-10-11 21:57:04.367 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:57:04.367 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.49s         Setting up automation session
+    t =     2.18s         Wait for com.xjrmh.gomoku to idle
+    t =     3.55s Waiting 5.0s for "game-board" Other to exist
+    t =     4.57s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     4.58s         Checking existence of `"game-board" Other`
+    t =     4.62s Tap "History" Button
+    t =     4.62s     Wait for com.xjrmh.gomoku to idle
+    t =     4.62s     Find the "History" Button
+    t =     4.64s     Check for interrupting elements affecting "History" Button
+    t =     4.65s     Synthesize event
+    t =     4.94s     Wait for com.xjrmh.gomoku to idle
+    t =     5.00s Waiting 3.0s for "History" NavigationBar to exist
+    t =     6.03s     Checking `Expect predicate `existsNoRetry == 1` for object "History" NavigationBar`
+    t =     6.03s         Checking existence of `"History" NavigationBar`
+    t =     6.07s Checking existence of `SearchField (First Match)`
+    t =     6.11s Swipe down Target Application 'com.xjrmh.gomoku'
+    t =     6.11s     Wait for com.xjrmh.gomoku to idle
+    t =     6.12s     Find the Target Application 'com.xjrmh.gomoku'
+    t =     6.13s     Check for interrupting elements affecting "Gomoku" Application
+    t =     6.14s     Synthesize event
+    t =     6.56s     Wait for com.xjrmh.gomoku to idle
+    t =     7.04s Checking existence of `SearchField (First Match)`
+    t =     7.06s Find the SearchField (First Match)
+    t =     7.08s Waiting 3.0s for "Result, mode, size, or date" SearchField to exist
+    t =     8.12s     Checking `Expect predicate `existsNoRetry == 1` for object "Result, mode, size, or date" SearchField`
+    t =     8.12s         Checking existence of `"Result, mode, size, or date" SearchField`
+    t =     8.14s Find the "Result, mode, size, or date" SearchField
+    t =     8.16s Tap "Result, mode, size, or date" SearchField
+    t =     8.16s     Wait for com.xjrmh.gomoku to idle
+    t =     8.32s     Find the "Result, mode, size, or date" SearchField
+    t =     8.33s     Check for interrupting elements affecting "Result, mode, size, or date" SearchField
+    t =     8.35s     Synthesize event
+    t =     8.64s     Wait for com.xjrmh.gomoku to idle
+    t =    10.09s Type '15×15' into "Result, mode, size, or date" SearchField
+    t =    10.09s     Wait for com.xjrmh.gomoku to idle
+    t =    10.09s     Find the "Result, mode, size, or date" SearchField
+    t =    10.13s     Check for interrupting elements affecting "Result, mode, size, or date" SearchField
+    t =    10.15s     Synthesize event
+    t =    10.44s     Wait for com.xjrmh.gomoku to idle
+    t =    10.44s Waiting 3.0s for Button (First Match) to exist
+    t =    11.47s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+    t =    11.47s         Checking existence of `Button (First Match)`
+    t =    11.53s Checking existence of `"No Matches" StaticText`
+    t =    11.57s Checking existence of `"Clear text" Button`
+    t =    11.59s Tap "Clear text" Button
+    t =    11.59s     Wait for com.xjrmh.gomoku to idle
+    t =    11.59s     Find the "Clear text" Button
+    t =    11.61s     Check for interrupting elements affecting "Clear text" Button
+    t =    11.63s     Synthesize event
+    t =    11.92s     Wait for com.xjrmh.gomoku to idle
+    t =    11.98s Type '15x15' into "Result, mode, size, or date" SearchField
+    t =    11.98s     Wait for com.xjrmh.gomoku to idle
+    t =    11.99s     Find the "Result, mode, size, or date" SearchField
+    t =    12.01s     Check for interrupting elements affecting "Result, mode, size, or date" SearchField
+    t =    12.03s     Synthesize event
+    t =    12.31s     Wait for com.xjrmh.gomoku to idle
+    t =    12.31s Waiting 3.0s for Button (First Match) to exist
+    t =    13.34s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+    t =    13.34s         Checking existence of `Button (First Match)`
+    t =    13.38s Checking existence of `"No Matches" StaticText`
+    t =    13.41s Tear Down
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testSearchMatchesDisplayedBoardSizeAndASCIIAlias]' passed (13.631 seconds).
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testSearchNoMatchesAndClearingRestoresArchive]' started.
+    t =     0.00s Start Test at 2026-10-11 21:57:16.913
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.02s     Launch com.xjrmh.gomoku
+    t =     0.02s         Terminate com.xjrmh.gomoku:23952
+2026-10-11 21:57:18.094 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:57:18.094 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.59s         Setting up automation session
+    t =     2.25s         Wait for com.xjrmh.gomoku to idle
+    t =     3.62s Waiting 5.0s for "game-board" Other to exist
+    t =     4.64s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     4.64s         Checking existence of `"game-board" Other`
+    t =     4.67s Tap "History" Button
+    t =     4.67s     Wait for com.xjrmh.gomoku to idle
+    t =     4.68s     Find the "History" Button
+    t =     4.69s     Check for interrupting elements affecting "History" Button
+    t =     4.70s     Synthesize event
+    t =     4.99s     Wait for com.xjrmh.gomoku to idle
+    t =     5.05s Waiting 3.0s for "History" NavigationBar to exist
+    t =     6.08s     Checking `Expect predicate `existsNoRetry == 1` for object "History" NavigationBar`
+    t =     6.08s         Checking existence of `"History" NavigationBar`
+    t =     6.12s Checking existence of `SearchField (First Match)`
+    t =     6.16s Swipe down Target Application 'com.xjrmh.gomoku'
+    t =     6.16s     Wait for com.xjrmh.gomoku to idle
+    t =     6.16s     Find the Target Application 'com.xjrmh.gomoku'
+    t =     6.18s     Check for interrupting elements affecting "Gomoku" Application
+    t =     6.19s     Synthesize event
+    t =     6.61s     Wait for com.xjrmh.gomoku to idle
+    t =     7.07s Checking existence of `SearchField (First Match)`
+    t =     7.09s Find the SearchField (First Match)
+    t =     7.11s Waiting 3.0s for "Result, mode, size, or date" SearchField to exist
+    t =     8.15s     Checking `Expect predicate `existsNoRetry == 1` for object "Result, mode, size, or date" SearchField`
+    t =     8.15s         Checking existence of `"Result, mode, size, or date" SearchField`
+    t =     8.17s Find the "Result, mode, size, or date" SearchField
+    t =     8.19s Tap "Result, mode, size, or date" SearchField
+    t =     8.19s     Wait for com.xjrmh.gomoku to idle
+    t =     8.35s     Find the "Result, mode, size, or date" SearchField
+    t =     8.37s     Check for interrupting elements affecting "Result, mode, size, or date" SearchField
+    t =     8.40s     Synthesize event
+    t =     8.69s     Wait for com.xjrmh.gomoku to idle
+    t =     9.18s Type 'edge-case-no-match' into "Result, mode, size, or date" SearchField
+    t =     9.18s     Wait for com.xjrmh.gomoku to idle
+    t =     9.18s     Find the "Result, mode, size, or date" SearchField
+    t =     9.21s     Check for interrupting elements affecting "Result, mode, size, or date" SearchField
+    t =     9.23s     Synthesize event
+    t =     9.73s     Wait for com.xjrmh.gomoku to idle
+    t =     9.74s Waiting 3.0s for "No Matches" StaticText to exist
+    t =    10.76s     Checking `Expect predicate `existsNoRetry == 1` for object "No Matches" StaticText`
+    t =    10.76s         Checking existence of `"No Matches" StaticText`
+    t =    10.79s Checking existence of `"No Games Yet" StaticText`
+    t =    10.82s Checking existence of `"Clear text" Button`
+    t =    10.83s Tap "Clear text" Button
+    t =    10.83s     Wait for com.xjrmh.gomoku to idle
+    t =    10.84s     Find the "Clear text" Button
+    t =    10.86s     Check for interrupting elements affecting "Clear text" Button
+    t =    10.87s     Synthesize event
+    t =    11.16s     Wait for com.xjrmh.gomoku to idle
+    t =    11.24s Type 'Draw' into "Result, mode, size, or date" SearchField
+    t =    11.24s     Wait for com.xjrmh.gomoku to idle
+    t =    11.24s     Find the "Result, mode, size, or date" SearchField
+    t =    11.27s     Check for interrupting elements affecting "Result, mode, size, or date" SearchField
+    t =    11.29s     Synthesize event
+    t =    11.56s     Wait for com.xjrmh.gomoku to idle
+    t =    11.56s Waiting 3.0s for Button (First Match) to exist
+    t =    12.59s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+    t =    12.59s         Checking existence of `Button (First Match)`
+    t =    12.65s Checking existence of `"No Matches" StaticText`
+    t =    12.67s Checking existence of `"Clear text" Button`
+    t =    12.69s Tap "Clear text" Button
+    t =    12.69s     Wait for com.xjrmh.gomoku to idle
+    t =    12.69s     Find the "Clear text" Button
+    t =    12.71s     Check for interrupting elements affecting "Clear text" Button
+    t =    12.72s     Synthesize event
+    t =    13.01s     Wait for com.xjrmh.gomoku to idle
+    t =    13.05s Checking existence of `"history-game-card" Button`
+    t =    13.10s Waiting 3.0s for "history-game-card" Button to exist
+    t =    14.12s     Checking `Expect predicate `existsNoRetry == 1` for object "history-game-card" Button`
+    t =    14.12s         Checking existence of `"history-game-card" Button`
+    t =    14.19s Checking existence of `"No Matches" StaticText`
+    t =    14.21s Tear Down
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testSearchNoMatchesAndClearingRestoresArchive]' passed (14.444 seconds).
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testWinResultCanOpenSystemShareSheet]' started.
+    t =     0.00s Start Test at 2026-10-11 21:57:31.358
+    t =     0.02s Set Up
+    t =     0.02s Open com.xjrmh.gomoku
+    t =     0.02s     Launch com.xjrmh.gomoku
+    t =     0.02s         Terminate com.xjrmh.gomoku:23998
+2026-10-11 21:57:32.422 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: debugger version lookup failed for path '<nil>': noURL
+2026-10-11 21:57:32.422 xcodebuild[23158:594160] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =     1.48s         Setting up automation session
+    t =     2.15s         Wait for com.xjrmh.gomoku to idle
+    t =     4.11s Waiting 5.0s for "game-board" Other to exist
+    t =     5.14s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     5.15s         Checking existence of `"game-board" Other`
+    t =     5.19s Waiting 5.0s for "game-board" Other to exist
+    t =     6.22s     Checking `Expect predicate `existsNoRetry == 1` for object "game-board" Other`
+    t =     6.22s         Checking existence of `"game-board" Other`
+    t =     6.23s Find the "game-board" Other
+    t =     6.23s Waiting 5.0s for "Share" Button to exist
+    t =     7.26s     Checking `Expect predicate `existsNoRetry == 1` for object "Share" Button`
+    t =     7.26s         Checking existence of `"Share" Button`
+    t =     7.28s Tap "Share" Button
+    t =     7.28s     Wait for com.xjrmh.gomoku to idle
+    t =     7.28s     Find the "Share" Button
+    t =     7.29s     Check for interrupting elements affecting "Share" Button
+    t =     7.31s     Synthesize event
+    t =     7.60s     Wait for com.xjrmh.gomoku to idle
+    t =     8.11s Waiting 5.0s for "ShareSheet.RemoteContainerView" Other to exist
+    t =     9.13s     Checking `Expect predicate `existsNoRetry == 1` for object "ShareSheet.RemoteContainerView" Other`
+    t =     9.13s         Checking existence of `"ShareSheet.RemoteContainerView" Other`
+    t =     9.20s Waiting 3.0s for "Black wins · 9 moves" NavigationBar to exist
+    t =    10.22s     Checking `Expect predicate `existsNoRetry == 1` for object "Black wins · 9 moves" NavigationBar`
+    t =    10.23s         Checking existence of `"Black wins · 9 moves" NavigationBar`
+    t =    10.26s Checking existence of `Image (First Match)`
+    t =    10.29s Checking existence of `"Copy" Cell`
+    t =    10.31s Tear Down
+Test Case '-[just_gomokuUITests.HistoryEdgeCaseUITests testWinResultCanOpenSystemShareSheet]' passed (10.542 seconds).
+Test Suite 'HistoryEdgeCaseUITests' passed at 2026-10-11 21:57:41.900.
+	 Executed 8 tests, with 0 failures (0 unexpected) in 108.190 (108.194) seconds
+Test Suite 'just-gomokuUITests.xctest' failed at 2026-10-11 21:57:41.900.
+	 Executed 11 tests, with 2 failures (0 unexpected) in 183.758 (183.765) seconds
+Test Suite 'Selected tests' failed at 2026-10-11 21:57:41.901.
+	 Executed 11 tests, with 2 failures (0 unexpected) in 183.758 (183.767) seconds
+2026-10-11 21:57:53.466 xcodebuild[23158:594160] [MT] IDETestOperationsObserverDebug: 207.354 elapsed -- Testing started completed.
+2026-10-11 21:57:53.466 xcodebuild[23158:594160] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-11 21:57:53.466 xcodebuild[23158:594160] [MT] IDETestOperationsObserverDebug: 207.354 sec, +207.354 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/lizheng/Downloads/gomoku-xcode/simulation-tests/2026-10-11/ios18-edge.xcresult
+
+Failing tests:
+	EdgeCaseUITests.testDenseBoardRejectsOccupiedAndCancelledGesturesAndUndoesToEmpty()
+	EdgeCaseUITests.testSmallBoardDraftCancellationResetAndCornerPlacement()
+
+** TEST FAILED **
+
+Testing started

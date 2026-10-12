@@ -1,0 +1,8 @@
+{
+  "engineSHA256": "544007f651ab0a0dba8544eb85cccee079279eb1b61a55cec770874f49069e9b",
+  "tournaments": "Two benchmark processes overlap:20 games each on15\u00d715, ten fixed openings and paired colors. No repeated matchsets.",
+  "baseline": "Exact prior engine SHA-256331303c9ad7e6ffd74cc5d7969ad058d808fc587811550f06b0901c1d8108b42.",
+  "hardBudgetMS": 750,
+  "mediumBudgetMS": 350,
+  "timingCaveat": "Matchsets overlap on the same Mac; wall-budget decisions and latencies depend on system load. Source provenance and paired-color outcomes are the strength comparison."
+}

@@ -1,0 +1,125 @@
+{
+  "evaluationDate": "2026-10-11",
+  "productionEngineSHA256": "331303c9ad7e6ffd74cc5d7969ad058d808fc587811550f06b0901c1d8108b42",
+  "hardware": "Apple M5 Pro",
+  "compiler": "swift-driver version: 1.168.6 Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)\nTarget: arm64-apple-macosx27.0.0",
+  "buildFlags": [
+    "-O",
+    "-swift-version",
+    "5"
+  ],
+  "methodology": {
+    "engine": "Exact current production source; diagnostic and no-cache copies only for explicitly labeled probes.",
+    "gameRules": "Current production GameSession; freestyle five or more wins.",
+    "hardBudgetMS": 750,
+    "selfPlay": "20 deterministic 15x15 games; ten fixed openings, each played with Hard as Black and White.",
+    "timing": "Engine computation on Mac; excludes app scheduling and minimum 250ms display delay.",
+    "limits": "Small selected-opening engine comparison, not a human rating. Device timing and timeout-sensitive choices can vary."
+  },
+  "basicChecks": {
+    "checks": 255,
+    "event": "basics",
+    "failures": 0,
+    "scope": "synthetic empty-board and unique immediate win/block positions; not a legal-history strength test"
+  },
+  "selfPlay": {
+    "games": 20,
+    "hardWins": 7,
+    "hardLosses": 12,
+    "draws": 1
+  },
+  "latency": {
+    "hard": {
+      "decisions": 649,
+      "medianMS": 750.076792,
+      "p95MS": 750.34675,
+      "maxMS": 751.472167
+    },
+    "medium": {
+      "decisions": 652,
+      "medianMS": 0.3128745,
+      "p95MS": 0.462792,
+      "maxMS": 0.78925
+    }
+  },
+  "searchProfiles": {
+    "positions": 16,
+    "acceptedDepthWithInterruptedBranch": 0,
+    "verifiedCompletedDepths": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "earlierConcurrentRun": {
+      "positions": 16,
+      "acceptedDepthWithInterruptedBranch": 7,
+      "file": "profile-concurrent.jsonl",
+      "timingContext": "Earlier profile run overlapped tournament and independent audit probes; idle rerun completed depth four in all16 positions."
+    }
+  },
+  "tacticalRegression": {
+    "safeMove": "H8",
+    "hard750msMove": "E8",
+    "hard750msFailures": 5,
+    "hard750msRepetitions": 5,
+    "mediumMove": "H8",
+    "whiteWinningReply": "H8",
+    "whiteWinningContinuations": [
+      "J8",
+      "H10"
+    ],
+    "allBlackRepliesChecked": 205,
+    "fullFourPlySearchFindsDefense": true,
+    "proofFile": "independent-tactical-proof.json"
+  },
+  "confirmedBugs": [
+    {
+      "source": "gomoku/AIEngine.swift:127",
+      "finding": "Alpha-beta cutoff bounds cached and reused as exact values; changes move even with a fully completed search.",
+      "reproFile": "correctness.jsonl"
+    },
+    {
+      "source": "gomoku/AIEngine.swift:124",
+      "finding": "Expired negamax returns root-perspective evaluation without side sign; deterministic score sign reversal.",
+      "reproFile": "correctness.jsonl"
+    },
+    {
+      "source": "gomoku/AIEngine.swift:108",
+      "finding": "Root can accept an interrupted final branch as a completed depth; descendant loop can also produce infinities after deadline.",
+      "reproFile": "profile.jsonl"
+    }
+  ],
+  "strengthLimits": {
+    "maxPlies": 4,
+    "rootCandidates": 14,
+    "childCandidates": 9,
+    "evaluator": "Only strongest hypothetical next move per side; no forcing-line extensions."
+  },
+  "testGap": "All four existing AIEngineTests bypass hardMove/negamax (empty/win/block shortcuts or Easy only).",
+  "recommendedOrder": [
+    "Fix timeout propagation and completed-depth invariants.",
+    "Use bound-aware transposition entries or remove cache until correct.",
+    "Guarantee tactical fork defense and add forcing-threat extensions.",
+    "Add tactical/search regression coverage; tune search speed/depth and budget on target devices."
+  ],
+  "reproductionCommands": [
+    "python3 ai-evaluation/run.py basics",
+    "python3 ai-evaluation/run.py tournament 15 10 medium",
+    "python3 ai-evaluation/run.py tactical",
+    "python3 ai-evaluation/run.py correctness",
+    "python3 ai-evaluation/run.py profile"
+  ]
+}

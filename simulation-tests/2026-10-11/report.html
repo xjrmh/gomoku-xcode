@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Just Gomoku · Simulator QA</title>
+  <style>
+    :root { color-scheme: light dark; --bg: #f5f5f7; --surface: #fff; --text: #1d1d1f; --muted: #62626a; --line: #d9d9de; --link: #0066cc; --pass: #166534; --pending: #855000; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { max-width: 1000px; margin: auto; padding: 40px 24px 64px; }
+    h1 { margin: 4px 0 12px; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -.025em; }
+    h2 { margin: 0 0 14px; font-size: 22px; line-height: 1.25; }
+    p { margin: 10px 0; }
+    .eyebrow, .note { color: var(--muted); font-size: 14px; }
+    .lead { font-size: 19px; max-width: 800px; }
+    section { margin-top: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+    a { color: var(--link); text-underline-offset: .2em; }
+    a:focus-visible { outline: 3px solid var(--link); outline-offset: 4px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    th, td { text-align: left; vertical-align: top; padding: 12px 10px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-size: 13px; font-weight: 600; }
+    th:first-child, td:first-child { padding-left: 0; }
+    tr:last-child td { border-bottom: 0; }
+    .pass { color: var(--pass); font-weight: 650; }
+    .pending { color: var(--pending); font-weight: 650; }
+    .scope { min-width: 220px; }
+    .evidence { font-size: 13px; white-space: nowrap; }
+    ul { margin: 0; padding-left: 22px; }
+    li + li { margin-top: 10px; }
+    .images { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    figure { margin: 0; }
+    figure img { display: block; width: 100%; max-height: 460px; object-fit: contain; background: var(--bg); border-radius: 10px; }
+    figcaption { margin-top: 8px; color: var(--muted); font-size: 14px; }
+    code { font-size: .9em; }
+    @media (max-width: 620px) { main { padding: 26px 16px 40px; } section { padding: 18px; } .images { gap: 12px; } th, td { padding: 10px 8px; } }
+    @media (prefers-color-scheme: dark) { :root { --bg: #161618; --surface: #222225; --text: #f5f5f7; --muted: #b0b0b8; --line: #424248; --link: #75b5ff; --pass: #8bddad; --pending: #edc480; } }
+    @media print { body { background: white; color: black; } main { max-width: none; padding: 0; } section { break-inside: avoid; } a { color: inherit; } .table-wrap { overflow: visible; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">JUST GOMOKU · OCTOBER 11, 2026</div>
+    <h1>Simulator QA</h1>
+    <p class="lead" id="overall-status">Gameplay, persistence, sharing, and the selected accessibility checks passed. Native board gestures were verified on iOS 18.6 and iOS 27.</p>
+    <p class="note">The current suite contains 17 distinct UI scenarios and 23 game, hint, and persistence checks. Runs below overlap; this does not mean every scenario was tested on every device. QA used a <a href="source-snapshot.json">frozen source snapshot</a>.</p>
+  </header>
+
+  <section aria-labelledby="results-title">
+    <h2 id="results-title">Results</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Device / run</th><th>Result</th><th class="scope">Scope</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td>iPhone SE · iOS 27.0</td><td class="pass">11 / 11 passed</td><td>Initial gameplay, history, replay, sharing, and relaunch edge cases.</td><td class="evidence"><a href="iphone-se-initial-summary.json">Result bundle</a></td></tr>
+          <tr><td>iPhone 16 Pro · iOS 18.6</td><td class="pass">11 UI scenarios verified</td><td>9 passed initially; the 2 remaining cases passed after correcting the test helper for native stepper accessibility. The rerun also passed all 23 model checks.</td><td class="evidence"><a href="ios18-edge.xcresult">Initial</a> · <a href="ios18-regressions.xcresult">Rerun</a> · <a href="ios18-regressions.log">Log</a></td></tr>
+          <tr><td>iPad Pro 13-inch (M5) · iOS 27.0</td><td class="pass">5 / 5 passed</td><td>Setup, tap/held-drag gameplay, settings/history navigation, and appearance changes before sharing.</td><td class="evidence"><a href="ipad-flows.xcresult">Result</a> · <a href="ipad-flows.log">Log</a></td></tr>
+          <tr><td>iPhone SE · largest accessibility text</td><td class="pass">2 / 2 passed</td><td>Header and footer layout, scrolling, hit regions, descriptions, and text clipping.</td><td class="evidence"><a href="compact-layout-verified.xcresult">Result</a> · <a href="compact-layout-verified.log">Log</a></td></tr>
+          <tr id="final-native-row"><td>iOS 27 · final native board regression</td><td class="pass" id="final-native-status">23 model + 5 core UI passed; 2 audits passed on rerun</td><td>Native tap/hold/cancel/swipe, min/max boards, reset/relaunch, sharing, and 23 model regressions passed. Two audit-tool failures were retained; the corrected audit fixtures passed separately.</td><td class="evidence"><a href="final-native-summary.json">Core run + diagnostics</a> · <a href="ios27-accessibility-summary.json">Audit rerun</a> · <a href="final-native-regressions.log">Log</a></td></tr>
+          <tr id="ios18-native-row"><td>iOS 18 · final native board regression</td><td class="pass" id="ios18-native-status">4 gesture/session UI + 2 audit checks passed</td><td>Native gesture/session compatibility passed. The 2 audit fixtures passed after separating fixed-size clipping checks from system Dynamic Type support.</td><td class="evidence" id="ios18-native-evidence"><a href="ios18-native-summary.json">Core run + diagnostics</a> · <a href="ios18-accessibility-summary.json">Audit rerun</a></td></tr>
+        <tr><td>Build checks</td><td class="pass">iOS Release + macOS Debug passed</td><td>Native gesture bridge compiles for iOS; macOS keeps its SwiftUI gestures. DEBUG fixtures are excluded from Release.</td><td class="evidence"><a href="release-build.log">iOS log</a> · <a href="macos-build.log">macOS log</a></td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="fixes-title">
+    <h2 id="fixes-title">Issues found and fixed</h2>
+    <ul>
+      <li><strong>Stale hints:</strong> pending hints could appear after a move or win, and visible hints could survive backgrounding. Position checks and cancellation now clear them.</li>
+      <li><strong>History search:</strong> searching the displayed <code>15×15</code> size returned no matches. Search now accepts both <code>×</code> and ASCII <code>x</code>, and trims surrounding whitespace.</li>
+      <li><strong>Share appearance:</strong> a completed game's PNG could keep the old appearance after switching light/dark mode. Rendering now refreshes when appearance changes; exported pixels match each palette.</li>
+      <li><strong>Large-text scrolling:</strong> combined SwiftUI board gestures blocked scrolling from the board at the largest accessibility size. Native UIKit recognizers now coordinate board touch with scrolling; the move counter moved from y=652 to y=335 after a swipe, and New Game became fully reachable.</li>
+      <li><strong>Compact text clipping:</strong> vertical sizing and the move counter's accessible description were corrected. Both compact header/footer audits now pass their selected layout checks.</li>
+    </ul>
+    <p class="note">The iOS 18 stepper adjustment and system share-sheet Cell/Button queries were test-harness corrections, not app defects.</p>
+  </section>
+
+  <section aria-labelledby="coverage-title">
+    <h2 id="coverage-title">Edge-case coverage</h2>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr><td><strong>Gameplay</strong></td><td>5×5 and 25×25 limits, corner taps, occupied intersections, held placement, cancelled drags, swipes, undo to an empty board, and cancelling/resetting setup.</td></tr>
+          <tr><td><strong>Session and archive</strong></td><td>Active-game process relaunch, supported-size normalization, clock snapshots, valid 25-move draws, terminal move rejection, 250 distinct archives, duplicate replacement, and replay prefixes. Disk-backed tests reopen fresh containers to verify saved win/draw data and durable deletion/erase.</td></tr>
+          <tr><td><strong>History and replay</strong></td><td>40 seeded games, empty archive versus empty filter, unmatched/cleared searches, Unicode/ASCII size queries, start/end bounds, stepping, restart from the final position, continued playback, and paused scrubbing.</td></tr>
+          <tr><td><strong>Sharing and accessibility</strong></td><td>Win/draw system previews, result titles and thumbnails, Play Again, appearance-specific PNG pixels, and compact largest-text layout checks.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="share-title">
+    <h2 id="share-title">Verified share cards</h2>
+    <div class="images">
+      <figure><a href="share-light-after.png"><img src="share-light-after.png" alt="Completed Black win share card rendered in light appearance" loading="lazy"></a><figcaption>Light appearance · 1800×2560 PNG</figcaption></figure>
+      <figure><a href="share-dark-after.png"><img src="share-dark-after.png" alt="Completed Black win share card rendered in dark appearance" loading="lazy"></a><figcaption>Dark appearance · 1800×2560 PNG</figcaption></figure>
+    </div>
+    <p class="note"><a href="share-appearance-verification.json">Pixel verification</a> found more than 2.25 million board pixels matching each expected palette and zero pixels matching the opposite board palette.</p>
+  </section>
+
+  <section aria-labelledby="limits-title">
+    <h2 id="limits-title">Remaining limits</h2>
+    <ul>
+      <li>Audit scope: system Dynamic Type support, hit regions, and descriptions; clipping checks at the largest text size. Small-font ViewThatFits clipping findings had no resolvable element. A fixed-size fixture cannot verify support for all system font sizes, so those checks run separately.</li>
+      <li><strong>Contrast audit tool limitation:</strong> the automatic auditor continued to flag “2 Players” even with opaque black text on a light background. <a href="compact-opaque-text-audit.xcresult">Diagnostics</a> and the <a href="compact-opaque-text-audit.log">log</a> are retained. This report does not certify full contrast compliance.</li>
+      <li>iPad coverage is limited to primary flows. Stage Manager and narrow windows were not tested in this run.</li>
+      <li>Physical haptics, a full VoiceOver navigation pass, iCloud synchronization, and actual external share delivery need device/account checks.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

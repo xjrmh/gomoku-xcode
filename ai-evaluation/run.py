@@ -1,82 +1,58 @@
 #!/usr/bin/env python3
-"""Compile the current production engine with a standalone evaluation harness."""
+"""Compile the current, unchanged production engine and its frozen prior version.
+
+Search diagnostics come from AIEngine.analyzeMove's per-call result. Tournament
+moves call computeBestMove directly without instrumentation or search rewrites.
+"""
 import hashlib
 import json
 import pathlib
+import platform
 import subprocess
 import sys
 import tempfile
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
+BASELINE_SHA256 = "331303c9ad7e6ffd74cc5d7969ad058d808fc587811550f06b0901c1d8108b42"
+
+
+def sha256(value: str) -> str:
+    return hashlib.sha256(value.encode()).hexdigest()
+
+
 engine = (ROOT / "gomoku/AIEngine.swift").read_text()
 models = (ROOT / "gomoku/Models.swift").read_text().split("enum HapticEvent:")[0]
 models = models.replace("import Combine\n", "")
-instrumented = engine.replace("enum AIEngine {", """enum InstrumentedAIEngine {
-    static var nodes = 0
-    static var cacheHits = 0
-    static var completedDepth = 0
-    static var verifiedCompletedDepth = 0
-    static var committedAfterTimeout = false
-    static var rootMovesCompleted = 0
-    static var timedOut = false
-    static func reset() {
-        nodes = 0; cacheHits = 0; completedDepth = 0
-        verifiedCompletedDepth = 0
-        committedAfterTimeout = false; rootMovesCompleted = 0; timedOut = false
-    }
-    static func timeoutProbe(board: [CellState], size: Int, root: Player) -> [String: Double] {
-        var liveTable: [SearchKey: Double] = [:]
-        var expiredTable: [SearchKey: Double] = [:]
-        let live = negamax(board: board, size: size, player: root.next, root: root,
-            depth: 0, alpha: -.infinity, beta: .infinity,
-            deadline: .now.advanced(by: .seconds(30)), table: &liveTable)
-        let expired = negamax(board: board, size: size, player: root.next, root: root,
-            depth: 0, alpha: -.infinity, beta: .infinity,
-            deadline: .now.advanced(by: .seconds(-1)), table: &expiredTable)
-        return ["live": live, "expired": expired]
-    }
-""")
-instrumented = instrumented.replace(
-    "if completedDepth { best = depthBest }",
-    "if completedDepth { best = depthBest; Self.completedDepth = depth; committedAfterTimeout = timedOut || .now >= deadline; if !committedAfterTimeout { verifiedCompletedDepth = depth } }",
-)
-instrumented = instrumented.replace(
-    "for item in ordered {",
-    "rootMovesCompleted = 0\n            for item in ordered {",
-)
-no_cache = engine.replace("enum AIEngine {", "enum NoCacheAIEngine {")
-no_cache = no_cache.replace("if let cached = table[key] { return cached }", "// Evaluation control: no cache lookup.")
-no_cache = no_cache.replace("table[key] = value", "// Evaluation control: no cache write.")
-instrumented = instrumented.replace(
-    "if score > depthScore {",
-    "rootMovesCompleted += 1\n                if score > depthScore {",
-)
-instrumented = instrumented.replace(
-    "if Task.isCancelled || .now >= deadline { return evaluateBoard(board, size, root) }",
-    "nodes += 1\n        if Task.isCancelled || .now >= deadline { timedOut = true; return evaluateBoard(board, size, root) }",
-)
-instrumented = instrumented.replace(
-    "if let cached = table[key] { return cached }",
-    "if let cached = table[key] { cacheHits += 1; return cached }",
-)
-instrumented = instrumented.replace(
-    "if Task.isCancelled || .now >= deadline { break }",
-    "if Task.isCancelled || .now >= deadline { timedOut = true; break }",
-)
+baseline = (HERE / "baseline/AIEngine.swift").read_text()
+if sha256(baseline) != BASELINE_SHA256:
+    raise RuntimeError("The frozen baseline source no longer matches the evaluated production engine")
+if baseline.count("enum AIEngine {") != 1:
+    raise RuntimeError("Expected exactly one baseline engine declaration")
+# Rename only its namespace so both exact engine implementations can be linked.
+baseline_namespace = baseline.replace("enum AIEngine {", "enum BaselineAIEngine {", 1)
+harness = (HERE / "Evaluation.swift").read_text()
+swift_version = subprocess.check_output(["swiftc", "--version"], text=True).strip()
 
 with tempfile.TemporaryDirectory(prefix="gomoku-ai-evaluation-") as temp:
     temp = pathlib.Path(temp)
     (temp / "Models.swift").write_text(models)
     (temp / "AIEngine.swift").write_text(engine)
-    (temp / "InstrumentedAIEngine.swift").write_text(instrumented)
-    (temp / "NoCacheAIEngine.swift").write_text(no_cache)
+    (temp / "BaselineAIEngine.swift").write_text(baseline_namespace)
     binary = temp / "evaluate"
     subprocess.run([
         "swiftc", "-O", "-swift-version", "5",
         str(temp / "Models.swift"), str(temp / "AIEngine.swift"),
-        str(temp / "InstrumentedAIEngine.swift"), str(temp / "NoCacheAIEngine.swift"), str(HERE / "Evaluation.swift"),
+        str(temp / "BaselineAIEngine.swift"), str(HERE / "Evaluation.swift"),
         "-o", str(binary),
     ], check=True)
-    print(json.dumps({"event": "build", "optimization": "-O", "engineSHA256": hashlib.sha256(engine.encode()).hexdigest(), "args": sys.argv[1:]}), flush=True)
+    print(json.dumps({
+        "event": "build", "optimization": "-O", "swiftLanguageVersion": "5",
+        "swiftCompiler": swift_version, "host": platform.platform(),
+        "machine": platform.machine(), "engineSHA256": sha256(engine),
+        "baselineEngineSHA256": BASELINE_SHA256, "modelsPrefixSHA256": sha256(models),
+        "harnessSHA256": sha256(harness), "driverSHA256": sha256(pathlib.Path(__file__).read_text()),
+        "productionSourceChangedForBenchmark": False,
+        "args": sys.argv[1:],
+    }), flush=True)
     subprocess.run([str(binary), *sys.argv[1:]], check=True)

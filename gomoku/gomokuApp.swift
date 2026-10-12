@@ -15,6 +15,14 @@ struct GomokuApp: App {
     private let archiveContainer: ModelContainer
 
     init() {
+        #if DEBUG
+        if let fixture = UITestFixtures.makeIfRequested() {
+            _game = StateObject(wrappedValue: fixture.game)
+            _preferences = StateObject(wrappedValue: fixture.preferences)
+            archiveContainer = fixture.archive
+            return
+        }
+        #endif
         _game = StateObject(wrappedValue: GameState())
         _preferences = StateObject(wrappedValue: PreferencesStore())
         archiveContainer = ArchiveContainer.make()
@@ -25,11 +33,27 @@ struct GomokuApp: App {
             ContentView()
                 .environmentObject(game)
                 .environmentObject(preferences)
+                #if DEBUG
+                .modifier(UITestDynamicTypeModifier())
+                #endif
         }
         .modelContainer(archiveContainer)
         .commands { GameCommands() }
     }
 }
+
+#if DEBUG
+private struct UITestDynamicTypeModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        let arguments = ProcessInfo.processInfo.arguments
+        if arguments.contains("--ui-testing"), arguments.contains("--ui-testing-largest-text") {
+            content.dynamicTypeSize(.accessibility5)
+        } else {
+            content
+        }
+    }
+}
+#endif
 
 struct GameActions {
     let newRound: () -> Void

@@ -1,0 +1,4660 @@
+{
+  "allBlackDefensesAfterFork" : [
+    {
+      "blackMove" : "A1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O1",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O2",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O3",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O4",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O5",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O6",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O7",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A8",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B8",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C8",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D8",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J8",
+      "whiteWinningMoves" : [
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K8",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L8",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M8",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N8",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O8",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O9",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H10",
+      "whiteWinningMoves" : [
+        "J8"
+      ]
+    },
+    {
+      "blackMove" : "I10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O10",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O11",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O12",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O13",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O14",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "A15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "B15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "C15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "D15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "E15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "F15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "G15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "H15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "I15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "J15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "K15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "L15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "M15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "N15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    },
+    {
+      "blackMove" : "O15",
+      "whiteWinningMoves" : [
+        "J8",
+        "H10"
+      ]
+    }
+  ],
+  "allLegalRootMoves" : [
+    {
+      "blackMove" : "A1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O1",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O2",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O3",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O4",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O5",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O6",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O7",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H8",
+      "survivesImmediateOrForkReplies" : true
+    },
+    {
+      "blackMove" : "J8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O8",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O9",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O10",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O11",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O12",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O13",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O14",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "A15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "B15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "C15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "D15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "E15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "F15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "G15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "H15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "I15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "J15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "K15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "L15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "M15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "N15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    },
+    {
+      "blackMove" : "O15",
+      "whiteForcedLossWitness" : {
+        "counterwins" : [
+
+        ],
+        "reply" : "H8",
+        "type" : "two_distinct_winning_points",
+        "winningPoints" : [
+          "E8",
+          "J8",
+          "H10"
+        ]
+      }
+    }
+  ],
+  "blackImmediateCounterwinsAfterFork" : [
+
+  ],
+  "boardRowsFrom1To15" : [
+    "...............",
+    "...............",
+    "...............",
+    "....B.....B....",
+    "....B..B.B.W...",
+    ".......W.W.....",
+    "...B...W.......",
+    ".....WW.W......",
+    ".....B.W.......",
+    "...............",
+    ".....B..W......",
+    "...B...........",
+    "...............",
+    "...............",
+    "..............."
+  ],
+  "boardSize" : 15,
+  "coordinates" : "Columns A–O, rows 1–15; same coordinates as app",
+  "demonstratedLosingContinuation" : [
+    "E8",
+    "H8"
+  ],
+  "legalAlternatingHistory" : [
+    "E4",
+    "F8",
+    "H5",
+    "G8",
+    "F9",
+    "I8",
+    "K4",
+    "H6",
+    "D7",
+    "H7",
+    "D12",
+    "H9",
+    "F11",
+    "I11",
+    "J5",
+    "J6",
+    "E5",
+    "L5"
+  ],
+  "measurements" : [
+    {
+      "allowsProvedForkLoss" : true,
+      "budgetMillis" : 350,
+      "chosenMove" : "H10",
+      "difficulty" : "easy",
+      "elapsedMillis" : 0.47991699999999998,
+      "repetition" : 1
+    },
+    {
+      "allowsProvedForkLoss" : false,
+      "budgetMillis" : 350,
+      "chosenMove" : "H8",
+      "difficulty" : "medium",
+      "elapsedMillis" : 0.47225,
+      "repetition" : 1
+    },
+    {
+      "allowsProvedForkLoss" : true,
+      "budgetMillis" : 750,
+      "chosenMove" : "E8",
+      "difficulty" : "hard",
+      "elapsedMillis" : 750.15404100000001,
+      "repetition" : 1
+    },
+    {
+      "allowsProvedForkLoss" : true,
+      "budgetMillis" : 750,
+      "chosenMove" : "E8",
+      "difficulty" : "hard",
+      "elapsedMillis" : 750.37937499999998,
+      "repetition" : 2
+    },
+    {
+      "allowsProvedForkLoss" : true,
+      "budgetMillis" : 750,
+      "chosenMove" : "E8",
+      "difficulty" : "hard",
+      "elapsedMillis" : 750.37433399999998,
+      "repetition" : 3
+    },
+    {
+      "allowsProvedForkLoss" : true,
+      "budgetMillis" : 750,
+      "chosenMove" : "E8",
+      "difficulty" : "hard",
+      "elapsedMillis" : 750.10237500000005,
+      "repetition" : 4
+    },
+    {
+      "allowsProvedForkLoss" : true,
+      "budgetMillis" : 750,
+      "chosenMove" : "E8",
+      "difficulty" : "hard",
+      "elapsedMillis" : 750.33987500000001,
+      "repetition" : 5
+    },
+    {
+      "allowsProvedForkLoss" : false,
+      "budgetMillis" : 3000,
+      "chosenMove" : "H8",
+      "difficulty" : "hard",
+      "elapsedMillis" : 908.06333400000005,
+      "repetition" : 1
+    },
+    {
+      "allowsProvedForkLoss" : false,
+      "budgetMillis" : 30000,
+      "chosenMove" : "H8",
+      "difficulty" : "hard",
+      "elapsedMillis" : 916.61245799999995,
+      "repetition" : 1
+    }
+  ],
+  "movesSurvivingImmediateOrForkReplies" : [
+    "H8"
+  ],
+  "name" : "Hard overlooks unique double-four defense",
+  "noEarlierTerminalPosition" : true,
+  "sideToMove" : "black",
+  "whiteWinningPointsAfterFork" : [
+    "J8",
+    "H10"
+  ]
+}

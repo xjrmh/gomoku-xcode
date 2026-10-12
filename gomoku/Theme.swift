@@ -39,31 +39,33 @@ final class PreferencesStore: NSObject, ObservableObject {
     }
 
     private let defaults: UserDefaults
-    private let cloud: NSUbiquitousKeyValueStore
+    private let cloud: NSUbiquitousKeyValueStore?
     private var applyingRemoteValue = false
 
     init(
         defaults: UserDefaults = .standard,
-        cloud: NSUbiquitousKeyValueStore = .default
+        cloud: NSUbiquitousKeyValueStore? = .default
     ) {
         self.defaults = defaults
         self.cloud = cloud
         let local = defaults.data(forKey: Self.localKey).flatMap {
             try? JSONDecoder().decode(PreferencePayload.self, from: $0)
         }
-        let remote = cloud.data(forKey: Self.cloudKey).flatMap {
+        let remote = cloud?.data(forKey: Self.cloudKey).flatMap {
             try? JSONDecoder().decode(PreferencePayload.self, from: $0)
         }
         self.payload = [local, remote].compactMap { $0 }.max(by: { $0.modifiedAt < $1.modifiedAt }) ?? .init()
         super.init()
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(cloudValueChanged),
-            name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
-            object: cloud
-        )
-        cloud.synchronize()
+        if let cloud {
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(cloudValueChanged),
+                name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+                object: cloud
+            )
+            cloud.synchronize()
+        }
     }
 
     deinit {
@@ -104,12 +106,12 @@ final class PreferencesStore: NSObject, ObservableObject {
     private func persist() {
         guard !applyingRemoteValue, let data = try? JSONEncoder().encode(payload) else { return }
         defaults.set(data, forKey: Self.localKey)
-        cloud.set(data, forKey: Self.cloudKey)
-        cloud.synchronize()
+        cloud?.set(data, forKey: Self.cloudKey)
+        cloud?.synchronize()
     }
 
     private func mergeRemoteValue() {
-        guard let data = cloud.data(forKey: Self.cloudKey),
+        guard let data = cloud?.data(forKey: Self.cloudKey),
               let remote = try? JSONDecoder().decode(PreferencePayload.self, from: data),
               remote.modifiedAt > payload.modifiedAt else { return }
         applyingRemoteValue = true

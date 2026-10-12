@@ -47,9 +47,18 @@ struct BoardCanvasView: View {
     var interactive = true
 
     @State private var target: Position?
+    @State private var touchPrecisionActive = false
     @GestureState(resetTransaction: Transaction(animation: .easeOut(duration: 0.12))) private var precisionActive = false
     @State private var cursor: Position = .init(r: 7, c: 7)
     @FocusState private var keyboardFocused: Bool
+
+    private var isPrecisionActive: Bool {
+        #if os(iOS)
+        touchPrecisionActive
+        #else
+        precisionActive
+        #endif
+    }
 
     var body: some View {
         GeometryReader { proxy in
@@ -60,14 +69,49 @@ struct BoardCanvasView: View {
                     .frame(width: side, height: side)
                     .position(x: proxy.size.width / 2, y: proxy.size.height / 2)
 
-                if precisionActive, let target {
+                if isPrecisionActive, let target {
                     loupe(for: target, boardSide: side)
                         .position(loupePosition(for: target, side: side, origin: origin, container: proxy.size))
                         .transition(.scale(scale: 0.8).combined(with: .opacity))
                 }
             }
             .contentShape(Rectangle())
+            #if os(iOS)
+            .overlay {
+                BoardTouchSurface(
+                    interactive: interactive,
+                    onTap: { point in
+                        if let position = boardPosition(at: point, side: side, origin: origin) {
+                            game.playHuman(at: position)
+                        }
+                    },
+                    onPrecisionChanged: { point in
+                        let position = boardPosition(at: point, side: side, origin: origin)
+                        if position != target, position != nil { game.emitTargetChanged() }
+                        if !touchPrecisionActive {
+                            withAnimation(.snappy(duration: 0.18)) {
+                                touchPrecisionActive = true
+                                target = position
+                            }
+                        } else {
+                            target = position
+                        }
+                    },
+                    onPrecisionEnded: { point in
+                        if let point,
+                           let position = boardPosition(at: point, side: side, origin: origin) {
+                            game.playHuman(at: position)
+                        }
+                        withAnimation(.easeOut(duration: 0.12)) {
+                            touchPrecisionActive = false
+                            target = nil
+                        }
+                    }
+                )
+            }
+            #else
             .gesture(placementGesture(side: side, origin: origin), isEnabled: interactive)
+            #endif
             .focusable(interactive)
             .focused($keyboardFocused)
             .onKeyPress(.leftArrow) { moveCursor(dr: 0, dc: -1) }
@@ -100,10 +144,13 @@ struct BoardCanvasView: View {
             let center = game.boardSize / 2
             cursor = Position(r: center, c: center)
         }
-        .onChange(of: precisionActive) { _, isActive in
+        .onChange(of: isPrecisionActive) { _, isActive in
             if !isActive { target = nil }
         }
-        .onDisappear { target = nil }
+        .onDisappear {
+            target = nil
+            touchPrecisionActive = false
+        }
     }
 
     private func boardCanvas(side: CGFloat) -> some View {
@@ -116,7 +163,7 @@ struct BoardCanvasView: View {
                 lastMove: game.moves.last?.pos,
                 winningLine: game.winningLine,
                 hint: game.hint,
-                preview: precisionActive ? target : nil,
+                preview: isPrecisionActive ? target : nil,
                 cursor: keyboardFocused ? cursor : nil,
                 palette: palette
             )

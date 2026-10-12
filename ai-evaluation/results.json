@@ -1,0 +1,498 @@
+{
+  "evaluationDate": "2026-10-11",
+  "status": "post-fix evaluation complete",
+  "baselineResults": "baseline/results.json",
+  "postFixResults": "post-fix/results.json",
+  "baseline": {
+    "evaluationDate": "2026-10-11",
+    "productionEngineSHA256": "331303c9ad7e6ffd74cc5d7969ad058d808fc587811550f06b0901c1d8108b42",
+    "hardware": "Apple M5 Pro",
+    "compiler": "swift-driver version: 1.168.6 Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)\nTarget: arm64-apple-macosx27.0.0",
+    "buildFlags": [
+      "-O",
+      "-swift-version",
+      "5"
+    ],
+    "methodology": {
+      "engine": "Exact current production source; diagnostic and no-cache copies only for explicitly labeled probes.",
+      "gameRules": "Current production GameSession; freestyle five or more wins.",
+      "hardBudgetMS": 750,
+      "selfPlay": "20 deterministic 15x15 games; ten fixed openings, each played with Hard as Black and White.",
+      "timing": "Engine computation on Mac; excludes app scheduling and minimum 250ms display delay.",
+      "limits": "Small selected-opening engine comparison, not a human rating. Device timing and timeout-sensitive choices can vary."
+    },
+    "basicChecks": {
+      "checks": 255,
+      "event": "basics",
+      "failures": 0,
+      "scope": "synthetic empty-board and unique immediate win/block positions; not a legal-history strength test"
+    },
+    "selfPlay": {
+      "games": 20,
+      "hardWins": 7,
+      "hardLosses": 12,
+      "draws": 1
+    },
+    "latency": {
+      "hard": {
+        "decisions": 649,
+        "medianMS": 750.076792,
+        "p95MS": 750.34675,
+        "maxMS": 751.472167
+      },
+      "medium": {
+        "decisions": 652,
+        "medianMS": 0.3128745,
+        "p95MS": 0.462792,
+        "maxMS": 0.78925
+      }
+    },
+    "searchProfiles": {
+      "positions": 16,
+      "acceptedDepthWithInterruptedBranch": 0,
+      "verifiedCompletedDepths": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "earlierConcurrentRun": {
+        "positions": 16,
+        "acceptedDepthWithInterruptedBranch": 7,
+        "file": "profile-concurrent.jsonl",
+        "timingContext": "Earlier profile run overlapped tournament and independent audit probes; idle rerun completed depth four in all16 positions."
+      }
+    },
+    "tacticalRegression": {
+      "safeMove": "H8",
+      "hard750msMove": "E8",
+      "hard750msFailures": 5,
+      "hard750msRepetitions": 5,
+      "mediumMove": "H8",
+      "whiteWinningReply": "H8",
+      "whiteWinningContinuations": [
+        "J8",
+        "H10"
+      ],
+      "allBlackRepliesChecked": 205,
+      "fullFourPlySearchFindsDefense": true,
+      "proofFile": "independent-tactical-proof.json"
+    },
+    "confirmedBugs": [
+      {
+        "source": "gomoku/AIEngine.swift:127",
+        "finding": "Alpha-beta cutoff bounds cached and reused as exact values; changes move even with a fully completed search.",
+        "reproFile": "correctness.jsonl"
+      },
+      {
+        "source": "gomoku/AIEngine.swift:124",
+        "finding": "Expired negamax returns root-perspective evaluation without side sign; deterministic score sign reversal.",
+        "reproFile": "correctness.jsonl"
+      },
+      {
+        "source": "gomoku/AIEngine.swift:108",
+        "finding": "Root can accept an interrupted final branch as a completed depth; descendant loop can also produce infinities after deadline.",
+        "reproFile": "profile.jsonl"
+      }
+    ],
+    "strengthLimits": {
+      "maxPlies": 4,
+      "rootCandidates": 14,
+      "childCandidates": 9,
+      "evaluator": "Only strongest hypothetical next move per side; no forcing-line extensions."
+    },
+    "testGap": "All four existing AIEngineTests bypass hardMove/negamax (empty/win/block shortcuts or Easy only).",
+    "recommendedOrder": [
+      "Fix timeout propagation and completed-depth invariants.",
+      "Use bound-aware transposition entries or remove cache until correct.",
+      "Guarantee tactical fork defense and add forcing-threat extensions.",
+      "Add tactical/search regression coverage; tune search speed/depth and budget on target devices."
+    ],
+    "reproductionCommands": [
+      "python3 ai-evaluation/run.py basics",
+      "python3 ai-evaluation/run.py tournament 15 10 medium",
+      "python3 ai-evaluation/run.py tactical",
+      "python3 ai-evaluation/run.py correctness",
+      "python3 ai-evaluation/run.py profile"
+    ]
+  },
+  "postFix": {
+    "evaluationDate": "2026-10-11",
+    "productionEngineSHA256": "544007f651ab0a0dba8544eb85cccee079279eb1b61a55cec770874f49069e9b",
+    "baselineEngineSHA256": "331303c9ad7e6ffd74cc5d7969ad058d808fc587811550f06b0901c1d8108b42",
+    "compiler": "Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)\nTarget: arm64-apple-macosx27.0.0",
+    "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "buildFlags": [
+      "-O",
+      "-swift-version",
+      "5"
+    ],
+    "methodology": {
+      "productionEngine": "Exact unchanged source; tournaments call computeBestMove directly.",
+      "diagnostics": "Native per-call analyzeMove result; cache controls use SearchOptions.",
+      "gameRules": "Production GameSession; freestyle five or more wins.",
+      "hardBudgetMS": 750,
+      "mediumBudgetMS": 350,
+      "comparisons": "20 games per opponent; ten fixed openings; each color once per opening.",
+      "timingContext": {
+        "engineSHA256": "544007f651ab0a0dba8544eb85cccee079279eb1b61a55cec770874f49069e9b",
+        "tournaments": "Two benchmark processes overlap:20 games each on15\u00d715, ten fixed openings and paired colors. No repeated matchsets.",
+        "baseline": "Exact prior engine SHA-256331303c9ad7e6ffd74cc5d7969ad058d808fc587811550f06b0901c1d8108b42.",
+        "hardBudgetMS": 750,
+        "mediumBudgetMS": 350,
+        "timingCaveat": "Matchsets overlap on the same Mac; wall-budget decisions and latencies depend on system load. Source provenance and paired-color outcomes are the strength comparison."
+      },
+      "limits": "Small local engine comparison with fixed openings. No human win-rate or Elo claim. Deadline-dependent decisions can vary with host load."
+    },
+    "vsCurrentMedium": {
+      "games": 20,
+      "hardWins": 16,
+      "hardLosses": 0,
+      "draws": 4,
+      "drawRate": 0.2,
+      "hardScoreFraction": 0.9,
+      "opponent": "medium",
+      "pairedOpenings": 10,
+      "latency": {
+        "currentHard": {
+          "decisions": 897,
+          "medianMS": 750.014792,
+          "p95MS": 750.090167,
+          "maxMS": 826.230042
+        },
+        "medium": {
+          "decisions": 889,
+          "medianMS": 0.083666,
+          "p95MS": 0.115292,
+          "maxMS": 0.32425
+        }
+      },
+      "sourceLog": "post-fix/hard-vs-medium-15.jsonl"
+    },
+    "vsFrozenPriorHard": {
+      "games": 20,
+      "hardWins": 18,
+      "hardLosses": 2,
+      "draws": 0,
+      "drawRate": 0.0,
+      "hardScoreFraction": 0.9,
+      "opponent": "baselineHard",
+      "pairedOpenings": 10,
+      "latency": {
+        "currentHard": {
+          "decisions": 273,
+          "medianMS": 390.552125,
+          "p95MS": 750.065166,
+          "maxMS": 750.109
+        },
+        "baselineHard": {
+          "decisions": 265,
+          "medianMS": 551.480458,
+          "p95MS": 750.229667,
+          "maxMS": 750.432542
+        }
+      },
+      "sourceLog": "post-fix/hard-vs-baseline-15.jsonl"
+    },
+    "baselineLossAudit": {
+      "lossesAudited": 2,
+      "avoidableImmediateOrForkBlunders": 0,
+      "losses": [
+        {
+          "opening": 4,
+          "hardSide": "White",
+          "plies": 47,
+          "winner": "baselineHard",
+          "history": [
+            "H8",
+            "J9",
+            "H7",
+            "H11",
+            "K8",
+            "G12",
+            "I10",
+            "E14",
+            "J10",
+            "G10",
+            "I9",
+            "G7",
+            "F13",
+            "G13",
+            "G11",
+            "I12",
+            "F9",
+            "F12",
+            "H12",
+            "E11",
+            "K11",
+            "L12",
+            "D10",
+            "H14",
+            "I15",
+            "K14",
+            "J13",
+            "J14",
+            "I14",
+            "E12",
+            "E10",
+            "E13",
+            "E15",
+            "G8",
+            "K10",
+            "G9",
+            "G6",
+            "D12",
+            "C12",
+            "C13",
+            "F10",
+            "B14",
+            "A15",
+            "K9",
+            "L10",
+            "H10",
+            "M10"
+          ],
+          "independentAudit": "Full-board five-cell windows; checks immediate win and one-reply fork, excluding defender immediate counterwin.",
+          "tacticalFindings": [
+            {
+              "ply": 44,
+              "chosen": "K9",
+              "ownImmediateWinsBefore": [],
+              "opponentImmediateWinsBefore": [],
+              "witness": {
+                "reply": "E9",
+                "type": "fork",
+                "continuations": [
+                  "D8",
+                  "I13"
+                ]
+              },
+              "safeAlternatives": []
+            },
+            {
+              "ply": 46,
+              "chosen": "H10",
+              "ownImmediateWinsBefore": [],
+              "opponentImmediateWinsBefore": [
+                "H10",
+                "M10"
+              ],
+              "witness": {
+                "reply": "M10",
+                "type": "immediate_win",
+                "continuations": []
+              },
+              "safeAlternatives": []
+            }
+          ],
+          "avoidableImmediateOrForkBlunders": 0
+        },
+        {
+          "opening": 8,
+          "hardSide": "White",
+          "plies": 27,
+          "winner": "baselineHard",
+          "history": [
+            "H8",
+            "J9",
+            "H7",
+            "J8",
+            "J7",
+            "I7",
+            "H6",
+            "H9",
+            "I9",
+            "J10",
+            "H5",
+            "H4",
+            "I6",
+            "K8",
+            "F6",
+            "G6",
+            "G8",
+            "F9",
+            "F8",
+            "J11",
+            "J12",
+            "E8",
+            "G7",
+            "E5",
+            "E9",
+            "I5",
+            "D10"
+          ],
+          "independentAudit": "Full-board five-cell windows; checks immediate win and one-reply fork, excluding defender immediate counterwin.",
+          "tacticalFindings": [
+            {
+              "ply": 24,
+              "chosen": "E5",
+              "ownImmediateWinsBefore": [],
+              "opponentImmediateWinsBefore": [
+                "E5"
+              ],
+              "witness": {
+                "reply": "I5",
+                "type": "fork",
+                "continuations": [
+                  "J4",
+                  "E9"
+                ]
+              },
+              "safeAlternatives": []
+            },
+            {
+              "ply": 26,
+              "chosen": "I5",
+              "ownImmediateWinsBefore": [],
+              "opponentImmediateWinsBefore": [
+                "I5",
+                "D10"
+              ],
+              "witness": {
+                "reply": "D10",
+                "type": "immediate_win",
+                "continuations": []
+              },
+              "safeAlternatives": []
+            }
+          ],
+          "avoidableImmediateOrForkBlunders": 0
+        }
+      ]
+    },
+    "basicChecks": {
+      "checks": 255,
+      "event": "basics",
+      "failures": 0,
+      "scope": "synthetic empty-board and unique immediate win/block positions; not a legal-history strength test"
+    },
+    "priorHardVsMedium": {
+      "games": 20,
+      "hardWins": 7,
+      "hardLosses": 12,
+      "draws": 1
+    },
+    "easyMediumEquivalence": {
+      "event": "difficultyEquivalence",
+      "failures": 0,
+      "legalPositions": 456,
+      "scope": "current Easy/Medium vs exact prior engine; same legal boards, player and seed",
+      "seededMoveComparisons": 3648
+    },
+    "tacticalRegression": {
+      "safeMove": "H8",
+      "hard750msFailures": 0,
+      "hard750msRepetitions": 5,
+      "hard750msLatency": {
+        "decisions": 5,
+        "medianMS": 0.765667,
+        "p95MS": 0.85775,
+        "maxMS": 0.85775
+      },
+      "symmetries": {
+        "checks": 24,
+        "event": "tacticalSymmetries",
+        "failures": 0
+      },
+      "proof": "After prior E8, White H8 creates winning cells J8 and H10; all 205 Black replies leave a White win. Current Hard prevents this fork at H8."
+    },
+    "cacheEquivalence": {
+      "completedComparisons": 4,
+      "allMovesAndScoresAgree": true,
+      "requestedDepths": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "expiredDeadline": {
+      "completedDepth": 0,
+      "event": "expiredDeadlineFallback",
+      "history": [
+        "D4"
+      ],
+      "interrupted": true,
+      "ms": 0.025167,
+      "nodes": 0,
+      "position": "D3",
+      "size": 7
+    },
+    "searchProfiles": {
+      "positions": 16,
+      "completedDepthCounts": {
+        "5": 10,
+        "6": 6
+      },
+      "interruptedSearches": 10,
+      "completedDepths": [
+        5,
+        6,
+        6,
+        6,
+        5,
+        5,
+        5,
+        6,
+        5,
+        5,
+        5,
+        6,
+        5,
+        5,
+        5,
+        6
+      ],
+      "latency": {
+        "decisions": 16,
+        "medianMS": 750.0306875,
+        "p95MS": 750.075375,
+        "maxMS": 750.075375
+      }
+    },
+    "verification": {
+      "productionEngineSHA256": "544007f651ab0a0dba8544eb85cccee079279eb1b61a55cec770874f49069e9b",
+      "iOSUnitTests": {
+        "configuration": "Release",
+        "testsPassed": 33,
+        "aiTestsPassed": 12,
+        "failures": 0,
+        "destination": "iPhone18Pro (366770B3-279A-4E5B-BFB8-6C7BC5A85D3A)",
+        "parallelTesting": false,
+        "log": "/tmp/gomoku-ai-fix-xcode-tests-final.log",
+        "resultBundle": "/tmp/gomoku-ai-fix-tests-final.xcresult",
+        "command": "xcodebuild -project just-gomoku.xcodeproj -scheme just-gomoku -configuration Release -destination 'platform=iOS Simulator,id=366770B3-279A-4E5B-BFB8-6C7BC5A85D3A' -parallel-testing-enabled NO -only-testing:just-gomokuTests ENABLE_TESTABILITY=YES test"
+      },
+      "macOSBuild": {
+        "configuration": "Release",
+        "passed": true,
+        "log": "/tmp/gomoku-ai-fix-macos-build.log",
+        "command": "xcodebuild -project just-gomoku.xcodeproj -scheme just-gomoku -configuration Release -destination 'platform=macOS' -derivedDataPath /tmp/gomoku-ai-fix-macos-derived-data CODE_SIGNING_ALLOWED=NO build"
+      }
+    },
+    "reproductionCommands": [
+      "python3 ai-evaluation/run.py difficulty-equivalence",
+      "python3 ai-evaluation/run.py correctness",
+      "python3 ai-evaluation/run.py tactical",
+      "python3 ai-evaluation/run.py tactical-symmetries",
+      "python3 ai-evaluation/run.py profile",
+      "python3 ai-evaluation/run.py tournament 15 10 medium",
+      "python3 ai-evaluation/run.py tournament 15 10 baseline",
+      "python3 ai-evaluation/audit-losses.py",
+      "python3 ai-evaluation/summarize.py"
+    ]
+  }
+}

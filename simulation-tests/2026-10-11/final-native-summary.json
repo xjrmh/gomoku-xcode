@@ -1,0 +1,60 @@
+{
+  "devicesAndConfigurations": [
+    {
+      "device": {
+        "architecture": "arm64",
+        "deviceId": "181FC3DB-B7C4-413B-9A95-D416C6E9F1CB",
+        "deviceName": "Gomoku Edge QA iOS 27",
+        "modelName": "iPhone SE (3rd generation)",
+        "osBuildNumber": "24A434",
+        "osVersion": "27.0",
+        "platform": "iOS Simulator"
+      },
+      "expectedFailures": 0,
+      "failedTests": 2,
+      "passedTests": 28,
+      "skippedTests": 0,
+      "testPlanConfiguration": {
+        "configurationId": "1",
+        "configurationName": "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription": "just-gomoku \u00b7 Built with macOS 27.0.1",
+  "expectedFailures": 0,
+  "failedTests": 2,
+  "finishTime": 1791778922.615,
+  "passedTests": 28,
+  "result": "Failed",
+  "runtimeWarnings": [],
+  "skippedTests": 0,
+  "startTime": 1791778690.688,
+  "statistics": [],
+  "testFailures": [
+    {
+      "failureText": "Text clipped",
+      "targetName": "just-gomokuUITests",
+      "testIdentifier": 28,
+      "testIdentifierString": "GameplayUITests/testPrimaryScreenAccessibilityAudit()",
+      "testIdentifierURL": "test://com.apple.xcode/just-gomoku/just-gomokuUITests/GameplayUITests/testPrimaryScreenAccessibilityAudit",
+      "testName": "testPrimaryScreenAccessibilityAudit()"
+    },
+    {
+      "failureText": "Text clipped",
+      "targetName": "just-gomokuUITests",
+      "testIdentifier": 29,
+      "testIdentifierString": "GameplayUITests/testScrollableGameplayFooterAccessibilityAudit()",
+      "testIdentifierURL": "test://com.apple.xcode/just-gomoku/just-gomokuUITests/GameplayUITests/testScrollableGameplayFooterAccessibilityAudit",
+      "testName": "testScrollableGameplayFooterAccessibilityAudit()"
+    }
+  ],
+  "title": "Test - just-gomoku",
+  "topInsights": [
+    {
+      "category": "Common Failures",
+      "impact": "100% of failures",
+      "text": "2 runs of 2 tests failed with Text clipped"
+    }
+  ],
+  "totalTestCount": 30
+}

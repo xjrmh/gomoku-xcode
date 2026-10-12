@@ -26,14 +26,16 @@ struct HistoryView: View {
             : [GridItem(.adaptive(minimum: 160, maximum: 240), spacing: 16)]
     }
     private var filteredGames: [ArchivedGame] {
-        games.filter { game in
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "×", with: "x")
+        return games.filter { game in
             let matchesMode = switch filter {
             case .all: true
             case .pvp: game.modes.contains(.pvp)
             case .ai: game.modes.contains(.ai)
             }
             guard matchesMode else { return false }
-            guard !searchText.isEmpty else { return true }
+            guard !query.isEmpty else { return true }
             let searchable = [
                 game.resultTitle,
                 game.finalMode.title,
@@ -42,7 +44,7 @@ struct HistoryView: View {
                 "\(game.boardSize)x\(game.boardSize)",
                 game.completedAt.formatted(date: .abbreviated, time: .omitted)
             ].joined(separator: " ")
-            return searchable.localizedCaseInsensitiveContains(searchText)
+            return searchable.localizedCaseInsensitiveContains(query)
         }
     }
 
@@ -68,6 +70,7 @@ struct HistoryView: View {
                             HistoryCard(game: game, palette: palette)
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("history-game-card")
                         .contextMenu {
                             Button("Delete", systemImage: "trash", role: .destructive) {
                                 modelContext.delete(game)
@@ -105,18 +108,21 @@ struct HistoryView: View {
 
     @ViewBuilder
     private var modePicker: some View {
-        if dynamicTypeSize.isAccessibilitySize {
-            Picker("Game type", selection: $filter) {
-                ForEach(HistoryFilter.allCases) { filter in Text(filter.title).tag(filter) }
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                Picker("Game type", selection: $filter) {
+                    ForEach(HistoryFilter.allCases) { filter in Text(filter.title).tag(filter) }
+                }
+                .pickerStyle(.menu)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                Picker("Game type", selection: $filter) {
+                    ForEach(HistoryFilter.allCases) { filter in Text(filter.title).tag(filter) }
+                }
+                .pickerStyle(.segmented)
             }
-            .pickerStyle(.menu)
-            .frame(maxWidth: .infinity, alignment: .leading)
-        } else {
-            Picker("Game type", selection: $filter) {
-                ForEach(HistoryFilter.allCases) { filter in Text(filter.title).tag(filter) }
-            }
-            .pickerStyle(.segmented)
         }
+        .accessibilityIdentifier("history-game-filter")
     }
 }
 

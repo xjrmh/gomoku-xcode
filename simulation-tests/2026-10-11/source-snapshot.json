@@ -1,0 +1,31 @@
+{
+  "snapshot": "/var/folders/w9/c5pmyygd46ggrzyzj0zqsr4h0000gn/T/gomoku-edge-qa-_a21ac53",
+  "simulator_id": "181FC3DB-B7C4-413B-9A95-D416C6E9F1CB",
+  "device_type": "iPhone SE (3rd generation)",
+  "runtime": "iOS 27.0",
+  "sources": {
+    "gomoku/ShareCard.swift": "38f8c585e61ee5958e4a59395942c518e189044f979b126031fd06f663e799a0",
+    "gomoku/BoardTouchSurface.swift": "6aa602bf9d1187b6a1ec03c2fa1243591ff4d5763bc33f244db75e954f30b9e3",
+    "gomoku/UITestFixtures.swift": "af435e46a0a3b04b2117b079bc6d0a74f008328e82f27050d3862fdfcca55fd5",
+    "gomoku/Archive.swift": "6ce35bb93db9c874f82b1fb3478b241d0670d6bd496c414d8603ff9936a6c8a9",
+    "gomoku/AIEngine.swift": "544007f651ab0a0dba8544eb85cccee079279eb1b61a55cec770874f49069e9b",
+    "gomoku/GlassStyles.swift": "18478c8171c1df9674e95b0ffba8f8cd908a0bb6e8bbdfcb7e3a94777549ce18",
+    "gomoku/ActiveSessionStore.swift": "112959ca67df6aa409a0d06cd2fe266a6217178b290798cda887d0e63258e7f5",
+    "gomoku/Models.swift": "10e7e5eda3e3298ff205a5eb45ea02f9f6a025e6363f1efc68ad575b533bfcb0",
+    "gomoku/HistoryView.swift": "5fc8406022e10daf0ca6454cf55730ebeb6f3f65529d97f8a70aebed6a1dcd58",
+    "gomoku/Theme.swift": "d63594953059f0862e77dd4b01c3d4a4198ea83112f600b87630a25cf0b3e0b5",
+    "gomoku/BoardCanvasView.swift": "764f7c700a740aa9baaa26ecba56b8dce7cb6fc55d2f8dcd3ebe102275ab4374",
+    "gomoku/ContentView.swift": "fef25f524d58ebb9be11e6d1926079c6b4e0a79f6f21b34cabce0f0b3b5c2039",
+    "gomoku/gomokuApp.swift": "03b9d442c02a8cf6f1e267c15fd6dc47e44e235e6411b0436481f1e4d7c1b5b8",
+    "just-gomokuTests/HintEdgeCaseTests.swift": "e567ba3eb9fe912223a0eaa85c97adbec435ec3e53e85f7654a87ae307590339",
+    "just-gomokuTests/GameSessionTests.swift": "1a8cdf530065b5c2c930ea53d87b1b723dc1a1b1c54cce7eb48ff9db3adc29d9",
+    "just-gomokuTests/ActiveSessionStoreTests.swift": "73362ad20ec64afab1c799e654a5b3264b5ff1df79379bef20fd4d1e9e00c75f",
+    "just-gomokuTests/ArchiveTests.swift": "06473e74076eed1f8713839a30a6e1f6f689b6b95175ba47f88c0cc11a6bde45",
+    "just-gomokuTests/ArchiveEdgeCaseTests.swift": "70190ccdc8de933d8d156ad44942afca7975dfe0804754f2b6746a995cb28b29",
+    "just-gomokuTests/AIEngineTests.swift": "b024c54e90e7d426117391aae1b73ebf520cab2a87cfe1a7d2d56c26737e8c80",
+    "just-gomokuUITests/GameplayUITests.swift": "9bf015c583f058d7c36fe6c50786ec18e90daf77ad957806ddee01c2419f73ab",
+    "just-gomokuUITests/EdgeCaseUITests.swift": "a243901489be674c3565108bff5dd5a511c42373609f37fd7a8a98e39bab652a",
+    "just-gomokuUITests/HistoryEdgeCaseUITests.swift": "029d5c5e6f62a142e302b630f23cfe0178fa4d52c9762cd6e86b861c3f32767b"
+  },
+  "note": "Final regression source hashes. Earlier runs predate the added native touch surface and audit-fixture corrections. Concurrent AI work was held at the snapshot version."
+}

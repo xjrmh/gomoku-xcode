@@ -1,0 +1,166 @@
+{
+  "lossesAudited": 2,
+  "avoidableImmediateOrForkBlunders": 0,
+  "losses": [
+    {
+      "opening": 4,
+      "hardSide": "White",
+      "plies": 47,
+      "winner": "baselineHard",
+      "history": [
+        "H8",
+        "J9",
+        "H7",
+        "H11",
+        "K8",
+        "G12",
+        "I10",
+        "E14",
+        "J10",
+        "G10",
+        "I9",
+        "G7",
+        "F13",
+        "G13",
+        "G11",
+        "I12",
+        "F9",
+        "F12",
+        "H12",
+        "E11",
+        "K11",
+        "L12",
+        "D10",
+        "H14",
+        "I15",
+        "K14",
+        "J13",
+        "J14",
+        "I14",
+        "E12",
+        "E10",
+        "E13",
+        "E15",
+        "G8",
+        "K10",
+        "G9",
+        "G6",
+        "D12",
+        "C12",
+        "C13",
+        "F10",
+        "B14",
+        "A15",
+        "K9",
+        "L10",
+        "H10",
+        "M10"
+      ],
+      "independentAudit": "Full-board five-cell windows; checks immediate win and one-reply fork, excluding defender immediate counterwin.",
+      "tacticalFindings": [
+        {
+          "ply": 44,
+          "chosen": "K9",
+          "ownImmediateWinsBefore": [],
+          "opponentImmediateWinsBefore": [],
+          "witness": {
+            "reply": "E9",
+            "type": "fork",
+            "continuations": [
+              "D8",
+              "I13"
+            ]
+          },
+          "safeAlternatives": []
+        },
+        {
+          "ply": 46,
+          "chosen": "H10",
+          "ownImmediateWinsBefore": [],
+          "opponentImmediateWinsBefore": [
+            "H10",
+            "M10"
+          ],
+          "witness": {
+            "reply": "M10",
+            "type": "immediate_win",
+            "continuations": []
+          },
+          "safeAlternatives": []
+        }
+      ],
+      "avoidableImmediateOrForkBlunders": 0
+    },
+    {
+      "opening": 8,
+      "hardSide": "White",
+      "plies": 27,
+      "winner": "baselineHard",
+      "history": [
+        "H8",
+        "J9",
+        "H7",
+        "J8",
+        "J7",
+        "I7",
+        "H6",
+        "H9",
+        "I9",
+        "J10",
+        "H5",
+        "H4",
+        "I6",
+        "K8",
+        "F6",
+        "G6",
+        "G8",
+        "F9",
+        "F8",
+        "J11",
+        "J12",
+        "E8",
+        "G7",
+        "E5",
+        "E9",
+        "I5",
+        "D10"
+      ],
+      "independentAudit": "Full-board five-cell windows; checks immediate win and one-reply fork, excluding defender immediate counterwin.",
+      "tacticalFindings": [
+        {
+          "ply": 24,
+          "chosen": "E5",
+          "ownImmediateWinsBefore": [],
+          "opponentImmediateWinsBefore": [
+            "E5"
+          ],
+          "witness": {
+            "reply": "I5",
+            "type": "fork",
+            "continuations": [
+              "J4",
+              "E9"
+            ]
+          },
+          "safeAlternatives": []
+        },
+        {
+          "ply": 26,
+          "chosen": "I5",
+          "ownImmediateWinsBefore": [],
+          "opponentImmediateWinsBefore": [
+            "I5",
+            "D10"
+          ],
+          "witness": {
+            "reply": "D10",
+            "type": "immediate_win",
+            "continuations": []
+          },
+          "safeAlternatives": []
+        }
+      ],
+      "avoidableImmediateOrForkBlunders": 0
+    }
+  ]
+}

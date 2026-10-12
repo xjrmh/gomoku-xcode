@@ -8,6 +8,7 @@ final class GameplayUITests: XCTestCase {
     @MainActor
     func testBoardModeAndNavigationFlow() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
         app.launch()
 
         openNewGame(in: app)
@@ -58,6 +59,7 @@ final class GameplayUITests: XCTestCase {
     @MainActor
     func testCustomBoardControlsOnlyAppearForCustomSelection() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
         app.launch()
 
         openNewGame(in: app)
@@ -77,6 +79,7 @@ final class GameplayUITests: XCTestCase {
     @MainActor
     func testBoardSwipeDoesNotPlaceAndHeldDragPlacesOneStone() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
         app.launch()
 
         openNewGame(in: app)
@@ -100,13 +103,62 @@ final class GameplayUITests: XCTestCase {
     @MainActor
     func testPrimaryScreenAccessibilityAudit() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
         app.launch()
         XCTAssertTrue(app.otherElements["game-board"].waitForExistence(timeout: 5))
-        try app.performAccessibilityAudit(for: [
-            .dynamicType,
+        let moveCount = app.staticTexts["move-count"]
+        XCTAssertTrue(moveCount.waitForExistence(timeout: 2))
+        var auditTypes: XCUIAccessibilityAuditType = [
+            .dynamicType, .hitRegion, .sufficientElementDescription,
+        ]
+        if moveCount.frame.height >= 30 { auditTypes.insert(.textClipped) }
+        // Material contrast audits remain separate evidence: the tool flags
+        // this HUD even with opaque black text on its light material surface.
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "Primary screen accessibility audit"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        try audit(app, types: auditTypes)
+    }
+
+    @MainActor
+    func testScrollableGameplayFooterAccessibilityAudit() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing", "--ui-testing-largest-text"]
+        app.launch()
+        let board = app.otherElements["game-board"]
+        XCTAssertTrue(board.waitForExistence(timeout: 5))
+        waitForMoveCount(0, on: board)
+        let moveCount = app.staticTexts["move-count"]
+        XCTAssertTrue(moveCount.waitForExistence(timeout: 2))
+        XCTAssertGreaterThanOrEqual(moveCount.frame.height, 30, "The footer audit must exercise the largest accessibility text size")
+        let newGame = app.buttons["New Game"]
+        let window = app.windows.firstMatch
+        for _ in 0..<3 {
+            if window.frame.contains(moveCount.frame), newGame.isHittable { break }
+            app.scrollViews.firstMatch.swipeUp(velocity: .fast)
+        }
+        XCTAssertTrue(window.frame.contains(moveCount.frame), "The move counter must be fully visible for the clipping audit")
+        XCTAssertTrue(newGame.isHittable, "The action dock must be reachable at the largest text size")
+        XCTAssertTrue(window.frame.contains(newGame.frame), "The action dock must fit within the visible viewport")
+        waitForMoveCount(0, on: board)
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "Gameplay footer accessibility audit"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        print("Move counter before footer audit: \(moveCount.frame)")
+        // This fixture fixes the largest size. Dynamic Type support is audited
+        // above with the system setting; contrast diagnostics are saved separately.
+        try audit(app, types: [
             .hitRegion,
             .sufficientElementDescription,
-        ]) { issue in
+            .textClipped,
+        ])
+    }
+
+    @MainActor
+    private func audit(_ app: XCUIApplication, types: XCUIAccessibilityAuditType) throws {
+        try app.performAccessibilityAudit(for: types) { issue in
             print("Accessibility audit \(issue.auditType.rawValue): \(issue.compactDescription)")
             print(issue.detailedDescription)
             if let element = issue.element {

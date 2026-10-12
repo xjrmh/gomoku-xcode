@@ -1,6 +1,23 @@
 import Foundation
 
 enum AIEngine {
+    struct SearchOptions: Sendable {
+        var maxDepth = 6
+        var useTranspositionTable = true
+        var threatExtensionDepth = 4
+    }
+
+    struct SearchResult: Sendable {
+        let position: Position?
+        let completedDepth: Int
+        let visitedNodes: Int
+        let interrupted: Bool
+        let score: Double?
+    }
+
+    private static let directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
+    private static let winScore = 10_000_000.0
+
     static func bestMove(
         for player: Player,
         session: GameSession,
@@ -31,20 +48,38 @@ enum AIEngine {
         size: Int,
         difficulty: AIDifficulty,
         deadline: ContinuousClock.Instant = .now.advanced(by: .seconds(1)),
-        seed: UInt64 = 1
+        seed: UInt64 = 1,
+        searchOptions: SearchOptions = .init()
     ) -> Position? {
-        guard board.count == size * size else { return nil }
+        analyzeMove(for: player, board: board, size: size, difficulty: difficulty,
+                    deadline: deadline, seed: seed, searchOptions: searchOptions).position
+    }
+
+    static func analyzeMove(
+        for player: Player,
+        board: [CellState],
+        size: Int,
+        difficulty: AIDifficulty,
+        deadline: ContinuousClock.Instant = .now.advanced(by: .seconds(1)),
+        seed: UInt64 = 1,
+        searchOptions: SearchOptions = .init()
+    ) -> SearchResult {
+        func immediate(_ position: Position?) -> SearchResult {
+            SearchResult(position: position, completedDepth: 0, visitedNodes: 0,
+                         interrupted: false, score: nil)
+        }
+        guard (5...25).contains(size), board.count == size * size else { return immediate(nil) }
         let empties = emptyPositions(board, size)
-        guard !empties.isEmpty else { return nil }
+        guard !empties.isEmpty else { return immediate(nil) }
         if empties.count == board.count {
-            return Position(r: size / 2, c: size / 2)
+            return immediate(Position(r: size / 2, c: size / 2))
         }
 
         let candidates = candidatePositions(board, size)
         let opponent = player.next
 
-        if let win = candidates.first(where: { formsFive(board, size, $0, player) }) { return win }
-        if let block = candidates.first(where: { formsFive(board, size, $0, opponent) }) { return block }
+        if let win = candidates.first(where: { formsFive(board, size, $0, player) }) { return immediate(win) }
+        if let block = candidates.first(where: { formsFive(board, size, $0, opponent) }) { return immediate(block) }
 
         switch difficulty {
         case .easy:
@@ -53,14 +88,15 @@ enum AIEngine {
                 .map { ($0, heuristic(board, size, $0, player) + heuristic(board, size, $0, opponent) * 0.65) }
                 .sorted { $0.1 > $1.1 }
             let pool = Array(ranked.prefix(min(8, ranked.count)))
-            guard let choice = pool.randomElement(using: &generator) else { return candidates.first }
-            return choice.0
+            guard let choice = pool.randomElement(using: &generator) else { return immediate(candidates.first) }
+            return immediate(choice.0)
 
         case .medium:
-            return rankedCandidates(board, size, candidates, player).first?.position
+            return immediate(rankedCandidates(board, size, candidates, player).first?.position)
 
         case .hard:
-            return hardMove(board: board, size: size, candidates: candidates, player: player, deadline: deadline)
+            return hardMove(board: board, size: size, candidates: candidates, player: player,
+                            deadline: deadline, options: searchOptions)
         }
     }
 
@@ -69,103 +105,234 @@ enum AIEngine {
         size: Int,
         candidates: [Position],
         player: Player,
-        deadline: ContinuousClock.Instant
-    ) -> Position? {
-        let ordered = Array(rankedCandidates(board, size, candidates, player).prefix(14))
-        guard !ordered.isEmpty else { return candidates.first }
+        deadline: ContinuousClock.Instant,
+        options: SearchOptions
+    ) -> SearchResult {
+        var mutableBoard = board
+        let assessed = assessedMoves(board, size, candidates, player)
+        // Mandatory tactics precede the beam and the time-limited search, so even
+        // its fallback cannot overlook a fork that the opponent already has.
+        if let fork = assessed.first(where: { $0.ownWinningPoints.count >= 2 }) {
+            return SearchResult(position: fork.position, completedDepth: 0, visitedNodes: 0,
+                                interrupted: false, score: winScore - 2)
+        }
+        let safe = forkDefenses(&mutableBoard, size, assessed, player)
+        let ordered = Array((safe.isEmpty ? assessed : safe).prefix(18))
+        guard let fallback = ordered.first?.position else {
+            return SearchResult(position: candidates.first, completedDepth: 0,
+                                visitedNodes: 0, interrupted: false, score: nil)
+        }
 
-        var best = ordered[0].position
-        var table: [SearchKey: Double] = [:]
-        for depth in 1...4 {
-            guard !Task.isCancelled, .now < deadline else { break }
-            var completedDepth = true
+        var best = fallback
+        var bestScore: Double?
+        var completedDepth = 0
+        var state = SearchState(deadline: deadline, options: options)
+        for depth in 1...max(1, min(12, options.maxDepth)) {
+            guard state.canContinue() else { break }
             var depthBest = best
             var depthScore = -Double.infinity
-
+            var completed = true
             for item in ordered {
-                guard !Task.isCancelled, .now < deadline else {
-                    completedDepth = false
-                    break
-                }
-                var next = board
-                next[item.position.r * size + item.position.c] = player.cellState
-                let score = -negamax(
-                    board: next,
-                    size: size,
-                    player: player.next,
-                    root: player,
-                    depth: depth - 1,
-                    alpha: -Double.infinity,
-                    beta: .infinity,
-                    deadline: deadline,
-                    table: &table
-                )
-                if score > depthScore {
-                    depthScore = score
-                    depthBest = item.position
-                }
+                guard state.canContinue() else { completed = false; break }
+                let index = item.position.r * size + item.position.c
+                mutableBoard[index] = player.cellState
+                let child = negamax(board: &mutableBoard, size: size, player: player.next,
+                                    depth: depth - 1, extensions: max(0, min(8, options.threatExtensionDepth)),
+                                    ply: 1, alpha: -.infinity, beta: -depthScore, state: &state)
+                mutableBoard[index] = .empty
+                guard let child, state.canContinue() else { completed = false; break }
+                let score = -child
+                // A fail-low bound equal to the best score is not an exact tie.
+                if score > depthScore { depthScore = score; depthBest = item.position }
             }
-            if completedDepth { best = depthBest }
+            guard completed else { break }
+            best = depthBest
+            bestScore = depthScore
+            completedDepth = depth
+            if abs(depthScore) >= winScore - 32 { break }
         }
-        return best
+        return SearchResult(position: best, completedDepth: completedDepth,
+                            visitedNodes: state.visitedNodes, interrupted: state.interrupted, score: bestScore)
     }
 
     private static func negamax(
-        board: [CellState],
+        board: inout [CellState],
         size: Int,
         player: Player,
-        root: Player,
         depth: Int,
+        extensions: Int,
+        ply: Int,
         alpha: Double,
         beta: Double,
-        deadline: ContinuousClock.Instant,
-        table: inout [SearchKey: Double]
-    ) -> Double {
-        if Task.isCancelled || .now >= deadline { return evaluateBoard(board, size, root) }
-        if depth == 0 { return evaluateBoard(board, size, root) * (player == root ? 1 : -1) }
-
-        let key = SearchKey(hash: boardHash(board), player: player, depth: depth)
-        if let cached = table[key] { return cached }
-
-        let candidates = Array(rankedCandidates(board, size, candidatePositions(board, size), player).prefix(9))
-        if candidates.isEmpty { return 0 }
+        state: inout SearchState
+    ) -> Double? {
+        state.visitedNodes += 1
+        guard state.canContinue() else { return nil }
+        let key = SearchKey(hash: boardHash(board), player: player, depth: depth, extensions: extensions)
         var localAlpha = alpha
+        var localBeta = beta
+        var cachedMove: Position?
+        if state.options.useTranspositionTable, let cached = state.table[key] {
+            cachedMove = cached.bestMove
+            switch cached.bound {
+            case .exact: return cached.value
+            case .lower: localAlpha = max(localAlpha, cached.value)
+            case .upper: localBeta = min(localBeta, cached.value)
+            }
+            if localAlpha >= localBeta { return cached.value }
+        }
+
+        let assessed = assessedMoves(board, size, candidatePositions(board, size), player)
+        guard state.canContinue() else { return nil }
+        if assessed.isEmpty { return 0 }
+        // Check terminal threats even at the horizon. A forcing line must not
+        // disappear just because it crosses the nominal depth limit.
+        if assessed.contains(where: { formsFive(board, size, $0.position, player) }) {
+            return winScore - Double(ply)
+        }
+        let losses = assessed.filter { formsFive(board, size, $0.position, player.next) }
+        if losses.count >= 2 { return -winScore + Double(ply + 1) }
+
+        var moves: [AssessedMove]
+        var mandatory = false
+        if let block = losses.first {
+            moves = [block]
+            mandatory = true
+        } else {
+            if assessed.contains(where: { $0.ownWinningPoints.count >= 2 }) {
+                return winScore - Double(ply + 2)
+            }
+            moves = forkDefenses(&board, size, assessed, player)
+            guard state.canContinue() else { return nil }
+            if moves.isEmpty { return -winScore + Double(ply + 3) }
+            mandatory = moves.count < assessed.count
+        }
+
+        var standPat: Double?
+        if depth <= 0 {
+            let staticScore = evaluateMoves(assessed)
+            // Resolve a final unique block before evaluating. Its child gets
+            // -1 extensions, so this cannot grow into an unbounded threat chain.
+            guard extensions > 0 || (extensions == 0 && losses.count == 1) else { return staticScore }
+            if !mandatory {
+                moves = moves.filter { !$0.ownWinningPoints.isEmpty }
+                if moves.isEmpty { return staticScore }
+                standPat = staticScore
+            }
+        }
+        let width = depth <= 0 ? 4 : 10
+        moves = Array(moves.prefix(width))
+        if let cachedMove, let index = moves.firstIndex(where: { $0.position == cachedMove }) {
+            moves.swapAt(0, index)
+        }
         var value = -Double.infinity
-        for item in candidates {
-            if Task.isCancelled || .now >= deadline { break }
-            if formsFive(board, size, item.position, player) { return 9_000_000 + Double(depth) }
-            var next = board
-            next[item.position.r * size + item.position.c] = player.cellState
-            let child = -negamax(
-                board: next,
-                size: size,
-                player: player.next,
-                root: root,
-                depth: depth - 1,
-                alpha: -beta,
-                beta: -localAlpha,
-                deadline: deadline,
-                table: &table
-            )
+        var bestMove: Position?
+        if let standPat {
+            value = standPat
+            localAlpha = max(localAlpha, value)
+        }
+        for item in moves where localAlpha < localBeta {
+            guard state.canContinue() else { return nil }
+            let index = item.position.r * size + item.position.c
+            board[index] = player.cellState
+            let result = negamax(board: &board, size: size, player: player.next,
+                                 depth: max(0, depth - 1), extensions: depth <= 0 ? extensions - 1 : extensions,
+                                 ply: ply + 1, alpha: -localBeta, beta: -localAlpha, state: &state)
+            board[index] = .empty
+            guard let result, state.canContinue() else { return nil }
+            let child = -result
+            if child > value { value = child; bestMove = item.position }
             value = max(value, child)
             localAlpha = max(localAlpha, value)
-            if localAlpha >= beta { break }
         }
-        table[key] = value
+        if state.options.useTranspositionTable {
+            let bound: SearchBound = value <= alpha ? .upper : value >= beta ? .lower : .exact
+            state.table[key] = SearchEntry(value: value, bound: bound, bestMove: bestMove)
+        }
         return value
     }
 
-    private static func candidatePositions(_ board: [CellState], _ size: Int) -> [Position] {
-        let occupied = occupiedPositions(board, size)
-        guard !occupied.isEmpty else { return [Position(r: size / 2, c: size / 2)] }
-        var candidates: [Position] = []
-        candidates.reserveCapacity(size * 4)
-        for position in emptyPositions(board, size) {
-            if occupied.contains(where: {
-                abs(position.r - $0.r) <= 2 && abs(position.c - $0.c) <= 2
-            }) {
-                candidates.append(position)
+    private static func assessedMoves(_ board: [CellState], _ size: Int, _ candidates: [Position], _ player: Player) -> [AssessedMove] {
+        candidates.map { position in
+            let attack = heuristic(board, size, position, player)
+            let defense = heuristic(board, size, position, player.next)
+            let center = Double(size) - hypot(Double(position.r - size / 2), Double(position.c - size / 2))
+            return AssessedMove(position: position, attack: attack, defense: defense,
+                                score: attack + defense * 0.92 + center,
+                                ownWinningPoints: attack >= 24_000 ? winningContinuations(board, size, position, player) : [],
+                                enemyWinningPoints: defense >= 24_000 ? winningContinuations(board, size, position, player.next) : [])
+        }.sorted {
+            $0.score == $1.score ? ($0.position.r, $0.position.c) < ($1.position.r, $1.position.c) : $0.score > $1.score
+        }
+    }
+
+    private static func forkDefenses(_ board: inout [CellState], _ size: Int, _ moves: [AssessedMove], _ player: Player) -> [AssessedMove] {
+        let forks = moves.filter { $0.enemyWinningPoints.count >= 2 }
+        if forks.isEmpty { return moves }
+        return moves.filter { defense in
+            let index = defense.position.r * size + defense.position.c
+            board[index] = player.cellState
+            defer { board[index] = .empty }
+            return forks.allSatisfy { fork in
+                if fork.position == defense.position { return true }
+                // A forcing counter-threat can win before the opponent's fork.
+                if defense.ownWinningPoints.contains(where: { $0 != fork.position }) { return true }
+                return winningContinuations(board, size, fork.position, player.next).count < 2
             }
+        }
+    }
+
+    private static func winningContinuations(_ board: [CellState], _ size: Int, _ position: Position, _ player: Player) -> [Position] {
+        var points: [Position] = []
+        for (dr, dc) in directions {
+            var values: [CellState] = []
+            for offset in -4...4 {
+                let r = position.r + dr * offset
+                let c = position.c + dc * offset
+                values.append(offset == 0 ? player.cellState : isInside(r, c, size) ? board[r * size + c] : player.next.cellState)
+            }
+            for start in 0...4 {
+                var stones = 0
+                var emptyOffset: Int?
+                var emptyCount = 0
+                for offset in start..<(start + 5) {
+                    if values[offset] == player.cellState { stones += 1 }
+                    if values[offset] == .empty { emptyCount += 1; emptyOffset = offset - 4 }
+                }
+                if stones == 4, emptyCount == 1, let offset = emptyOffset {
+                    let point = Position(r: position.r + dr * offset, c: position.c + dc * offset)
+                    if !points.contains(point) { points.append(point) }
+                }
+            }
+        }
+        return points
+    }
+
+    private static func evaluateMoves(_ moves: [AssessedMove]) -> Double {
+        func strength(_ scores: [Double]) -> Double {
+            let top = scores.sorted(by: >).prefix(3)
+            return zip(top, [1.0, 0.18, 0.05]).reduce(0) { $0 + $1.0 * $1.1 }
+        }
+        // Side-to-move evaluation is antisymmetric; negamax supplies the sign.
+        return strength(moves.map(\.attack)) - strength(moves.map(\.defense))
+    }
+
+    private static func candidatePositions(_ board: [CellState], _ size: Int) -> [Position] {
+        var nearby = Array(repeating: false, count: board.count)
+        var hasStones = false
+        for index in board.indices where board[index] != .empty {
+            hasStones = true
+            let row = index / size
+            let column = index % size
+            for r in max(0, row - 2)...min(size - 1, row + 2) {
+                for c in max(0, column - 2)...min(size - 1, column + 2) {
+                    nearby[r * size + c] = true
+                }
+            }
+        }
+        guard hasStones else { return [Position(r: size / 2, c: size / 2)] }
+        let candidates = board.indices.compactMap { index in
+            nearby[index] && board[index] == .empty ? Position(r: index / size, c: index % size) : nil
         }
         return candidates.isEmpty ? emptyPositions(board, size) : candidates
     }
@@ -196,25 +363,13 @@ enum AIEngine {
         _ position: Position,
         _ player: Player
     ) -> Double {
-        var simulated = board
-        simulated[position.r * size + position.c] = player.cellState
         var total = 0.0
-        for (dr, dc) in [(1, 0), (0, 1), (1, 1), (1, -1)] {
-            let contiguous = lineStats(simulated, size, position, player, dr, dc)
+        for (dr, dc) in directions {
+            let contiguous = lineStats(board, size, position, player, dr, dc)
             total += patternWeight(length: contiguous.length, openEnds: contiguous.openEnds)
-            total += gappedThreat(simulated, size, position, player, dr, dc)
+            total += gappedThreat(board, size, position, player, dr, dc)
         }
         return total
-    }
-
-    private static func evaluateBoard(_ board: [CellState], _ size: Int, _ player: Player) -> Double {
-        var own = 0.0
-        var opponent = 0.0
-        for position in candidatePositions(board, size) {
-            own = max(own, heuristic(board, size, position, player))
-            opponent = max(opponent, heuristic(board, size, position, player.next))
-        }
-        return own - opponent * 1.05
     }
 
     private static func lineStats(
@@ -259,16 +414,25 @@ enum AIEngine {
         for offset in -4...4 {
             let r = position.r + dr * offset
             let c = position.c + dc * offset
-            values.append(isInside(r, c, size) ? board[r * size + c] : player.next.cellState)
+            values.append(offset == 0 ? player.cellState : isInside(r, c, size) ? board[r * size + c] : player.next.cellState)
         }
         let target = player.cellState
         var score = 0.0
+        var stones = 0
+        var empties = 0
+        for index in 0..<5 {
+            if values[index] == target { stones += 1 }
+            if values[index] == .empty { empties += 1 }
+        }
         for start in 0...4 {
-            let window = values[start..<(start + 5)]
-            let stones = window.filter { $0 == target }.count
-            let empties = window.filter { $0 == .empty }.count
             if stones == 4 && empties == 1 { score += 32_000 }
             if stones == 3 && empties == 2 { score += 2_400 }
+            if start < 4 {
+                if values[start] == target { stones -= 1 }
+                if values[start] == .empty { empties -= 1 }
+                if values[start + 5] == target { stones += 1 }
+                if values[start + 5] == .empty { empties += 1 }
+            }
         }
         return score
     }
@@ -293,16 +457,8 @@ enum AIEngine {
         _ player: Player
     ) -> Bool {
         guard board[position.r * size + position.c] == .empty else { return false }
-        var simulated = board
-        simulated[position.r * size + position.c] = player.cellState
-        return [(1, 0), (0, 1), (1, 1), (1, -1)].contains { dr, dc in
-            lineStats(simulated, size, position, player, dr, dc).length >= 5
-        }
-    }
-
-    private static func occupiedPositions(_ board: [CellState], _ size: Int) -> [Position] {
-        board.indices.compactMap { index in
-            board[index] == .empty ? nil : Position(r: index / size, c: index % size)
+        return directions.contains { dr, dc in
+            lineStats(board, size, position, player, dr, dc).length >= 5
         }
     }
 
@@ -327,10 +483,41 @@ enum AIEngine {
         let score: Double
     }
 
+    private struct AssessedMove {
+        let position: Position
+        let attack: Double
+        let defense: Double
+        let score: Double
+        let ownWinningPoints: [Position]
+        let enemyWinningPoints: [Position]
+    }
+
+    private enum SearchBound { case exact, lower, upper }
+
+    private struct SearchEntry {
+        let value: Double
+        let bound: SearchBound
+        let bestMove: Position?
+    }
+
+    private struct SearchState {
+        let deadline: ContinuousClock.Instant
+        let options: SearchOptions
+        var table: [SearchKey: SearchEntry] = [:]
+        var visitedNodes = 0
+        var interrupted = false
+
+        mutating func canContinue() -> Bool {
+            if Task.isCancelled || .now >= deadline { interrupted = true; return false }
+            return true
+        }
+    }
+
     private struct SearchKey: Hashable {
         let hash: UInt64
         let player: Player
         let depth: Int
+        let extensions: Int
     }
 
     private struct SeededGenerator: RandomNumberGenerator {

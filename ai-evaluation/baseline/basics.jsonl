@@ -1,0 +1,2 @@
+{"event": "build", "optimization": "-O", "engineSHA256": "331303c9ad7e6ffd74cc5d7969ad058d808fc587811550f06b0901c1d8108b42", "args": ["basics"]}
+{"checks":255,"event":"basics","failures":0,"scope":"synthetic empty-board and unique immediate win\/block positions; not a legal-history strength test"}

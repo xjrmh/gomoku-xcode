@@ -12,6 +12,12 @@ private enum GameSheet: String, Identifiable {
     var id: Self { self }
 }
 
+private struct ShareRenderIdentity: Equatable {
+    let sessionID: UUID
+    let archived: Bool
+    let colorScheme: ColorScheme
+}
+
 struct ContentView: View {
     @EnvironmentObject private var game: GameState
     @EnvironmentObject private var preferences: PreferencesStore
@@ -65,10 +71,19 @@ struct ContentView: View {
             .onChange(of: game.session.configuration) { _, configuration in
                 preferences.apply(configuration: configuration)
             }
-            .task(id: game.session.archived) {
+            .task(id: ShareRenderIdentity(sessionID: game.session.id, archived: game.session.archived, colorScheme: colorScheme)) {
                 sharePayload = game.gameOver
                     ? ShareCardRenderer.render(session: game.session, palette: palette, colorScheme: colorScheme)
                     : nil
+                #if DEBUG
+                if let sharePayload { UITestFixtures.recordShareCard(sharePayload, colorScheme: colorScheme) }
+                #endif
+                #if DEBUG && os(iOS)
+                if ProcessInfo.processInfo.arguments.contains("--ui-testing") {
+                    try? await Task.sleep(for: .milliseconds(300))
+                    UITestFixtures.recordScrollMetrics()
+                }
+                #endif
             }
             .onAppear { bootstrap() }
         }
@@ -88,8 +103,9 @@ struct ContentView: View {
                 .id(game.session.id)
             Text("Move \(game.moves.count)")
                 .font(.caption.monospacedDigit().weight(.medium))
-                .foregroundStyle(.secondary)
-                .accessibilityLabel("Move count, \(game.moves.count)")
+                .foregroundStyle(Color.primary.opacity(0.7))
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("move-count")
         }
     }
 
@@ -261,7 +277,7 @@ private struct MatchHUD: View {
             Divider().frame(height: 20)
             Text(modeDescription)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.primary.opacity(0.7))
                 .fixedSize()
         }
     }
@@ -271,7 +287,7 @@ private struct MatchHUD: View {
             turnSummary
             Text(modeDescription)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.primary.opacity(0.7))
                 .fixedSize(horizontal: false, vertical: true)
             ViewThatFits(in: .horizontal) {
                 HStack(spacing: 20) {
@@ -305,7 +321,7 @@ private struct MatchHUD: View {
             StoneDot(player: player, size: 13)
             Text(value)
                 .font(.footnote.monospacedDigit())
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.primary.opacity(0.7))
                 .fixedSize()
                 .accessibilityLabel("\(player.name) elapsed time, \(value)")
                 .accessibilityIdentifier(player == .black ? "black-clock" : "white-clock")
@@ -545,6 +561,7 @@ private struct SettingsView: View {
                 )) {
                     ForEach(AppAppearance.allCases) { Text($0.title).tag($0) }
                 }
+                .accessibilityIdentifier("settings-appearance")
                 Toggle("Haptics", isOn: Binding(
                     get: { preferences.hapticsEnabled },
                     set: { preferences.hapticsEnabled = $0 }

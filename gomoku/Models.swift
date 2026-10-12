@@ -382,7 +382,7 @@ final class GameState: ObservableObject {
             emit(.invalidPlacement)
             return false
         }
-        hint = nil
+        clearHint()
         emitTerminalOrPlacement()
         persist()
         scheduleAIIfNeeded()
@@ -476,7 +476,10 @@ final class GameState: ObservableObject {
                 deadline: .now.advanced(by: .milliseconds(300)),
                 seed: UInt64(snapshot.moves.count + 1)
             )
-            guard !Task.isCancelled, let self, self.hintGeneration == request else { return }
+            guard !Task.isCancelled, let self, self.hintGeneration == request,
+                  self.session.id == snapshot.id,
+                  self.session.moves.count == snapshot.moves.count,
+                  self.session.current == player, self.canHint else { return }
             self.hint = position
             self.emit(.hint)
             try? await Task.sleep(for: .seconds(3))
@@ -487,6 +490,7 @@ final class GameState: ObservableObject {
 
     func clearHint() {
         hintTask?.cancel()
+        hintTask = nil
         hintGeneration &+= 1
         hint = nil
     }
@@ -546,12 +550,10 @@ final class GameState: ObservableObject {
 
     private func cancelAsyncWork() {
         aiTask?.cancel()
-        hintTask?.cancel()
         aiTask = nil
-        hintTask = nil
+        clearHint()
         isAIThinking = false
         generation &+= 1
-        hintGeneration &+= 1
     }
 
     private func emit(_ event: HapticEvent) {
