@@ -179,7 +179,21 @@ final class PreferencesStore: NSObject, ObservableObject {
         set { update { $0.didShowPrecisionCoachMark = newValue } }
     }
 
+    var gameConfiguration: GameConfiguration {
+        var configuration = GameConfiguration(
+            mode: payload.defaultMode,
+            boardSize: payload.boardSize,
+            difficulty: payload.difficulty,
+            humanSide: payload.humanSide
+        )
+        configuration.normalize()
+        return configuration
+    }
+
     func apply(configuration: GameConfiguration) {
+        var configuration = configuration
+        configuration.normalize()
+        guard gameConfiguration != configuration else { return }
         update {
             $0.defaultMode = configuration.mode
             $0.boardSize = configuration.boardSize

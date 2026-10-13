@@ -6,50 +6,50 @@ final class GameplayUITests: XCTestCase {
     }
 
     @MainActor
-    func testBoardModeAndNavigationFlow() throws {
-        let app = XCUIApplication()
-        app.launchArguments = ["--ui-testing"]
-        app.launch()
-
-        openNewGame(in: app)
-        select("2 Players", in: "new-game-opponent", app: app)
-        select("15×15", in: "new-game-board-size", app: app)
-        XCTAssertFalse(app.buttons["new-game-difficulty"].exists)
+    func testNewGameImmediatelyUsesSettingsAndSettingsPreserveActiveBoard() throws {
+        let app = launch()
+        openSettings(in: app)
+        select("2 Players", in: "settings-opponent", app: app)
+        select("15×15", in: "settings-board-size", app: app)
+        XCTAssertFalse(app.buttons["settings-difficulty"].exists)
+        XCTAssertFalse(app.buttons["settings-stones"].exists)
         XCTAssertFalse(app.steppers["custom-board-size"].exists)
-        startGame(in: app)
+        closeSettings(in: app)
+        startNewGame(in: app)
 
         let board = app.otherElements["game-board"]
         XCTAssertTrue(board.waitForExistence(timeout: 5))
+        XCTAssertEqual(board.label, "Gomoku board, 15 by 15")
         waitForMoveCount(0, on: board)
         board.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
         waitForMoveCount(1, on: board)
         let activeBoardValue = board.value as? String
 
-        openNewGame(in: app)
-        configureAI(in: app)
-        app.navigationBars["New Game"].buttons["Cancel"].tap()
-        XCTAssertFalse(app.navigationBars["New Game"].exists)
-        XCTAssertEqual(board.value as? String, activeBoardValue)
+        openSettings(in: app)
+        select("AI", in: "settings-opponent", app: app)
+        select("Medium", in: "settings-difficulty", app: app)
+        select("White", in: "settings-stones", app: app)
+        select("19×19", in: "settings-board-size", app: app)
+        closeSettings(in: app)
+        XCTAssertEqual(board.label, "Gomoku board, 15 by 15")
+        XCTAssertEqual(board.value as? String, activeBoardValue,
+                       "Settings Done must preserve the current stones, turn, and board size")
+        XCTAssertTrue(app.staticTexts["2 Players"].exists)
 
-        openNewGame(in: app)
-        configureAI(in: app)
-        app.buttons["start-game"].tap()
-        let confirmStart = app.buttons["Start New Game"]
-        XCTAssertTrue(confirmStart.waitForExistence(timeout: 2))
-        XCTAssertTrue(app.staticTexts["The current board will be cleared."].exists)
-        confirmStart.tap()
+        startNewGame(in: app)
+        XCTAssertEqual(board.label, "Gomoku board, 19 by 19")
         waitForMoveCount(1, on: board)
         XCTAssertTrue((board.value as? String)?.contains("Your move") == true)
+        XCTAssertTrue(app.staticTexts["AI · Medium"].exists)
         XCTAssertFalse(app.buttons["game-mode-menu"].exists)
 
-        app.buttons["Settings"].tap()
-        XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.staticTexts["Appearance"].exists || app.buttons["Appearance"].exists)
+        openSettings(in: app)
+        reveal(app.buttons["settings-appearance"], in: app)
+        XCTAssertTrue(app.buttons["settings-appearance"].exists)
         XCTAssertTrue(app.switches["Haptics"].exists)
+        reveal(app.buttons["About Just Gomoku"], in: app)
         XCTAssertTrue(app.buttons["About Just Gomoku"].exists)
-        XCTAssertFalse(app.buttons["Board Size"].exists)
-        XCTAssertFalse(app.buttons["Your Stones"].exists)
-        app.navigationBars["Settings"].buttons["Done"].tap()
+        closeSettings(in: app)
         XCTAssertTrue(board.exists)
 
         app.buttons["History"].tap()
@@ -57,35 +57,66 @@ final class GameplayUITests: XCTestCase {
     }
 
     @MainActor
-    func testCustomBoardControlsOnlyAppearForCustomSelection() throws {
-        let app = XCUIApplication()
-        app.launchArguments = ["--ui-testing"]
-        app.launch()
+    func testGameSettingsAutoSaveAcrossRelaunchBeforeDone() throws {
+        let app = launch()
+        let board = app.otherElements["game-board"]
+        waitForMoveCount(0, on: board)
+        let originalBoardSize = board.label
+        let originalBoardValue = board.value as? String
 
-        openNewGame(in: app)
-        select("2 Players", in: "new-game-opponent", app: app)
-        select("15×15", in: "new-game-board-size", app: app)
+        openSettings(in: app)
+        select("AI", in: "settings-opponent", app: app)
+        select("Easy", in: "settings-difficulty", app: app)
+        select("White", in: "settings-stones", app: app)
+        select("9×9", in: "settings-board-size", app: app)
+        // Changes save as they are selected, even if the app exits before Done.
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(board.waitForExistence(timeout: 5))
+        XCTAssertEqual(board.label, originalBoardSize)
+        XCTAssertEqual(board.value as? String, originalBoardValue)
+
+        openSettings(in: app)
+        assertSelection("AI", in: "settings-opponent", app: app)
+        assertSelection("Easy", in: "settings-difficulty", app: app)
+        assertSelection("White", in: "settings-stones", app: app)
+        assertSelection("9×9", in: "settings-board-size", app: app)
+        closeSettings(in: app)
+        XCTAssertEqual(board.label, originalBoardSize)
+        XCTAssertEqual(board.value as? String, originalBoardValue)
+
+        startNewGame(in: app)
+        XCTAssertEqual(board.label, "Gomoku board, 9 by 9")
+        waitForMoveCount(1, on: board)
+        XCTAssertTrue((board.value as? String)?.contains("Your move") == true)
+        XCTAssertTrue(app.staticTexts["AI · Easy"].exists)
+    }
+
+    @MainActor
+    func testCustomBoardControlsOnlyAppearForCustomSelection() throws {
+        let app = launch()
+        openSettings(in: app)
+        select("2 Players", in: "settings-opponent", app: app)
+        select("15×15", in: "settings-board-size", app: app)
         XCTAssertFalse(app.steppers["custom-board-size"].exists)
 
-        select("Custom", in: "new-game-board-size", app: app)
+        select("Custom", in: "settings-board-size", app: app)
         XCTAssertTrue(app.steppers["custom-board-size"].waitForExistence(timeout: 2))
 
-        select("15×15", in: "new-game-board-size", app: app)
+        select("15×15", in: "settings-board-size", app: app)
         XCTAssertFalse(app.steppers["custom-board-size"].exists)
-        app.navigationBars["New Game"].buttons["Cancel"].tap()
-        XCTAssertFalse(app.navigationBars["New Game"].exists)
+        closeSettings(in: app)
+        waitForMoveCount(0, on: app.otherElements["game-board"])
     }
 
     @MainActor
     func testBoardSwipeDoesNotPlaceAndHeldDragPlacesOneStone() throws {
-        let app = XCUIApplication()
-        app.launchArguments = ["--ui-testing"]
-        app.launch()
-
-        openNewGame(in: app)
-        select("2 Players", in: "new-game-opponent", app: app)
-        select("15×15", in: "new-game-board-size", app: app)
-        startGame(in: app)
+        let app = launch()
+        openSettings(in: app)
+        select("2 Players", in: "settings-opponent", app: app)
+        select("15×15", in: "settings-board-size", app: app)
+        closeSettings(in: app)
+        startNewGame(in: app)
 
         let board = app.otherElements["game-board"]
         XCTAssertTrue(board.waitForExistence(timeout: 5))
@@ -172,12 +203,66 @@ final class GameplayUITests: XCTestCase {
     }
 
     @MainActor
-    private func openNewGame(in app: XCUIApplication) {
+    private func launch() -> XCUIApplication {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
+        app.launchEnvironment["UI_TEST_RUN_ID"] = UUID().uuidString
+        app.launch()
+        XCTAssertTrue(app.otherElements["game-board"].waitForExistence(timeout: 5))
+        return app
+    }
+
+    @MainActor
+    private func openSettings(in app: XCUIApplication) {
+        let settings = app.buttons["Settings"]
+        XCTAssertTrue(settings.waitForExistence(timeout: 5))
+        for _ in 0..<4 {
+            if settings.isHittable { break }
+            app.scrollViews.firstMatch.swipeDown(velocity: .fast)
+        }
+        XCTAssertTrue(settings.isHittable, "Settings should be reachable after scrolling back to the gameplay header")
+        settings.tap()
+        XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 2))
+    }
+
+    @MainActor
+    private func closeSettings(in app: XCUIApplication) {
+        app.navigationBars["Settings"].buttons["Done"].tap()
+        let dismissed = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "exists == false"),
+            object: app.navigationBars["Settings"]
+        )
+        XCTAssertEqual(XCTWaiter.wait(for: [dismissed], timeout: 3), .completed)
+    }
+
+    @MainActor
+    private func startNewGame(in app: XCUIApplication) {
         let newGame = app.buttons["New Game"]
         XCTAssertTrue(newGame.waitForExistence(timeout: 5))
+        reveal(newGame, in: app)
         newGame.tap()
-        XCTAssertTrue(app.navigationBars["New Game"].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.buttons["start-game"].exists)
+        XCTAssertFalse(app.navigationBars["New Game"].exists)
+        XCTAssertFalse(app.buttons["start-game"].exists)
+        XCTAssertFalse(app.buttons["Start New Game"].exists)
+    }
+
+    @MainActor
+    private func reveal(_ element: XCUIElement, in app: XCUIApplication) {
+        for _ in 0..<4 {
+            if element.exists && element.isHittable { break }
+            let form = app.collectionViews.firstMatch
+            if form.exists { form.swipeUp() }
+            else { app.scrollViews.firstMatch.swipeUp() }
+        }
+        XCTAssertTrue(element.isHittable, "Control should be reachable after bounded scrolling")
+    }
+
+    @MainActor
+    private func assertSelection(_ title: String, in identifier: String, app: XCUIApplication) {
+        let picker = app.buttons[identifier]
+        reveal(picker, in: app)
+        let selection = picker.label + " " + (picker.value as? String ?? "")
+        XCTAssertTrue(selection.contains(title), "\(identifier) should retain \(title); reports \(selection)")
     }
 
     @MainActor
@@ -199,28 +284,6 @@ final class GameplayUITests: XCTestCase {
         let option = app.buttons[title]
         XCTAssertTrue(option.waitForExistence(timeout: 2))
         option.tap()
-    }
-
-    @MainActor
-    private func configureAI(in app: XCUIApplication) {
-        select("AI", in: "new-game-opponent", app: app)
-        select("Medium", in: "new-game-difficulty", app: app)
-        select("White", in: "new-game-stones", app: app)
-        select("15×15", in: "new-game-board-size", app: app)
-    }
-
-    @MainActor
-    private func startGame(in app: XCUIApplication) {
-        app.buttons["start-game"].tap()
-        let confirmation = app.buttons["Start New Game"]
-        if confirmation.waitForExistence(timeout: 1) {
-            confirmation.tap()
-        }
-        let dismissed = XCTNSPredicateExpectation(
-            predicate: NSPredicate(format: "exists == false"),
-            object: app.navigationBars["New Game"]
-        )
-        XCTAssertEqual(XCTWaiter.wait(for: [dismissed], timeout: 3), .completed)
     }
 
     @MainActor

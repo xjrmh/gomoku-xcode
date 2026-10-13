@@ -2,6 +2,23 @@ import XCTest
 @testable import just_gomoku
 
 final class ActiveSessionStoreTests: XCTestCase {
+    @MainActor
+    func testFreshGameUsesSavedConfigurationAndRestoredEmptyGameKeepsItsConfiguration() throws {
+        let file = FileManager.default.temporaryDirectory
+            .appendingPathComponent("JustGomokuDefaults-\(UUID().uuidString).json")
+        defer { try? FileManager.default.removeItem(at: file) }
+        let store = ActiveSessionStore(fileURL: file)
+        let savedConfiguration = GameConfiguration(mode: .ai, boardSize: 19, difficulty: .hard, humanSide: .black)
+
+        let fresh = GameState(initialConfiguration: savedConfiguration, sessionStore: store)
+        XCTAssertEqual(fresh.session.configuration, savedConfiguration)
+
+        let emptySession = GameSession(configuration: .init(mode: .pvp, boardSize: 9))
+        store.save(emptySession)
+        let restored = GameState(initialConfiguration: savedConfiguration, sessionStore: store)
+        XCTAssertEqual(restored.session, emptySession, "Saved next-game defaults must not replace an existing empty board")
+    }
+
     func testSaveLoadAndClear() throws {
         let directory = FileManager.default.temporaryDirectory
             .appendingPathComponent("JustGomokuTests-\(UUID().uuidString)", isDirectory: true)

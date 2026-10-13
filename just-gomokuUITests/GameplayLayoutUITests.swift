@@ -63,16 +63,12 @@ final class GameplayLayoutUITests: XCTestCase {
     @MainActor
     func testDismissingPrecisionTipKeepsBoardFrameAndSectionEdges() {
         let app = launch()
+        openSettings(in: app)
+        select("19×19", in: "settings-board-size", app: app)
+        closeSettings(in: app)
         app.buttons["New Game"].tap()
-        XCTAssertTrue(app.navigationBars["New Game"].waitForExistence(timeout: 3))
-        app.buttons["new-game-board-size"].tap()
-        app.buttons["19×19"].tap()
-        app.buttons["start-game"].tap()
-        let dismissed = XCTNSPredicateExpectation(
-            predicate: NSPredicate(format: "exists == false"),
-            object: app.navigationBars["New Game"]
-        )
-        XCTAssertEqual(XCTWaiter.wait(for: [dismissed], timeout: 3), .completed)
+        XCTAssertFalse(app.navigationBars["New Game"].exists)
+        XCTAssertFalse(app.buttons["Start New Game"].exists)
 
         let board = app.otherElements["game-board"]
         waitForMoveCount(0, on: board)
@@ -106,6 +102,76 @@ final class GameplayLayoutUITests: XCTestCase {
         assertFrame(board.frame, equals: initialBoardFrame, context: "Dismissing the precision tip")
         assertSectionEdges(in: app, boardFrame: initialBoardFrame)
         waitForMoveCount(0, on: board)
+    }
+
+    @MainActor
+    func testPlayAgainUsesSavedSettingsAndSettingsPreserveCompletedGame() {
+        let app = launch(arguments: ["--ui-testing-win"])
+        let board = app.otherElements["game-board"]
+        waitForMoveCount(9, on: board)
+        XCTAssertEqual(board.label, "Gomoku board, 9 by 9")
+        let completedBoardValue = board.value as? String
+
+        openSettings(in: app)
+        select("2 Players", in: "settings-opponent", app: app)
+        select("19×19", in: "settings-board-size", app: app)
+        closeSettings(in: app)
+        XCTAssertEqual(board.label, "Gomoku board, 9 by 9")
+        XCTAssertEqual(board.value as? String, completedBoardValue,
+                       "Saving next-game settings must preserve the completed game")
+        let playAgain = app.buttons["Play Again"]
+        XCTAssertTrue(playAgain.waitForExistence(timeout: 3))
+        reveal(playAgain, in: app)
+        playAgain.tap()
+        waitForMoveCount(0, on: board)
+        XCTAssertEqual(board.label, "Gomoku board, 19 by 19")
+        XCTAssertFalse(app.buttons["Play Again"].exists)
+        XCTAssertFalse(app.navigationBars["New Game"].exists)
+        XCTAssertFalse(app.buttons["Start New Game"].exists)
+    }
+
+    @MainActor
+    private func openSettings(in app: XCUIApplication) {
+        let settings = app.buttons["Settings"]
+        XCTAssertTrue(settings.waitForExistence(timeout: 5))
+        for _ in 0..<4 {
+            if settings.isHittable { break }
+            app.scrollViews.firstMatch.swipeDown(velocity: .fast)
+        }
+        XCTAssertTrue(settings.isHittable, "Settings should be reachable after scrolling back to the gameplay header")
+        settings.tap()
+        XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 3))
+    }
+
+    @MainActor
+    private func closeSettings(in app: XCUIApplication) {
+        app.navigationBars["Settings"].buttons["Done"].tap()
+        let dismissed = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "exists == false"),
+            object: app.navigationBars["Settings"]
+        )
+        XCTAssertEqual(XCTWaiter.wait(for: [dismissed], timeout: 3), .completed)
+    }
+
+    @MainActor
+    private func select(_ title: String, in identifier: String, app: XCUIApplication) {
+        let picker = app.buttons[identifier]
+        reveal(picker, in: app)
+        picker.tap()
+        let option = app.buttons[title]
+        XCTAssertTrue(option.waitForExistence(timeout: 2))
+        option.tap()
+    }
+
+    @MainActor
+    private func reveal(_ control: XCUIElement, in app: XCUIApplication) {
+        for _ in 0..<4 {
+            if control.exists && control.isHittable { break }
+            let form = app.collectionViews.firstMatch
+            if form.exists { form.swipeUp(velocity: .fast) }
+            else { app.scrollViews.firstMatch.swipeUp(velocity: .fast) }
+        }
+        XCTAssertTrue(control.isHittable, "Control should be reachable after bounded scrolling")
     }
 
     @MainActor

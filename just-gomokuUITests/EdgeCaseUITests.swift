@@ -23,13 +23,14 @@ final class EdgeCaseUITests: XCTestCase {
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
-        openNewGame(in: app)
-        select("2 Players", in: "new-game-opponent", app: app)
-        select("Custom", in: "new-game-board-size", app: app)
+        openSettings(in: app)
+        select("2 Players", in: "settings-opponent", app: app)
+        select("Custom", in: "settings-board-size", app: app)
         try setCustomBoardSize(25, in: app)
         let stepper = app.steppers["custom-board-size"]
         XCTAssertFalse(stepperButton("Increment", in: stepper).isEnabled)
-        startGame(in: app)
+        closeSettings(in: app)
+        startNewGame(in: app)
 
         let board = app.otherElements["game-board"]
         assertBoardSize(25, on: board)
@@ -64,15 +65,17 @@ final class EdgeCaseUITests: XCTestCase {
     }
 
     @MainActor
-    func testSmallBoardDraftCancellationResetAndCornerPlacement() throws {
+    func testSmallBoardSettingsPreserveCurrentGameAndNewGameImmediatelyResets() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing"]
+        app.launchEnvironment["UI_TEST_RUN_ID"] = UUID().uuidString
         app.launch()
 
-        openNewGame(in: app)
-        select("2 Players", in: "new-game-opponent", app: app)
-        select("9×9", in: "new-game-board-size", app: app)
-        startGame(in: app)
+        openSettings(in: app)
+        select("2 Players", in: "settings-opponent", app: app)
+        select("9×9", in: "settings-board-size", app: app)
+        closeSettings(in: app)
+        startNewGame(in: app)
 
         let board = app.otherElements["game-board"]
         assertBoardSize(9, on: board)
@@ -81,27 +84,16 @@ final class EdgeCaseUITests: XCTestCase {
         waitForMoveCount(1, on: board)
         let activeBoardValue = board.value as? String
 
-        openNewGame(in: app)
-        select("Custom", in: "new-game-board-size", app: app)
+        openSettings(in: app)
+        select("Custom", in: "settings-board-size", app: app)
         try setCustomBoardSize(5, in: app)
         XCTAssertFalse(stepperButton("Decrement", in: app.steppers["custom-board-size"]).isEnabled)
-        app.buttons["start-game"].tap()
-        let confirmation = app.buttons["Start New Game"]
-        XCTAssertTrue(confirmation.waitForExistence(timeout: 2))
-        XCTAssertTrue(app.staticTexts["The current board will be cleared."].exists)
-        cancelResetConfirmation(in: app)
-        waitForDisappearance(of: confirmation)
-        XCTAssertTrue(app.navigationBars["New Game"].exists)
-
-        app.navigationBars["New Game"].buttons["Cancel"].tap()
-        waitForDisappearance(of: app.navigationBars["New Game"])
+        closeSettings(in: app)
         assertBoardSize(9, on: board)
-        XCTAssertEqual(board.value as? String, activeBoardValue, "Cancelling setup must preserve the active board and turn")
+        XCTAssertEqual(board.value as? String, activeBoardValue,
+                       "Changing saved settings must preserve the active board and turn")
 
-        openNewGame(in: app)
-        select("Custom", in: "new-game-board-size", app: app)
-        try setCustomBoardSize(5, in: app)
-        startGame(in: app)
+        startNewGame(in: app)
         assertBoardSize(5, on: board)
         waitForMoveCount(0, on: board)
         XCTAssertTrue((board.value as? String)?.hasPrefix("Cursor C3, empty.") == true,
@@ -113,6 +105,12 @@ final class EdgeCaseUITests: XCTestCase {
         waitForMoveCount(2, on: board)
         intersection(row: 0, column: 0, size: 5, on: board).tap()
         waitForMoveCount(2, on: board)
+
+        startNewGame(in: app)
+        assertBoardSize(5, on: board)
+        waitForMoveCount(0, on: board)
+        XCTAssertFalse(app.buttons["Undo"].isEnabled)
+        XCTAssertTrue((board.value as? String)?.hasPrefix("Cursor C3, empty.") == true)
     }
 
     @MainActor
@@ -122,10 +120,11 @@ final class EdgeCaseUITests: XCTestCase {
         app.launchEnvironment["UI_TEST_RUN_ID"] = UUID().uuidString
         app.launch()
 
-        openNewGame(in: app)
-        select("2 Players", in: "new-game-opponent", app: app)
-        select("9×9", in: "new-game-board-size", app: app)
-        startGame(in: app)
+        openSettings(in: app)
+        select("2 Players", in: "settings-opponent", app: app)
+        select("9×9", in: "settings-board-size", app: app)
+        closeSettings(in: app)
+        startNewGame(in: app)
         let board = app.otherElements["game-board"]
         assertBoardSize(9, on: board)
         waitForMoveCount(0, on: board)
@@ -147,12 +146,22 @@ final class EdgeCaseUITests: XCTestCase {
     }
 
     @MainActor
-    private func openNewGame(in app: XCUIApplication) {
-        let newGame = app.buttons["New Game"]
-        XCTAssertTrue(newGame.waitForExistence(timeout: 5))
-        reveal(newGame, in: app)
-        newGame.tap()
-        XCTAssertTrue(app.navigationBars["New Game"].waitForExistence(timeout: 2))
+    private func openSettings(in app: XCUIApplication) {
+        let settings = app.buttons["Settings"]
+        XCTAssertTrue(settings.waitForExistence(timeout: 5))
+        for _ in 0..<4 {
+            if settings.isHittable { break }
+            app.scrollViews.firstMatch.swipeDown(velocity: .fast)
+        }
+        XCTAssertTrue(settings.isHittable, "Settings should be reachable after scrolling back to the gameplay header")
+        settings.tap()
+        XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 2))
+    }
+
+    @MainActor
+    private func closeSettings(in app: XCUIApplication) {
+        app.navigationBars["Settings"].buttons["Done"].tap()
+        waitForDisappearance(of: app.navigationBars["Settings"])
     }
 
     @MainActor
@@ -206,32 +215,14 @@ final class EdgeCaseUITests: XCTestCase {
     }
 
     @MainActor
-    private func startGame(in app: XCUIApplication) {
-        app.buttons["start-game"].tap()
-        let confirmation = app.buttons["Start New Game"]
-        if confirmation.waitForExistence(timeout: 1) { confirmation.tap() }
-        waitForDisappearance(of: app.navigationBars["New Game"])
-    }
-
-    @MainActor
-    private func cancelResetConfirmation(in app: XCUIApplication) {
-        let visibleCancel = app.buttons.matching(identifier: "Cancel").allElementsBoundByIndex.first { $0.isHittable }
-        if let visibleCancel {
-            visibleCancel.tap()
-        } else {
-            // Native confirmation popovers omit the Cancel row and expose an
-            // outside-tap dismissal region. The sheet title is a safe, inert
-            // point outside the popup, avoiding both Start and setup Cancel.
-            XCTAssertTrue(app.otherElements["PopoverDismissRegion"].exists,
-                          "A confirmation without a Cancel button should expose native popup dismissal")
-            let popup = app.popovers.firstMatch
-            XCTAssertTrue(popup.exists)
-            let title = app.navigationBars["New Game"].staticTexts["New Game"]
-            XCTAssertTrue(title.exists)
-            let titleCenter = CGPoint(x: title.frame.midX, y: title.frame.midY)
-            XCTAssertFalse(popup.frame.contains(titleCenter), "Outside dismissal must avoid the destructive popup")
-            title.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
-        }
+    private func startNewGame(in app: XCUIApplication) {
+        let newGame = app.buttons["New Game"]
+        XCTAssertTrue(newGame.waitForExistence(timeout: 5))
+        reveal(newGame, in: app)
+        newGame.tap()
+        XCTAssertFalse(app.navigationBars["New Game"].exists)
+        XCTAssertFalse(app.buttons["start-game"].exists)
+        XCTAssertFalse(app.buttons["Start New Game"].exists)
     }
 
     @MainActor

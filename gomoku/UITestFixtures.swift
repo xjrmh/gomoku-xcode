@@ -46,7 +46,11 @@ enum UITestFixtures {
             }
             try! archive.mainContext.save()
         }
-        return Dependencies(game: GameState(sessionStore: store), preferences: preferences, archive: archive)
+        return Dependencies(
+            game: GameState(initialConfiguration: preferences.gameConfiguration, sessionStore: store),
+            preferences: preferences,
+            archive: archive
+        )
     }
 
     private static func win(boardSize: Int) -> GameSession {

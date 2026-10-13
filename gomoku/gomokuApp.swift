@@ -23,8 +23,9 @@ struct GomokuApp: App {
             return
         }
         #endif
-        _game = StateObject(wrappedValue: GameState())
-        _preferences = StateObject(wrappedValue: PreferencesStore())
+        let preferences = PreferencesStore()
+        _game = StateObject(wrappedValue: GameState(initialConfiguration: preferences.gameConfiguration))
+        _preferences = StateObject(wrappedValue: preferences)
         archiveContainer = ArchiveContainer.make()
     }
 

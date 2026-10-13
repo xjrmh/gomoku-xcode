@@ -8,7 +8,7 @@ import AppKit
 #endif
 
 private enum GameSheet: String, Identifiable {
-    case newGame, settings, about
+    case settings, about
     var id: Self { self }
 }
 
@@ -41,9 +41,7 @@ struct ContentView: View {
                         boardSection
                         VStack(spacing: 10) {
                             auxiliaryControls
-                            MatchDock(game: game, sharePayload: sharePayload) {
-                                presentedSheet = .newGame
-                            }
+                            MatchDock(game: game, sharePayload: sharePayload, newGame: startNewGame)
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -59,7 +57,6 @@ struct ContentView: View {
             .sheet(item: $presentedSheet) { destination in
                 NavigationStack {
                     switch destination {
-                    case .newGame: NewGameView(game: game)
                     case .settings: SettingsView().environmentObject(preferences)
                     case .about: AboutView().presentationDetents([.medium, .large])
                     }
@@ -72,9 +69,6 @@ struct ContentView: View {
                 if phase == .active { game.sceneBecameActive() } else { game.sceneBecameInactive() }
             }
             .onChange(of: game.feedbackPulse) { _, pulse in announce(pulse.event) }
-            .onChange(of: game.session.configuration) { _, configuration in
-                preferences.apply(configuration: configuration)
-            }
             .task(id: ShareRenderIdentity(sessionID: game.session.id, archived: game.session.archived,
                                          colorScheme: colorScheme, theme: preferences.theme)) {
                 sharePayload = game.gameOver
@@ -93,7 +87,7 @@ struct ContentView: View {
             .onAppear { bootstrap() }
         }
         .focusedSceneValue(\.gameActions, GameActions(
-            newRound: { presentedSheet = .newGame },
+            newRound: startNewGame,
             undo: { game.undo() },
             hint: { game.askForHint() },
             canUndo: game.canUndo,
@@ -121,7 +115,7 @@ struct ContentView: View {
                 .disabled(!showsTip)
                 .allowsHitTesting(showsTip)
                 .accessibilityHidden(!showsTip)
-            AdaptiveGlassButton(prominent: true) { game.newRound() } label: {
+            AdaptiveGlassButton(prominent: true, action: startNewGame) {
                 Label("Play Again", systemImage: "arrow.clockwise")
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
@@ -174,17 +168,11 @@ struct ContentView: View {
             completion: { ArchiveRepository.archive($0, theme: preferences.theme, in: modelContext) },
             reopen: { ArchiveRepository.reopen($0, in: modelContext) }
         )
-        if game.moves.isEmpty, !game.gameOver {
-            let saved = preferences.payload
-            let configuration = GameConfiguration(
-                mode: saved.defaultMode,
-                boardSize: saved.boardSize,
-                difficulty: saved.difficulty,
-                humanSide: saved.humanSide
-            )
-            if game.session.configuration != configuration { game.newRound(configuration: configuration) }
-        }
         if scenePhase == .active { game.sceneBecameActive() }
+    }
+
+    private func startNewGame() {
+        game.newRound(configuration: preferences.gameConfiguration)
     }
 
     private func announce(_ event: HapticEvent) {
@@ -518,104 +506,67 @@ private struct MinimalDockActionStyle: ButtonStyle {
     }
 }
 
-private struct NewGameView: View {
-    @ObservedObject var game: GameState
+private struct GameSettingsSection: View {
     @EnvironmentObject private var preferences: PreferencesStore
-    @Environment(\.dismiss) private var dismiss
-    @State private var draft: GameConfiguration
-    @State private var boardChoice: Int
-    @State private var showResetConfirmation = false
+    @State private var showsCustomBoardSize = false
 
-    init(game: GameState) {
-        self.game = game
-        _draft = State(initialValue: game.session.configuration)
-        let size = game.boardSize
-        _boardChoice = State(initialValue: [9, 15, 19].contains(size) ? size : 0)
+    private var configuration: Binding<GameConfiguration> {
+        Binding(
+            get: { preferences.gameConfiguration },
+            set: { preferences.apply(configuration: $0) }
+        )
+    }
+
+    private var boardChoice: Binding<Int> {
+        Binding(
+            get: {
+                let size = preferences.gameConfiguration.boardSize
+                return showsCustomBoardSize || ![9, 15, 19].contains(size) ? 0 : size
+            },
+            set: { size in
+                showsCustomBoardSize = size == 0
+                if size != 0 {
+                    configuration.boardSize.wrappedValue = size
+                }
+            }
+        )
     }
 
     var body: some View {
-        Form {
-            Section {
-                Picker("Opponent", selection: $draft.mode) {
-                    Text("2 Players").tag(GameMode.pvp)
-                    Text("AI").tag(GameMode.ai)
-                }
-                .accessibilityIdentifier("new-game-opponent")
-                if draft.mode == .ai {
-                    Picker("Difficulty", selection: $draft.difficulty) {
-                        ForEach(AIDifficulty.allCases) { Text($0.title).tag($0) }
-                    }
-                    .accessibilityIdentifier("new-game-difficulty")
-                    Picker("Your Stones", selection: $draft.humanSide) {
-                        Text(sideTitle(.black)).tag(Player.black)
-                        Text(sideTitle(.white)).tag(Player.white)
-                    }
-                    .accessibilityIdentifier("new-game-stones")
-                }
-            } header: {
-                Text("Players")
-            } footer: {
-                Text("\(sideTitle(.black)) moves first.")
+        Section {
+            Picker("Opponent", selection: configuration.mode) {
+                ForEach(GameMode.allCases) { Text($0.title).tag($0) }
             }
-            Section {
-                Picker("Board Size", selection: $boardChoice) {
-                    Text("9×9").tag(9)
-                    Text("15×15").tag(15)
-                    Text("19×19").tag(19)
-                    Text("Custom").tag(0)
+            .accessibilityIdentifier("settings-opponent")
+            if preferences.gameConfiguration.mode == .ai {
+                Picker("Difficulty", selection: configuration.difficulty) {
+                    ForEach(AIDifficulty.allCases) { Text($0.title).tag($0) }
                 }
-                .accessibilityIdentifier("new-game-board-size")
-                if boardChoice == 0 {
-                    Stepper("Custom Size: \(draft.boardSize)×\(draft.boardSize)", value: $draft.boardSize, in: 5...25, step: 2)
-                        .accessibilityIdentifier("custom-board-size")
+                .accessibilityIdentifier("settings-difficulty")
+                Picker("Your Stones", selection: configuration.humanSide) {
+                    Text(sideTitle(.black)).tag(Player.black)
+                    Text(sideTitle(.white)).tag(Player.white)
                 }
-            } header: {
-                Text("Board")
-            } footer: {
-                Text("Connect five stones in a row to win.")
+                .accessibilityIdentifier("settings-stones")
             }
+            Picker("Board Size", selection: boardChoice) {
+                Text("9×9").tag(9)
+                Text("15×15").tag(15)
+                Text("19×19").tag(19)
+                Text("Custom").tag(0)
+            }
+            .accessibilityIdentifier("settings-board-size")
+            if boardChoice.wrappedValue == 0 {
+                Stepper("Custom Size: \(preferences.gameConfiguration.boardSize)×\(preferences.gameConfiguration.boardSize)",
+                        value: configuration.boardSize, in: 5...25, step: 2)
+                    .accessibilityIdentifier("custom-board-size")
+            }
+        } header: {
+            Text("Game")
+        } footer: {
+            Text("\(sideTitle(.black)) moves first. Changes apply to your next game.")
         }
         .pickerStyle(.menu)
-        .navigationTitle("New Game")
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            startButton
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
-                .padding(.bottom, 16)
-                .background(.bar)
-        }
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
-        }
-    }
-
-    private var startButton: some View {
-        AdaptiveGlassButton(prominent: true) {
-            if game.moves.isEmpty || game.gameOver { startGame() }
-            else { showResetConfirmation = true }
-        } label: {
-            Text("Start Game")
-                .fontWeight(.semibold)
-                .frame(maxWidth: .infinity, minHeight: 32)
-        }
-        .controlSize(.large)
-        .buttonBorderShape(.capsule)
-        .keyboardShortcut(.defaultAction)
-        .accessibilityIdentifier("start-game")
-        .confirmationDialog("Start a new game?", isPresented: $showResetConfirmation, titleVisibility: .visible) {
-            Button("Start New Game", role: .destructive) { startGame() }
-            Button("Cancel", role: .cancel) { }
-        } message: {
-            Text("The current board will be cleared.")
-        }
-    }
-
-    private func startGame() {
-        var configuration = draft
-        if boardChoice != 0 { configuration.boardSize = boardChoice }
-        configuration.normalize()
-        game.newRound(configuration: configuration)
-        dismiss()
     }
 
     private func sideTitle(_ player: Player) -> String {
@@ -629,6 +580,7 @@ private struct SettingsView: View {
 
     var body: some View {
         Form {
+            GameSettingsSection()
             Section("Appearance & Feel") {
                 Picker("Appearance", selection: Binding(
                     get: { preferences.appearance },

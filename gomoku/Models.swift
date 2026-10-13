@@ -323,14 +323,14 @@ final class GameState: ObservableObject {
     private var archiveReopen: ((UUID) -> Void)?
     private var lastTargetFeedbackAt = Date.distantPast
 
-    init(sessionStore: ActiveSessionStore = .init()) {
+    init(initialConfiguration: GameConfiguration = .init(), sessionStore: ActiveSessionStore = .init()) {
         self.sessionStore = sessionStore
         if let restored = sessionStore.load(), restored.isValid {
             var paused = restored
             paused.turnStartedAt = nil
             self.session = paused
         } else {
-            self.session = GameSession()
+            self.session = GameSession(configuration: initialConfiguration)
         }
     }
 
