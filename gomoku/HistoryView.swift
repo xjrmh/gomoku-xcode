@@ -11,7 +11,6 @@ enum HistoryFilter: String, CaseIterable, Identifiable {
 }
 
 struct HistoryView: View {
-    @EnvironmentObject private var preferences: PreferencesStore
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -20,7 +19,6 @@ struct HistoryView: View {
     @State private var searchText = ""
     @State private var showEraseConfirmation = false
 
-    private var palette: GomokuPalette { .resolve(colorScheme, theme: preferences.theme) }
     private var gridColumns: [GridItem] {
         dynamicTypeSize.isAccessibilitySize
             ? [GridItem(.flexible(maximum: 440))]
@@ -39,7 +37,7 @@ struct HistoryView: View {
             guard !query.isEmpty else { return true }
             let searchable = [
                 game.resultTitle,
-                game.winner.map { "\(preferences.theme.playerName($0)) won" } ?? game.resultTitle,
+                game.winner.map { "\($0.name) won" } ?? game.resultTitle,
                 game.finalMode.title,
                 game.finalMode == .pvp ? "2 Players PvP" : "AI",
                 game.difficulty.title,
@@ -69,7 +67,7 @@ struct HistoryView: View {
                         NavigationLink {
                             ReplayView(game: game)
                         } label: {
-                            HistoryCard(game: game, palette: palette)
+                            HistoryCard(game: game, palette: .resolve(colorScheme, theme: game.theme))
                         }
                         .buttonStyle(.plain)
                         .accessibilityIdentifier("history-game-card")
@@ -145,7 +143,7 @@ private struct HistoryCard: View {
 
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 StoneDot(player: game.winner, theme: palette.theme)
-                Text(resultTitle)
+                Text(game.resultTitle)
                     .font(.headline)
                 Spacer(minLength: 0)
             }
@@ -169,14 +167,9 @@ private struct HistoryCard: View {
         parts.append("\(game.boardSize)×\(game.boardSize)")
         return parts.joined(separator: " · ")
     }
-
-    private var resultTitle: String {
-        game.winner.map { "\(palette.theme.playerName($0)) won" } ?? game.resultTitle
-    }
 }
 
 struct ReplayView: View {
-    @EnvironmentObject private var preferences: PreferencesStore
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let game: ArchivedGame
@@ -215,7 +208,7 @@ struct ReplayView: View {
                 .padding(16)
             }
         }
-        .navigationTitle(resultTitle)
+        .navigationTitle(game.resultTitle)
         .onDisappear { stopPlayback() }
     }
 
@@ -227,13 +220,9 @@ struct ReplayView: View {
 
     private var selectedMoveSummary: String {
         guard let selectedMove else { return "Starting position" }
-        let name = preferences.theme.playerName(selectedMove.player)
+        let name = game.theme.playerName(selectedMove.player)
         let player = selectedMove.controller == .ai ? "\(name) (AI)" : name
         return "\(player) at \(selectedMove.pos.coordinate)"
-    }
-
-    private var resultTitle: String {
-        game.winner.map { "\(preferences.theme.playerName($0)) won" } ?? game.resultTitle
     }
 
     private var replayPositionDescription: String {
@@ -246,7 +235,7 @@ struct ReplayView: View {
             boardSize: game.boardSize,
             lastMove: selectedMove?.pos,
             winningLine: moveIndex == game.moves.count ? game.winningLine : [],
-            palette: .resolve(colorScheme, theme: preferences.theme)
+            palette: .resolve(colorScheme, theme: game.theme)
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Replay board, \(game.boardSize) by \(game.boardSize)")
@@ -257,12 +246,12 @@ struct ReplayView: View {
         let moves = game.moves.prefix(moveIndex)
         let blackCount = moves.filter { $0.player == .black }.count
         let whiteCount = moves.count - blackCount
-        let result = moveIndex == game.moves.count ? " \(resultTitle)." : ""
-        if preferences.theme == .standard {
+        let result = moveIndex == game.moves.count ? " \(game.resultTitle)." : ""
+        if game.theme == .standard {
             return "\(replayPositionDescription). \(blackCount) black stones and \(whiteCount) white stones.\(result)"
         }
-        let black = "\(preferences.theme.playerName(.black)) (black side)"
-        let white = "\(preferences.theme.playerName(.white)) (white side)"
+        let black = "\(game.theme.playerName(.black)) (black side)"
+        let white = "\(game.theme.playerName(.white)) (white side)"
         return "\(replayPositionDescription). \(blackCount) \(black) pieces and \(whiteCount) \(white) pieces.\(result)"
     }
 
@@ -272,7 +261,7 @@ struct ReplayView: View {
                 Text("Move \(moveIndex) of \(game.moves.count)")
                     .font(.headline.monospacedDigit())
                 HStack(spacing: 8) {
-                    if let selectedMove { StoneDot(player: selectedMove.player, theme: preferences.theme) }
+                    if let selectedMove { StoneDot(player: selectedMove.player, theme: game.theme) }
                     Text(selectedMoveSummary)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)

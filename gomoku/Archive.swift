@@ -16,13 +16,15 @@ final class ArchivedGame {
     var finalModeRaw: String = GameMode.pvp.rawValue
     var difficultyRaw: String = AIDifficulty.medium.rawValue
     var humanSideRaw: Int = Player.white.rawValue
+    // Older records without theme metadata default to the Standard board.
+    var themeRaw: String = "standard"
     var moveCount: Int = 0
     var blackElapsed: TimeInterval = 0
     var whiteElapsed: TimeInterval = 0
     var movesData: Data?
     var winningLineData: Data?
 
-    init(session: GameSession, completedAt: Date = .now) {
+    init(session: GameSession, theme: BoardTheme = .standard, completedAt: Date = .now) {
         sessionID = session.id
         schemaVersion = session.schemaVersion
         self.completedAt = completedAt
@@ -32,6 +34,7 @@ final class ArchivedGame {
         finalModeRaw = session.configuration.mode.rawValue
         difficultyRaw = session.configuration.difficulty.rawValue
         humanSideRaw = session.configuration.humanSide.rawValue
+        themeRaw = theme.rawValue
         moveCount = session.moves.count
         blackElapsed = session.clocks.black
         whiteElapsed = session.clocks.white
@@ -52,8 +55,9 @@ final class ArchivedGame {
     }
 
     var winner: Player? { winnerRaw.flatMap(Player.init(rawValue:)) }
+    var theme: BoardTheme { BoardTheme(rawValue: themeRaw) ?? .standard }
     var resultTitle: String {
-        if let winner { return "\(winner.name) won" }
+        if let winner { return "\(theme.playerName(winner)) won" }
         return outcomeRaw == "draw" ? "Draw" : "Unfinished"
     }
     var finalMode: GameMode { GameMode(rawValue: finalModeRaw) ?? .pvp }
@@ -143,14 +147,14 @@ enum ArchiveContainer {
 
 @MainActor
 enum ArchiveRepository {
-    static func archive(_ session: GameSession, in context: ModelContext) {
+    static func archive(_ session: GameSession, theme: BoardTheme = .standard, in context: ModelContext) {
         let id = session.id
         var descriptor = FetchDescriptor<ArchivedGame>(predicate: #Predicate { $0.sessionID == id })
         descriptor.fetchLimit = 1
         if let existing = try? context.fetch(descriptor).first {
             context.delete(existing)
         }
-        context.insert(ArchivedGame(session: session))
+        context.insert(ArchivedGame(session: session, theme: theme))
         try? context.save()
     }
 

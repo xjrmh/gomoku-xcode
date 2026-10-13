@@ -171,7 +171,7 @@ struct ContentView: View {
         guard !didBootstrap else { return }
         didBootstrap = true
         game.configureArchive(
-            completion: { ArchiveRepository.archive($0, in: modelContext) },
+            completion: { ArchiveRepository.archive($0, theme: preferences.theme, in: modelContext) },
             reopen: { ArchiveRepository.reopen($0, in: modelContext) }
         )
         if game.moves.isEmpty, !game.gameOver {
@@ -672,33 +672,58 @@ private struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
     var showsDone = true
 
+    private var version: String? {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+    }
+
     var body: some View {
-        Form {
-            Section {
-                VStack(spacing: 10) {
+        ScrollView {
+            VStack(spacing: 28) {
+                VStack(spacing: 12) {
                     Image("GomokuLogo")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 68, height: 68)
+                        .frame(width: 84, height: 84)
                         .accessibilityHidden(true)
-                    Text("Just Gomoku").font(.title2.bold())
-                    Text("Private, focused Gomoku for your Apple devices.")
+                    Text("Just Gomoku")
+                        .font(.title.bold())
+                        .accessibilityAddTraits(.isHeader)
+                    Text("The classic five-in-a-row game.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
+                    if let version {
+                        Text("Version \(version)")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
-            }
-            Section("Creator") {
+
+                Text("Play against the built-in AI or a friend on the same device. Replay past games, one move at a time.")
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+                    .lineSpacing(4)
+
+                Divider()
+
                 Link(destination: URL(string: "https://flatre.ai")!) {
-                    Label("Flatre.ai", systemImage: "arrow.up.right.square")
+                    Image("FlatreLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .background(.white, in: RoundedRectangle(cornerRadius: 10))
+                        .frame(minWidth: 44, minHeight: 44)
                 }
-                Link(destination: URL(string: "mailto:li@flatre.ai")!) {
-                    Label("li@flatre.ai", systemImage: "envelope")
-                }
+                .accessibilityLabel("Flatre website")
+                .accessibilityHint("Opens flatre.ai in your browser")
             }
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: 360)
+            .padding(.horizontal, 28)
+            .padding(.top, 32)
+            .padding(.bottom, 40)
+            .frame(maxWidth: .infinity)
         }
+        .scrollBounceBehavior(.basedOnSize)
         .navigationTitle("About")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)

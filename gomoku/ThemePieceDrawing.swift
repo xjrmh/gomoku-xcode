@@ -24,6 +24,7 @@ enum ThemePieceDrawing {
             case .nature: first ? piece.leaf() : piece.flower()
             case .pets: first ? piece.cat() : piece.dog()
             case .ocean: first ? piece.shell() : piece.starfish()
+            case .flatre: first ? piece.house() : piece.key()
             }
         }
     }
@@ -373,5 +374,47 @@ private struct PieceCanvas {
         for dot in dots {
             fill(ellipse(dot.x - 0.033, dot.y - 0.033, 0.066, 0.066), cream.opacity(0.9), outlined: false)
         }
+    }
+
+    func house() {
+        let navy = Color(red: 7.0 / 255, green: 26.0 / 255, blue: 59.0 / 255)
+        let blue = Color(red: 10.0 / 255, green: 140.0 / 255, blue: 1)
+        let silhouette = polygon([
+            point(0.06, 0.43), point(0.5, 0.07), point(0.94, 0.43),
+            point(0.85, 0.53), point(0.79, 0.48), point(0.79, 0.93),
+            point(0.21, 0.93), point(0.21, 0.48), point(0.15, 0.53)
+        ])
+        fill(silhouette, navy)
+        // The blue edge keeps the navy silhouette visible in dark HUDs and share cards.
+        stroke(silhouette, blue.opacity(0.85), width: 0.03)
+        fill(box(0.28, 0.5, 0.17, 0.17, radius: 0.015), blue, outlined: false)
+        fill(box(0.56, 0.61, 0.15, 0.32, radius: 0.015), cream, outlined: false)
+    }
+
+    func key() {
+        // The ring is a real opening, so every board surface shows through it.
+        var silhouette = path {
+            $0.move(to: point(0.28 + 0.22 * CGFloat(cos(Double.pi / 6)), 0.39))
+            $0.addLine(to: point(0.94, 0.86))
+            $0.addLine(to: point(0.86, 0.94))
+            $0.addLine(to: point(0.79, 0.87))
+            $0.addLine(to: point(0.7, 0.96))
+            $0.addLine(to: point(0.61, 0.87))
+            $0.addLine(to: point(0.7, 0.78))
+            $0.addLine(to: point(0.63, 0.71))
+            $0.addLine(to: point(0.54, 0.8))
+            $0.addLine(to: point(0.45, 0.71))
+            $0.addLine(to: point(0.54, 0.62))
+            $0.addLine(to: point(0.39, 0.28 + 0.22 * CGFloat(sin(Double.pi / 3))))
+            $0.addArc(center: point(0.28, 0.28), radius: 0.22,
+                      startAngle: .degrees(60), endAngle: .degrees(390), clockwise: false)
+            $0.closeSubpath()
+        }
+        silhouette.addEllipse(in: CGRect(x: 0.17, y: 0.17, width: 0.22, height: 0.22))
+        let shape = mapped(silhouette)
+        context.fill(shape, with: .color(Color(red: 0.95, green: 0.73, blue: 0.31)), style: FillStyle(eoFill: true))
+        context.stroke(shape, with: .color(ink.opacity(0.6)), style: StrokeStyle(
+            lineWidth: max(0.5, rect.width * 0.032), lineJoin: .round
+        ))
     }
 }

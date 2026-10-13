@@ -20,7 +20,7 @@ enum AppAppearance: String, Codable, CaseIterable, Identifiable, Sendable {
 
 enum BoardTheme: String, Codable, CaseIterable, Identifiable, Sendable {
     case standard, halloween, christmas, easter, valentines, lunarNewYear
-    case space, nature, pets, ocean
+    case flatre, space, nature, pets, ocean
 
     var id: Self { self }
 
@@ -32,6 +32,7 @@ enum BoardTheme: String, Codable, CaseIterable, Identifiable, Sendable {
         case .easter: "Easter"
         case .valentines: "Valentine’s"
         case .lunarNewYear: "Lunar New Year"
+        case .flatre: "Flatre"
         case .space: "Space"
         case .nature: "Nature"
         case .pets: "Pets"
@@ -40,7 +41,7 @@ enum BoardTheme: String, Codable, CaseIterable, Identifiable, Sendable {
     }
 
     static let holidays: [Self] = [.halloween, .christmas, .easter, .valentines, .lunarNewYear]
-    static let everyday: [Self] = [.space, .nature, .pets, .ocean]
+    static let everyday: [Self] = [.flatre, .space, .nature, .pets, .ocean]
 
     func playerName(_ player: Player) -> String {
         let names: (String, String) = switch self {
@@ -50,6 +51,7 @@ enum BoardTheme: String, Codable, CaseIterable, Identifiable, Sendable {
         case .easter: ("Egg", "Bunny")
         case .valentines: ("Heart", "Love Letter")
         case .lunarNewYear: ("Lantern", "Coin")
+        case .flatre: ("House", "Key")
         case .space: ("Moon", "Star")
         case .nature: ("Leaf", "Flower")
         case .pets: ("Cat", "Dog")
@@ -265,6 +267,9 @@ struct GomokuPalette {
         case .lunarNewYear: dark
             ? (0x552C35, 0xA9766D, 0xA9775A, 0x211216)
             : (0xF5D8D1, 0xB77F6A, 0xCDA367, 0xFFF5EF)
+        case .flatre: dark
+            ? (0x88A9C4, 0x4B6A89, 0x6487A8, 0x101827)
+            : (0xDFEDF7, 0x97B4CF, 0xAABCD6, 0xF4F7FC)
         case .space: (0x202F50, 0x5F739B, 0x4D628C, dark ? 0x0D1423 : 0xF0F3FA)
         case .nature: dark
             ? (0xA1B098, 0x657655, 0x859675, 0x151B12)
