@@ -254,8 +254,24 @@ struct BoardCanvasView: View {
 
     private var accessibilityValue: String {
         let state = game.session.state(at: cursor)
-        let occupant = state.player?.name ?? "empty"
-        return "Cursor \(cursor.coordinate), \(occupant). \(game.statusText). \(game.moves.count) moves."
+        let occupant = state.player.map(playerDescription) ?? "empty"
+        let status: String
+        if palette.theme == .standard {
+            status = game.statusText
+        } else {
+            switch game.outcome {
+            case let .win(player, _): status = "\(playerDescription(player)) wins"
+            case .draw: status = "Draw"
+            case .ongoing where game.isAIThinking: status = "AI thinking"
+            case .ongoing: status = "\(playerDescription(game.current)) to play"
+            }
+        }
+        return "Cursor \(cursor.coordinate), \(occupant). \(status). \(game.moves.count) moves."
+    }
+
+    private func playerDescription(_ player: Player) -> String {
+        guard palette.theme != .standard else { return player.name }
+        return "\(palette.theme.playerName(player)) (\(player.name.lowercased()) side)"
     }
 }
 
@@ -372,6 +388,10 @@ enum BoardDrawing {
             context.fill(Path(ellipseIn: rect), with: .color(palette.boardGrid))
         }
 
+        if palette.theme != .standard, winningLine.count >= 2 {
+            drawWinningConnection(context: &context, geometry: geometry, winningLine: winningLine, palette: palette)
+        }
+
         for r in 0..<boardSize {
             for c in 0..<boardSize {
                 let state = board[r * boardSize + c]
@@ -387,16 +407,9 @@ enum BoardDrawing {
         }
 
         if winningLine.count >= 2 {
-            let start = geometry.point(for: winningLine.first!)
-            let end = geometry.point(for: winningLine.last!)
-            var path = Path()
-            path.move(to: start)
-            path.addLine(to: end)
-            context.stroke(
-                path,
-                with: .color(palette.winningGold),
-                style: StrokeStyle(lineWidth: max(3, geometry.step * 0.12), lineCap: .round)
-            )
+            if palette.theme == .standard {
+                drawWinningConnection(context: &context, geometry: geometry, winningLine: winningLine, palette: palette)
+            }
             for position in winningLine {
                 let rect = geometry.stoneRect(for: position).insetBy(dx: -2, dy: -2)
                 context.stroke(
@@ -409,13 +422,20 @@ enum BoardDrawing {
 
         if let lastMove {
             let stoneRect = geometry.stoneRect(for: lastMove)
-            let ring = stoneRect.insetBy(dx: stoneRect.width * 0.3, dy: stoneRect.height * 0.3)
-            let color: Color = board[lastMove.r * boardSize + lastMove.c] == .black ? .white : .black
-            context.stroke(
-                Path(ellipseIn: ring),
-                with: .color(color.opacity(0.92)),
-                lineWidth: max(1.5, geometry.step * 0.075)
-            )
+            if palette.theme == .standard {
+                let ring = stoneRect.insetBy(dx: stoneRect.width * 0.3, dy: stoneRect.height * 0.3)
+                let color: Color = board[lastMove.r * boardSize + lastMove.c] == .black ? .white : .black
+                context.stroke(
+                    Path(ellipseIn: ring),
+                    with: .color(color.opacity(0.92)),
+                    lineWidth: max(1.5, geometry.step * 0.075)
+                )
+            } else {
+                let ring = Path(ellipseIn: stoneRect.insetBy(dx: stoneRect.width * 0.025, dy: stoneRect.height * 0.025))
+                let width = max(1, geometry.step * 0.045)
+                context.stroke(ring, with: .color(.black.opacity(0.88)), lineWidth: width + 2)
+                context.stroke(ring, with: .color(.white), lineWidth: width)
+            }
         }
 
         if let hint, board[hint.r * boardSize + hint.c] == .empty {
@@ -448,7 +468,24 @@ enum BoardDrawing {
         }
     }
 
+    private static func drawWinningConnection(
+        context: inout GraphicsContext, geometry: BoardGeometry,
+        winningLine: [Position], palette: GomokuPalette
+    ) {
+        var path = Path()
+        path.move(to: geometry.point(for: winningLine.first!))
+        path.addLine(to: geometry.point(for: winningLine.last!))
+        context.stroke(
+            path, with: .color(palette.winningGold),
+            style: StrokeStyle(lineWidth: max(3, geometry.step * 0.12), lineCap: .round)
+        )
+    }
+
     static func drawStone(context: inout GraphicsContext, rect: CGRect, player: Player, palette: GomokuPalette) {
+        if palette.theme != .standard {
+            ThemePieceDrawing.draw(context: &context, rect: rect, player: player, theme: palette.theme)
+            return
+        }
         let path = Path(ellipseIn: rect)
         let gradient = player == .black
             ? Gradient(stops: [

@@ -16,6 +16,7 @@ private struct ShareRenderIdentity: Equatable {
     let sessionID: UUID
     let archived: Bool
     let colorScheme: ColorScheme
+    let theme: BoardTheme
 }
 
 struct ContentView: View {
@@ -28,7 +29,7 @@ struct ContentView: View {
     @State private var sharePayload: SharePayload?
     @State private var didBootstrap = false
 
-    private var palette: GomokuPalette { .resolve(colorScheme) }
+    private var palette: GomokuPalette { .resolve(colorScheme, theme: preferences.theme) }
 
     var body: some View {
         NavigationStack {
@@ -36,7 +37,7 @@ struct ContentView: View {
                 ScrollView {
                     GameplayLayout(viewportHeight: proxy.size.height) {
                         gameplayControls
-                        MatchHUD(game: game)
+                        MatchHUD(game: game, theme: preferences.theme)
                         boardSection
                         VStack(spacing: 10) {
                             auxiliaryControls
@@ -74,7 +75,8 @@ struct ContentView: View {
             .onChange(of: game.session.configuration) { _, configuration in
                 preferences.apply(configuration: configuration)
             }
-            .task(id: ShareRenderIdentity(sessionID: game.session.id, archived: game.session.archived, colorScheme: colorScheme)) {
+            .task(id: ShareRenderIdentity(sessionID: game.session.id, archived: game.session.archived,
+                                         colorScheme: colorScheme, theme: preferences.theme)) {
                 sharePayload = game.gameOver
                     ? ShareCardRenderer.render(session: game.session, palette: palette, colorScheme: colorScheme)
                     : nil
@@ -188,12 +190,12 @@ struct ContentView: View {
     private func announce(_ event: HapticEvent) {
         let message: String?
         switch event {
-        case .placement: message = game.statusText
+        case .placement: message = preferences.theme.statusText(for: game)
         case .invalidPlacement: message = "That position is unavailable"
-        case .undo: message = "Move undone. \(game.statusText)"
+        case .undo: message = "Move undone. \(preferences.theme.statusText(for: game))"
         case .hint: message = game.hint.map { "Hint: \($0.coordinate)" }
-        case .newRound: message = "New round. Black's turn"
-        case .win: message = game.winner.map { "\($0.name) wins" }
+        case .newRound: message = "New round. \(preferences.theme.playerName(.black))'s turn"
+        case .win: message = game.winner.map { "\(preferences.theme.playerName($0)) wins" }
         case .draw: message = "Draw"
         case .none, .targetChanged: message = nil
         }
@@ -287,6 +289,7 @@ private struct PrecisionCoachMark: View {
 
 private struct MatchHUD: View {
     @ObservedObject var game: GameState
+    let theme: BoardTheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private var modeDescription: String {
@@ -351,33 +354,33 @@ private struct MatchHUD: View {
 
     private var turnSummary: some View {
         HStack(spacing: 8) {
-            StoneDot(player: game.outcome == .draw ? nil : (game.winner ?? game.current))
+            StoneDot(player: game.outcome == .draw ? nil : (game.winner ?? game.current), theme: theme)
             // Reserve every status label so a result or turn change
             // cannot switch the HUD between its compact and expanded layouts.
             ZStack(alignment: .leading) {
-                ForEach(["Black's turn", "White's turn", "AI thinking…", "Your move",
-                         "Black wins", "White wins", "Draw"], id: \.self) { status in
+                ForEach(["\(theme.playerName(.black))'s turn", "\(theme.playerName(.white))'s turn", "AI thinking…", "Your move",
+                         "\(theme.playerName(.black)) wins", "\(theme.playerName(.white)) wins", "Draw"], id: \.self) { status in
                     Text(status).hidden()
                 }
-                Text(game.statusText)
+                Text(theme.statusText(for: game))
             }
             .font(.subheadline.weight(.semibold))
             .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(game.session.configuration.mode == .ai && !game.gameOver
-            ? "\(game.statusText), \(game.current.name) stones" : game.statusText)
+            ? "\(theme.statusText(for: game)), \(theme.accessibilityName(game.current)) pieces" : theme.statusText(for: game))
     }
 
     private func clock(for player: Player, now: Date) -> some View {
         let value = time(game.elapsed(for: player, now: now))
         return HStack(spacing: 6) {
-            StoneDot(player: player, size: 13)
+            StoneDot(player: player, size: 13, theme: theme)
             Text(value)
                 .font(.footnote.monospacedDigit())
                 .foregroundStyle(Color.primary.opacity(0.7))
                 .fixedSize()
-                .accessibilityLabel("\(player.name) elapsed time, \(value)")
+                .accessibilityLabel("\(theme.accessibilityName(player)) elapsed time, \(value)")
                 .accessibilityIdentifier(player == .black ? "black-clock" : "white-clock")
         }
         .frame(minHeight: 44)
@@ -517,6 +520,7 @@ private struct MinimalDockActionStyle: ButtonStyle {
 
 private struct NewGameView: View {
     @ObservedObject var game: GameState
+    @EnvironmentObject private var preferences: PreferencesStore
     @Environment(\.dismiss) private var dismiss
     @State private var draft: GameConfiguration
     @State private var boardChoice: Int
@@ -543,15 +547,15 @@ private struct NewGameView: View {
                     }
                     .accessibilityIdentifier("new-game-difficulty")
                     Picker("Your Stones", selection: $draft.humanSide) {
-                        Text("Black").tag(Player.black)
-                        Text("White").tag(Player.white)
+                        Text(sideTitle(.black)).tag(Player.black)
+                        Text(sideTitle(.white)).tag(Player.white)
                     }
                     .accessibilityIdentifier("new-game-stones")
                 }
             } header: {
                 Text("Players")
             } footer: {
-                Text("Black moves first.")
+                Text("\(sideTitle(.black)) moves first.")
             }
             Section {
                 Picker("Board Size", selection: $boardChoice) {
@@ -613,6 +617,10 @@ private struct NewGameView: View {
         game.newRound(configuration: configuration)
         dismiss()
     }
+
+    private func sideTitle(_ player: Player) -> String {
+        preferences.theme == .standard ? player.name : "\(preferences.theme.playerName(player)) (\(player.name))"
+    }
 }
 
 private struct SettingsView: View {
@@ -629,6 +637,17 @@ private struct SettingsView: View {
                     ForEach(AppAppearance.allCases) { Text($0.title).tag($0) }
                 }
                 .accessibilityIdentifier("settings-appearance")
+                NavigationLink {
+                    ThemeSettingsView()
+                } label: {
+                    HStack {
+                        Text("Theme")
+                        Spacer()
+                        Text(preferences.theme.title)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .accessibilityIdentifier("settings-theme")
                 Toggle("Haptics", isOn: Binding(
                     get: { preferences.hapticsEnabled },
                     set: { preferences.hapticsEnabled = $0 }

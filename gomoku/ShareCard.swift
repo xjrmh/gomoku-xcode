@@ -39,7 +39,7 @@ enum ShareCardRenderer {
             .frame(width: 900, height: 1_280)
         let renderer = ImageRenderer(content: view)
         renderer.scale = 2
-        let result = session.outcome.winner.map { "\($0.name) wins" } ?? "Draw"
+        let result = session.outcome.winner.map { "\(palette.theme.playerName($0)) wins" } ?? "Draw"
         let moveCount = session.moves.count
         let title = "\(result) · \(moveCount) \(moveCount == 1 ? "move" : "moves")"
         #if os(iOS)
@@ -75,14 +75,14 @@ private struct ShareCardView: View {
             .frame(width: 820, height: 820)
             VStack(spacing: 12) {
                 HStack(spacing: 18) {
-                    StoneDot(player: session.outcome.winner, size: 28)
+                    StoneDot(player: session.outcome.winner, size: 28, theme: palette.theme)
                     Text(resultTitle)
                         .font(.system(size: 40, weight: .bold, design: .rounded))
                 }
                 Text("\(session.configuration.mode.title) · \(session.boardSize)×\(session.boardSize) · \(session.moves.count) moves")
                     .font(.title2)
                     .foregroundStyle(.secondary)
-                Text("Black \(time(session.clocks.black))  ·  White \(time(session.clocks.white))")
+                Text("\(palette.theme.playerName(.black)) \(time(session.clocks.black))  ·  \(palette.theme.playerName(.white)) \(time(session.clocks.white))")
                     .font(.title2.monospacedDigit())
                     .foregroundStyle(.secondary)
             }
@@ -93,7 +93,7 @@ private struct ShareCardView: View {
     }
 
     private var resultTitle: String {
-        session.outcome.winner.map { "\($0.name) wins" } ?? "Draw"
+        session.outcome.winner.map { "\(palette.theme.playerName($0)) wins" } ?? "Draw"
     }
 
     private func time(_ interval: TimeInterval) -> String {

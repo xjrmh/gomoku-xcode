@@ -11,6 +11,7 @@ enum HistoryFilter: String, CaseIterable, Identifiable {
 }
 
 struct HistoryView: View {
+    @EnvironmentObject private var preferences: PreferencesStore
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -19,7 +20,7 @@ struct HistoryView: View {
     @State private var searchText = ""
     @State private var showEraseConfirmation = false
 
-    private var palette: GomokuPalette { .resolve(colorScheme) }
+    private var palette: GomokuPalette { .resolve(colorScheme, theme: preferences.theme) }
     private var gridColumns: [GridItem] {
         dynamicTypeSize.isAccessibilitySize
             ? [GridItem(.flexible(maximum: 440))]
@@ -38,6 +39,7 @@ struct HistoryView: View {
             guard !query.isEmpty else { return true }
             let searchable = [
                 game.resultTitle,
+                game.winner.map { "\(preferences.theme.playerName($0)) won" } ?? game.resultTitle,
                 game.finalMode.title,
                 game.finalMode == .pvp ? "2 Players PvP" : "AI",
                 game.difficulty.title,
@@ -142,8 +144,8 @@ private struct HistoryCard: View {
             .accessibilityHidden(true)
 
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                StoneDot(player: game.winner)
-                Text(game.resultTitle)
+                StoneDot(player: game.winner, theme: palette.theme)
+                Text(resultTitle)
                     .font(.headline)
                 Spacer(minLength: 0)
             }
@@ -167,9 +169,14 @@ private struct HistoryCard: View {
         parts.append("\(game.boardSize)×\(game.boardSize)")
         return parts.joined(separator: " · ")
     }
+
+    private var resultTitle: String {
+        game.winner.map { "\(palette.theme.playerName($0)) won" } ?? game.resultTitle
+    }
 }
 
 struct ReplayView: View {
+    @EnvironmentObject private var preferences: PreferencesStore
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let game: ArchivedGame
@@ -208,7 +215,7 @@ struct ReplayView: View {
                 .padding(16)
             }
         }
-        .navigationTitle(game.resultTitle)
+        .navigationTitle(resultTitle)
         .onDisappear { stopPlayback() }
     }
 
@@ -220,8 +227,13 @@ struct ReplayView: View {
 
     private var selectedMoveSummary: String {
         guard let selectedMove else { return "Starting position" }
-        let player = selectedMove.controller == .ai ? "\(selectedMove.player.name) (AI)" : selectedMove.player.name
+        let name = preferences.theme.playerName(selectedMove.player)
+        let player = selectedMove.controller == .ai ? "\(name) (AI)" : name
         return "\(player) at \(selectedMove.pos.coordinate)"
+    }
+
+    private var resultTitle: String {
+        game.winner.map { "\(preferences.theme.playerName($0)) won" } ?? game.resultTitle
     }
 
     private var replayPositionDescription: String {
@@ -234,7 +246,7 @@ struct ReplayView: View {
             boardSize: game.boardSize,
             lastMove: selectedMove?.pos,
             winningLine: moveIndex == game.moves.count ? game.winningLine : [],
-            palette: .resolve(colorScheme)
+            palette: .resolve(colorScheme, theme: preferences.theme)
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Replay board, \(game.boardSize) by \(game.boardSize)")
@@ -245,8 +257,13 @@ struct ReplayView: View {
         let moves = game.moves.prefix(moveIndex)
         let blackCount = moves.filter { $0.player == .black }.count
         let whiteCount = moves.count - blackCount
-        let result = moveIndex == game.moves.count ? " \(game.resultTitle)." : ""
-        return "\(replayPositionDescription). \(blackCount) black stones and \(whiteCount) white stones.\(result)"
+        let result = moveIndex == game.moves.count ? " \(resultTitle)." : ""
+        if preferences.theme == .standard {
+            return "\(replayPositionDescription). \(blackCount) black stones and \(whiteCount) white stones.\(result)"
+        }
+        let black = "\(preferences.theme.playerName(.black)) (black side)"
+        let white = "\(preferences.theme.playerName(.white)) (white side)"
+        return "\(replayPositionDescription). \(blackCount) \(black) pieces and \(whiteCount) \(white) pieces.\(result)"
     }
 
     private var playbackControls: some View {
@@ -255,7 +272,7 @@ struct ReplayView: View {
                 Text("Move \(moveIndex) of \(game.moves.count)")
                     .font(.headline.monospacedDigit())
                 HStack(spacing: 8) {
-                    if let selectedMove { StoneDot(player: selectedMove.player) }
+                    if let selectedMove { StoneDot(player: selectedMove.player, theme: preferences.theme) }
                     Text(selectedMoveSummary)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -345,12 +362,24 @@ struct StoneDot: View {
     @Environment(\.colorScheme) private var colorScheme
     let player: Player?
     var size: CGFloat = 16
+    var theme: BoardTheme = .standard
 
     var body: some View {
         Group {
             if let player {
-                Circle().fill(player == .black ? Color.black : Color.white)
-                    .overlay(Circle().stroke(.secondary, lineWidth: player == .white || colorScheme == .dark ? 1 : 0))
+                if theme == .standard {
+                    Circle().fill(player == .black ? Color.black : Color.white)
+                        .overlay(Circle().stroke(.secondary, lineWidth: player == .white || colorScheme == .dark ? 1 : 0))
+                } else {
+                    Canvas { context, canvasSize in
+                        ThemePieceDrawing.draw(
+                            context: &context,
+                            rect: CGRect(origin: .zero, size: canvasSize),
+                            player: player,
+                            theme: theme
+                        )
+                    }
+                }
             } else {
                 Image(systemName: "equal")
                     .font(.caption.bold())
