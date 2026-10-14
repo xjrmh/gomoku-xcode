@@ -61,12 +61,28 @@ final class GameplayLayoutUITests: XCTestCase {
     }
 
     @MainActor
+    func testNewGameFromCompletedBoardStartsWithoutConfirmation() {
+        let app = launch(arguments: ["--ui-testing-win"])
+        let board = app.otherElements["game-board"]
+        waitForMoveCount(9, on: board)
+
+        let newGame = app.buttons["New Game"]
+        reveal(newGame, in: app)
+        newGame.tap()
+
+        waitForMoveCount(0, on: board)
+        XCTAssertFalse(app.alerts["Start a new game?"].exists)
+        XCTAssertFalse(app.buttons["Play Again"].exists)
+    }
+
+    @MainActor
     func testDismissingPrecisionTipKeepsBoardFrameAndSectionEdges() {
         let app = launch()
         openSettings(in: app)
         select("19×19", in: "settings-board-size", app: app)
         closeSettings(in: app)
         app.buttons["New Game"].tap()
+        XCTAssertFalse(app.alerts["Start a new game?"].exists)
         XCTAssertFalse(app.navigationBars["New Game"].exists)
         XCTAssertFalse(app.buttons["Start New Game"].exists)
 

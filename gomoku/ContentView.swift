@@ -26,6 +26,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var colorScheme
     @State private var presentedSheet: GameSheet?
+    @State private var showNewGameConfirmation = false
     @State private var sharePayload: SharePayload?
     @State private var didBootstrap = false
 
@@ -41,7 +42,7 @@ struct ContentView: View {
                         boardSection
                         VStack(spacing: 10) {
                             auxiliaryControls
-                            MatchDock(game: game, sharePayload: sharePayload, newGame: startNewGame)
+                            MatchDock(game: game, sharePayload: sharePayload, newGame: requestNewGame)
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -57,7 +58,10 @@ struct ContentView: View {
             .sheet(item: $presentedSheet) { destination in
                 NavigationStack {
                     switch destination {
-                    case .settings: SettingsView().environmentObject(preferences)
+                    case .settings:
+                        SettingsView()
+                            .environmentObject(game)
+                            .environmentObject(preferences)
                     case .about: AboutView().presentationDetents([.medium, .large])
                     }
                 }
@@ -86,8 +90,9 @@ struct ContentView: View {
             }
             .onAppear { bootstrap() }
         }
+        .modifier(NewGameConfirmation(isPresented: $showNewGameConfirmation, startNewGame: startNewGame))
         .focusedSceneValue(\.gameActions, GameActions(
-            newRound: startNewGame,
+            newRound: requestNewGame,
             undo: { game.undo() },
             hint: { game.askForHint() },
             canUndo: game.canUndo,
@@ -169,6 +174,14 @@ struct ContentView: View {
             reopen: { ArchiveRepository.reopen($0, in: modelContext) }
         )
         if scenePhase == .active { game.sceneBecameActive() }
+    }
+
+    private func requestNewGame() {
+        if !game.moves.isEmpty && !game.gameOver {
+            showNewGameConfirmation = true
+        } else {
+            startNewGame()
+        }
     }
 
     private func startNewGame() {
@@ -508,6 +521,7 @@ private struct MinimalDockActionStyle: ButtonStyle {
 
 private struct GameSettingsSection: View {
     @EnvironmentObject private var preferences: PreferencesStore
+    let newGame: () -> Void
     @State private var showsCustomBoardSize = false
 
     private var configuration: Binding<GameConfiguration> {
@@ -534,6 +548,11 @@ private struct GameSettingsSection: View {
 
     var body: some View {
         Section {
+            Text("Tap New Game to apply these settings. Your current game keeps its settings.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("next-game-settings-note")
             Picker("Opponent", selection: configuration.mode) {
                 ForEach(GameMode.allCases) { Text($0.title).tag($0) }
             }
@@ -561,10 +580,16 @@ private struct GameSettingsSection: View {
                         value: configuration.boardSize, in: 5...25, step: 2)
                     .accessibilityIdentifier("custom-board-size")
             }
+            Button(action: newGame) {
+                Label("New Game", systemImage: "plus.circle")
+                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+            }
+            .accessibilityIdentifier("settings-new-game")
+            .accessibilityHint("Starts a new game using the settings above.")
         } header: {
-            Text("Game")
+            Text("Next Game")
         } footer: {
-            Text("\(sideTitle(.black)) moves first. Changes apply to your next game.")
+            Text("\(sideTitle(.black)) moves first.")
         }
         .pickerStyle(.menu)
     }
@@ -575,12 +600,14 @@ private struct GameSettingsSection: View {
 }
 
 private struct SettingsView: View {
+    @EnvironmentObject private var game: GameState
     @EnvironmentObject private var preferences: PreferencesStore
     @Environment(\.dismiss) private var dismiss
+    @State private var showNewGameConfirmation = false
 
     var body: some View {
         Form {
-            GameSettingsSection()
+            GameSettingsSection(newGame: requestNewGame)
             Section("Appearance & Feel") {
                 Picker("Appearance", selection: Binding(
                     get: { preferences.appearance },
@@ -616,6 +643,34 @@ private struct SettingsView: View {
         .navigationTitle("Settings")
         .toolbar {
             ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
+        }
+        .modifier(NewGameConfirmation(isPresented: $showNewGameConfirmation, startNewGame: startNewGame))
+    }
+
+    private func requestNewGame() {
+        if !game.moves.isEmpty && !game.gameOver {
+            showNewGameConfirmation = true
+        } else {
+            startNewGame()
+        }
+    }
+
+    private func startNewGame() {
+        game.newRound(configuration: preferences.gameConfiguration)
+        dismiss()
+    }
+}
+
+private struct NewGameConfirmation: ViewModifier {
+    @Binding var isPresented: Bool
+    let startNewGame: () -> Void
+
+    func body(content: Content) -> some View {
+        content.alert("Start a new game?", isPresented: $isPresented) {
+            Button("New Game", role: .destructive, action: startNewGame)
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Your current game progress will be lost.")
         }
     }
 }

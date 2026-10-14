@@ -65,7 +65,7 @@ final class EdgeCaseUITests: XCTestCase {
     }
 
     @MainActor
-    func testSmallBoardSettingsPreserveCurrentGameAndNewGameImmediatelyResets() throws {
+    func testSmallBoardSettingsAndCancelledNewGamePreserveProgressUntilConfirmed() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing"]
         app.launchEnvironment["UI_TEST_RUN_ID"] = UUID().uuidString
@@ -93,7 +93,20 @@ final class EdgeCaseUITests: XCTestCase {
         XCTAssertEqual(board.value as? String, activeBoardValue,
                        "Changing saved settings must preserve the active board and turn")
 
-        startNewGame(in: app)
+        let newGame = app.buttons["New Game"]
+        reveal(newGame, in: app)
+        newGame.tap()
+        let confirmation = app.alerts["Start a new game?"]
+        XCTAssertTrue(confirmation.waitForExistence(timeout: 2))
+        XCTAssertTrue(confirmation.staticTexts["Your current game progress will be lost."].exists)
+        confirmation.buttons["Cancel"].tap()
+        waitForDisappearance(of: confirmation)
+        assertBoardSize(9, on: board)
+        XCTAssertEqual(board.value as? String, activeBoardValue,
+                       "Cancelling New Game must preserve the stones, turn, and board size")
+        XCTAssertTrue(app.buttons["Undo"].isEnabled)
+
+        startNewGame(in: app, confirmingProgressLoss: true)
         assertBoardSize(5, on: board)
         waitForMoveCount(0, on: board)
         XCTAssertTrue((board.value as? String)?.hasPrefix("Cursor C3, empty.") == true,
@@ -106,7 +119,7 @@ final class EdgeCaseUITests: XCTestCase {
         intersection(row: 0, column: 0, size: 5, on: board).tap()
         waitForMoveCount(2, on: board)
 
-        startNewGame(in: app)
+        startNewGame(in: app, confirmingProgressLoss: true)
         assertBoardSize(5, on: board)
         waitForMoveCount(0, on: board)
         XCTAssertFalse(app.buttons["Undo"].isEnabled)
@@ -215,11 +228,18 @@ final class EdgeCaseUITests: XCTestCase {
     }
 
     @MainActor
-    private func startNewGame(in app: XCUIApplication) {
+    private func startNewGame(in app: XCUIApplication, confirmingProgressLoss: Bool = false) {
         let newGame = app.buttons["New Game"]
         XCTAssertTrue(newGame.waitForExistence(timeout: 5))
         reveal(newGame, in: app)
         newGame.tap()
+        let confirmation = app.alerts["Start a new game?"]
+        if confirmingProgressLoss {
+            XCTAssertTrue(confirmation.waitForExistence(timeout: 2))
+            confirmation.buttons["New Game"].tap()
+            waitForDisappearance(of: confirmation)
+        }
+        XCTAssertFalse(confirmation.exists)
         XCTAssertFalse(app.navigationBars["New Game"].exists)
         XCTAssertFalse(app.buttons["start-game"].exists)
         XCTAssertFalse(app.buttons["Start New Game"].exists)
